@@ -16,7 +16,7 @@ const SuperAdminSettings = () => {
     return null;
   }
 
-  if (user?.role !== "superAdmin") {
+  if (user?.email !== "risbel961019@gmail.com") {
     return null;
   }
 
@@ -25,7 +25,7 @@ const SuperAdminSettings = () => {
       <DropdownMenuTrigger>
         <span className="text-white text-xs p-2 bg-blue-900 hover:bg-blue-800 rounded-md">Super Admin</span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="backdrop-blur-sm bg-black/50">
+      <DropdownMenuContent className="backdrop-blur-sm bg-black/50 text-white">
         <DropdownMenuLabel>Admin Settings</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href={"/admin-settings/add-discos"}>

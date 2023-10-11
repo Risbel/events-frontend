@@ -8,7 +8,6 @@ function Navbar() {
   const { data: session, status } = useSession();
 
   return (
-    // session && (
     <div className="fixed z-50">
       <div className="flex w-screen h-14 absolute z-30 backdrop-sepia-0 bg-black/10 blur-sm"></div>
       <div className="flex justify-between items-center w-screen absolute z-40 px-4 py-2 border-b-[0.1px]">
@@ -24,7 +23,6 @@ function Navbar() {
       </div>
     </div>
   );
-  // )
 }
 
 export default Navbar;

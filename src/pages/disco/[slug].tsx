@@ -3,8 +3,12 @@ import { useRouter } from "next/router";
 
 const Disco = () => {
   const router = useRouter();
+  const { query } = router;
+  const { slug } = query;
 
-  return <DiscoEnviroment name={router.query.slug} />;
+  if (slug) {
+    return <DiscoEnviroment name={slug} />;
+  }
 };
 
 export default Disco;

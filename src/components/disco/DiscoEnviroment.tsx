@@ -9,29 +9,42 @@ import AboutUs from "./AboutUs";
 import Experiencies from "./Experiencies";
 import { SkeletonAboutUs, SkeletonExperiences, SkeletonHead } from "./Skeleton";
 import Navbar from "../navigation/Navbar";
+import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 
 const DiscoEnviroment = ({ name }: { name: string }) => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
-  const { data: discoData, isLoading: loadingDisco, isError } = useGetDisco({ name, userId });
+  const { data: discoData, isLoading: loadingDisco, isError: isErrordisco } = useGetDisco({ name, userId });
   const discoId = discoData?.disco?.id;
+
+  const { data: myPermissions } = useGetMyPermissions(userId, discoId);
 
   const { data: admisions } = useGetAdmisionsByIdDisco(discoId);
 
-  if (isError) {
+  if (isErrordisco) {
     return (
-      <div className="flex w-full h-screen justify-center items-center">
-        <span>Bad conection, please try later...</span>
+      <div className="flex w-full h-screen justify-center items-center bg-black">
+        <span className="text-white">Bad conection, please try later...</span>
       </div>
     );
   }
 
   return (
     <div className="relative overflow-hidden bg-black">
+      <style>
+        {`
+          ::-webkit-scrollbar {
+            width: 0.1rem;
+          }
+          ::-webkit-scrollbar-button {
+            display: none;
+          }
+        `}
+      </style>
       <Navbar />
-      {loadingDisco ? (
-        <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-4">
+      {loadingDisco || !discoData ? (
+        <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-8">
           <SkeletonHead />
           <SkeletonAboutUs />
           <SkeletonExperiences />
@@ -39,12 +52,12 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
       ) : (
         <Image
           className="absolute h-full object-cover"
-          src={discoData?.disco.discoDetail.bgImage}
+          src={discoData?.disco?.discoDetail?.bgImage}
           width={1800}
           height={800}
           alt="Picture of the author"
           placeholder="blur"
-          blurDataURL={discoData?.disco.discoDetail.bgImage}
+          blurDataURL={discoData?.disco?.discoDetail?.bgImage}
         />
       )}
 
@@ -65,7 +78,9 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
                 ? null
                 : discoData && <AboutUs largeDescription={discoData?.disco.discoDetail.largeDescription} />}
             </>
-            {loadingDisco ? null : discoData && <Experiencies discoDetail={discoData?.disco.discoDetail} />}
+            {loadingDisco
+              ? null
+              : discoData && <Experiencies permissions={myPermissions} discoDetail={discoData?.disco.discoDetail} />}
           </div>
         </div>
         <>

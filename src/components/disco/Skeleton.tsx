@@ -1,4 +1,4 @@
-import { Skeleton } from '../ui/skeleton'
+import { Skeleton } from "../ui/skeleton";
 
 export const SkeletonHead = () => {
   return (
@@ -12,8 +12,8 @@ export const SkeletonHead = () => {
         <Skeleton className="h-6 w-full" />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const SkeletonAboutUs = () => {
   return (
@@ -26,20 +26,20 @@ export const SkeletonAboutUs = () => {
         <Skeleton className="h-3 md:h-4 w-full" />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const SkeletonExperiences = () => {
   return (
     <div className="flex flex-col gap-4 pt-12 pb-12">
       <Skeleton className="h-10 w-60" />
       <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-5 gap-8">
-        <Skeleton className="overflow-hidden h-72 w-full max-h-60 rounded-2xl" />
-        <Skeleton className="overflow-hidden h-72 w-full max-h-60 rounded-2xl" />
-        <Skeleton className="overflow-hidden h-72 w-full max-h-60 rounded-2xl" />
-        <Skeleton className="overflow-hidden h-72 w-full max-h-60 rounded-2xl" />
-        <Skeleton className="overflow-hidden h-72 w-full max-h-60 rounded-2xl" />
+        <Skeleton className="overflow-hidden h-72 w-full rounded-2xl" />
+        <Skeleton className="overflow-hidden h-72 w-full rounded-2xl" />
+        <Skeleton className="overflow-hidden h-72 w-full rounded-2xl" />
+        <Skeleton className="overflow-hidden h-72 w-full rounded-2xl" />
+        <Skeleton className="overflow-hidden h-72 w-full rounded-2xl" />
       </div>
     </div>
-  )
-}
+  );
+};

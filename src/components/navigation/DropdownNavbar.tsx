@@ -28,7 +28,7 @@ const DropdownNavbar = ({ session }: { session: Session }) => {
           )}
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="backdrop-blur-sm bg-black/50">
+      <DropdownMenuContent className="backdrop-blur-sm bg-black/50 text-white">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href={"/profile"}>

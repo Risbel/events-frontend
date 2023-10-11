@@ -1,14 +1,14 @@
-import { getUserByToken } from '@/services/getUserByToken'
-import { useQuery } from '@tanstack/react-query'
+import { getUserByToken } from "@/services/getUserByToken";
+import { useQuery } from "@tanstack/react-query";
 
 const useGetUser = (token: string) => {
-  const isToken = token ? true : false
+  const isToken = token ? true : false;
 
   return useQuery({
-    queryKey: ['myself', token],
+    queryKey: ["myself"],
     queryFn: () => getUserByToken(token),
     enabled: isToken,
-  })
-}
+  });
+};
 
-export default useGetUser
+export default useGetUser;

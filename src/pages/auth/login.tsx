@@ -35,6 +35,7 @@ const Login = () => {
           value={credentials.password}
           type="password"
           placeholder="Password"
+          autoComplete="on"
         />
         <Button type="submit">Login</Button>
         {<span className="text-red-600 text-center">{error}</span>}
