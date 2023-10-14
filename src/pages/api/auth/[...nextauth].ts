@@ -18,8 +18,9 @@ export default NextAuth({
           throw new Error(res.response.data.error);
         } else {
           const token = res.accessToken;
+          const refreshToken = res.refreshToken;
 
-          const decoded: TokenDecoded = decode(token, process.env.NEXTAUTH_SECRET);
+          const decoded: TokenDecoded = decode(token, process.env.SECRET_SIGNATURE);
 
           if (decoded) {
             return {
@@ -28,6 +29,7 @@ export default NextAuth({
               email: decoded.email,
               image: decoded?.image,
               accessToken: token,
+              refreshToken: refreshToken,
             };
           }
         }

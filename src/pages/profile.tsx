@@ -38,12 +38,11 @@ const SkeletonSubs = () => {
 
 const Profile = () => {
   const { data: session, status } = useSession();
+  const { data } = useGetSubscriptionsByUserId(session?.user.id);
 
   if (!status) {
     return;
   }
-
-  const { data } = useGetSubscriptionsByUserId(session?.user.id);
 
   return (
     <HomeLayout>
@@ -51,18 +50,18 @@ const Profile = () => {
         {session ? (
           <div className="flex md:px-12 lg:px-16 gap-4 justify-center md:justify-start items-center text-white">
             <div className="rounded-full overflow-hidden float-left">
-              {session.user.image ? (
+              {session?.user.image ? (
                 <Image
-                  src={session?.user?.image}
+                  src={session?.user.image}
                   alt="image-next-auth"
                   width={100}
                   height={100}
                   placeholder="blur"
-                  blurDataURL={session.user.image}
+                  blurDataURL={session?.user.image}
                 />
               ) : (
                 <div className="flex items-center justify-center bg-violet-800 h-16 w-16 md:w-24 md:h-24 font-bold text-2xl md:text-5xl text-white">
-                  {session.user.name[0]}
+                  {session?.user?.name[0]}
                 </div>
               )}
             </div>

@@ -38,7 +38,7 @@ const AddDiscos = () => {
   }
 
   if (user) {
-    if (user.role !== "superAdmin") {
+    if (user.email !== "risbel961019@gmail.com") {
       return (
         <div className="flex flex-col justify-center items-center gap-8 pt-24">
           <Resource405 text={"This resource is just reserved for admins"} />

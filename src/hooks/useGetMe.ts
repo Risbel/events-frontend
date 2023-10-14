@@ -1,10 +1,7 @@
-import { useSession } from "next-auth/react";
-import useGetUser from "./useGetUser";
+import useGetUserByToken from "./useGetUserByToken";
 
 const useGetMe = (): UseGetMeResult => {
-  const { data: session } = useSession();
-
-  const { data: user, error, isLoading } = useGetUser(session?.user?.accessToken);
+  const { data: user, error, isLoading } = useGetUserByToken();
 
   return {
     user,

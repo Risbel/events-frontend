@@ -29,7 +29,10 @@ const SuperAdminSettings = () => {
         <DropdownMenuLabel>Admin Settings</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href={"/admin-settings/add-discos"}>
-          <DropdownMenuItem>Discos</DropdownMenuItem>
+          <DropdownMenuItem>Add discos</DropdownMenuItem>
+        </Link>
+        <Link href={"/admin-settings/users"}>
+          <DropdownMenuItem>Users</DropdownMenuItem>
         </Link>
         <Link href={"/admin-settings/permissions"}>
           <DropdownMenuItem>Permissions</DropdownMenuItem>
