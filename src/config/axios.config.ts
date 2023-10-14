@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getSession } from "next-auth/react";
+import { getSession, signOut } from "next-auth/react";
 import { refreshToken } from "./utils/refreshToken";
 
 const httpService = axios.create({
@@ -23,6 +23,9 @@ httpService.interceptors.request.use(
 httpService.interceptors.response.use(
   (response) => response,
   async (error) => {
+    if (error.response.data.error === "Refresh token has expired") {
+      return signOut();
+    }
     const session = await getSession();
     const prevRequest = error.config;
     if (error.response.status === 401 && !prevRequest.sent) {
@@ -30,14 +33,15 @@ httpService.interceptors.response.use(
 
       const accessToken = await refreshToken();
 
-      if (session) {
+      if (session && accessToken) {
         session.user.accessToken = accessToken;
       }
 
-      prevRequest.headers.Authorization = `Bearer ${accessToken}`;
+      prevRequest.headers.Authorization = `Bearer ${session?.user.accessToken}`;
 
       return httpService(prevRequest);
     }
+
     return Promise.reject(error);
   }
 );
