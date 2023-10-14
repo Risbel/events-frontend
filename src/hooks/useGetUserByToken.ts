@@ -5,8 +5,6 @@ const useGetUserByToken = () => {
   return useQuery({
     queryKey: ["myself"],
     queryFn: () => getUserByToken(),
-
-    cacheTime: 0,
   });
 };
 

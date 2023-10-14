@@ -10,7 +10,7 @@ const PermissionsContainer = () => {
 
   const { isLoading: isLoadingDiscoRoles, data, error, isError } = useGetDiscoRoles();
 
-  if (isLoadingMy) {
+  if (isLoadingMy || isLoadingDiscoRoles) {
     return (
       <div className="flex pt-24 justify-center">
         <Spinner diameter={20} />
@@ -31,14 +31,6 @@ const PermissionsContainer = () => {
 
   if (isError && error) {
     return <div>We have had a problem, please try again later.</div>;
-  }
-
-  if (isLoadingDiscoRoles) {
-    return (
-      <div className="w-full flex justify-center">
-        <Spinner diameter={20} />
-      </div>
-    );
   }
 
   return (

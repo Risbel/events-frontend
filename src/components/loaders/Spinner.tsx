@@ -1,10 +1,10 @@
 import { clsx } from "clsx";
 
-const Spinner = ({ diameter = 8 }: { diameter?: number }) => {
+const Spinner = ({ diameter }: { diameter: number }) => {
   return (
     <div
       className={clsx(
-        "inline-block animate-spin rounded-full h-8 w-8 border-[3px] border-solid border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]",
+        "inline-block animate-spin rounded-full border-[3px] border-solid border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]",
         `h-${diameter} w-${diameter}`
       )}
       role="status"
