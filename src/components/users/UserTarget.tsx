@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const UserTarget = ({ imageUrl, name, lastName, phone, email, id }: IUserTarget) => {
   return (
-    <Link href={`/admin-settings/users/user/${id}`}>
+    <Link href={`/admin-settings/users/${id}`}>
       <div className="flex gap-2 items-center text-sm md:text-base hover:bg-white/10 rounded-l-full">
         <Avatar>
           {!imageUrl ? (

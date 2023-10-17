@@ -8,7 +8,7 @@ const UserContainer = ({ id }: { id: string }) => {
   if (isLoading && !data) {
     return (
       <div className="flex justify-center">
-        <Spinner />
+        <Spinner diameter={10} />
       </div>
     );
   }

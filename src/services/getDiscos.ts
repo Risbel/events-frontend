@@ -6,6 +6,6 @@ export const getDiscos = async (): Promise<DataDisco[]> => {
     const response = await httpService.get(`/disco`);
     return response.data;
   } catch (error: any) {
-    return error.message;
+    throw error;
   }
 };

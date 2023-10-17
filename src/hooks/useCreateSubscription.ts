@@ -1,15 +1,15 @@
-import { createSubscription } from '@/services/createSubscription'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { createSubscription } from "@/services/createSubscription";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useCreateSubscription = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const { mutate: subscribe, isLoading } = useMutation({
-    mutationFn: data => createSubscription(data),
+    mutationFn: createSubscription,
     onSuccess: () => {
-      queryClient.invalidateQueries('discoBySlug')
+      queryClient.invalidateQueries(["discoBySlug"]);
     },
-  })
+  });
 
-  return { subscribe, isLoading }
-}
+  return { subscribe, isLoading };
+};

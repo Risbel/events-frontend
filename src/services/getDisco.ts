@@ -23,6 +23,7 @@ export interface DataDisco {
   id: string;
   logo: string;
   name: string;
+  slug: string;
   updatedAt: string;
 }
 export interface DiscoDetail {
@@ -33,7 +34,6 @@ export interface DiscoDetail {
   address: string;
   phone: string;
   email: string;
-  slug: string;
   createdAt: string;
   updatedAt: string;
   administrator: string;

@@ -36,7 +36,7 @@ const Resources = ({ discoRoleId, permissionId }: { discoRoleId: string; permiss
             <div>{resource.Resource.name}</div>
             <button
               onClick={() => handleDelete(resource.id)}
-              className={clsx("bg-red-500 hover:bg-red-600 rounded-full px-1")}
+              className={" bg-red-500 hover:bg-red-600 rounded-full px-1"}
             >
               ×
             </button>

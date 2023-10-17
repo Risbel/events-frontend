@@ -1,19 +1,19 @@
-import { useDeleteSubscription } from '@/hooks/useDeleteSubscription'
-import { Button } from '../ui/button'
+import { useDeleteSubscription } from "@/hooks/useDeleteSubscription";
+import { Button } from "../ui/button";
 
 const Unsubscribe = ({ id }: { id: string }) => {
-  const { unsubscribe } = useDeleteSubscription()
+  const { unsubscribe } = useDeleteSubscription();
 
   return (
     <Button
-      size={'sm'}
+      size={"sm"}
       onClick={() => unsubscribe(id)}
       className="hover:bg-red-800 hover:text-white"
-      variant={'secondary'}
+      variant={"secondary"}
     >
       Unsubscribe
     </Button>
-  )
-}
+  );
+};
 
-export default Unsubscribe
+export default Unsubscribe;
