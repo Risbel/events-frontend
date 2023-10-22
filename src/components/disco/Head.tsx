@@ -1,7 +1,6 @@
 import { DataDisco } from "@/services/getDisco";
 import Image from "next/image";
 import React from "react";
-import Navbar from "../navigation/Navbar";
 
 const Head = ({ disco }: { disco: DataDisco }) => {
   return (

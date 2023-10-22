@@ -1,7 +1,7 @@
 import useGetDisco from "@/hooks/useGetDisco";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { useGetAdmisionsByIdDisco } from "@/hooks/useGetAdmisionsByIdDisco";
+
 import FooterDisco from "./FooterDisco";
 import Head from "./Head";
 import SubscribeNow from "./SubscribeNow";
@@ -10,6 +10,8 @@ import Experiencies from "./Experiencies";
 import { SkeletonAboutUs, SkeletonExperiences, SkeletonHead } from "./Skeleton";
 import Navbar from "../navigation/Navbar";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
+import { useGetDiscoTicketsByIdDisco } from "@/hooks/useGetDiscoTicketsByIdDisco";
+import DiscoTickets from "./DiscoTickets";
 
 const DiscoEnviroment = ({ name }: { name: string }) => {
   const { data: session } = useSession();
@@ -20,7 +22,7 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
 
   const { data: myPermissions } = useGetMyPermissions(userId, discoId);
 
-  const { data: admisions } = useGetAdmisionsByIdDisco(discoId);
+  const { data: discotickets } = useGetDiscoTicketsByIdDisco(discoId);
 
   if (isErrordisco) {
     return (
@@ -61,8 +63,8 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
         />
       )}
 
-      <div className="pt-24 px-4 md:px-8">
-        <div className="flex -translate-y-4">
+      <div className="pt-24 px-4 md:px-8 relative z-10">
+        <div>
           <div className="flex flex-col gap-4 md:gap-8">
             {loadingDisco ? null : <Head disco={discoData?.disco} />}
 
@@ -70,7 +72,7 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
               ? null
               : discoData &&
                 discoId &&
-                userId && // just return it if discoData & discoId exist
+                userId &&
                 !discoData?.subscription && <SubscribeNow userId={userId} discoId={discoId} />}
 
             <>
@@ -80,53 +82,14 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
             </>
             {loadingDisco
               ? null
-              : discoData && <Experiencies permissions={myPermissions} discoDetail={discoData?.disco.discoDetail} />}
+              : discoData && <Experiencies myPermissions={myPermissions} discoDetail={discoData?.disco.discoDetail} />}
           </div>
         </div>
-        <>
+        <div>
           {loadingDisco ? null : (
-            <div className="grid grid-flow-row md:grid-flow-col md:grid-cols-3 gap-4 py-9">
-              {admisions &&
-                admisions?.map((admision) => (
-                  <div
-                    className="flex justify-between gap-2 border-2 bg-slate-800 rounded-md p-2 relative hover:scale-[102%]"
-                    key={admision.id}
-                  >
-                    <div className="text-white">
-                      <p>Entrada {admision.category}</p>
-                      <p>Price: {admision.price}</p>
-                      <p>{admision.description}</p>
-                    </div>
-                    <div className="flex items-start absolute right-2">
-                      {admision.category === "vip" ? (
-                        <Image
-                          className="object-cover"
-                          src="/icons8-vip-94.png"
-                          height={50}
-                          width={50}
-                          alt="vip icon"
-                          placeholder="blur"
-                          blurDataURL={"icons8-vip-94.png"}
-                        />
-                      ) : (
-                        admision.category === "simple" && (
-                          <Image
-                            className="object-cover"
-                            src="/icons8-movie-ticket-96.png"
-                            height={50}
-                            width={50}
-                            alt="simple icon"
-                            placeholder="blur"
-                            blurDataURL={"icons8-movie-ticket-96.png"}
-                          />
-                        )
-                      )}
-                    </div>
-                  </div>
-                ))}
-            </div>
+            <DiscoTickets myPermissions={myPermissions} discoId={discoId} discoTickets={discotickets} />
           )}
-        </>
+        </div>
       </div>
       {loadingDisco ? null : discoData && <FooterDisco phone={discoData?.disco.discoDetail.phone} />}
     </div>

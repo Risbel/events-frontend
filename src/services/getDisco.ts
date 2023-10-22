@@ -7,12 +7,8 @@ const getDisco = async ({
   name: string;
   userId: string | undefined;
 }): Promise<{ disco: DataDisco; subscription: Subscription }> => {
-  try {
-    const response = await httpService.get(`/disco/${name}/${userId}`);
-    return response.data;
-  } catch (error) {
-    return error.message;
-  }
+  const response = await httpService.get(`/disco/${name}/${userId}`);
+  return response.data;
 };
 
 export default getDisco;

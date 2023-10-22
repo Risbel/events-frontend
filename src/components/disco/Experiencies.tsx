@@ -3,15 +3,12 @@ import AddExperienceButton from "../buttons/AddExperienceButton";
 import Image from "next/image";
 
 import { DiscoDetail } from "@/services/getDisco";
+
+import useHavePermissions from "@/utils/useHavePermissions";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 
-const Experiencies = ({ discoDetail, permissions }: { discoDetail: DiscoDetail; permissions: ImyPermissions }) => {
-  const havePermission =
-    permissions &&
-    permissions.DiscoRole.rolePermissionResouces.find(
-      (permisionResource) =>
-        permisionResource.Permission.name === "create" && permisionResource.Resource.name === "discoImages"
-    );
+const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail; myPermissions: ImyPermissions }) => {
+  const { havePermission } = useHavePermissions(myPermissions);
 
   return (
     <div className="flex flex-col gap-2">
@@ -33,7 +30,7 @@ const Experiencies = ({ discoDetail, permissions }: { discoDetail: DiscoDetail; 
             )
         )}
       </div>
-      {havePermission && <AddExperienceButton discoDetailId={discoDetail.id} />}
+      {havePermission("create", "Disco Images") && <AddExperienceButton discoDetailId={discoDetail.id} />}
     </div>
   );
 };

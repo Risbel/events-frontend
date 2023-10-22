@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import clsx from "clsx";
 import { Button } from "../ui/button";
-import AddRolesForm from "../forms/AddRolesForm";
+import AddTicketsForm from "../forms/AddTicketsForm";
 
-const AddRoleButton = ({ discoId }: { discoId: string }) => {
+const AddTicketsButton = ({ discoId }: { discoId: string }) => {
   const [isActiveForm, setIsActiveForm] = useState(false);
 
   return (
@@ -15,12 +15,14 @@ const AddRoleButton = ({ discoId }: { discoId: string }) => {
         onClick={() => setIsActiveForm(true)}
         className={clsx(isActiveForm && "hidden")}
       >
-        Add role
+        Add Tickets
       </Button>
 
-      {isActiveForm && <AddRolesForm discoId={discoId} setIsActiveForm={setIsActiveForm} />}
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 col-start-2 w-full">
+        {isActiveForm && <AddTicketsForm discoId={discoId} setIsActiveForm={setIsActiveForm} />}
+      </div>
     </div>
   );
 };
 
-export default AddRoleButton;
+export default AddTicketsButton;

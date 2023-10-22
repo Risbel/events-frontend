@@ -1,12 +1,8 @@
 import httpService from "@/config/axios.config";
 
-const getMyPermissionsOnDisco = async (userId: string, discoId: string): Promise<ImyPermissions[]> => {
-  try {
-    const response = await httpService.get(`/subscription/role/permissions/${userId}/${discoId}`);
-    return response.data;
-  } catch (error: any) {
-    return error.message;
-  }
+const getMyPermissionsOnDisco = async (userId: string, discoId: string): Promise<ImyPermissions[] | any> => {
+  const response = await httpService.get(`/subscription/role/permissions/${userId}/${discoId}`);
+  return response.data;
 };
 
 export default getMyPermissionsOnDisco;

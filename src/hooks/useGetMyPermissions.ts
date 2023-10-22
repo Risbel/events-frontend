@@ -1,7 +1,7 @@
 import getMyPermissionsOnDisco from "@/services/getMyPermissionsOnDisco";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetMyPermissions = (userId: string, discoId: string) => {
+const useGetMyPermissions = (userId: string | any, discoId: string | any) => {
   const isParams = userId && discoId ? true : false;
 
   const { isLoading, isError, error, data } = useQuery({
