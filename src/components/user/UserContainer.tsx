@@ -1,9 +1,18 @@
 import useGetUserById from "@/hooks/useGetUserById";
 import Spinner from "../loaders/Spinner";
 import { Avatar, AvatarImage } from "../ui/avatar";
+import UpdateRoleForm from "../forms/UpdateRoleForm";
 
 const UserContainer = ({ id }: { id: string }) => {
-  const { isLoading, data } = useGetUserById(id);
+  const { isLoading, data, isError, error } = useGetUserById(id);
+
+  if (isError) {
+    return (
+      <div>
+        <p>{error.message}</p>
+      </div>
+    );
+  }
 
   if (isLoading && !data) {
     return (
@@ -36,11 +45,30 @@ const UserContainer = ({ id }: { id: string }) => {
         <h2 className="text-white text-xl font-thin bg-blue-900/20 pb-2">Personal dates:</h2>
         <p className="text-white">Email: {data?.phone}</p>
         <p className="text-white">Phone: {data?.email}</p>
-        <p className="text-white">Joined: {data?.createdAt}</p>
+        <p className="text-white">Joined: {data?.createdAt?.slice(0, 10)}</p>
       </div>
 
       <div className="py-4">
-        <h2 className="text-white text-xl font-thin bg-blue-900/20 pb-2">Subscriptions:</h2>
+        <h2 className="text-white text-xl font-thin bg-blue-900/20 pb-2 mb-2">Subscriptions:</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {data?.subscriptions.map((subscription) => {
+            return (
+              <div
+                key={subscription.id}
+                className="flex gap-2 items-center justify-between pr-1 bg-blue-800/40 hover:bg-blue-700/50 rounded-l-full "
+              >
+                <Avatar>
+                  <AvatarImage src={subscription.Disco.logo} />
+                </Avatar>
+                <div className="flex flex-col">
+                  <p className="text-xl text-white">{subscription.Disco.name}</p>
+                  <p className="text-xs text-white">Role: {subscription.DiscoRole.name}</p>
+                </div>
+                <UpdateRoleForm discoId={subscription.discoId} idSubscription={subscription.id} />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

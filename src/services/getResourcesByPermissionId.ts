@@ -4,12 +4,8 @@ const getResourcesByPermissionId = async (
   discoRoleId: string,
   permissionId: string
 ): Promise<ResourcesByPermissionId[]> => {
-  try {
-    const response = await httpService.get(`/rolesPermissionsResources/resources/${discoRoleId}/${permissionId}`);
-    return response.data;
-  } catch (error) {
-    return error.message;
-  }
+  const response = await httpService.get(`/rolesPermissionsResources/resources/${discoRoleId}/${permissionId}`);
+  return response.data;
 };
 
 export default getResourcesByPermissionId;

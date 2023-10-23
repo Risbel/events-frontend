@@ -12,6 +12,8 @@ const Resources = ({ discoRoleId, permissionId }: { discoRoleId: string; permiss
   } = useGetResourcesByPermissionId(discoRoleId, permissionId);
   const { mutate, isLoading } = useDeleteRolePermissionResource();
 
+  console.log(data);
+
   const handleDelete = (id: string) => {
     mutate(id);
   };

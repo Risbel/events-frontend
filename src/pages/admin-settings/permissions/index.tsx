@@ -15,24 +15,28 @@ const Permissions = () => {
             <Spinner diameter={10} />
           </div>
         )}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {discos &&
-            isFetched &&
-            discos?.map((disco) => (
-              <Link
-                href={`/admin-settings/permissions/${disco.slug}`}
-                className="flex gap-2 items-center hover:bg  hover:bg-white/10 rounded-l-full"
-                key={disco.id}
-              >
-                <Avatar className="rounded-full overflow-hidden">
-                  <AvatarImage height={50} width={50} src={disco.logo} />
-                </Avatar>
-                <div>
-                  <h1 className="text-white text-xl">{disco.name}</h1>
-                </div>
-              </Link>
-            ))}
-        </div>
+
+        {discos && isFetched && (
+          <>
+            <h1 className="text-2xl text-white pb-4">Permissions:</h1>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {discos?.map((disco) => (
+                <Link
+                  href={`/admin-settings/permissions/${disco.slug}`}
+                  className="flex gap-2 items-center hover:bg  hover:bg-white/10 rounded-l-full"
+                  key={disco.id}
+                >
+                  <Avatar className="rounded-full overflow-hidden">
+                    <AvatarImage height={50} width={50} src={disco.logo} />
+                  </Avatar>
+                  <div>
+                    <h1 className="text-white text-xl">{disco.name}</h1>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </HomeLayout>
   );

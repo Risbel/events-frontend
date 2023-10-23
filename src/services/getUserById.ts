@@ -1,13 +1,8 @@
 import httpService from "@/config/axios.config";
 
 export const getUserById = async (id: string): Promise<IuserById> => {
-  try {
-    const response = await httpService.get(`/user/${id}`);
-
-    return response.data;
-  } catch (error: any) {
-    return error.message;
-  }
+  const response = await httpService.get(`/user/${id}`);
+  return response.data;
 };
 
 export interface IuserById {
