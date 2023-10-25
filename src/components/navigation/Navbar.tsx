@@ -3,6 +3,7 @@ import DropdownNavbar from "./DropdownNavbar";
 
 import SuperAdminSettings from "./SuperAdminSettings";
 import { useSession } from "next-auth/react";
+import { Skeleton } from "../ui/skeleton";
 
 function Navbar() {
   const { data: session, status } = useSession();
@@ -12,13 +13,17 @@ function Navbar() {
       <div className="flex w-screen  h-14 absolute z-30 backdrop-sepia-0 bg-white/10 blur-md"></div>
       <div className="flex justify-between items-center w-screen absolute z-40 px-4 py-2 border-b-[0.1px]">
         <Link href={"/"} className="text-white font-semibold shadow-lg hover:shadow-blue-500/50">
-          CFG-TONIGHT
+          C-TONIGHT
         </Link>
         <div>
           <SuperAdminSettings />
         </div>
         <div className="flex justify-center md:pr-5 lg:pr-10">
-          {status !== "loading" && session && <DropdownNavbar session={session} />}
+          {status === "loading" ? (
+            <Skeleton className="relative z-0 rounded-full items-center w-10 h-10"></Skeleton>
+          ) : (
+            session && <DropdownNavbar session={session} />
+          )}
         </div>
       </div>
     </div>

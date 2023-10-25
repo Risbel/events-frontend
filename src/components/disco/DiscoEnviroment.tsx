@@ -12,12 +12,14 @@ import Navbar from "../navigation/Navbar";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import { useGetDiscoTicketsByIdDisco } from "@/hooks/useGetDiscoTicketsByIdDisco";
 import DiscoTickets from "./DiscoTickets";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
 const DiscoEnviroment = ({ name }: { name: string }) => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
-  const { data: discoData, isLoading: loadingDisco, isError: isErrordisco } = useGetDisco({ name, userId });
+  const { data: discoData, isLoading: loadingDisco, isError: isErrordisco, error } = useGetDisco({ name, userId });
   const discoId = discoData?.disco?.id;
 
   const { data: myPermissions } = useGetMyPermissions(userId, discoId);
@@ -26,8 +28,13 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
 
   if (isErrordisco) {
     return (
-      <div className="flex w-full h-screen justify-center items-center bg-black">
-        <span className="text-white">Bad conection, please try later...</span>
+      <div className="flex gap-4 w-full h-screen justify-center items-center bg-black">
+        <span className="text-white text-5xl font-semibold">{error?.response?.status}</span>
+        <span className="text-white text-xl">{error?.response?.data?.message}</span>
+
+        <Link href={"/"}>
+          <Button>Back to home</Button>
+        </Link>
       </div>
     );
   }
@@ -87,7 +94,7 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
         </div>
         <div>
           {loadingDisco ? null : (
-            <DiscoTickets myPermissions={myPermissions} discoId={discoId} discoTickets={discotickets} />
+            <DiscoTickets name={name} myPermissions={myPermissions} discoId={discoId} discoTickets={discotickets} />
           )}
         </div>
       </div>

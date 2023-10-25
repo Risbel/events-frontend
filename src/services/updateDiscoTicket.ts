@@ -4,6 +4,6 @@ import httpService from "@/config/axios.config";
 export const updateDiscoTicket = async (data: EditTicketSchema) => {
   const id = data.id;
 
-  const response = await httpService.put(`/discoTickets/${id}`, data);
+  const response = await httpService.put(`/discoTicket/${id}`, data);
   return response.data;
 };

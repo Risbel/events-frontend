@@ -32,7 +32,7 @@ const AddDiscos = () => {
   if (isLoadingMy) {
     return (
       <div className="flex pt-24 justify-center">
-        <Spinner />
+        <Spinner diameter={8} />
       </div>
     );
   }

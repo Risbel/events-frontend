@@ -1,5 +1,5 @@
-import { createDisco } from '@/services/createDisco'
-import { useMutation } from '@tanstack/react-query'
+import { createDisco } from "@/services/createDisco";
+import { useMutation } from "@tanstack/react-query";
 
 const useCreateDisco = () => {
   const {
@@ -8,10 +8,10 @@ const useCreateDisco = () => {
     isSuccess,
     status,
   } = useMutation({
-    mutationFn: data => createDisco(data),
-  })
+    mutationFn: createDisco,
+  });
 
-  return { submitDataDisco, isLoading, isSuccess, status }
-}
+  return { submitDataDisco, isLoading, isSuccess, status };
+};
 
-export default useCreateDisco
+export default useCreateDisco;

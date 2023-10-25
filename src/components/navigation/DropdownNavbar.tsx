@@ -18,11 +18,11 @@ const DropdownNavbar = ({ session }: { session: Session }) => {
       <DropdownMenuTrigger>
         <Avatar>
           {!session.user?.image ? (
-            <div className="bg-zinc-200 rounded-full flex justify-center items-center w-full">
+            <div className="bg-zinc-200 rounded-full flex justify-center items-center w-full relative z-20">
               <span className="text-md font-bold">{session.user?.name && session.user.name[0]}</span>
             </div>
           ) : (
-            <div className="rounded-full overflow-hidden h-full w-full bg-slate-300">
+            <div className="rounded-full overflow-hidden h-full w-full bg-slate-300 relative z-20">
               <AvatarImage src={session.user.image} />
             </div>
           )}
