@@ -11,7 +11,7 @@ import Spinner from "../loaders/Spinner";
 const editTicketSchema = z.object({
   id: z.string().optional(),
   price: z.string().min(1, { message: "This field is required" }),
-  quantity: z.string().min(1, { message: "This field is required" }),
+  countInStock: z.string().min(1, { message: "This field is required" }),
   description: z.string().optional(),
 });
 
@@ -20,12 +20,12 @@ export type EditTicketSchema = z.infer<typeof editTicketSchema>;
 const EditTicketsForm = ({
   id,
   price,
-  quantity,
+  countInStock,
   description,
 }: {
   id: string;
   price: number;
-  quantity: number;
+  countInStock: number;
   description: string;
 }) => {
   const [isActiveForm, setIsActiveForm] = useState(false);
@@ -67,18 +67,18 @@ const EditTicketsForm = ({
           {errors.price && <p className="text-xs italic text-red-500 mt-2">{errors.price.message}</p>}
         </div>
         <div>
-          <label htmlFor="quantity" className="block mb-1 text-xs font-medium text-gray-200">
-            seats / quantity
+          <label htmlFor="countInStock" className="block mb-1 text-xs font-medium text-gray-200">
+            seats / countInStock
           </label>
           <Input
-            defaultValue={quantity}
+            defaultValue={countInStock}
             type="number"
-            placeholder="seats / quantity"
+            placeholder="seats / countInStock"
             min={1}
-            id="quantity"
-            {...register("quantity")}
+            id="countInStock"
+            {...register("countInStock")}
           />
-          {errors.quantity && <p className="text-xs italic text-red-500 mt-2">{errors.quantity.message}</p>}
+          {errors.countInStock && <p className="text-xs italic text-red-500 mt-2">{errors.countInStock.message}</p>}
         </div>
         {description !== "" && (
           <div>

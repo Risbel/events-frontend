@@ -8,13 +8,15 @@ export const getDiscoTicketById = async (idTicket: string) => {
 export interface IDiscoTicketById {
   id: string;
   price: string;
+  shortDescription: string;
   description: string;
   category: string;
-  quantity: string;
+  countInStock: string;
   createdAt: string;
   updatedAt: string;
   discoId: string;
   Disco: IDisco;
+  ticketImages: IticketImages[];
 }
 
 interface IDisco {
@@ -24,4 +26,13 @@ interface IDisco {
   slug: string;
   createdAt: string;
   updatedAt: string;
+}
+
+interface IticketImages {
+  id: string;
+  image: string;
+  imageText: string;
+  createdAt: string;
+  updatedAt: string;
+  discoTicketId: string;
 }

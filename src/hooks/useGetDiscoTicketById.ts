@@ -8,5 +8,10 @@ export const useGetDiscoTicketById = (idTicket: string) => {
     queryKey: ["discoById", idTicket],
     queryFn: () => getDiscoTicketById(idTicket),
     enabled: isIdTicket,
+    onError: (err: IApiError) => err,
   });
 };
+
+interface IApiError {
+  response: any;
+}

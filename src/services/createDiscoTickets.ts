@@ -12,7 +12,7 @@ export interface IDiscoTickets {
   price: string;
   description: string;
   category: string;
-  quantity: string;
+  countInStock: string;
   updatedAt: string;
   createdAt: string;
 }

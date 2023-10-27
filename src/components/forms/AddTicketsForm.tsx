@@ -10,8 +10,10 @@ const addTicketsSchema = z.object({
   discoId: z.string().optional(),
   category: z.enum(["VIP", "economy", "common"]),
   price: z.string().min(1, { message: "This field is required" }),
+  shortDescription: z.string().optional(),
   description: z.string().optional(),
-  quantity: z.string().min(1, { message: "This field is required" }),
+  countInStock: z.string().min(1, { message: "This field is required" }),
+  image: z.string().optional(),
 });
 
 export type AddTicketSchema = z.infer<typeof addTicketsSchema>;
@@ -76,22 +78,31 @@ const AddTicketsForm = ({
           {errors.price && <p className="text-xs italic text-red-500 mt-2">{errors.price.message}</p>}
         </div>
         <div>
-          <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="quantity">
-            seats / quantity
+          <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="countInStock">
+            seats / countInStock
           </label>
           <Input
             className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-            placeholder="Quantity"
+            placeholder="countInStock"
             defaultValue={1}
             type="number"
             min={1}
-            id="quantity"
-            {...register("quantity")}
+            id="countInStock"
+            {...register("countInStock")}
           />
         </div>
       </div>
-      <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="description">
-        optional description
+      <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="shortDescription">
+        optional short description
+      </label>
+      <textarea
+        className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+        placeholder="Short description"
+        id="shortDescription"
+        {...register("shortDescription")}
+      />
+      <label className="block text-xs font-medium text-gray-200" htmlFor="description">
+        optional large description
       </label>
       <textarea
         className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -99,6 +110,18 @@ const AddTicketsForm = ({
         id="description"
         {...register("description")}
       />
+      <div className="mb-2">
+        <label className="block text-xs font-medium text-gray-200" htmlFor="image">
+          optional image
+        </label>
+        <Input
+          className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+          placeholder="Insert Image URL"
+          type="text"
+          id="image"
+          {...register("image")}
+        />
+      </div>
 
       <div className="flex gap-2">
         <ButtomSubmit text="add" isLoading={isLoading} />

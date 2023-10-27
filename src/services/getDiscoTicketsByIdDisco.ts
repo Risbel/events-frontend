@@ -8,9 +8,10 @@ export const getDiscoTicketsByIdDisco = async (discoId: string): Promise<IDiscoT
 export interface IDiscoTicket {
   id: string;
   price: number;
+  shortDescription: string;
   description: string;
   category: string;
-  quantity: number;
+  countInStock: number;
   createdAt: string;
   updatedAt: string;
   discoId: string;
