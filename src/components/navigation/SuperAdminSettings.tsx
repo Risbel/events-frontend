@@ -22,11 +22,11 @@ const SuperAdminSettings = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
-        <span className="text-white text-xs p-2 bg-blue-900 hover:bg-blue-800 rounded-md">Super Admin</span>
+      <DropdownMenuTrigger className="w-full">
+        <span className="text-white text-sm px-2 pb-2 pt-1 flex  hover:bg-blue-800 rounded-sm ">Super Admin</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="backdrop-blur-sm bg-black/50 text-white">
-        <DropdownMenuLabel>Admin Settings</DropdownMenuLabel>
+        <DropdownMenuLabel className="bg-blue-700/40">Admin Settings</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <Link href={"/admin-settings/add-discos"}>
           <DropdownMenuItem>Add discos</DropdownMenuItem>

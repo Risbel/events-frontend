@@ -4,7 +4,8 @@ import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useGetDiscoTicketById } from "@/hooks/useGetDiscoTicketById";
-import { useCart } from "@/store/useCart";
+import useCart from "@/store/useCart";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -21,16 +22,17 @@ const DiscoTicketDetails = () => {
 
   const { cartItems, addToCart, removeFromCart } = useCart();
 
-  console.log(cartItems);
-
   const existItem = cartItems.find((item) => item.id === data?.id);
   const addToCartHandler = (e: FormEvent<HTMLFormElement> | any) => {
     e.preventDefault();
 
+    if (!data) {
+      return;
+    }
     const amount = Number(e.target.amount.value);
-    const quantity = existItem ? existItem.quantity + amount : amount;
+    const quantity = existItem ? Number(existItem.quantity) + amount : amount;
 
-    if (data && data?.countInStock < quantity) {
+    if (data && Number(data.countInStock) < quantity) {
       return;
     }
 
@@ -84,16 +86,16 @@ const DiscoTicketDetails = () => {
           </Link>
 
           <div className="grid md:grid-cols-4">
-            <div className="flex items-center justify-between bg-white/20 rounded-md  pl-2 pr-1 py-2 h-12">
+            <div className="flex items-center justify-between bg-gradient-to-r from-white/20 to-transparent rounded-md  pl-2 pr-1 py-2 h-12">
               <h1 className="text-xl md:text-2xl text-white">
-                Ticket <span className="bg-blue-700/80 rounded-full px-2">{data.category}</span>
+                Tickets <span className="bg-blue-700/80 rounded-full px-2">{data.category}</span>
               </h1>
               <LogoCategory category={data.category} />
             </div>
           </div>
 
           <div className="bg-gradient-to-r from-white/10 to-transparent rounded-l-md">
-            <h2 className="text-2xl text-white underline-offset-2 underline bg-gradient-to-r from-white/10 via-transparent to-transparent  rounded-l-md py-1 pl-2">
+            <h2 className="text-xl text-white underline-offset-2 underline bg-gradient-to-r from-white/10 via-transparent to-transparent  rounded-l-md py-1 pl-2">
               Details:
             </h2>
             <div className="py-1 pl-2">
@@ -115,13 +117,13 @@ const DiscoTicketDetails = () => {
           </div>
 
           <div className="flex flex-col gap-2 md:flex-row justify-start">
-            <div>
-              {data.ticketImages.map((ticketImage) => (
+            {data?.ticketImages[0]?.image &&
+              data.ticketImages.map((ticketImage) => (
                 <div className="flex items-center justify-center h-64 overflow-hidden rounded-xl" key={ticketImage.id}>
                   <Image src={ticketImage.image} alt={data.Disco.slug} height={300} width={300} />
                 </div>
               ))}
-            </div>
+
             <div className="md:col-start-3 flex flex-col">
               <div className="flex flex-col gap-4">
                 <div className="p-2 rounded-md bg-gradient-to-r from-blue-700/30 to-transparent">
@@ -136,14 +138,26 @@ const DiscoTicketDetails = () => {
                 <form onSubmit={addToCartHandler}>
                   <div className="flex flex-col">
                     <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="addTickets">
-                      Add tickets here
+                      Add tickets to shopping cart
                     </label>
                     <div className="flex items-center gap-2">
-                      <Input defaultValue={1} min={1} type="number" name="amount" className="w-11 text-center" />
+                      <Input
+                        defaultValue={1}
+                        min={1}
+                        type="number"
+                        name="amount"
+                        className="w-11 text-center text-lg"
+                      />
                       <LogoCategory category={data.category} />
 
-                      <Button type="submit">Add to cart</Button>
-                      <Button type="button" onClick={() => removeFromCart(data)}>
+                      <Button className="text-xs px-3" type="submit">
+                        Add 🛒
+                      </Button>
+                      <Button
+                        className="text-xs px-3 bg-yellow-600 hover:bg-yellow-500/80"
+                        type="button"
+                        onClick={() => removeFromCart(data)}
+                      >
                         Discart
                       </Button>
                     </div>

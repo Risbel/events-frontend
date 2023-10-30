@@ -17,6 +17,7 @@ export interface IDiscoTicketById {
   discoId: string;
   Disco: IDisco;
   ticketImages: IticketImages[];
+  quantity: number;
 }
 
 interface IDisco {

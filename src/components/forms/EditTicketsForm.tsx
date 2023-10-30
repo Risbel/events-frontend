@@ -24,8 +24,8 @@ const EditTicketsForm = ({
   description,
 }: {
   id: string;
-  price: number;
-  countInStock: number;
+  price: string;
+  countInStock: string;
   description: string;
 }) => {
   const [isActiveForm, setIsActiveForm] = useState(false);
@@ -68,12 +68,12 @@ const EditTicketsForm = ({
         </div>
         <div>
           <label htmlFor="countInStock" className="block mb-1 text-xs font-medium text-gray-200">
-            seats / countInStock
+            seats / quantity
           </label>
           <Input
             defaultValue={countInStock}
             type="number"
-            placeholder="seats / countInStock"
+            placeholder="seats / quantity"
             min={1}
             id="countInStock"
             {...register("countInStock")}

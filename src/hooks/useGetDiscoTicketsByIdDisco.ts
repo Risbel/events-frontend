@@ -1,4 +1,5 @@
 import { getDiscoTicketsByIdDisco } from "@/services/getDiscoTicketsByIdDisco";
+import { IApiError } from "@/types/react-query";
 import { useQuery } from "@tanstack/react-query";
 
 export const useGetDiscoTicketsByIdDisco = (discoId: string | undefined) => {
@@ -12,5 +13,6 @@ export const useGetDiscoTicketsByIdDisco = (discoId: string | undefined) => {
       }
     },
     enabled: isDiscoId,
+    onError: (err: IApiError) => err,
   });
 };

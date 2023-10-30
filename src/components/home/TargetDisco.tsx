@@ -5,7 +5,7 @@ import React from "react";
 
 const TargetDisco = ({ disco }: { disco: DataDisco }) => {
   return (
-    <div className="flex items-center h-full backdrop-blur-2xl bg-white/30 shadow-lg hover:shadow-purple-800/50 rounded-xl mx-2 overflow-hidden">
+    <div className="flex items-center h-full backdrop-blur-2xl bg-white/30 shadow-lg hover:shadow-purple-800/50 transition-shadow duration-300 rounded-xl mx-2 overflow-hidden">
       <Link className="md:flex" href={`disco/${disco.slug}`}>
         <div className="flex items-center pr-2">
           <Image

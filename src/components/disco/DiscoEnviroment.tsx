@@ -53,7 +53,7 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
       </style>
       <Navbar />
       {loadingDisco || !discoData ? (
-        <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-8">
+        <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-4">
           <SkeletonHead />
           <SkeletonAboutUs />
           <SkeletonExperiences />
@@ -93,9 +93,12 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
           </div>
         </div>
         <div>
-          {loadingDisco ? null : (
-            <DiscoTickets name={name} myPermissions={myPermissions} discoId={discoId} discoTickets={discotickets} />
-          )}
+          {loadingDisco
+            ? null
+            : discoId &&
+              discotickets && (
+                <DiscoTickets name={name} myPermissions={myPermissions} discoId={discoId} discoTickets={discotickets} />
+              )}
         </div>
       </div>
       {loadingDisco ? null : discoData && <FooterDisco phone={discoData?.disco.discoDetail.phone} />}

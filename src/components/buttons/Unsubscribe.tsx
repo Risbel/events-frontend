@@ -1,17 +1,19 @@
 import { useDeleteSubscription } from "@/hooks/useDeleteSubscription";
 import { Button } from "../ui/button";
+import Spinner from "../loaders/Spinner";
 
 const Unsubscribe = ({ id }: { id: string }) => {
-  const { unsubscribe } = useDeleteSubscription();
+  const { mutate, isLoading } = useDeleteSubscription();
 
   return (
     <Button
       size={"sm"}
-      onClick={() => unsubscribe(id)}
-      className="hover:bg-red-800 hover:text-white"
+      onClick={() => mutate(id)}
+      className="hover:bg-red-800 hover:text-white flex gap-2"
       variant={"secondary"}
     >
-      Unsubscribe
+      <span>Unsubscribe</span>
+      {isLoading && <Spinner diameter={4} />}
     </Button>
   );
 };

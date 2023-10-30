@@ -1,4 +1,5 @@
 import getDisco from "@/services/getDisco";
+import { IApiError } from "@/types/react-query";
 import { useQuery } from "@tanstack/react-query";
 
 const useGetDisco = (data: { name: string; userId: string | undefined }) => {
@@ -9,6 +10,7 @@ const useGetDisco = (data: { name: string; userId: string | undefined }) => {
     queryKey: ["discoBySlug", data],
     queryFn: () => getDisco(data),
     enabled: isUserId || isName,
+    onError: (err: IApiError) => err,
   });
 };
 

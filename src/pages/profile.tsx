@@ -22,7 +22,7 @@ const SkeletonAvatar = () => {
 
 const SkeletonSubs = () => {
   return (
-    <div className="px-8 pt-20">
+    <div className="px-4 pt-20">
       <Skeleton className="h-8 w-36 mb-8" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
         <Skeleton className="h-14 w-full" />
@@ -74,8 +74,8 @@ const Profile = () => {
           <SkeletonAvatar />
         )}
         {data ? (
-          <div className="py-10 px-8 md:px-12 text-white">
-            <h1 className="text-2xl font-semibold my-8">My Subscriptions:</h1>
+          <div className="py-10 px-4 md:px-12 text-white">
+            <h1 className="text-2xl font-semibold my-4">My Subscriptions:</h1>
             <div className="grid md:grid-cols-3 gap-2 md:gap-4">
               {data.map((sub) => (
                 <div className="flex items-center justify-between border rounded-md overflow-hidden pr-2" key={sub.id}>

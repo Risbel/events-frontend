@@ -79,7 +79,7 @@ const AddTicketsForm = ({
         </div>
         <div>
           <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="countInStock">
-            seats / countInStock
+            seats / quantity
           </label>
           <Input
             className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"

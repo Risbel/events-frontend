@@ -1,12 +1,12 @@
 import create from "zustand";
 
 interface State {
-  cartItems: any[];
-  addToCart: ({}: any) => void;
-  removeFromCart: ({}: any) => void;
+  cartItems: ICart[];
+  addToCart: ({}: ICart) => void;
+  removeFromCart: ({}: ICart) => void;
 }
 
-export const useCart = create<State>((set, get) => ({
+const useCart = create<State>((set, get) => ({
   cartItems: [],
 
   addToCart: (ticket) => {
@@ -26,3 +26,34 @@ export const useCart = create<State>((set, get) => ({
     return set({ cartItems });
   },
 }));
+
+export default useCart;
+
+export interface ICart {
+  id: string;
+  price: string;
+  shortDescription: string;
+  description: string;
+  category: string;
+  countInStock: string;
+  createdAt: string;
+  updatedAt: string;
+  discoId: string;
+  Disco: {
+    id: string;
+    name: string;
+    logo: string;
+    slug: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+  ticketImages: {
+    id: string;
+    image: string;
+    imageText: string | null;
+    createdAt: string;
+    updatedAt: string;
+    discoTicketId: string;
+  }[];
+  quantity: number;
+}

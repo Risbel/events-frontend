@@ -11,6 +11,7 @@ import Link from "next/link";
 
 import { Session } from "next-auth";
 import Logout from "../buttons/Logout";
+import SuperAdminSettings from "./SuperAdminSettings";
 
 const DropdownNavbar = ({ session }: { session: Session }) => {
   return (
@@ -28,9 +29,10 @@ const DropdownNavbar = ({ session }: { session: Session }) => {
           )}
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="backdrop-blur-sm bg-black/50 text-white">
+      <DropdownMenuContent className="backdrop-blur-sm bg-black/50 text-white rounded-r-none ">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <SuperAdminSettings />
         <Link href={"/profile"}>
           <DropdownMenuItem>Profile</DropdownMenuItem>
         </Link>
