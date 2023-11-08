@@ -1,14 +1,13 @@
-import httpService from "@/config/axios.config"
+import httpService from "@/config/axios.config";
 
-
-const login = async formData => {
+const login = async (formData) => {
   try {
-    const response = await httpService.post('/login', formData)
+    const response = await httpService.post("/login", formData);
 
-    return response.data
+    return response.data;
   } catch (error) {
-    return error
+    return error;
   }
-}
+};
 
-export default login
+export default login;

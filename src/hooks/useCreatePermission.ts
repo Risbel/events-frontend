@@ -1,17 +1,17 @@
-import addPermission from '@/services/addPermission'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import addPermission from "@/services/addPermission";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useCreatePermission = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: data => addPermission(data),
+    mutationFn: addPermission,
     onSuccess: () => {
-      queryClient.invalidateQueries()
+      queryClient.invalidateQueries();
     },
-  })
+  });
 
-  return { mutate, isLoading }
-}
+  return { mutate, isLoading };
+};
 
-export default useCreatePermission
+export default useCreatePermission;

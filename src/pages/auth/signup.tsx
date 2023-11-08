@@ -103,12 +103,12 @@ const Signup = () => {
         <Button type="submit">Sign up</Button>
         {isLoading && (
           <div className="flex w-full justify-center">
-            <Spinner />
+            <Spinner diameter={4} />
           </div>
         )}
         {isSuccess && (
           <div className="flex justify-center w-full">
-            <span>Successful</span>
+            <span className="text-green-600">Successful</span>
           </div>
         )}
       </form>

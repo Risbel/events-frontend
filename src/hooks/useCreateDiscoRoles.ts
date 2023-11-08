@@ -1,21 +1,21 @@
-import createDiscoRoles from '@/services/createDiscoRoles'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import createDiscoRoles from "@/services/createDiscoRoles";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useCreateDiscoRoles = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const {
     mutate: submitDiscoRole,
     isLoading,
     isSuccess,
   } = useMutation({
-    mutationFn: data => createDiscoRoles(data),
+    mutationFn: createDiscoRoles,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['discoRoles'] })
+      queryClient.invalidateQueries({ queryKey: ["discoRoles"] });
     },
-  })
+  });
 
-  return { submitDiscoRole, isLoading, isSuccess }
-}
+  return { submitDiscoRole, isLoading, isSuccess };
+};
 
-export default useCreateDiscoRoles
+export default useCreateDiscoRoles;

@@ -2,6 +2,7 @@ import { LogoCategory } from "@/components/disco/DiscoTickets";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { Button } from "@/components/ui/button";
 import useCart, { ICart } from "@/store/useCart";
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -30,14 +31,19 @@ const Cart = () => {
 
   return (
     <HomeLayout>
-      <div className="pt-20 px-4 md:px-8">
-        {cartItems.length === 0 ? (
-          <h1 className="text-white text-2xl font-semibold pb-2">The shopping cart is empty</h1>
-        ) : (
-          <h1 className="text-white text-2xl font-semibold pb-2">Tickets and combos in cart</h1>
+      <div className="text-center px-4 md:px-8">
+        {cartItems.length && (
+          <p className="text-center text-slate-400 font-thin pt-16 pb-4 text-xl">
+            <span className="text-white underline underline-2">Cart</span>/
+            <Link className="hover:text-white hover:underline underline-2" href={"/cart/payment"}>
+              Payment
+            </Link>
+            /Status
+          </p>
         )}
+        {!cartItems.length && <h1 className="text-white text-xl md:text-2xl mt-20">The shopping cart is empty</h1>}
 
-        <div className="grid md:grid-cols-4 gap-2 md:gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
           {cartItems.map((item) => (
             <div
               key={item.id}
@@ -53,17 +59,31 @@ const Cart = () => {
               <div className="flex flex-col gap-2 p-2">
                 <div className="flex items-center justify-between gap-2">
                   <LogoCategory category={item.category} />
-                  <div className="flex flex-col leading-tight">
-                    <p className="text-sm font-thin text-white">
-                      Disco: <span className="font-semibold">{item.Disco.name}</span>
-                    </p>
-                    <p className="text-sm font-thin text-white">
-                      Category: <span className="font-semibold">{item.category}</span>
-                    </p>
-                    <p className="text-sm font-thin text-white">
-                      Price: <span className="font-semibold">${item.price}</span>
-                    </p>
-                  </div>
+                  <table className="-translate-x-2">
+                    <tbody>
+                      <tr className="text-sm font-thin text-white">
+                        <td className="pr-1 text-right">Disco: </td>
+                        <td>
+                          <span className="font-semibold">{item.Disco.name}</span>
+                        </td>
+                      </tr>
+
+                      <tr className="text-sm font-thin text-white">
+                        <td className="pr-1 text-right">Category: </td>
+                        <td>
+                          <span className="font-semibold">{item.category}</span>
+                        </td>
+                      </tr>
+
+                      <tr className="text-sm font-thin text-white">
+                        <td className="pr-1 text-right">Price: </td>
+                        <td>
+                          <span className="font-semibold">${item.price}</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
                   <div className="flex h-full items-start">
                     <Link
                       className="text-white font-thin bg-blue-900/80 hover:bg-blue-800  px-1 rounded-md"
@@ -75,7 +95,7 @@ const Cart = () => {
                 </div>
                 <div className="flex flex-col items-center">
                   <p className="text-white">
-                    <span className="font-thin"></span> {item.quantity} tickets reserved
+                    <span className="font-thin"></span> {item.quantity} ticket{item.quantity > 1 && "s"}
                   </p>
 
                   <div className="flex items-center justify-around w-full gap-2">
@@ -93,7 +113,7 @@ const Cart = () => {
                     </div>
                     <Button
                       size={"sm"}
-                      className="bg-red-800 hover:bg-red-700 text-xs h-6 px-1"
+                      className="bg-red-800 hover:bg-red-700 text-xs h-7 px-1"
                       onClick={() => removeFromCart(item)}
                     >
                       Descart
@@ -106,6 +126,20 @@ const Cart = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className={clsx("w-full text-center mt-28 mb-8", !cartItems.length && "hidden")}>
+          <Button className="shadow-xl hover:shadow-blue-400/40 hover:border-b hover:bg-violet-700">
+            <Link href={"/cart/payment"}> Make Payment</Link>
+          </Button>
+          <p className="text-white text-xl font-thin my-4">
+            Total to pay: $
+            <span className="font-semibold">
+              {cartItems.reduce(
+                (acc, currentItem) => Number(currentItem.quantity) * Number(currentItem.price) + acc,
+                0
+              )}
+            </span>
+          </p>
         </div>
       </div>
     </HomeLayout>

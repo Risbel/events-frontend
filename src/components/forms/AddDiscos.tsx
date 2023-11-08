@@ -8,10 +8,13 @@ import useGetMe from "@/hooks/useGetMe";
 import Spinner from "../loaders/Spinner";
 import Resource405 from "../alerts/Resource405";
 import Link from "next/link";
+import { useState } from "react";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
 
 const AddDiscos = () => {
+  const [bankCardInput, setBankCardInput] = useState("");
+  const [errorBankCard, setErrorBankCard] = useState("");
   const { isLoading: isLoadingMy, user } = useGetMe();
 
   const {
@@ -25,6 +28,13 @@ const AddDiscos = () => {
 
   const { submitDataDisco, isLoading } = useCreateDisco();
   const onSubmit: SubmitHandler<AddDiscoSchema> = (data) => {
+    if (bankCardInput.length < 19) {
+      setErrorBankCard("This field most be at least 16 characters");
+      return;
+    }
+    setErrorBankCard("");
+    data.bankCardNumber = bankCardInput;
+
     submitDataDisco(data);
     reset();
   };
@@ -68,7 +78,7 @@ const AddDiscos = () => {
             />
             {errors.name && <p className="text-xs italic text-red-500 mt-2">{errors.name?.message}</p>}
           </div>
-          <div className="md:ml-2">
+          <div className="mb-2">
             <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="slug">
               Slug
             </label>
@@ -85,19 +95,6 @@ const AddDiscos = () => {
 
         <div className="mb-2 md:grid md:grid-cols-2">
           <div className="mb-2 md:mr-2 md:mb-0">
-            <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              placeholder="Email"
-              {...register("email")}
-            />
-            {errors.email && <p className="text-xs italic text-red-500 mt-2">{errors.email?.message}</p>}
-          </div>
-          <div className="md:ml-2">
             <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="phone">
               Phone
             </label>
@@ -109,6 +106,21 @@ const AddDiscos = () => {
               {...register("phone")}
             />
             {errors.phone && <p className="text-xs italic text-red-500 mt-2">{errors.phone?.message}</p>}
+          </div>
+          <div className="pb-2">
+            <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="administrator">
+              Administrator
+            </label>
+            <input
+              className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+              id="administrator"
+              type="text"
+              placeholder="Administrator"
+              {...register("administrator")}
+            />
+            {errors.administrator && (
+              <p className="text-xs italic text-red-500 mt-2">{errors.administrator?.message}</p>
+            )}
           </div>
         </div>
         <div className="pb-2">
@@ -156,17 +168,27 @@ const AddDiscos = () => {
         </div>
 
         <div className="pb-2">
-          <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="administrator">
-            Administrator
+          <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="bankCardNumber">
+            Bank card number
           </label>
           <input
             className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-            id="administrator"
+            id="bankCardNumber"
             type="text"
-            placeholder="Administrator"
-            {...register("administrator")}
+            max={16}
+            placeholder="Bank card number"
+            value={bankCardInput}
+            autoComplete="off"
+            onChange={(e) => {
+              let value = e.target.value.replace(/\D/g, "");
+              value = value.replace(/(\d{4})(?=\d)/g, "$1-");
+              if (value.length > 20) {
+                return;
+              }
+              setBankCardInput(value);
+            }}
           />
-          {errors.administrator && <p className="text-xs italic text-red-500 mt-2">{errors.administrator?.message}</p>}
+          {errorBankCard.length > 5 && <p className="text-xs italic text-red-500 mt-2">{errorBankCard}</p>}
         </div>
 
         <div className="pb-2">

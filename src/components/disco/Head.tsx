@@ -1,10 +1,13 @@
 import { DataDisco } from "@/services/getDisco";
 import Image from "next/image";
 import React from "react";
+import AdminSettings from "./AdminSettings";
 
 const Head = ({ disco }: { disco: DataDisco }) => {
   return (
-    <div>
+    <div className="relative">
+      <AdminSettings disco={disco} />
+
       <div className="flex items-center gap-4 md:gap-8">
         {disco && (
           <Image

@@ -35,6 +35,9 @@ export interface DiscoDetail {
   administrator: string;
   discoId: string;
   discoImages: DiscoImages[];
+  discoNetworks: [];
+  discoPhones: [];
+  userBankCard: IUserBankCard;
 }
 
 export interface DiscoImages {
@@ -62,4 +65,13 @@ export interface DiscoRole {
   createdAt: string;
   updatedAt: string;
   discoId: string;
+}
+
+export interface IUserBankCard {
+  id: string;
+  number: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
 }

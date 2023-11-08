@@ -33,6 +33,7 @@ const AddRolesForm = ({
   const onSubmit: SubmitHandler<AddRoleSchema> = (data) => {
     data.discoId = discoId;
     submitDiscoRole(data);
+
     isSuccess && reset();
   };
 

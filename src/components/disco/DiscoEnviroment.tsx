@@ -52,6 +52,7 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
         `}
       </style>
       <Navbar />
+
       {loadingDisco || !discoData ? (
         <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-4">
           <SkeletonHead />
@@ -70,7 +71,7 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
         />
       )}
 
-      <div className="pt-24 px-4 md:px-8 relative z-10">
+      <div className="pt-20 px-4 md:px-8 relative z-10">
         <div>
           <div className="flex flex-col gap-4 md:gap-8">
             {loadingDisco ? null : <Head disco={discoData?.disco} />}
@@ -101,6 +102,7 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
               )}
         </div>
       </div>
+
       {loadingDisco ? null : discoData && <FooterDisco phone={discoData?.disco.discoDetail.phone} />}
     </div>
   );
