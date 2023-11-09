@@ -74,7 +74,7 @@ const EditTicketsForm = ({
             defaultValue={countInStock}
             type="number"
             placeholder="seats / quantity"
-            min={1}
+            min={0}
             id="countInStock"
             {...register("countInStock")}
           />

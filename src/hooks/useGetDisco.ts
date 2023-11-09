@@ -2,7 +2,7 @@ import getDisco from "@/services/getDisco";
 import { IApiError } from "@/types/react-query";
 import { useQuery } from "@tanstack/react-query";
 
-const useGetDisco = (data: { name: string; userId: string }) => {
+const useGetDisco = (data: { name: string; userId: string | undefined }) => {
   const isUserId = data.userId ? true : false;
   const isName = data.name ? true : false;
 

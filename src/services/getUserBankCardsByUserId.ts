@@ -12,4 +12,9 @@ export interface IUserBankCardByUserId {
   createdAt: string;
   updatedAt: string;
   userId: string;
+  discoDetail: IdiscoDetail;
+}
+
+interface IdiscoDetail {
+  id: string;
 }

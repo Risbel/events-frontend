@@ -17,19 +17,26 @@ export type EditBankCardSchema = z.infer<typeof editBankCardSchema>;
 
 const EditBankCardButton = ({ discoBankCard }: { discoBankCard: IUserBankCard }) => {
   const [isActive, setIsActive] = useState(false);
-  const { data } = useGetBankCardsByUserId(discoBankCard.userId);
+  const { data, isLoading: isLoadingCards } = useGetBankCardsByUserId(discoBankCard.userId);
   const { mutate, isLoading } = useUpdateDiscoBankCard();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<EditBankCardSchema>({ resolver: zodResolver(editBankCardSchema) });
 
   const onSubmit: SubmitHandler<EditBankCardSchema> = (data) => {
     mutate(data);
   };
+
+  if (isLoadingCards) {
+    return (
+      <div className="flex w-full justify-center py-4">
+        <Spinner diameter={4} />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col">

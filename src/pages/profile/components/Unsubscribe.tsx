@@ -1,6 +1,6 @@
 import { useDeleteSubscription } from "@/hooks/useDeleteSubscription";
-import { Button } from "../ui/button";
-import Spinner from "../loaders/Spinner";
+import { Button } from "../../../components/ui/button";
+import Spinner from "../../../components/loaders/Spinner";
 
 const Unsubscribe = ({ id }: { id: string }) => {
   const { mutate, isLoading } = useDeleteSubscription();

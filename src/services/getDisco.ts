@@ -1,13 +1,7 @@
 import httpService from "@/config/axios.config";
 
-const getDisco = async ({
-  name,
-  userId,
-}: {
-  name: string;
-  userId: string | undefined;
-}): Promise<{ disco: DataDisco; subscription: Subscription }> => {
-  const response = await httpService.get(`/disco/${name}/${userId}`);
+const getDisco = async ({ name, userId }: { name: string; userId: string | undefined }) => {
+  const response = await httpService.get<{ disco: DataDisco; subscription: Subscription }>(`/disco/${name}/${userId}`);
   return response.data;
 };
 
