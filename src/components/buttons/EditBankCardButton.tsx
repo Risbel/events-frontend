@@ -11,11 +11,18 @@ import Spinner from "../loaders/Spinner";
 
 const editBankCardSchema = z.object({
   userBankCardId: z.string().min(1, { message: "You must have select first a number card" }),
+  discoDetailId: z.string().min(1),
 });
 
 export type EditBankCardSchema = z.infer<typeof editBankCardSchema>;
 
-const EditBankCardButton = ({ discoBankCard }: { discoBankCard: IUserBankCard }) => {
+const EditBankCardButton = ({
+  discoDetailId,
+  discoBankCard,
+}: {
+  discoDetailId: string;
+  discoBankCard: IUserBankCard;
+}) => {
   const [isActive, setIsActive] = useState(false);
   const { data, isLoading: isLoadingCards } = useGetBankCardsByUserId(discoBankCard.userId);
   const { mutate, isLoading } = useUpdateDiscoBankCard();
@@ -46,7 +53,7 @@ const EditBankCardButton = ({ discoBankCard }: { discoBankCard: IUserBankCard })
         </div>
       ) : (
         <>
-          <div className="flex justify-end">
+          <div className="flex justify-end mb-2">
             <Button
               className={cn(isActive && "bg-yellow-600 hover:bg-yellow-500")}
               onClick={() => setIsActive((prev) => !prev)}
@@ -54,38 +61,43 @@ const EditBankCardButton = ({ discoBankCard }: { discoBankCard: IUserBankCard })
               {isActive ? "Discart" : "Change card"}
             </Button>
           </div>
-          <div>
-            {isActive && (
-              <div>
-                <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-                  <div>
-                    <select className="py-2 pl-2  rounded-sm" id="userBankCardId" {...register("userBankCardId")}>
-                      <option className="py-2" value="" hidden>
-                        Select new card here
-                      </option>
-                      {data &&
-                        data?.map(
-                          (item) =>
-                            discoBankCard.id !== item.id && (
-                              <option className="py-2" key={item.id} value={item.id}>
-                                {item.number.replace(/(\d{4})/g, "$1-").slice(0, -1)}
-                              </option>
-                            )
-                        )}
-                    </select>
-                    {errors.userBankCardId && (
-                      <p className="text-xs italic text-red-500 mt-2">{errors.userBankCardId.message}</p>
-                    )}
-                  </div>
+
+          {isActive && (
+            <div>
+              <p className="text-xs text-white text-center px-8 pb-4">
+                In this select you can only choose cards associated with your account.
+              </p>
+              <form className="flex gap-2 justify-center" onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                  <select className="py-2 pl-2  rounded-sm" id="userBankCardId" {...register("userBankCardId")}>
+                    <option className="py-2" value="" hidden>
+                      Select new card here
+                    </option>
+                    {data &&
+                      data?.map(
+                        (item) =>
+                          discoBankCard.id !== item.id && (
+                            <option className="py-2" key={item.id} value={item.id}>
+                              {item.number.replace(/(\d{4})/g, "$1-").slice(0, -1)}
+                            </option>
+                          )
+                      )}
+                  </select>
+                  {errors.userBankCardId && (
+                    <p className="text-xs italic text-red-500 mt-2">{errors.userBankCardId.message}</p>
+                  )}
+                </div>
+                <div>
+                  <input value={discoDetailId} hidden id="discoDetailId" {...register("discoDetailId")} />
                   <Button type="submit">
-                    <div className="flex gap-2 items-center">
-                      <span>Add new card</span> {isLoading && <Spinner diameter={4} />}
+                    <div className="flex gap-2 justify-center">
+                      {!isLoading && <span>Save</span>} {isLoading && <Spinner diameter={4} />}
                     </div>
                   </Button>
-                </form>
-              </div>
-            )}
-          </div>
+                </div>
+              </form>
+            </div>
+          )}
         </>
       )}
     </div>

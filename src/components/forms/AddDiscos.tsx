@@ -179,6 +179,7 @@ const AddDiscos = () => {
             placeholder="Bank card number"
             value={bankCardInput}
             autoComplete="off"
+            {...register("bankCardNumber")}
             onChange={(e) => {
               let value = e.target.value.replace(/\D/g, "");
               value = value.replace(/(\d{4})(?=\d)/g, "$1-");

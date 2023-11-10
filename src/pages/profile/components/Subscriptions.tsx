@@ -27,7 +27,7 @@ const Subscriptions = ({ userId }: { userId: string }) => {
       {" "}
       {data ? (
         <div className="py-10 px-4 md:px-12 text-white">
-          <h1 className="text-2xl font-semibold my-4">My Subscriptions:</h1>
+          <h1 className="text-xl font-semibold my-4">My Subscriptions:</h1>
           <div className="grid md:grid-cols-3 gap-2 md:gap-4">
             {data.map((sub) => (
               <div className="flex items-center justify-between border rounded-md overflow-hidden pr-2" key={sub.id}>

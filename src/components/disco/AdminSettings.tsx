@@ -34,7 +34,7 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
             <DropdownMenuItem>My users</DropdownMenuItem>
             <DropdownMenuItem>Permissions</DropdownMenuItem>
 
-            <BankCardAsociated discoBankCard={disco.discoDetail.userBankCard} />
+            <BankCardAsociated discoDetailId={disco.discoDetail.id} discoBankCard={disco.discoDetail.userBankCard} />
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

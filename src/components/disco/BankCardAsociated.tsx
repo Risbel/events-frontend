@@ -3,7 +3,13 @@ import { IUserBankCard } from "@/services/getDisco";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import EditBankCardButton from "../buttons/EditBankCardButton";
 
-const BankCardAsociated = ({ discoBankCard }: { discoBankCard: IUserBankCard }) => {
+const BankCardAsociated = ({
+  discoBankCard,
+  discoDetailId,
+}: {
+  discoBankCard: IUserBankCard;
+  discoDetailId: string;
+}) => {
   return (
     <div>
       <Dialog>
@@ -20,7 +26,7 @@ const BankCardAsociated = ({ discoBankCard }: { discoBankCard: IUserBankCard }) 
                 <p className="text-xl md:text-2xl">{discoBankCard.number.replace(/(\d{4})/g, "$1-").slice(0, -1)}</p>
               </div>
 
-              <EditBankCardButton discoBankCard={discoBankCard} />
+              <EditBankCardButton discoDetailId={discoDetailId} discoBankCard={discoBankCard} />
             </div>
           </div>
         </DialogContent>
