@@ -9,7 +9,7 @@ const Home = () => {
 
   return (
     <HomeLayout>
-      <main className="flex flex-col items-center h-screen pt-24">
+      <main className="flex flex-col md:items-center h-screen pt-24 px-4 md:px-0">
         <div className="grid lg:grid-cols-2 gap-4">
           {isLoading && <Spinner diameter={10} />}
 

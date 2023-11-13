@@ -12,8 +12,8 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
 
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="font-extrabold text-4xl text-white pt-5 pb-2">Experiencies</h1>
-      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <h1 className="font-extrabold text-4xl text-white pt-5 pb-2 text-center md:text-start">Experiencies</h1>
+      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-5 gap-4">
         {discoDetail?.discoImages?.map(
           (discoImage, index) =>
             discoImage && (
@@ -25,7 +25,7 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
                   height={500}
                   alt="experiencies"
                 />
-                <p className="text-white text-md md:text-md font-light text-start">{discoImage?.imageText}</p>
+                <p className="text-white text-xs md:text-md font-light text-start">{discoImage?.imageText}</p>
               </div>
             )
         )}

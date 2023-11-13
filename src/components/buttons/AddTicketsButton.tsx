@@ -9,16 +9,11 @@ const AddTicketsButton = ({ discoId }: { discoId: string }) => {
 
   return (
     <div>
-      <Button
-        size={"sm"}
-        variant={"outline"}
-        onClick={() => setIsActiveForm(true)}
-        className={clsx(isActiveForm && "hidden")}
-      >
+      <Button size={"sm"} onClick={() => setIsActiveForm(true)} className={clsx(isActiveForm && "hidden")}>
         Add Tickets
       </Button>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 col-start-2 w-full">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 col-start-2 w-full">
         {isActiveForm && <AddTicketsForm discoId={discoId} setIsActiveForm={setIsActiveForm} />}
       </div>
     </div>

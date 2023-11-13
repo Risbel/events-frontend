@@ -5,28 +5,30 @@ import React from "react";
 
 const TargetDisco = ({ disco }: { disco: DataDisco }) => {
   return (
-    <div className="flex items-center h-full backdrop-blur-2xl bg-white/30 shadow-lg hover:shadow-purple-800/50 transition-shadow duration-300 rounded-xl mx-2 overflow-hidden">
-      <Link className="md:flex" href={`disco/${disco.slug}`}>
-        <div className="flex items-center pr-2">
+    <div className="flex items-center h-full backdrop-blur-2xl bg-black/30 shadow-lg hover:shadow-purple-800/50 transition-shadow duration-300 rounded-xl overflow-hidden border-l-2 border-b-2">
+      <Link className="flex w-full" href={`disco/${disco.slug}`}>
+        <div className="flex items-center">
           <Image
-            className="float-left rounded-r-full md:rounded-none"
+            className="float-left rounded-full absolute z-20 -translate-x-8 opacity-70"
             placeholder="blur"
             blurDataURL={disco.logo}
             src={disco.logo}
             alt="image-next-auth"
-            width={80}
-            height={80}
+            width={150}
+            height={150}
           />
-          <div className="pl-4 md:hidden">
-            <h1 className="w-full justify-center font-semibold text-2xl text-gray-100">{disco.name}</h1>
-            <p className="text-sm text-gray-100 md:text-md">{disco.discoDetail.address}</p>
-          </div>
         </div>
 
-        <div className="flex flex-col justify-center p-2">
-          <h1 className="font-semibold text-xl text-gray-100 hidden md:block">{disco.name}</h1>
-          <p className="text-sm text-gray-100 md:text-md">{disco?.discoDetail?.description}</p>
-          <p className="text-sm text-gray-100 md:text-md hidden md:block">{disco.discoDetail.address}</p>
+        <div className="flex flex-col p-2 relative z-20 w-full">
+          <div className="grid grid-cols-2">
+            <h1 className="col-start-2 text-center font-bold text-xl text-black bg-gradient-to-r from-transparent via-white/90 to-transparent rounded-md leading-none py-1">
+              {disco.name}
+            </h1>
+          </div>
+          <div className="bg-gradient-to-r from-black/60 to-transparent p-2 rounded-xl">
+            <p className="text-sm text-gray-100 md:text-md hidden md:block">{disco?.discoDetail?.description}</p>
+            <p className="text-sm text-gray-100 md:text-md">{disco.discoDetail.address}</p>
+          </div>
         </div>
       </Link>
     </div>

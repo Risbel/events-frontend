@@ -15,4 +15,5 @@ export interface IDiscoTicket {
   createdAt: string;
   updatedAt: string;
   discoId: string;
+  expDate: string;
 }

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useGetDiscoTicketById } from "@/hooks/useGetDiscoTicketById";
 import useCart from "@/store/useCart";
+import { ChevronLeft } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -81,8 +82,11 @@ const DiscoTicketDetails = () => {
     return (
       <HomeLayout>
         <div className="flex flex-col gap-4 py-20  px-4 md:px-8">
-          <Link href={`/disco/${data.Disco.slug}`}>
-            <Button>Go back</Button>
+          <Link
+            className="flex items-center pr-2 rounded-md border hover:bg-white/20 text-white w-fit"
+            href={`/disco/${data.Disco.slug}`}
+          >
+            <ChevronLeft width={20} /> Go back
           </Link>
 
           <div className="grid md:grid-cols-4">

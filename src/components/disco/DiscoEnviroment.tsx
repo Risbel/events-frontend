@@ -41,16 +41,6 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
 
   return (
     <div className="relative overflow-hidden bg-black">
-      <style>
-        {`
-          ::-webkit-scrollbar {
-            width: 0.1rem;
-          }
-          ::-webkit-scrollbar-button {
-            display: none;
-          }
-        `}
-      </style>
       <Navbar />
 
       {loadingDisco || !discoData ? (

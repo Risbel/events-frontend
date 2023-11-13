@@ -8,7 +8,7 @@ const ButtomSubmit = ({ className, isLoading, text }: { className?: string; isLo
   return (
     <Button
       className={clsx(
-        "w-full px-4 py-2 font-medium leading-none text-white bg-blue-700 rounded-full hover:bg-blue-600 focus:outline-none focus:shadow-outline",
+        "w-full px-4 py-2 font-medium leading-none text-white bg-blue-700 hover:bg-blue-600 focus:outline-none focus:shadow-outline",
         className
       )}
       type="submit"
