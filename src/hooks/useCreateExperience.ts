@@ -1,14 +1,19 @@
-import { createExperience } from '@/services/createExperience'
-import { useMutation } from '@tanstack/react-query'
+import { createExperience } from "@/services/createExperience";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useCreateExperience = () => {
+  const queryClient = useQueryClient();
+
   const {
     isLoading,
     isSuccess,
     mutate: submitDataExperience,
   } = useMutation({
-    mutationFn: data => createExperience(data),
-  })
+    mutationFn: createExperience,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["discoBySlug"]);
+    },
+  });
 
-  return { isLoading, isSuccess, submitDataExperience }
-}
+  return { isLoading, isSuccess, submitDataExperience };
+};

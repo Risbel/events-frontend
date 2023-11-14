@@ -12,7 +12,7 @@ const editTicketSchema = z.object({
   id: z.string().optional(),
   price: z.string().min(1, { message: "This field is required" }),
   countInStock: z.string().min(1, { message: "This field is required" }),
-  description: z.string().optional(),
+  shortDescription: z.string().optional(),
 });
 
 export type EditTicketSchema = z.infer<typeof editTicketSchema>;
@@ -21,12 +21,12 @@ const EditTicketsForm = ({
   id,
   price,
   countInStock,
-  description,
+  shortDescription,
 }: {
   id: string;
   price: string;
   countInStock: string;
-  description: string;
+  shortDescription: string;
 }) => {
   const [isActiveForm, setIsActiveForm] = useState(false);
 
@@ -80,16 +80,16 @@ const EditTicketsForm = ({
           />
           {errors.countInStock && <p className="text-xs italic text-red-500 mt-2">{errors.countInStock.message}</p>}
         </div>
-        {description !== "" && (
+        {shortDescription !== "" && (
           <div>
-            <label htmlFor="description" className="w-full block mb-1 text-xs font-medium text-gray-200">
-              optional description
+            <label htmlFor="shortDescription" className="w-full block mb-1 text-xs font-medium text-gray-200">
+              optional short description
             </label>
             <textarea
               className="w-full py-2 pl-1 text-xs leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-              defaultValue={description}
-              id="description"
-              {...register("description")}
+              defaultValue={shortDescription}
+              id="shortDescription"
+              {...register("shortDescription")}
             />
           </div>
         )}

@@ -19,7 +19,7 @@ const addTicketsSchema = z.object({
   price: z.string().min(1, { message: "This field is required" }),
   expDate: z.date().optional(),
   shortDescription: z.string().optional(),
-  description: z.string().optional(),
+  largeDescription: z.string().optional(),
   countInStock: z.string().min(1, { message: "This field is required" }),
   image: z.string().optional(),
 });
@@ -65,16 +65,16 @@ const AddTicketsForm = ({
           </label>
           <select
             defaultValue={""}
-            className="h-10 pl-2 text-gray-800 bg-white rounded-md w-full md:text-base outline-0"
+            className="h-10 pl-2 text-gray-500 bg-white rounded-md w-full text-xs outline-0"
             id="category"
             {...register("category")}
           >
             <option value="" disabled hidden>
               Select category
             </option>
-            <option className="text-md">VIP</option>
-            <option className="text-md">economy</option>
-            <option className="text-md">common</option>
+            <option className="text-sm">VIP</option>
+            <option className="text-sm">economy</option>
+            <option className="text-sm">common</option>
           </select>
           {errors.category && <p className="text-xs italic text-red-500 mt-2">Please select some category</p>}
         </div>
@@ -151,14 +151,14 @@ const AddTicketsForm = ({
         id="shortDescription"
         {...register("shortDescription")}
       />
-      <label className="block text-xs font-medium text-gray-200" htmlFor="description">
+      <label className="block text-xs font-medium text-gray-200" htmlFor="largeDescription">
         optional large description
       </label>
       <textarea
         className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-        placeholder="Description"
-        id="description"
-        {...register("description")}
+        placeholder="Large description"
+        id="largeDescription"
+        {...register("largeDescription")}
       />
       <div className="mb-2">
         <label className="block text-xs font-medium text-gray-200" htmlFor="image">

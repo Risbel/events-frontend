@@ -111,15 +111,18 @@ const DiscoTickets = ({
                         className="flex justify-between gap-2 border-2 bg-gradient-to-r from-black/70 to-slate-900/70 rounded-md p-2 relative shadow-lg hover:shadow-purple-500 hover:-translate-y-0.5"
                       >
                         <div className="text-white w-full">
-                          <p className="text-sm">🎫 Reserve {ticket.category} tickets</p>
+                          <p className="text-sm">Reserve {ticket.category} tickets</p>
                           <div className="flex gap-3 items-center">
-                            <p className="text-sm">💵 ${ticket.price} c/u</p>
+                            <div className="flex items-end -translate-y-1">
+                              <div>💳</div>
+                              <div className="text-sm"> ${ticket.price} c/u</div>
+                            </div>
                             {(ticket.category === "VIP" || ticket.category === "economy") && (
                               <p className="text-xs">🪑 {ticket.countInStock} </p>
                             )}
                           </div>
                           <div>
-                            <p className="text-xs font-light text-gray-100"> {ticket.description}</p>
+                            <p className="text-xs font-light text-gray-100"> {ticket.shortDescription}</p>
                             <p className="text-xs font-semibold text-center text-gray-400 pt-2">
                               📆 {diasSemana[new Date(ticket.expDate).getDay()]} {ticket.expDate.slice(8, 10)}
                             </p>
@@ -139,7 +142,7 @@ const DiscoTickets = ({
                             id={ticket.id}
                             price={ticket.price}
                             countInStock={ticket.countInStock}
-                            description={ticket.description}
+                            shortDescription={ticket.shortDescription}
                           />
                         </div>
                       )}

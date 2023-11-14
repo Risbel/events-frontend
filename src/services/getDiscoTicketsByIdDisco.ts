@@ -9,7 +9,7 @@ export interface IDiscoTicket {
   id: string;
   price: string;
   shortDescription: string;
-  description: string;
+  largeDescription: string;
   category: string;
   countInStock: string;
   createdAt: string;

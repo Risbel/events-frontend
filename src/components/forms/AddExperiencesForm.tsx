@@ -1,26 +1,24 @@
-'use client'
-
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import ButtomSubmit from '../buttons/ButtomSubmit'
-import ButtomDiscart from '../buttons/ButtonDiscart'
-import { useCreateExperience } from '@/hooks/useCreateExperience'
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import ButtomSubmit from "../buttons/ButtomSubmit";
+import ButtomDiscart from "../buttons/ButtonDiscart";
+import { useCreateExperience } from "@/hooks/useCreateExperience";
 
 const addExperienceSchema = z.object({
-  imageUrl: z.string().min(1, { message: 'This field is required' }),
-  imageText: z.string().min(1, { message: 'This field is required' }),
-  discoDetailId: z.string().optional(),
-})
+  imageUrl: z.string().min(1, { message: "This field is required" }),
+  imageText: z.string().min(1, { message: "This field is required" }),
+  discoDetailId: z.string().min(1),
+});
 
-export type AddExperiencieSchema = z.infer<typeof addExperienceSchema>
+export type AddExperiencieSchema = z.infer<typeof addExperienceSchema>;
 
 const AddExperiencesForm = ({
   discoDetailId,
   setIsActiveForm,
 }: {
-  discoDetailId: string
-  setIsActiveForm: React.Dispatch<React.SetStateAction<boolean>>
+  discoDetailId: string;
+  setIsActiveForm: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const {
     register,
@@ -29,23 +27,19 @@ const AddExperiencesForm = ({
     reset,
   } = useForm<AddExperiencieSchema>({
     resolver: zodResolver(addExperienceSchema),
-  })
+  });
 
-  const { isLoading, submitDataExperience } = useCreateExperience()
+  const { isLoading, submitDataExperience } = useCreateExperience();
 
-  const onSubmit: SubmitHandler<AddExperiencieSchema> = data => {
-    data.discoDetailId = discoDetailId
-    submitDataExperience(data)
-    reset()
-  }
+  const onSubmit: SubmitHandler<AddExperiencieSchema> = (data) => {
+    submitDataExperience(data);
+    reset();
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label
-          className="block mb-1 text-sm font-medium text-gray-200"
-          htmlFor="imageUrl"
-        >
+        <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="imageUrl">
           Image URL
         </label>
         <input
@@ -53,19 +47,12 @@ const AddExperiencesForm = ({
           placeholder="Image URL"
           id="imageUrl"
           type="text"
-          {...register('imageUrl')}
+          {...register("imageUrl")}
         />
-        {errors.imageUrl && (
-          <p className="text-xs italic text-red-500 mt-2">
-            {errors.imageUrl?.message}
-          </p>
-        )}
+        {errors.imageUrl && <p className="text-xs italic text-red-500 mt-2">{errors.imageUrl?.message}</p>}
       </div>
       <div>
-        <label
-          className="block mb-1 text-sm font-medium text-gray-200"
-          htmlFor="imageText"
-        >
+        <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="imageText">
           Image text
         </label>
         <input
@@ -73,23 +60,17 @@ const AddExperiencesForm = ({
           placeholder="Image text"
           id="imageText"
           type="text"
-          {...register('imageText')}
+          {...register("imageText")}
         />
-        {errors.imageText && (
-          <p className="text-xs italic text-red-500 mt-2">
-            {errors.imageText?.message}
-          </p>
-        )}
+        {errors.imageText && <p className="text-xs italic text-red-500 mt-2">{errors.imageText?.message}</p>}
       </div>
+      <input type="text" hidden defaultValue={discoDetailId} {...register("discoDetailId")} id="discoDetailId" />
       <div className="my-6 mb-12 text-center flex gap-4">
-        <ButtomSubmit isLoading={isLoading} text={'Create new experience'} />
-        <ButtomDiscart
-          setIsActiveForm={setIsActiveForm}
-          text={'Discart experience'}
-        />
+        <ButtomSubmit isLoading={isLoading} text={"Create new experience"} />
+        <ButtomDiscart setIsActiveForm={setIsActiveForm} text={"Discart experience"} />
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default AddExperiencesForm
+export default AddExperiencesForm;
