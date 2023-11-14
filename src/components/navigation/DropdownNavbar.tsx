@@ -17,7 +17,7 @@ const DropdownNavbar = ({ session }: { session: Session }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <Avatar>
+        <Avatar className=" ">
           {!session.user?.image ? (
             <div className="bg-zinc-200 rounded-full flex justify-center items-center w-full relative z-20">
               <span className="text-md font-bold">{session.user?.name && session.user.name[0]}</span>

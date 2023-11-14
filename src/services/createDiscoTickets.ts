@@ -10,7 +10,8 @@ export interface IDiscoTickets {
   id: string;
   discoId: string;
   price: string;
-  description: string;
+  largeDescription: string;
+  shortDescription: string;
   category: string;
   countInStock: string;
   updatedAt: string;

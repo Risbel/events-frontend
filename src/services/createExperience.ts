@@ -1,6 +1,7 @@
+import { AddExperiencieSchema } from "@/components/forms/AddExperiencesForm";
 import httpService from "@/config/axios.config";
 
-export const createExperience = async (data: { imageUrl: string; imageText: string; discoDetailId: string }) => {
+export const createExperience = async (data: AddExperiencieSchema) => {
   const { imageUrl: image, imageText, discoDetailId } = data;
 
   const response = await httpService.post(`/discoImage/${discoDetailId}`, {

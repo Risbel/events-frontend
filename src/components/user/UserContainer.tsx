@@ -4,15 +4,7 @@ import { Avatar, AvatarImage } from "../ui/avatar";
 import UpdateRoleForm from "../forms/UpdateRoleForm";
 
 const UserContainer = ({ id }: { id: string }) => {
-  const { isLoading, data, isError, error } = useGetUserById(id);
-
-  if (isError) {
-    return (
-      <div>
-        <p>{error.message}</p>
-      </div>
-    );
-  }
+  const { isLoading, data } = useGetUserById(id);
 
   if (isLoading && !data) {
     return (
