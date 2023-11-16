@@ -63,7 +63,7 @@ const DiscoTickets = ({
   discoId: string;
   discoTickets: IDiscoTicket[];
 }) => {
-  const [day, setDay] = useState("");
+  const [day, setDay] = useState(`${discoTickets?.[0]?.expDate}`.slice(0, 10));
 
   const { havePermission } = useHavePermissions(myPermissions);
 

@@ -1,7 +1,5 @@
-import Unsubscribe from "@/pages/profile/components/Unsubscribe";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useGetSubscriptionsByUserId } from "@/hooks/useGetSubscriptionsByUserId";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Subscriptions from "./components/Subscriptions";

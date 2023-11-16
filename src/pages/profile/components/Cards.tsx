@@ -19,7 +19,7 @@ const Cards = ({ userId }: { userId: string }) => {
             className={cn(isAddCardOpen && "bg-yellow-600 hover:bg-yellow-600/90", "h-8 mb-1")}
             onClick={() => setIsAddCardOpen((prev) => !prev)}
           >
-            {isAddCardOpen ? "Discard" : "Add card"}{" "}
+            {isAddCardOpen ? "Discard" : "Add card"}
           </Button>
           {isAddCardOpen && <FormAddNewCard />}
         </div>

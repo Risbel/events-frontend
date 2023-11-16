@@ -44,7 +44,7 @@ const DiscoTicketDetails = () => {
     return (
       <HomeLayout>
         <div className="flex gap-4 w-full h-screen justify-center items-center">
-          <Spinner diameter={10} />
+          <Spinner diameter={8} />
         </div>
       </HomeLayout>
     );
@@ -92,7 +92,7 @@ const DiscoTicketDetails = () => {
           <div className="grid md:grid-cols-4">
             <div className="flex items-center justify-between bg-gradient-to-r from-white/20 to-transparent rounded-md  pl-2 pr-1 py-2 h-12">
               <h1 className="text-xl md:text-2xl text-white">
-                Tickets <span className="bg-blue-700/80 rounded-full px-2">{data.category}</span>
+                Tickets <span className="bg-blue-700/80 rounded-full px-2 text-lg">{data.category}</span>
               </h1>
               <LogoCategory category={data.category} />
             </div>
@@ -106,15 +106,17 @@ const DiscoTicketDetails = () => {
               <p className="text-md md:text-xl text-white font-thin">
                 <span className="font-normal bg-black/20">Disco:</span> {data.Disco.name}
               </p>
-              <p className="text-md md:text-xl text-white font-thin">
-                <span className="font-normal bg-black/20">Price:</span> ${data.price}
+              <p className="text-md md:text-xl text-white font-semibold">
+                <span className="font-normal bg-black/20">Price:</span> $ {data.price}
+                <span className="font-light pl-1">c/u</span>
               </p>
               <p className="text-md md:text-xl text-white font-thin">
                 <span className="font-normal bg-black/20">Available ticket quantity:</span> {data.countInStock}
               </p>
-              {data.description && (
-                <p className="md:text-xl text-white font-thin mt-4">
-                  <span className="font-normal bg-black/20">More:</span> {data.description}
+              {data.largeDescription && (
+                <p className="md:text-md text-white font-light mt-4">
+                  <span className="text-md md:text-xl bg-black/20 mr-2">More:</span>
+                  {data.largeDescription}
                 </p>
               )}
             </div>
@@ -157,13 +159,15 @@ const DiscoTicketDetails = () => {
                       <Button className="text-xs px-3" type="submit">
                         Add 🛒
                       </Button>
-                      <Button
-                        className="text-xs px-3 bg-yellow-600 hover:bg-yellow-500/80"
-                        type="button"
-                        onClick={() => removeFromCart(data)}
-                      >
-                        Discart
-                      </Button>
+                      {existItem && (
+                        <Button
+                          className="text-xs px-3 bg-yellow-600 hover:bg-yellow-500/80"
+                          type="button"
+                          onClick={() => removeFromCart(data)}
+                        >
+                          Discart
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </form>
@@ -171,7 +175,7 @@ const DiscoTicketDetails = () => {
               <div className="flex flex-col justify-center py-2 mt-2 p-2 rounded-md bg-gradient-to-r from-blue-700/30 to-transparent text-xs font-medium text-gray-200">
                 <p>Reserved quantity: {existItem ? existItem?.quantity : 0} </p>
                 <p>
-                  Amount: <span className="text-lg">${existItem ? existItem.quantity * Number(data.price) : 0}</span>
+                  Total: <span className="text-lg">${existItem ? existItem.quantity * Number(data.price) : 0}</span>
                 </p>
               </div>
             </div>

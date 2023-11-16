@@ -4,6 +4,7 @@ interface State {
   cartItems: ICart[];
   addToCart: ({}: ICart) => void;
   removeFromCart: ({}: ICart) => void;
+  resetCart: () => void;
 }
 
 const useCart = create<State>((set, get) => ({
@@ -25,6 +26,9 @@ const useCart = create<State>((set, get) => ({
 
     return set({ cartItems });
   },
+  resetCart: () => {
+    return set({ cartItems: [] });
+  },
 }));
 
 export default useCart;
@@ -33,7 +37,7 @@ export interface ICart {
   id: string;
   price: string;
   shortDescription: string;
-  description: string;
+  largeDescription: string;
   category: string;
   countInStock: string;
   createdAt: string;
@@ -46,6 +50,7 @@ export interface ICart {
     slug: string;
     createdAt: string;
     updatedAt: string;
+    discoDetail: IDiscoDetail;
   };
   ticketImages: {
     id: string;
@@ -56,4 +61,25 @@ export interface ICart {
     discoTicketId: string;
   }[];
   quantity: number;
+}
+
+export interface IDiscoDetail {
+  id: string;
+  description: string;
+  largeDescription: string;
+  bgImage: string;
+  address: string;
+  createdAt: string;
+  updatedAt: string;
+  userBankCardId: string;
+  administrator: string;
+  discoId: string;
+  userBankCard: {
+    id: string;
+    number: string;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    userId: string;
+  };
 }

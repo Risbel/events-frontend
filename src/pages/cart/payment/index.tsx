@@ -1,13 +1,34 @@
 import HomeLayout from "@/components/layouts/HomeLayout";
+import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useCreateReservation } from "@/hooks/useCreateReservation";
 import useCart from "@/store/useCart";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Payment = () => {
   const { cartItems } = useCart();
-  console.log(cartItems);
+  const { data } = useSession();
+
+  const { mutate, isLoading } = useCreateReservation();
+
+  const handleSubmitReservation = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (data && cartItems) {
+      const payloadReservation = cartItems.map((item) => {
+        return {
+          discoTicketId: item.id,
+          quantity: item.quantity,
+          discoId: item.Disco.id,
+          cardNumber: item.Disco.discoDetail.userBankCard.number,
+        };
+      });
+
+      mutate({ userId: data?.user.id, cartItems: payloadReservation });
+    }
+  };
 
   return (
     <HomeLayout>
@@ -30,18 +51,14 @@ const Payment = () => {
             </TabsTrigger>
           </TabsList>
           <TabsContent className="rounded-xl p-2 bg-purple-900/80" value="account">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                console.log("hola");
-              }}
-              className="flex flex-col gap-2"
-            >
+            <form onSubmit={handleSubmitReservation} className="flex flex-col gap-2">
               <div className="grid gap-2 md:grid-cols-2">
                 <Input className="text-md" />
                 <Input className="text-md" />
               </div>
-              <Button type="submit">Submit</Button>
+              <Button type="submit">
+                <div className="flex items-center gap-2">Pay {isLoading && <Spinner diameter={4} />}</div>
+              </Button>
             </form>
           </TabsContent>
           <TabsContent className="rounded-xl p-2 bg-purple-900/80 text-white" value="password">
