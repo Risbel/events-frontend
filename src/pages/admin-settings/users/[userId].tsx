@@ -1,5 +1,5 @@
 import HomeLayout from "@/components/layouts/HomeLayout";
-import UserContainer from "@/components/user/UserContainer";
+import UserContainer from "./components/UserContainer";
 import { useRouter } from "next/router";
 
 const UserDetail = () => {

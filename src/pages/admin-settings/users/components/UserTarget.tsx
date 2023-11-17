@@ -1,5 +1,5 @@
 import { Iuser } from "@/services/getUsers";
-import { Avatar, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 
 const UserTarget = ({ imageUrl, name, lastName, phone, email, id }: IUserTarget) => {

@@ -1,7 +1,7 @@
 import useGetUserById from "@/hooks/useGetUserById";
-import Spinner from "../loaders/Spinner";
-import { Avatar, AvatarImage } from "../ui/avatar";
-import UpdateRoleForm from "../forms/UpdateRoleForm";
+import Spinner from "@/components/loaders/Spinner";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import UpdateRoleForm from "@/components/forms/UpdateRoleForm";
 
 const UserContainer = ({ id }: { id: string }) => {
   const { isLoading, data } = useGetUserById(id);

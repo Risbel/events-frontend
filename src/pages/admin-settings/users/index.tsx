@@ -1,5 +1,5 @@
 import HomeLayout from "@/components/layouts/HomeLayout";
-import UsersContainer from "@/components/users/UsersContainer";
+import UsersContainer from "./components/UsersContainer";
 
 const Users = () => {
   return (

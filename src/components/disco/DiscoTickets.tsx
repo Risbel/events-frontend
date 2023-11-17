@@ -8,6 +8,8 @@ import EditTicketsForm from "../forms/EditTicketsForm";
 import DeleteTicketButton from "../buttons/DeleteTicketButton";
 import Link from "next/link";
 import { useState } from "react";
+import { useListDays } from "@/hooks/useListDays";
+import { useListMonths } from "@/hooks/useListMonths";
 
 export const LogoCategory = ({ category }: { category: string }) => {
   return (
@@ -63,6 +65,9 @@ const DiscoTickets = ({
   discoId: string;
   discoTickets: IDiscoTicket[];
 }) => {
+  const weekdays = useListDays();
+  const months = useListMonths();
+
   const [day, setDay] = useState(`${discoTickets?.[0]?.expDate}`.slice(0, 10));
 
   const { havePermission } = useHavePermissions(myPermissions);
@@ -70,10 +75,6 @@ const DiscoTickets = ({
   const dates = discoTickets.map((ticket) => ticket.expDate.slice(0, 10));
 
   const unicDates = [...new Set(dates)].slice().sort((a, b) => new Date(a).valueOf() - new Date(b).valueOf());
-
-  const diasSemana = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-  const meses = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   return (
     <>
@@ -88,9 +89,9 @@ const DiscoTickets = ({
                   className="flex flex-col items-center px-4 py-2 bg-slate-900/80 hover:bg-slate-900/90 leading-none rounded-md hover:-translate-y-[2px] shadow hover:shadow-lg hover:shadow-purple-600/40"
                   onClick={() => setDay(date)}
                 >
-                  <p className="text-white text-xs">{diasSemana[new Date(date).getDay()].slice(0, 3)}</p>
+                  <p className="text-white text-xs">{weekdays[new Date(date).getDay()].slice(0, 3)}</p>
                   <p className="text-white text-xl">{date.slice(8, 10)}</p>
-                  <p className="text-white text-xs">{meses[new Date(date).getMonth()]}</p>
+                  <p className="text-white text-xs">{months[new Date(date).getMonth()]}</p>
                 </button>
               ))}
             </div>
@@ -124,7 +125,7 @@ const DiscoTickets = ({
                           <div>
                             <p className="text-xs font-light text-gray-100"> {ticket.shortDescription}</p>
                             <p className="text-xs font-semibold text-center text-gray-400 pt-2">
-                              📆 {diasSemana[new Date(ticket.expDate).getDay()]} {ticket.expDate.slice(8, 10)}
+                              📆 {weekdays[new Date(ticket.expDate).getDay()]} {ticket.expDate.slice(8, 10)}
                             </p>
                           </div>
                         </div>

@@ -1,5 +1,5 @@
 import useGetUsers from "@/hooks/useGetUsers";
-import Spinner from "../loaders/Spinner";
+import Spinner from "@/components/loaders/Spinner";
 import UserTarget from "./UserTarget";
 
 const UsersContainer = () => {
