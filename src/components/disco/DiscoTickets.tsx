@@ -68,13 +68,15 @@ const DiscoTickets = ({
   const weekdays = useListDays();
   const months = useListMonths();
 
-  const [day, setDay] = useState(`${discoTickets?.[0]?.expDate}`.slice(0, 10));
+  const [day, setDay] = useState(`${new Date(discoTickets?.[0]?.expDate).toLocaleDateString()}`);
 
   const { havePermission } = useHavePermissions(myPermissions);
 
-  const dates = discoTickets.map((ticket) => ticket.expDate.slice(0, 10));
+  const dates = discoTickets.map((ticket) => ticket.expDate);
 
-  const unicDates = [...new Set(dates)].slice().sort((a, b) => new Date(a).valueOf() - new Date(b).valueOf());
+  const unicDates = [...new Set(dates.map((date) => new Date(date).toLocaleDateString()))].sort(
+    (a, b) => new Date(a).valueOf() - new Date(b).valueOf()
+  );
 
   return (
     <>
@@ -83,29 +85,39 @@ const DiscoTickets = ({
           <h1 className="font-extrabold text-4xl text-center text-white mt-10 pb-2">Tickets</h1>
           <div className="flex justify-center pb-4">
             <div className="flex gap-1 overflow-hidden max-w-screen-lg overflow-x-auto border rounded-md p-2 bg-white/10">
-              {unicDates.map((date) => (
-                <button
-                  key={date}
-                  className="flex flex-col items-center px-4 py-2 bg-slate-900/80 hover:bg-slate-900/90 leading-none rounded-md hover:-translate-y-[2px] shadow hover:shadow-lg hover:shadow-purple-600/40"
-                  onClick={() => setDay(date)}
-                >
-                  <p className="text-white text-xs">{weekdays[new Date(date).getDay()].slice(0, 3)}</p>
-                  <p className="text-white text-xl">{date.slice(8, 10)}</p>
-                  <p className="text-white text-xs">{months[new Date(date).getMonth()]}</p>
-                </button>
-              ))}
+              {unicDates.map((date) => {
+                if (new Date(date).toLocaleDateString() >= new Date().toLocaleDateString()) {
+                  return (
+                    <button
+                      key={date}
+                      className="flex flex-col items-center px-4 py-2 bg-slate-900/80 hover:bg-slate-900/90 leading-none rounded-md hover:-translate-y-[2px] shadow hover:shadow-lg hover:shadow-purple-600/40"
+                      onClick={() => setDay(date)}
+                    >
+                      <p className="text-white text-xs">{weekdays[new Date(date).getDay()].slice(0, 3)}</p>
+                      <p className="text-white text-xl">{new Date(date).getDate()}</p>
+                      <p className="text-white text-xs">{months[new Date(date).getMonth()]}</p>
+                    </button>
+                  );
+                }
+              })}
             </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 p-2 rounded-md bg-black/20">
             {discoTickets?.map((ticket) => {
-              if (ticket.expDate.slice(0, 10) === day) {
+              if (new Date(ticket.expDate).toLocaleDateString() === day) {
                 return (
                   <div key={ticket.id}>
                     <div className="relative">
-                      {Number(ticket.countInStock) === 0 && (
+                      {Number(ticket.countInStock) === 0 ? (
                         <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-md flex items-center justify-center">
                           <p className="text-slate-200 text-2xl">Sold out</p>
                         </div>
+                      ) : (
+                        ticket.ticketsReservations.length >= 1 && (
+                          <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-md flex items-center justify-center">
+                            <p className="text-slate-200 text-2xl">Reserved</p>
+                          </div>
+                        )
                       )}
                       <Link
                         href={`/disco/${name}/details-ticket/${ticket.id}`}
@@ -119,7 +131,7 @@ const DiscoTickets = ({
                               <div className="text-sm"> ${ticket.price} c/u</div>
                             </div>
                             {(ticket.category === "VIP" || ticket.category === "economy") && (
-                              <p className="text-xs">🪑 {ticket.countInStock} </p>
+                              <p className="text-xs">🪑 {ticket.countInStock}available</p>
                             )}
                           </div>
                           <div>
@@ -137,7 +149,7 @@ const DiscoTickets = ({
                     </div>
 
                     <div className="flex gap-4 my-2 ">
-                      {havePermission("update", "Tickets") && (
+                      {havePermission("update", "Tickets") && ticket.ticketsReservations.length < 1 && (
                         <div>
                           <EditTicketsForm
                             id={ticket.id}
@@ -148,7 +160,9 @@ const DiscoTickets = ({
                         </div>
                       )}
 
-                      {havePermission("delete", "Tickets") && <DeleteTicketButton id={ticket.id} />}
+                      {ticket.ticketsReservations.length < 1 && havePermission("delete", "Tickets") && (
+                        <DeleteTicketButton id={ticket.id} />
+                      )}
                     </div>
                   </div>
                 );
