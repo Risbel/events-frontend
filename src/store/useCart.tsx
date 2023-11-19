@@ -11,14 +11,19 @@ const useCart = create<State>((set, get) => ({
   cartItems: [],
 
   addToCart: (ticket) => {
+    const newTicket = [ticket];
     const existNewItem = get().cartItems.find((item) => item.id === ticket.id);
+
+    const hasDuplicateExpDate = get().cartItems.some((item) => item.expDate === ticket.expDate);
 
     //una condicion para actualizar si existe el item o guardar si no existe
     const cartItems = existNewItem
       ? get().cartItems.map((item) => (item.id === existNewItem.id ? ticket : item))
       : [...get().cartItems, ticket]; //de lo contrario si no existe entonces guardamos el primero
 
-    return set({ cartItems: cartItems });
+    const finalCartItems = hasDuplicateExpDate ? cartItems : newTicket;
+
+    return set({ cartItems: finalCartItems });
   },
 
   removeFromCart: (ticket) => {
@@ -43,6 +48,7 @@ export interface ICart {
   createdAt: string;
   updatedAt: string;
   discoId: string;
+  expDate: string;
   Disco: {
     id: string;
     name: string;
