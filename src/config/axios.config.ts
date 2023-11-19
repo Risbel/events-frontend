@@ -23,7 +23,7 @@ httpService.interceptors.request.use(
 httpService.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response.data.error === "Refresh token has expired") {
+    if (error.response.status === 401) {
       return signOut();
     }
     const session = await getSession();

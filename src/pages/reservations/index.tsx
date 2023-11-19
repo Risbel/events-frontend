@@ -1,3 +1,4 @@
+import { LogoCategory } from "@/components/disco/DiscoTickets";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { useGetMyReservations } from "@/hooks/useGetMyReservations";
@@ -31,7 +32,7 @@ const Reservations = () => {
       <div className="pt-20 px-4">
         <h1 className="text-white text-xl mb-2">My Reservations:</h1>
 
-        <div className="grid md:grid-cols-3 gap-4 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
           {sortedReservations &&
             sortedReservations.map((reservation) => (
               <div className="border rounded-md p-2 bg-gradient-to-l from-white/10 to-black/40" key={reservation.id}>
@@ -41,7 +42,7 @@ const Reservations = () => {
                       {reservation.ticketsReservations[0].DiscoTicket.Disco.name}
                     </p>
 
-                    <p>
+                    <div>
                       {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate() ==
                       new Date().getDate() ? (
                         <p className="text-green-500 text-xs flex items-center gap-2">
@@ -54,7 +55,7 @@ const Reservations = () => {
                       ) : (
                         <p className="text-gray-400 text-xs">Desabled</p>
                       )}
-                    </p>
+                    </div>
                   </div>
                   <p className="text-white">
                     <span className="bg-black/20">Invoice:</span>
@@ -79,7 +80,10 @@ const Reservations = () => {
                   <p className="text-white bg-black/20 mb-1">Purchases: </p>
                   <div className="flex gap-2 flex-wrap">
                     {reservation.ticketsReservations.map((ticket) => (
-                      <div className="border rounded-md px-2 py1 bg-black/40" key={ticket.id}>
+                      <div
+                        className="relative overflow-hidden flex flex-col items-center border rounded-md px-2 py1 bg-black/40"
+                        key={ticket.id}
+                      >
                         <p className="text-white text-sm">
                           {ticket.quantity} {ticket.DiscoTicket.category}{" "}
                           {Number(ticket.quantity) > 1 ? "tickets" : "ticket"}

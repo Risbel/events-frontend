@@ -9,8 +9,12 @@ import {
 } from "../ui/dropdown-menu";
 import { DataDisco } from "@/services/getDisco";
 import BankCardAsociated from "./BankCardAsociated";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 
 const AdminSettings = ({ disco }: { disco: DataDisco }) => {
+  const { slug } = useParams();
+
   return (
     <div>
       <div className="absolute w-full flex justify-end -translate-y-2 md:-translate-x-6">
@@ -30,7 +34,9 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
             <DropdownMenuLabel className="bg-blue-500/20">Admin settings</DropdownMenuLabel>
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem>My sales</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/disco/${slug}/my-sales`}>My sales</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>My users</DropdownMenuItem>
             <DropdownMenuItem>Permissions</DropdownMenuItem>
 
