@@ -4,6 +4,7 @@ import Spinner from "@/components/loaders/Spinner";
 import { useGetMyReservations } from "@/hooks/useGetMyReservations";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
+import { IReservationByUserId } from "@/services/getMyReservations";
 import { useSession } from "next-auth/react";
 
 const Reservations = () => {
@@ -23,8 +24,11 @@ const Reservations = () => {
     );
   }
 
-  const sortedReservations = [...myReservationsData].sort((a: any, b: any) => {
-    return Number(new Date(b.createdAt)) - Number(new Date(a.createdAt));
+  const sortedReservations = [...myReservationsData].sort((a: IReservationByUserId, b: IReservationByUserId) => {
+    return (
+      Number(new Date(b.ticketsReservations[0].DiscoTicket.expDate)) -
+      Number(new Date(a.ticketsReservations[0].DiscoTicket.expDate))
+    );
   });
 
   return (
@@ -52,8 +56,11 @@ const Reservations = () => {
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                           </span>
                         </p>
+                      ) : new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate().valueOf() <
+                        new Date().getDate() ? (
+                        <p className="text-gray-400 text-xs">expired</p>
                       ) : (
-                        <p className="text-gray-400 text-xs">Desabled</p>
+                        <p className="text-gray-400 text-xs">pending</p>
                       )}
                     </div>
                   </div>

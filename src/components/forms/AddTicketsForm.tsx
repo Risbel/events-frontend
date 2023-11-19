@@ -13,16 +13,30 @@ import { cn } from "@/lib/shadcnUtils";
 import { format } from "date-fns";
 import { ChevronDown } from "lucide-react";
 
-const addTicketsSchema = z.object({
-  discoId: z.string().min(1),
-  category: z.enum(["VIP", "economy", "common"]),
-  price: z.string().min(1, { message: "This field is required" }),
-  expDate: z.date().optional(),
-  shortDescription: z.string().optional(),
-  largeDescription: z.string().optional(),
-  countInStock: z.string().min(1, { message: "This field is required" }),
-  image: z.string().optional(),
-});
+const addTicketsSchema = z
+  .object({
+    discoId: z.string().min(1),
+    category: z.enum(["VIP", "economy", "common"]),
+    price: z.string().min(1, { message: "This field is required" }),
+    expDate: z.date().optional(),
+    shortDescription: z.string(),
+    largeDescription: z.string().optional(),
+    countInStock: z.string().min(1, { message: "This field is required" }),
+    image: z.string().optional(),
+  })
+  .refine(
+    (data) => {
+      const isEconomyOrCommon = data.category === "economy" || data.category === "VIP";
+      if (isEconomyOrCommon) {
+        return data.shortDescription != null && data.shortDescription.trim() !== "";
+      }
+      return true;
+    },
+    {
+      message: "Short description is required for economy or common category",
+      path: ["shortDescription"],
+    }
+  );
 
 export type AddTicketSchema = z.infer<typeof addTicketsSchema>;
 
@@ -146,11 +160,13 @@ const AddTicketsForm = ({
         optional short description
       </label>
       <textarea
+        maxLength={120}
         className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
         placeholder="Short description"
         id="shortDescription"
         {...register("shortDescription")}
       />
+      {errors.shortDescription && <p className="text-xs italic text-red-500">{errors.shortDescription.message}</p>}
       <label className="block text-xs font-medium text-gray-200" htmlFor="largeDescription">
         optional large description
       </label>

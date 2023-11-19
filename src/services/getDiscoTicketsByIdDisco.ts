@@ -16,4 +16,10 @@ export interface IDiscoTicket {
   updatedAt: string;
   discoId: string;
   expDate: string;
+  ticketsReservations: [
+    {
+      id: string;
+      quantity: string;
+    }
+  ];
 }
