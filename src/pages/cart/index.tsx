@@ -1,12 +1,15 @@
 import { LogoCategory } from "@/components/disco/DiscoTickets";
 import HomeLayout from "@/components/layouts/HomeLayout";
 import { Button } from "@/components/ui/button";
+import { useListMonths } from "@/hooks/useListMonths";
 import useCart, { ICart } from "@/store/useCart";
 import clsx from "clsx";
+import { ChevronLeftIcon, ChevronsLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const Cart = () => {
+  const months = useListMonths();
   const { cartItems, removeFromCart, addToCart } = useCart();
 
   const increment = (item: ICart) => {
@@ -56,7 +59,11 @@ const Cart = () => {
                 height={400}
                 width={400}
               />
-              <div className="flex flex-col gap-2 p-2">
+              <p className="text-gray-300 text-xs text-start p-1">
+                📆 {new Date(item.expDate).getDate()}-{months[new Date(item.expDate).getMonth()]}-
+                {new Date(item.expDate).getFullYear()}
+              </p>
+              <div className="flex flex-col gap-2 p-2 pt-0">
                 <div className="flex items-center justify-between gap-2">
                   <LogoCategory category={item.category} />
                   <table className="-translate-x-2">
@@ -86,10 +93,10 @@ const Cart = () => {
 
                   <div className="flex h-full items-start">
                     <Link
-                      className="text-white font-thin bg-blue-900/80 hover:bg-blue-800  px-1 rounded-md"
+                      className="flex items-center text-white font-thin bg-blue-900/80 hover:bg-blue-800 pr-1 rounded-md"
                       href={`/disco/${item.Disco.slug}/details-ticket/${item.id}`}
                     >
-                      Back
+                      <ChevronLeftIcon height={15} width={15} /> Back
                     </Link>
                   </div>
                 </div>

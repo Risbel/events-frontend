@@ -13,6 +13,7 @@ export interface ISubscriptionsByUserId {
   roleId: string;
   discoId: string;
   Disco: Disco;
+  DiscoRole: IDiscoRole;
 }
 
 export interface Disco {
@@ -21,4 +22,12 @@ export interface Disco {
   logo: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IDiscoRole {
+  id: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  discoId: string;
 }

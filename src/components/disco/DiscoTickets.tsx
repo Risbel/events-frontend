@@ -68,7 +68,7 @@ const DiscoTickets = ({
   const weekdays = useListDays();
   const months = useListMonths();
 
-  const [day, setDay] = useState(`${new Date(discoTickets?.[0]?.expDate).toLocaleDateString()}`);
+  const [day, setDay] = useState(`${new Date().toLocaleDateString()}`);
 
   const { havePermission } = useHavePermissions(myPermissions);
 
@@ -113,7 +113,8 @@ const DiscoTickets = ({
                           <p className="text-slate-200 text-2xl">Sold out</p>
                         </div>
                       ) : (
-                        ticket.ticketsReservations.length >= 1 && (
+                        ticket.ticketsReservations.length >= 1 &&
+                        ticket.category !== "common" && (
                           <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-md flex items-center justify-center">
                             <p className="text-slate-200 text-2xl">Reserved</p>
                           </div>
@@ -149,16 +150,17 @@ const DiscoTickets = ({
                     </div>
 
                     <div className="flex gap-4 my-2 ">
-                      {havePermission("update", "Tickets") && ticket.ticketsReservations.length < 1 && (
-                        <div>
-                          <EditTicketsForm
-                            id={ticket.id}
-                            price={ticket.price}
-                            countInStock={ticket.countInStock}
-                            shortDescription={ticket.shortDescription}
-                          />
-                        </div>
-                      )}
+                      {havePermission("update", "Tickets") &&
+                        (ticket.ticketsReservations.length < 1 || ticket.category === "common") && (
+                          <div>
+                            <EditTicketsForm
+                              id={ticket.id}
+                              price={ticket.price}
+                              countInStock={ticket.countInStock}
+                              shortDescription={ticket.shortDescription}
+                            />
+                          </div>
+                        )}
 
                       {ticket.ticketsReservations.length < 1 && havePermission("delete", "Tickets") && (
                         <DeleteTicketButton id={ticket.id} />

@@ -98,9 +98,9 @@ const MySales = () => {
                         <span className="font-semibold bg-black/20">Invoice:</span> {reservation.id.slice(0, 13)}
                       </p>
                     </div>
-                    <div className="grid grid-flow-col gap-2">
+                    <div className="grid flex-col gap-2">
                       {reservation.ticketsReservations.map((ticket) => (
-                        <div className="py-2" key={ticket.id}>
+                        <div key={ticket.id}>
                           <div className="bg-black/20 p-2 rounded-md">
                             <div className="flex justify-between items-center">
                               <LogoCategory category={ticket.DiscoTicket.category} />
@@ -127,8 +127,8 @@ const MySales = () => {
           {sortedReservations &&
             sortedReservations.map((reservation) => {
               if (
-                new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate().valueOf() >
-                new Date().getDate()
+                new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).toISOString() >
+                new Date().toISOString()
               ) {
                 return (
                   <div key={reservation.id}>
@@ -148,9 +148,9 @@ const MySales = () => {
                           <span className="font-semibold bg-black/20">Invoice:</span> {reservation.id.slice(0, 13)}
                         </p>
                       </div>
-                      <div className="grid grid-flow-col gap-2">
+                      <div className="flex flex-col gap-2">
                         {reservation.ticketsReservations.map((ticket) => (
-                          <div className="py-2" key={ticket.id}>
+                          <div key={ticket.id}>
                             <div className="bg-black/20 p-2 rounded-md">
                               <div className="flex justify-between items-center">
                                 <LogoCategory category={ticket.DiscoTicket.category} />
@@ -202,9 +202,9 @@ const MySales = () => {
                           <span className="font-semibold bg-black/20">Invoice:</span> {reservation.id.slice(0, 13)}
                         </p>
                       </div>
-                      <div className="grid grid-flow-col gap-2">
+                      <div className="flex flex-col gap-2">
                         {reservation.ticketsReservations.map((ticket) => (
-                          <div className="py-2" key={ticket.id}>
+                          <div key={ticket.id}>
                             <div className="bg-black/20 p-2 rounded-md">
                               <div className="flex justify-between items-center">
                                 <LogoCategory category={ticket.DiscoTicket.category} />

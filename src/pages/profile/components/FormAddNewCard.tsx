@@ -69,7 +69,7 @@ const AddNewCard = () => {
             Short description
           </label>
           <textarea
-            maxLength={40}
+            maxLength={25}
             placeholder="Short description"
             autoComplete="off"
             className="pl-2 rounded-md h-8 outline-none text-sm"

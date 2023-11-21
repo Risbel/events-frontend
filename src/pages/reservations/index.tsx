@@ -56,8 +56,8 @@ const Reservations = () => {
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                           </span>
                         </p>
-                      ) : new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate().valueOf() <
-                        new Date().getDate() ? (
+                      ) : new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).toISOString() <
+                        new Date().toISOString() ? (
                         <p className="text-gray-400 text-xs">expired</p>
                       ) : (
                         <p className="text-gray-400 text-xs">pending</p>

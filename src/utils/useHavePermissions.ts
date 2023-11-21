@@ -18,4 +18,4 @@ export const useHavePermissions = (myPermissions: ImyPermissions) => {
 export default useHavePermissions;
 
 type Ipermission = "create" | "read" | "update" | "delete";
-type Iresource = "Disco Admissions" | "Discos" | "Users " | "Disco Images" | "Tickets";
+type Iresource = "Disco Admissions" | "Admin settings on disco" | "Discos" | "Users " | "Disco Images" | "Tickets";
