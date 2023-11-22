@@ -1,7 +1,7 @@
 import { getDiscoTicketById } from "@/services/getDiscoTicketById";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetDiscoTicketById = (idTicket: string) => {
+export const useGetDiscoTicketById = (idTicket: string | any) => {
   const isIdTicket = idTicket ? true : false;
 
   return useQuery({

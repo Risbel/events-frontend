@@ -9,21 +9,20 @@ import { ChevronLeft } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 import { FormEvent } from "react";
 
 const DiscoTicketDetails = () => {
-  const router = useRouter();
-  const { details } = router.query;
-  let disco = details && details[0];
-  let route = details && details[1];
-  let idTicket = details && details[2];
+  const params = useParams();
+  const slug = params && params.slug;
+  const idTicket = params && params.id;
 
   const { isLoading, data, isError, error } = useGetDiscoTicketById(idTicket);
 
   const { cartItems, addToCart, removeFromCart } = useCart();
 
   const existItem = cartItems.find((item) => item.id === data?.id);
+
   const addToCartHandler = (e: FormEvent<HTMLFormElement> | any) => {
     e.preventDefault();
 
@@ -39,8 +38,24 @@ const DiscoTicketDetails = () => {
 
     return addToCart({ ...data, quantity });
   };
+  if (isError) {
+    return (
+      <div className="flex gap-4 w-full h-screen justify-center items-center bg-black">
+        <span className="text-white text-8xl font-semibold">404</span>
+        <div className="flex flex-col gap-2">
+          <span className="text-white text-xl">
+            {error?.response?.status === 500 ? <span>Page not found</span> : error?.response?.data?.message}
+          </span>
 
-  if (isLoading) {
+          <Link href={`/disco/${slug}`}>
+            <Button>Go back</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading || !data) {
     return (
       <HomeLayout>
         <div className="flex gap-4 w-full h-screen justify-center items-center">
@@ -50,35 +65,7 @@ const DiscoTicketDetails = () => {
     );
   }
 
-  if (data && (disco !== data.Disco.slug || route !== "details-ticket" || !idTicket)) {
-    return (
-      <div className="flex gap-4 w-full h-screen justify-center items-center bg-black">
-        <span className="text-white text-5xl font-semibold">404</span>
-        <span className="text-white text-xl">Page not found</span>
-
-        <Link href={`/disco/${disco}`}>
-          <Button>Go back</Button>
-        </Link>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="flex gap-4 w-full h-screen justify-center items-center bg-black">
-        <span className="text-white text-5xl font-semibold">404</span>
-        <span className="text-white text-xl">
-          {error?.response?.status === 500 ? <span>This ticket does not exist</span> : error?.response?.data?.message}
-        </span>
-
-        <Link href={`/disco/${details[0]}`}>
-          <Button>Go back</Button>
-        </Link>
-      </div>
-    );
-  }
-
-  if (details) {
+  if (data) {
     return (
       <HomeLayout>
         <div className="flex flex-col gap-4 py-20  px-4 md:px-8">

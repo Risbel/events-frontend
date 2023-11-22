@@ -29,12 +29,14 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
   if (isErrordisco) {
     return (
       <div className="flex gap-4 w-full h-screen justify-center items-center bg-black">
-        <span className="text-white text-5xl font-semibold">{error?.response?.status}</span>
-        <span className="text-white text-xl">{error?.response?.data?.message}</span>
+        <span className="text-white text-5xl md:text-8xl font-semibold">{error?.response?.status}</span>
+        <div className="flex flex-col gap-2">
+          <span className="text-white text-md md:text-xl">{error?.response?.data?.message}</span>
 
-        <Link href={"/"}>
-          <Button>Back to home</Button>
-        </Link>
+          <Link href={"/"}>
+            <Button>Back to home</Button>
+          </Link>
+        </div>
       </div>
     );
   }
