@@ -40,13 +40,8 @@ const addTicketsSchema = z
 
 export type AddTicketSchema = z.infer<typeof addTicketsSchema>;
 
-const AddTicketsForm = ({
-  discoId,
-  setIsActiveForm,
-}: {
-  discoId: string;
-  setIsActiveForm: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const AddTicketsForm = ({ discoId }: { discoId: string }) => {
+  const [isActive, setIsActive] = useState(false);
   const [date, setDate] = useState<Date>();
   const [isOpenPopover, setIsOpenPopover] = useState(false);
 
@@ -71,130 +66,138 @@ const AddTicketsForm = ({
   };
 
   return (
-    <form className="bg-black/20 p-3 rounded-md" onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-2  gap-2">
-        <div>
-          <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="category">
-            category
-          </label>
-          <select
-            defaultValue={""}
-            className="h-10 pl-2 text-gray-500 bg-white rounded-md w-full text-xs outline-0"
-            id="category"
-            {...register("category")}
-          >
-            <option value="" disabled hidden>
-              Select category
-            </option>
-            <option className="text-sm">VIP</option>
-            <option className="text-sm">economy</option>
-            <option className="text-sm">common</option>
-          </select>
-          {errors.category && <p className="text-xs italic text-red-500 mt-2">Please select some category</p>}
+    <div>
+      <Button
+        className={cn(isActive && "bg-yellow-600 hover:bg-yellow-500 ", "text-xs h-8 mb-2")}
+        onClick={() => setIsActive((prev) => !prev)}
+      >
+        {isActive ? "Discard" : "Add Ticket"}
+      </Button>
+      <form
+        className={cn("md:w-1/2 lg:w-1/3 bg-black/20 p-3 rounded-md", !isActive && "hidden")}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="grid grid-cols-2  gap-2">
+          <div>
+            <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="category">
+              category
+            </label>
+            <select
+              defaultValue={""}
+              className="h-10 pl-2 text-gray-500 bg-white rounded-md w-full text-xs outline-0"
+              id="category"
+              {...register("category")}
+            >
+              <option value="" disabled hidden>
+                Select category
+              </option>
+              <option className="text-sm">VIP</option>
+              <option className="text-sm">economy</option>
+              <option className="text-sm">common</option>
+            </select>
+            {errors.category && <p className="text-xs italic text-red-500 mt-2">Please select some category</p>}
+          </div>
+          <div>
+            <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="expDate">
+              day of use
+            </label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  onClick={() => setIsOpenPopover((prev) => !prev)}
+                  variant={"outline"}
+                  className={cn(
+                    "flex justify-between w-full font-normal text-xs pl-1 pr-0",
+                    !date && "text-muted-foreground"
+                  )}
+                >
+                  <div className="pr-1">📆</div>
+                  {date ? format(date, "PP") : <span>Pick a date</span>}
+                  <ChevronDown className={cn("h-4 transition-transform duration-300", isOpenPopover && "rotate-180")} />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-1 -translate-x-6">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  initialFocus
+                  disabled={(date) => date.valueOf() < new Date().setHours(0, 0, 0, 0)}
+                />
+              </PopoverContent>
+            </Popover>
+            {errors.expDate && <p className="text-xs italic text-red-500 mt-2">{errors.expDate.message}</p>}
+          </div>
         </div>
-        <div>
-          <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="expDate">
-            day of use
-          </label>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                onClick={() => setIsOpenPopover((prev) => !prev)}
-                variant={"outline"}
-                className={cn(
-                  "flex justify-between w-full font-normal text-xs pl-1 pr-0",
-                  !date && "text-muted-foreground"
-                )}
-              >
-                <div className="pr-1">📆</div>
-                {date ? format(date, "PP") : <span>Pick a date</span>}
-                <ChevronDown className={cn("h-4 transition-transform duration-300", isOpenPopover && "rotate-180")} />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-1 -translate-x-6">
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={setDate}
-                initialFocus
-                disabled={(date) => date.valueOf() < new Date().setHours(0, 0, 0, 0)}
-              />
-            </PopoverContent>
-          </Popover>
-          {errors.expDate && <p className="text-xs italic text-red-500 mt-2">{errors.expDate.message}</p>}
-        </div>
-      </div>
 
-      <div className="grid grid-cols-2  gap-2">
-        <div>
-          <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="price">
-            price
-          </label>
-          <Input
-            className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-            placeholder="$"
-            type="number"
-            min={1}
-            id="price"
-            {...register("price")}
-          />
-          {errors.price && <p className="text-xs italic text-red-500 mt-2">{errors.price.message}</p>}
+        <div className="grid grid-cols-2  gap-2">
+          <div>
+            <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="price">
+              price
+            </label>
+            <Input
+              className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+              placeholder="$"
+              type="number"
+              min={1}
+              id="price"
+              {...register("price")}
+            />
+            {errors.price && <p className="text-xs italic text-red-500 mt-2">{errors.price.message}</p>}
+          </div>
+          <div>
+            <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="countInStock">
+              seats / quantity
+            </label>
+            <Input
+              className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+              placeholder="countInStock"
+              defaultValue={1}
+              type="number"
+              min={1}
+              id="countInStock"
+              {...register("countInStock")}
+            />
+          </div>
         </div>
-        <div>
-          <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="countInStock">
-            seats / quantity
-          </label>
-          <Input
-            className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-            placeholder="countInStock"
-            defaultValue={1}
-            type="number"
-            min={1}
-            id="countInStock"
-            {...register("countInStock")}
-          />
-        </div>
-      </div>
 
-      <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="shortDescription">
-        optional short description
-      </label>
-      <textarea
-        maxLength={120}
-        className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-        placeholder="Short description"
-        id="shortDescription"
-        {...register("shortDescription")}
-      />
-      {errors.shortDescription && <p className="text-xs italic text-red-500">{errors.shortDescription.message}</p>}
-      <label className="block text-xs font-medium text-gray-200" htmlFor="largeDescription">
-        optional large description
-      </label>
-      <textarea
-        className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-        placeholder="Large description"
-        id="largeDescription"
-        {...register("largeDescription")}
-      />
-      <div className="mb-2">
-        <label className="block text-xs font-medium text-gray-200" htmlFor="image">
-          optional image
+        <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="shortDescription">
+          optional short description
         </label>
-        <Input
+        <textarea
+          maxLength={120}
           className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-          placeholder="Insert Image URL"
-          type="text"
-          id="image"
-          {...register("image")}
+          placeholder="Short description"
+          id="shortDescription"
+          {...register("shortDescription")}
         />
-      </div>
-      <input {...register("discoId")} id="discoId" type="text" hidden defaultValue={discoId} />
+        {errors.shortDescription && <p className="text-xs italic text-red-500">{errors.shortDescription.message}</p>}
+        <label className="block text-xs font-medium text-gray-200" htmlFor="largeDescription">
+          optional large description
+        </label>
+        <textarea
+          className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+          placeholder="Large description"
+          id="largeDescription"
+          {...register("largeDescription")}
+        />
+        <div className="mb-2">
+          <label className="block text-xs font-medium text-gray-200" htmlFor="image">
+            optional image
+          </label>
+          <Input
+            className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+            placeholder="Insert Image URL"
+            type="text"
+            id="image"
+            {...register("image")}
+          />
+        </div>
+        <input {...register("discoId")} id="discoId" type="text" hidden defaultValue={discoId} />
 
-      <div className="flex gap-2">
-        <ButtomSubmit text="add" isLoading={isLoading} />
-        <ButtomDiscart setIsActiveForm={setIsActiveForm} text={"discart"} />
-      </div>
-    </form>
+        <ButtomSubmit text="Add" isLoading={isLoading} />
+      </form>
+    </div>
   );
 };
 

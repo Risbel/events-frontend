@@ -1,6 +1,5 @@
 import { IDiscoTicket } from "@/services/getDiscoTicketsByIdDisco";
 import Image from "next/image";
-import AddTicketsButton from "../buttons/AddTicketsButton";
 import clsx from "clsx";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 import useHavePermissions from "@/utils/useHavePermissions";
@@ -10,6 +9,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
+import AddCombosForm from "@/pages/disco/[slug]/details-ticket/[id]/components/AddCombosForm";
+import AddTicketsForm from "../forms/AddTicketsForm";
 
 export const LogoCategory = ({ category }: { category: string }) => {
   return (
@@ -173,8 +174,10 @@ const DiscoTickets = ({
           </div>
         </>
       )}
-      <div className={clsx(!havePermission("create", "Tickets") && "hidden", "my-10")}>
-        <AddTicketsButton discoId={discoId} />
+      <div className={clsx(!havePermission("create", "Tickets") && "hidden", "my-10 flex flex-col gap-4")}>
+        <AddTicketsForm discoId={discoId} />
+
+        <AddCombosForm discoId={discoId} />
       </div>
     </>
   );
