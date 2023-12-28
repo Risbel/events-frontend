@@ -19,9 +19,10 @@ const Payment = () => {
     if (data && cartItems) {
       const payloadReservation = cartItems.map((item) => {
         return {
-          discoTicketId: item.id,
+          discoTicketId: !item?.comboDetail?.id ? item.id : null,
+          comboId: item?.comboDetail?.id ? item.id : null,
           quantity: item.quantity,
-          discoId: item.Disco.id,
+          discoId: item.discoId,
           cardNumber: item.Disco.discoDetail.userBankCard.number,
         };
       });
@@ -37,7 +38,7 @@ const Payment = () => {
           <Link className="hover:text-white hover:underline" href={"/cart"}>
             Cart/
           </Link>
-          <span className="text-white underline">Payment</span>/Status
+          <span className="text-white underline">Reservation</span>/Status
         </p>
       </div>
       <div className="grid md:grid-cols-4 pt-4 px-4">

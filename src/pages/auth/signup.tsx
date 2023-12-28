@@ -32,6 +32,7 @@ const Signup = () => {
     }
 
     const { confirmPassword, ...personalDataWithoutConfirm } = personalDates;
+
     submitPersonalDates(personalDataWithoutConfirm);
 
     setConfirmAlert(false);

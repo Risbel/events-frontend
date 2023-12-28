@@ -5,16 +5,6 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="relative w-screen h-screen bg-neutral-900">
       <Navbar />
-      <style>
-        {`
-          ::-webkit-scrollbar {
-            width: 0.1rem;
-          }
-          ::-webkit-scrollbar-button {
-            display: none;
-          }
-        `}
-      </style>
       <div className="w-full h-full absolute z-20 backdrop-blur-3xl overflow-y-scroll">{children}</div>
       <div className="fixed right-20 top-1/3">
         <Image

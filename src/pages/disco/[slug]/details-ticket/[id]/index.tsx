@@ -10,10 +10,11 @@ import { ChevronLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { FormEvent } from "react";
 import Combos from "./components/combos";
+import { useListMonths } from "@/hooks/useListMonths";
 
 const DiscoTicketDetails = () => {
+  const months = useListMonths();
   const params = useParams();
   const slug = params && params.slug;
   const idTicket = params && params.id;
@@ -24,7 +25,7 @@ const DiscoTicketDetails = () => {
 
   const existItem = cartItems.find((item) => item.id === data?.id);
 
-  const addToCartHandler = (e: FormEvent<HTMLFormElement> | any) => {
+  const addToCartHandler = (e: any) => {
     e.preventDefault();
 
     if (!data) {
@@ -69,7 +70,7 @@ const DiscoTicketDetails = () => {
   if (data) {
     return (
       <HomeLayout>
-        <div className="grid grid-flow-row  md:grid-flow-col md:grid-cols-2 py-16">
+        <div className="grid grid-flow-row  md:grid-flow-col md:grid-cols-3 py-16">
           <div className="flex flex-col gap-4 px-2 md:px-8">
             <Link
               className="flex items-center pr-2 rounded-md border hover:bg-white/20 text-white w-fit"
@@ -90,11 +91,16 @@ const DiscoTicketDetails = () => {
                 Details:
               </h2>
               <div className="py-1 pl-2">
+                <p className="text-white text-sm text-start">
+                  <span className="font-normal bg-black/20">Tu use on:</span> {new Date(data.expDate).getDate()}/
+                  {months[new Date(data.expDate).getMonth()]}/{new Date(data.expDate).getFullYear()}
+                </p>
+
                 <p className="text-md md:text-xl text-white font-thin">
                   <span className="font-normal bg-black/20">Disco:</span> {data.Disco.name}
                 </p>
                 <p className="text-md md:text-xl text-white font-semibold">
-                  <span className="font-normal bg-black/20">Price:</span> $ {data.price}
+                  <span className="font-normal bg-black/20">Price:</span> {data.price} cup
                   <span className="font-light pl-1">c/u</span>
                 </p>
                 <p className="text-md md:text-xl text-white font-thin">
@@ -151,7 +157,7 @@ const DiscoTicketDetails = () => {
                         </Button>
                         {existItem && (
                           <Button
-                            className="text-xs px-3 bg-yellow-600 hover:bg-yellow-500/80"
+                            className="text-xs px-3 h-8 bg-yellow-600 hover:bg-yellow-500/80"
                             type="button"
                             onClick={() => removeFromCart(data)}
                           >
@@ -172,9 +178,11 @@ const DiscoTicketDetails = () => {
             </div>
           </div>
 
-          <div className="w-full border border-slate-500 border-dashed my-8 md:hidden" />
-
-          <Combos discoId={data.discoId} />
+          {new Date(data.expDate).toLocaleString().slice(0, 9) === new Date().toLocaleString().slice(0, 9) && (
+            <div className="col-span-2">
+              <Combos discoId={data.discoId} />
+            </div>
+          )}
         </div>
       </HomeLayout>
     );

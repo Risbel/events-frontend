@@ -9,6 +9,7 @@ const nextConfig = {
       "i.pinimg.com",
       "tailwindui.com",
       "avatars.githubusercontent.com",
+      "res.cloudinary.com",
     ],
   },
 };

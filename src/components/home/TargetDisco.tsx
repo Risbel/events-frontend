@@ -28,7 +28,7 @@ const TargetDisco = ({ disco }: { disco: DataDisco }) => {
           <div className="bg-gradient-to-r from-black/60 to-transparent p-2 rounded-xl">
             <p className="text-sm text-gray-100 md:text-md hidden md:block">{disco?.discoDetail?.description}</p>
             <p className="flex items-center gap-2 text-xs font-light text-gray-100 md:text-md">
-              <Image width={20} height={20} alt="gps icon" src={"/pin.png"} /> {disco.discoDetail.address}
+              <Image width={20} height={20} alt="gps icon" src={"/pin.png"} /> {disco.discoDetail?.address}
             </p>
           </div>
         </div>

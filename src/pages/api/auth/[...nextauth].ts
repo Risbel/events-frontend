@@ -20,7 +20,7 @@ export default NextAuth({
           const token = res.accessToken;
           const refreshToken = res.refreshToken;
 
-          const decoded: any = decode(token, process.env.SECRET_SIGNATURE);
+          const decoded: TokenDecoded = decode(token, process.env.SECRET_SIGNATURE as string);
 
           if (decoded) {
             return {

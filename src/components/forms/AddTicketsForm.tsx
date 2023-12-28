@@ -18,7 +18,7 @@ const addTicketsSchema = z
     discoId: z.string().min(1),
     category: z.enum(["VIP", "economy", "common"]),
     price: z.string().min(1, { message: "This field is required" }),
-    expDate: z.date().optional(),
+    expDate: z.string().optional(),
     shortDescription: z.string(),
     largeDescription: z.string().optional(),
     countInStock: z.string().min(1, { message: "This field is required" }),
@@ -57,7 +57,8 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
   const { mutate, isLoading } = useCreateDiscoTickets(discoId);
   const onSubmit: SubmitHandler<AddTicketSchema> = (data) => {
     if (date) {
-      data.expDate = date;
+      data.expDate = new Date(date.setUTCHours(23, 59, 59, 59)).toISOString();
+
       mutate(data);
       reset();
     } else {

@@ -3,7 +3,7 @@ import create from "zustand";
 interface State {
   cartItems: ICart[];
   addToCart: ({}: ICart) => void;
-  removeFromCart: ({}: ICart) => void;
+  removeFromCart: ({}: any) => void;
   resetCart: () => void;
 }
 
@@ -14,7 +14,9 @@ const useCart = create<State>((set, get) => ({
     const newTicket = [ticket];
     const existNewItem = get().cartItems.find((item) => item.id === ticket.id);
 
-    const hasDuplicateExpDate = get().cartItems.some((item) => item.expDate === ticket.expDate);
+    const hasDuplicateExpDate = ticket?.expDate
+      ? get().cartItems.some((item) => item.expDate === ticket.expDate)
+      : true;
 
     //una condicion para actualizar si existe el item o guardar si no existe
     const cartItems = existNewItem
@@ -49,6 +51,7 @@ export interface ICart {
   updatedAt: string;
   discoId: string;
   expDate: string;
+  comboDetail: IComboDetail;
   Disco: {
     id: string;
     name: string;
@@ -58,6 +61,7 @@ export interface ICart {
     updatedAt: string;
     discoDetail: IDiscoDetail;
   };
+  comboReservations: [];
   ticketImages: {
     id: string;
     image: string;
@@ -88,4 +92,14 @@ export interface IDiscoDetail {
     updatedAt: string;
     userId: string;
   };
+}
+
+interface IComboDetail {
+  id: string;
+  description: string;
+  image: string;
+  imageCloudId: string;
+  createdAt: string;
+  updatedAt: string;
+  comboId: string;
 }

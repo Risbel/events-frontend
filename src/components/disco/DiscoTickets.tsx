@@ -87,7 +87,7 @@ const DiscoTickets = ({
           <div className="flex justify-center pb-4">
             <div className="flex gap-1 overflow-hidden max-w-screen-lg overflow-x-auto border rounded-md p-2 bg-white/10">
               {unicDates.map((date) => {
-                if (new Date(date).toLocaleDateString() >= new Date().toLocaleDateString()) {
+                if (new Date(new Date(date).toLocaleDateString()) >= new Date(new Date().toLocaleDateString())) {
                   return (
                     <button
                       key={date}
@@ -139,7 +139,7 @@ const DiscoTickets = ({
                           <div>
                             <p className="text-xs font-light text-gray-100"> {ticket.shortDescription}</p>
                             <p className="text-xs font-semibold text-center text-gray-400 pt-2">
-                              📆 {weekdays[new Date(ticket.expDate).getDay()]} {ticket.expDate.slice(8, 10)}
+                              📆 {weekdays[new Date(ticket.expDate).getDay()]} {new Date(ticket.expDate).getDate()}
                             </p>
                           </div>
                         </div>

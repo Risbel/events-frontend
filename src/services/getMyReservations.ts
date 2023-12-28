@@ -13,6 +13,7 @@ export interface IReservationByUserId {
   updatedAt: string;
   userId: string;
   ticketsReservations: ITicketsReservation[];
+  comboReservations: IComboreservation[];
 }
 
 interface ITicketsReservation {
@@ -23,6 +24,32 @@ interface ITicketsReservation {
   reservationId: string;
   discoTicketId: string;
   DiscoTicket: IDiscoTicket;
+}
+
+interface IComboreservation {
+  id: string;
+  quantity: string;
+  createdAt: string;
+  updatedAt: string;
+  reservationId: string;
+  comboId: string;
+  Combo: {
+    id: string;
+    price: string;
+    countInStock: string;
+    category: string;
+    createdAt: string;
+    updatedAt: string;
+    discoId: string;
+    Disco: {
+      id: string;
+      name: string;
+      logo: string;
+      slug: string;
+      createdAt: string;
+      updatedAt: string;
+    };
+  };
 }
 
 interface IDiscoTicket {

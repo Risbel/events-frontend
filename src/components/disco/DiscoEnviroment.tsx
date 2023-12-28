@@ -78,7 +78,7 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
             <>
               {loadingDisco
                 ? null
-                : discoData && <AboutUs largeDescription={discoData?.disco.discoDetail.largeDescription} />}
+                : discoData && <AboutUs largeDescription={discoData?.disco?.discoDetail?.largeDescription} />}
             </>
             {loadingDisco
               ? null
@@ -95,7 +95,7 @@ const DiscoEnviroment = ({ name }: { name: string }) => {
         </div>
       </div>
 
-      {loadingDisco ? null : discoData && <FooterDisco phone={discoData?.disco.discoDetail.phone} />}
+      {loadingDisco ? null : discoData && <FooterDisco phone={discoData?.disco?.discoDetail?.phone} />}
     </div>
   );
 };
