@@ -21,7 +21,7 @@ const TargetDisco = ({ disco }: { disco: DataDisco }) => {
 
         <div className="flex flex-col p-2 relative z-20 w-full">
           <div className="grid grid-cols-2">
-            <h1 className="col-start-2 text-center font-bold text-xl text-black bg-gradient-to-r from-transparent via-white/90 to-transparent rounded-md leading-none py-1">
+            <h1 className="col-start-2 text-center font-bold text-base md:text-xl text-black bg-gradient-to-r from-transparent via-white/90 to-transparent rounded-md leading-none py-1">
               {disco.name}
             </h1>
           </div>

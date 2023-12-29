@@ -91,7 +91,7 @@ const DiscoTickets = ({
                   return (
                     <button
                       key={date}
-                      className="flex flex-col items-center px-4 py-2 bg-slate-900/80 hover:bg-slate-900/90 leading-none rounded-md hover:-translate-y-[2px] shadow hover:shadow-lg hover:shadow-purple-600/40"
+                      className="flex flex-col items-center px-4 py-2 bg-slate-900/80 hover:bg-slate-900/90 leading-none rounded-md hover:-translate-y-[2px] shadow hover:shadow-lg hover:shadow-purple-600/40 transition-transform"
                       onClick={() => setDay(date)}
                     >
                       <p className="text-white text-xs">{weekdays[new Date(date).getDay()].slice(0, 3)}</p>
@@ -123,7 +123,7 @@ const DiscoTickets = ({
                       )}
                       <Link
                         href={`/disco/${name}/details-ticket/${ticket.id}`}
-                        className="flex justify-between gap-2 border-2 bg-gradient-to-r from-black/70 to-slate-900/70 rounded-md p-2 relative shadow-lg hover:shadow-purple-500 hover:-translate-y-0.5"
+                        className="flex justify-between gap-2 border-2 bg-gradient-to-r from-black/70 to-slate-900/70 rounded-md p-2 relative shadow-lg hover:shadow-purple-800/60 hover:-translate-y-1 transition-transform duration-300"
                       >
                         <div className="text-white w-full">
                           <p className="text-sm">Reserve {ticket.category} tickets</p>

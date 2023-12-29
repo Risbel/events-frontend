@@ -32,7 +32,7 @@ export const useSubmitCredentials = (initialState: { email: string; password: st
     }
 
     if (!status?.url) {
-      setError(status?.error || "An error occurred");
+      setError("Invalid Credentials");
     }
     setIsLoading(false);
   };
