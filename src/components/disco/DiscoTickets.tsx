@@ -11,6 +11,7 @@ import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
 import AddCombosForm from "@/pages/disco/[slug]/details-ticket/[id]/components/AddCombosForm";
 import AddTicketsForm from "../forms/AddTicketsForm";
+import { compareAsc, compareDesc } from "date-fns";
 
 export const LogoCategory = ({ category }: { category: string }) => {
   return (
@@ -69,15 +70,13 @@ const DiscoTickets = ({
   const weekdays = useListDays();
   const months = useListMonths();
 
-  const [day, setDay] = useState(`${new Date().toLocaleDateString()}`);
+  const [day, setDay] = useState(`${new Date().toDateString()}`);
 
   const { havePermission } = useHavePermissions(myPermissions);
 
-  const dates = discoTickets.map((ticket) => ticket.expDate);
-
-  const unicDates = [...new Set(dates.map((date) => new Date(date).toLocaleDateString()))].sort(
-    (a, b) => new Date(a).valueOf() - new Date(b).valueOf()
-  );
+  const expDates = discoTickets.map((ticket) => new Date(ticket.expDate));
+  const sortedDates = expDates.sort(compareAsc);
+  const unicDates = [...new Set(sortedDates.map((date) => date.toDateString()))];
 
   return (
     <>
@@ -86,11 +85,11 @@ const DiscoTickets = ({
           <h1 className="font-extrabold text-4xl text-center text-white mt-10 pb-2">Tickets</h1>
           <div className="flex justify-center pb-4">
             <div className="flex gap-1 overflow-hidden max-w-screen-lg overflow-x-auto border rounded-md p-2 bg-white/10">
-              {unicDates.map((date) => {
-                if (new Date(new Date(date).toLocaleDateString()) >= new Date(new Date().toLocaleDateString())) {
+              {unicDates.map((date, i) => {
+                if (compareAsc(new Date(new Date(date).toDateString()), new Date(new Date().toDateString())) >= 0) {
                   return (
                     <button
-                      key={date}
+                      key={i}
                       className="flex flex-col items-center px-4 py-2 bg-slate-900/80 hover:bg-slate-900/90 leading-none rounded-md hover:-translate-y-[2px] shadow hover:shadow-lg hover:shadow-purple-600/40 transition-transform"
                       onClick={() => setDay(date)}
                     >
@@ -105,7 +104,7 @@ const DiscoTickets = ({
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 p-2 rounded-md bg-black/20">
             {discoTickets?.map((ticket) => {
-              if (new Date(ticket.expDate).toLocaleDateString() === day) {
+              if (new Date(ticket.expDate).toDateString() === day) {
                 return (
                   <div key={ticket.id}>
                     <div className="relative">

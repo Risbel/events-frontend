@@ -71,7 +71,7 @@ const DiscoTicketDetails = () => {
     return (
       <HomeLayout>
         <div className="grid grid-flow-row  md:grid-flow-col md:grid-cols-3 py-16">
-          <div className="flex flex-col gap-4 px-2 md:px-8">
+          <div className="flex w-full flex-col gap-4 px-2 md:px-8">
             <Link
               className="flex items-center pr-2 rounded-md border hover:bg-white/20 text-white w-fit"
               href={`/disco/${data.Disco.slug}`}
@@ -115,13 +115,10 @@ const DiscoTicketDetails = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 md:flex-row justify-start">
+            <div className="flex flex-col gap-2 justify-start">
               {data?.ticketImages[0]?.image &&
                 data.ticketImages.map((ticketImage) => (
-                  <div
-                    className="flex items-center justify-center h-64 overflow-hidden rounded-xl"
-                    key={ticketImage.id}
-                  >
+                  <div className="flex items-center overflow-hidden rounded-xl" key={ticketImage.id}>
                     <Image src={ticketImage.image} alt={data.Disco.slug} height={300} width={300} />
                   </div>
                 ))}

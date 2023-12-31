@@ -10,8 +10,11 @@ import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { useState } from "react";
 import { cn } from "@/lib/shadcnUtils";
-import { format } from "date-fns";
+import { endOfDay, format, startOfDay } from "date-fns";
 import { ChevronDown } from "lucide-react";
+
+const MAX_FILE_SIZE = 1048576;
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 const addTicketsSchema = z
   .object({
@@ -22,7 +25,20 @@ const addTicketsSchema = z
     shortDescription: z.string(),
     largeDescription: z.string().optional(),
     countInStock: z.string().min(1, { message: "This field is required" }),
-    image: z.string().optional(),
+    image: z.preprocess(
+      (image: any) => {
+        if (image.length === 0) {
+          return undefined;
+        } else {
+          return image;
+        }
+      },
+      z
+        .any()
+        .refine((file: any) => file?.[0]?.size <= MAX_FILE_SIZE, `Max image size is 1MB.`)
+        .refine((file: any) => ACCEPTED_IMAGE_TYPES.includes(file?.[0]?.type), "Image format not supported.")
+        .optional()
+    ),
   })
   .refine(
     (data) => {
@@ -57,10 +73,18 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
   const { mutate, isLoading } = useCreateDiscoTickets(discoId);
   const onSubmit: SubmitHandler<AddTicketSchema> = (data) => {
     if (date) {
-      data.expDate = new Date(date.setUTCHours(23, 59, 59, 59)).toISOString();
+      const expDate = (data.expDate = endOfDay(new Date(date)).toISOString());
 
-      mutate(data);
-      reset();
+      const formData = new FormData();
+      formData.append("image", data?.image?.[0]);
+      formData.append("expDate", expDate);
+      formData.append("price", data.price);
+      formData.append("countInStock", data.countInStock);
+      formData.append("category", data.category);
+      formData.append("shortDescription", data.shortDescription);
+      data.largeDescription && formData.append("largeDescription", data.largeDescription);
+
+      mutate({ formData: formData, discoId: data.discoId });
     } else {
       return;
     }
@@ -75,6 +99,7 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
         {isActive ? "Discard" : "Add Ticket"}
       </Button>
       <form
+        encType="multipart/form-data"
         className={cn("md:w-1/2 lg:w-1/3 bg-black/20 p-3 rounded-md", !isActive && "hidden")}
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -123,7 +148,7 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
                   selected={date}
                   onSelect={setDate}
                   initialFocus
-                  disabled={(date) => date.valueOf() < new Date().setHours(0, 0, 0, 0)}
+                  disabled={(date) => date.valueOf() < startOfDay(new Date()).valueOf()}
                 />
               </PopoverContent>
             </Popover>
@@ -182,21 +207,17 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
           id="largeDescription"
           {...register("largeDescription")}
         />
-        <div className="mb-2">
-          <label className="block text-xs font-medium text-gray-200" htmlFor="image">
-            optional image
+        <div>
+          <label className="block text-xs font-medium text-gray-200" htmlFor="picture">
+            Picture
           </label>
-          <Input
-            className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-            placeholder="Insert Image URL"
-            type="text"
-            id="image"
-            {...register("image")}
-          />
+          <Input id="image" type="file" accept=".png, .img, .jpg, .jpeg" {...register("image")} />
+          {errors.image && <p className="text-xs italic text-red-500">{String(errors.image.message)}</p>}
         </div>
+
         <input {...register("discoId")} id="discoId" type="text" hidden defaultValue={discoId} />
 
-        <ButtomSubmit text="Add" isLoading={isLoading} />
+        <ButtomSubmit className="mt-2" text="Add" isLoading={isLoading} />
       </form>
     </div>
   );

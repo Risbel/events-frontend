@@ -6,7 +6,7 @@ export const useCreateDiscoTickets = (discoId: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: AddTicketSchema) => createDiscoTickets(data),
+    mutationFn: createDiscoTickets,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["discoTickets", discoId] });
     },

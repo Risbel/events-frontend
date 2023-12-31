@@ -1,8 +1,8 @@
 import { AddTicketSchema } from "@/components/forms/AddTicketsForm";
 import httpService from "@/config/axios.config";
 
-export const createDiscoTickets = async (data: AddTicketSchema) => {
-  const response = await httpService.post<IDiscoTickets>(`/discoTicket/${data.discoId}`, data);
+export const createDiscoTickets = async ({ formData, discoId }: { formData: any; discoId: string }) => {
+  const response = await httpService.post<IDiscoTickets>(`/discoTicket/${discoId}`, formData);
   return response.data;
 };
 
