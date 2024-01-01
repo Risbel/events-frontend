@@ -3,7 +3,7 @@ import Spinner from "@/components/loaders/Spinner";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import UpdateRoleForm from "@/components/forms/UpdateRoleForm";
 
-const UserContainer = ({ id }: { id: string }) => {
+const UserContainer = ({ id }: { id: any }) => {
   const { isLoading, data } = useGetUserById(id);
 
   if (isLoading && !data) {

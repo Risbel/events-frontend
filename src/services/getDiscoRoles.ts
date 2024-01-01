@@ -1,12 +1,8 @@
 import httpService from "@/config/axios.config";
 
 export const getDiscoRoles = async (): Promise<Disco[]> => {
-  try {
-    const response = await httpService.get("/discoRoles");
-    return response.data;
-  } catch (error) {
-    return error.message;
-  }
+  const response = await httpService.get("/discoRoles");
+  return response.data;
 };
 
 export interface Disco {

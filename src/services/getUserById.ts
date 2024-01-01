@@ -1,6 +1,6 @@
 import httpService from "@/config/axios.config";
 
-export const getUserById = async (id: string): Promise<IuserById> => {
+export const getUserById = async (id: any): Promise<IuserById> => {
   const response = await httpService.get(`/user/${id}`);
   return response.data;
 };

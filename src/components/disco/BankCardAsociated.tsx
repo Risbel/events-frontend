@@ -23,7 +23,7 @@ const BankCardAsociated = ({
 
               <div className="bg-black text-white p-2 rounded-md w-full mb-4">
                 <p>{discoBankCard.name}</p>
-                <p className="text-xl md:text-2xl">{discoBankCard.number.replace(/(\d{4})/g, "$1-").slice(0, -1)}</p>
+                <p className="text-xl md:text-2xl">{discoBankCard.number}</p>
               </div>
 
               <EditBankCardButton discoDetailId={discoDetailId} discoBankCard={discoBankCard} />

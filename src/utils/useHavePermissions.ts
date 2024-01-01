@@ -6,7 +6,7 @@ export const useHavePermissions = (myPermissions: ImyPermissions) => {
       myPermissions &&
       myPermissions.DiscoRole.rolePermissionResouces.find(
         (permisionResource: IrolePermissionResouce) =>
-          permisionResource.Permission.name === permission && permisionResource.Resource.name === resource
+          permisionResource?.Permission?.name === permission && permisionResource?.Resource?.name === resource
       );
 
     return isPermission;

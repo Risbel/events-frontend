@@ -15,7 +15,7 @@ import DiscoTickets from "./DiscoTickets";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
-const DiscoEnviroment = ({ name }: { name: string }) => {
+const DiscoEnviroment = ({ name }: { name: any }) => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 

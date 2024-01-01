@@ -6,7 +6,7 @@ export const useDeleteRolePermissionResource = () => {
   const { isLoading, mutate } = useMutation({
     mutationFn: deleteRolePermissionResource,
     onSuccess: () => {
-      queryClient.invalidateQueries("resourcesByPermissionId");
+      queryClient.invalidateQueries(["resourcesByPermissionId"]);
     },
   });
 

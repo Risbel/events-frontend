@@ -18,8 +18,6 @@ export const createReservation = async ({ userId, cartItems }: IReservation) => 
     return result;
   }, []);
 
-  console.log({ userId, cartItems: groupedByDiscoId });
-
   const response = await httpService.post<IReservation>("/reservation", { userId, cartItems: groupedByDiscoId });
   return response.data;
 };

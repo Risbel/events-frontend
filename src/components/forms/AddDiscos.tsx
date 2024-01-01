@@ -94,19 +94,6 @@ const AddDiscos = () => {
         </div>
 
         <div className="mb-2 md:grid md:grid-cols-2">
-          <div className="mb-2 md:mr-2 md:mb-0">
-            <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="phone">
-              Phone
-            </label>
-            <input
-              className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="phone"
-              type="tel"
-              placeholder="Phone"
-              {...register("phone")}
-            />
-            {errors.phone && <p className="text-xs italic text-red-500 mt-2">{errors.phone?.message}</p>}
-          </div>
           <div className="pb-2">
             <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="administrator">
               Administrator

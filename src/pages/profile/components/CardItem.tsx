@@ -2,10 +2,14 @@ import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
 import { useDeleteBankCard } from "@/hooks/useDeleteBankCard";
 import { IUserBankCardByUserId } from "@/services/getUserBankCardsByUserId";
+import { clear } from "console";
 import React from "react";
 
 const CardItem = ({ bankCard }: { bankCard: IUserBankCardByUserId }) => {
   const { mutate, isLoading: isLoadingDelete } = useDeleteBankCard();
+  if (!bankCard) {
+    return;
+  }
 
   return (
     <div className="flex flex-col items-center bg-white/80 p-4 rounded-md" key={bankCard.id}>
