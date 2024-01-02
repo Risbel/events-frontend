@@ -7,7 +7,7 @@ import CardItem from "./CardItem";
 
 const Cards = ({ userId }: { userId: string }) => {
   const [isAddCardOpen, setIsAddCardOpen] = useState(false);
-  const { data, isLoading: isLoadingBankCards } = useGetBankCardsByUserId(userId);
+  const { data, isLoading } = useGetBankCardsByUserId(userId);
 
   return (
     <div className="px-4 md:px-12 mb-12">

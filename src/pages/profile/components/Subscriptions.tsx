@@ -19,38 +19,37 @@ export const SkeletonSubs = () => {
 };
 
 const Subscriptions = ({ userId }: { userId: string }) => {
-  const { data } = useGetSubscriptionsByUserId(userId);
+  const { data, isLoading } = useGetSubscriptionsByUserId(userId);
+
+  if (isLoading) {
+    return <SkeletonSubs />;
+  }
 
   return (
-    <>
-      {data ? (
-        <div className="py-4 md:py-10 px-4 md:px-12 text-white">
-          <h1 className="text-xl font-semibold my-4">My Subscriptions:</h1>
-          <div className="grid md:grid-cols-3 gap-2 md:gap-4">
-            {data.map((sub) => (
-              <div
-                className="flex items-center justify-between border rounded-md overflow-hidden pr-2 bg-gray-800/30"
-                key={sub.id}
-              >
-                <div className="flex items-center gap-2">
-                  <Image src={sub.Disco.logo} alt="logo sub" height={50} width={50} />
-                  <p>{sub.Disco.name}</p>
-                </div>
-                {sub.DiscoRole.name !== "admin" ? (
-                  <Unsubscribe id={sub.id} />
-                ) : (
-                  <div className="bg-white/10 p-1 px-2 rounded-md">
-                    <p className="text-white font-light">You are admin</p>
-                  </div>
-                )}
+    <div className="py-4 md:py-10 px-4 md:px-12 text-white">
+      <h1 className="text-xl font-semibold my-4">My Subscriptions:</h1>
+      <div className="grid md:grid-cols-3 gap-2 md:gap-4">
+        {data &&
+          data.map((sub) => (
+            <div
+              className="flex items-center justify-between border rounded-md overflow-hidden pr-2 bg-gray-800/30"
+              key={sub.id}
+            >
+              <div className="flex items-center gap-2">
+                <Image src={sub.Disco.logo} alt="logo sub" height={50} width={50} />
+                <p>{sub.Disco.name}</p>
               </div>
-            ))}
-          </div>
-        </div>
-      ) : (
-        <SkeletonSubs />
-      )}
-    </>
+              {sub.DiscoRole.name !== "admin" ? (
+                <Unsubscribe id={sub.id} />
+              ) : (
+                <div className="bg-white/10 p-1 px-2 rounded-md">
+                  <p className="text-white font-light">You are admin</p>
+                </div>
+              )}
+            </div>
+          ))}
+      </div>
+    </div>
   );
 };
 
