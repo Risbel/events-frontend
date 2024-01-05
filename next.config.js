@@ -3,14 +3,34 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: [
-      "image.lexica.art",
-      "images.unsplash.com",
-      "i.pinimg.com",
-      "tailwindui.com",
-      "avatars.githubusercontent.com",
-      "res.cloudinary.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "image.lexica.art",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "image.lexica.art",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.pinimg.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
+        pathname: "**",
+      },
     ],
+    formats: ["image/avif", "image/webp"],
   },
 };
 

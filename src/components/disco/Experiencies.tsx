@@ -6,6 +6,7 @@ import { DiscoDetail } from "@/services/getDisco";
 
 import useHavePermissions from "@/utils/useHavePermissions";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
+import DeleteExperienceButton from "../buttons/DeleteExperienceButton";
 
 const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail; myPermissions: ImyPermissions }) => {
   const { havePermission } = useHavePermissions(myPermissions);
@@ -19,17 +20,21 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
             discoImage && (
               <div key={index}>
                 <Image
+                  priority
+                  placeholder="blur"
                   className="object-cover max-h-72 rounded-2xl"
                   src={discoImage.image}
-                  width={500}
-                  height={500}
-                  alt="experiencies"
+                  width={400}
+                  height={400}
+                  alt={`experiencie${discoImage.id}`}
                 />
                 <p className="text-white text-xs md:text-md font-light text-start">{discoImage?.imageText}</p>
+                {havePermission("delete", "Disco Images") && <DeleteExperienceButton id={discoImage.id} />}
               </div>
             )
         )}
       </div>
+
       {havePermission("create", "Disco Images") && <AddExperienceButton discoDetailId={discoDetail.id} />}
     </div>
   );
