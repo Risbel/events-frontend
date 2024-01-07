@@ -20,8 +20,6 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
             discoImage && (
               <div key={index}>
                 <Image
-                  priority
-                  placeholder="blur"
                   className="object-cover max-h-72 rounded-2xl"
                   src={discoImage.image}
                   width={400}
