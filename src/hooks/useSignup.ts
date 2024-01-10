@@ -2,17 +2,12 @@ import { useMutation } from "@tanstack/react-query";
 import { signup } from "@/services/signup";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { SignupState } from "@/pages/auth/signup";
 
-export const useSubmitSignup = (password: string, email: string) => {
+export const useSignup: any = ({ password, email }: { password: string; email: string }) => {
   const router = useRouter();
 
-  const {
-    mutate: submitPersonalDates,
-    isLoading,
-    isSuccess,
-  } = useMutation({
-    mutationFn: (personalDates: SignupState) => signup(personalDates),
+  return useMutation({
+    mutationFn: signup,
     onSuccess: async (resp) => {
       if (resp.status) {
         const status = await signIn("credentials", {
@@ -28,6 +23,4 @@ export const useSubmitSignup = (password: string, email: string) => {
       }
     },
   });
-
-  return { submitPersonalDates, isLoading, isSuccess };
 };

@@ -3,25 +3,45 @@ import Spinner from "@/components/loaders/Spinner";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { useSubmitCredentials } from "@/hooks/useSubmitCredentials";
+import useLogin from "@/hooks/useLogin";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+
+const loginSchema = z.object({
+  email: z.string().min(1, { message: "The email is required" }).email(),
+  password: z.string().min(1, { message: "The password is required" }),
+});
+
+export type ILoginSchema = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const [isPassword, setIsPassword] = useState(false);
-  const { handleChange, credentials, isLoading, error, onSubmitWithCredentials } = useSubmitCredentials({
-    email: "",
-    password: "",
+
+  const { mutate, isLoading, data: status } = useLogin();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ILoginSchema>({
+    resolver: zodResolver(loginSchema),
   });
+
+  const onSubmit: SubmitHandler<ILoginSchema> = (data) => {
+    mutate(data);
+  };
 
   return (
     <AuthLayout>
-      <div className="flex flex-col gap-4 p-4">
-        <h1 className="text-4xl font-semibold text-start px-4">LOGIN</h1>
+      <div className="flex flex-col gap-4">
+        <h1 className="text-4xl font-semibold text-center md:text-start">LOGIN</h1>
         <div className="pb-2">
-          <p className="text-start font-light text-md leading-4 px-4">
+          <p className="text-start font-light text-md leading-4">
             <span className="text-destructive/80 font-semibold">Login</span> to access to{" "}
             <span className="font-semibold">MyEvents</span> or{" "}
             <Link href={"/auth/signup"}>
@@ -30,28 +50,20 @@ const Login = () => {
             if you don&apos;t have an acount.
           </p>
         </div>
-        <form onSubmit={onSubmitWithCredentials} name="login form" className="flex flex-col gap-4 p-4">
+        <form onSubmit={handleSubmit(onSubmit)} name="login form" className="flex flex-col gap-4">
           <div className="relative">
             <Label name={"Email"} htmlfor={"email"} />
-            <Input
-              required
-              name="email"
-              onChange={handleChange}
-              value={credentials.email}
-              type="email"
-              placeholder="Email"
-            />
+            <Input {...register("email")} autoComplete="none" id="email" type="email" placeholder="Email" />
+            {errors.email && <p className="text-start text-xs italic text-red-500">{errors.email.message}</p>}
           </div>
           <div className="relative z-20">
             <Label name={"Password"} htmlfor={"password"} />
             <Input
-              required
-              name="password"
-              onChange={handleChange}
-              value={credentials.password}
+              {...register("password")}
+              id="password"
+              autoComplete="none"
               type={isPassword ? "text" : "password"}
               placeholder="Password"
-              autoComplete="on"
             />
             <button
               type="button"
@@ -60,16 +72,18 @@ const Login = () => {
             >
               {isPassword ? <EyeIcon className="stroke-gray-700" /> : <EyeOffIcon className="stroke-gray-700" />}
             </button>
+            {errors.password && <p className="text-start text-xs italic text-red-500">{errors.password.message}</p>}
           </div>
+          {status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
+
           <Button className="flex gap-2" type="submit">
-            Login{" "}
+            Login
             {isLoading && (
               <div>
                 <Spinner diameter={4} />
               </div>
             )}
           </Button>
-          {<span className="text-red-600 text-center">{error}</span>}
 
           <div className="flex justify-center items-center gap-2 w-full overflow-hidden text-black">
             <Separator className="w-full" />

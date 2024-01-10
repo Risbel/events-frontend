@@ -1,105 +1,92 @@
 import { useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
-import { useSubmitSignup } from "@/hooks/useSubmitSignup";
+import { useSignup } from "@/hooks/useSignup";
 import Link from "next/link";
 import Spinner from "@/components/loaders/Spinner";
 import AuthLayout from "@/components/layouts/AuthLayout.tsx";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { ChevronLeft, EyeIcon, EyeOffIcon } from "lucide-react";
 import Image from "next/image";
+import { z } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const signupSchema = z
+  .object({
+    name: z.string().min(1, { message: "Your name is required" }),
+    lastName: z.string().min(1, { message: "Your lastname is required" }),
+    email: z.string().min(1, { message: "The email is required" }).email(),
+    phone: z.string().min(1, { message: "Your phone is required" }),
+    password: z.string().min(1, { message: "The password is required" }),
+    confirmPassword: z.string().min(1, { message: "Please, confirm your password" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
+
+export type ISignupSchema = z.infer<typeof signupSchema>;
 
 const Signup = () => {
   const [isPassword, setIsPassword] = useState(false);
   const [isRePassword, setIsRePassword] = useState(false);
-  const [confirmAlert, setConfirmAlert] = useState(false);
-  const [personalDates, setPersonalDates] = useState<SignupState>({
-    name: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<ISignupSchema>({
+    resolver: zodResolver(signupSchema),
   });
 
-  const { submitPersonalDates, isLoading, isSuccess } = useSubmitSignup(personalDates.password, personalDates.email);
+  const credentials: any = getValues();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const { mutate, isLoading, isError, error } = useSignup(credentials);
 
-    if (personalDates.password !== personalDates.confirmPassword) {
-      setPersonalDates({
-        ...personalDates,
-        password: "",
-        confirmPassword: "",
-      });
-      return setConfirmAlert(true);
-    }
-
-    const { confirmPassword, ...personalDataWithoutConfirm } = personalDates;
-
-    submitPersonalDates(personalDataWithoutConfirm);
-
-    setConfirmAlert(false);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPersonalDates({
-      ...personalDates,
-      [e.target.name]: e.target.value,
-    });
+  const onSubmit: SubmitHandler<ISignupSchema> = (data) => {
+    mutate(data);
   };
 
   return (
     <AuthLayout>
-      <div className="px-4">
+      <div>
         <Link
           className={`${buttonVariants({
             variant: "outline",
           })} absolute left-6 top-5`}
           href={"/auth/login"}
         >
-          Back To Login
+          <ChevronLeft />
         </Link>
-        <p className="text-2xl font-bold text-start py-4">SIGN UP</p>
-        <form onSubmit={handleSubmit} name="signup form" className="flex flex-col gap-4">
+        <p className="text-2xl font-bold text-center py-4">SIGN UP</p>
+        <form onSubmit={handleSubmit(onSubmit)} name="signup form" className="flex flex-col gap-4">
           <div className="relative">
             <Label name={"Name"} htmlfor={"name"} />
-            <Input onChange={handleChange} value={personalDates.name} name="name" type="text" placeholder="name" />
+            <Input autoComplete="off" {...register("name")} id="name" type="text" placeholder="name" />
+            {errors.name && <p className="text-start text-xs italic text-red-500">{errors.name.message}</p>}
           </div>
           <div className="relative">
             <Label name={"Last Name"} htmlfor={"lastName"} />
-            <Input
-              required
-              onChange={handleChange}
-              value={personalDates.lastName}
-              name="lastName"
-              type="text"
-              placeholder="last name"
-            />
+            <Input autoComplete="off" {...register("lastName")} id="lastName" type="text" placeholder="last name" />
+            {errors.lastName && <p className="text-start text-xs italic text-red-500">{errors.lastName.message}</p>}
           </div>
           <div className="relative">
             <Label name={"Email"} htmlfor={"email"} />
-            <Input onChange={handleChange} value={personalDates.email} name="email" type="email" placeholder="email" />
+            <Input autoComplete="off" {...register("email")} id="email" placeholder="email" />
+            {errors.email && <p className="text-start text-xs italic text-red-500">{errors.email.message}</p>}
           </div>
           <div className="relative">
             <Label name={"Phone"} htmlfor={"phone"} />
-            <Input
-              required
-              onChange={handleChange}
-              value={personalDates.phone}
-              name="phone"
-              type="text"
-              placeholder="phone number"
-            />
+            <Input autoComplete="off" {...register("phone")} id="phone" type="text" placeholder="phone number" />
+            {errors.phone && <p className="text-start text-xs italic text-red-500">{errors.phone.message}</p>}
           </div>
           <div className="relative">
             <Label name={"Password"} htmlfor={"password"} />
             <Input
               autoComplete="off"
-              required
-              onChange={handleChange}
-              value={personalDates.password}
-              name="password"
+              {...register("password")}
+              id="password"
               type={isPassword ? "text" : "password"}
               placeholder="password"
             />
@@ -110,15 +97,14 @@ const Signup = () => {
             >
               {isPassword ? <EyeIcon className="stroke-gray-700" /> : <EyeOffIcon className="stroke-gray-700" />}
             </button>
+            {errors.password && <p className="text-start text-xs italic text-red-500">{errors.password.message}</p>}
           </div>
           <div className="relative">
             <Label name={"Confirm Password"} htmlfor={"password"} />
             <Input
               autoComplete="off"
-              required
-              onChange={handleChange}
-              value={personalDates.confirmPassword}
-              name="confirmPassword"
+              {...register("confirmPassword")}
+              id="confirmPassword"
               type={isRePassword ? "text" : "password"}
               placeholder="confirm password"
             />
@@ -129,19 +115,14 @@ const Signup = () => {
             >
               {isRePassword ? <EyeIcon className="stroke-gray-700" /> : <EyeOffIcon className="stroke-gray-700" />}
             </button>
+            {errors.confirmPassword && (
+              <p className="text-start text-xs italic text-red-500">{errors.confirmPassword.message}</p>
+            )}
           </div>
-
-          {confirmAlert && <span className="text-red-600">Rectify the confirmation</span>}
-
+          {isError && <p className="text-center text-xs italic text-red-500">{error?.response?.data?.message}</p>}
           <Button className="flex gap-2" type="submit">
             Sign up {isLoading && <Spinner diameter={4} />}
           </Button>
-
-          {isSuccess && (
-            <div className="flex justify-center w-full">
-              <span className="text-green-600">Successful</span>
-            </div>
-          )}
         </form>
       </div>
       <div className="relative hidden md:flex flex-col text-gray-700">
