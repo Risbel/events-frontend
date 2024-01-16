@@ -63,7 +63,7 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
         />
       )}
 
-      <div className="pt-20 px-4 md:px-8 relative z-10">
+      <div className="pt-12 relative z-10">
         <div>
           <div className="flex flex-col gap-4 md:gap-8">
             {loadingDisco ? null : <Head disco={discoData?.disco} myPermissions={myPermissions} />}
