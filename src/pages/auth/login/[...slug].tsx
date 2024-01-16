@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,14 +16,17 @@ import { z } from "zod";
 const loginSchema = z.object({
   email: z.string().min(1, { message: "The email is required" }).email(),
   password: z.string().min(1, { message: "The password is required" }),
+  disco: z.string().optional(),
 });
 
 export type ILoginSchema = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const [isPassword, setIsPassword] = useState(false);
+  const params = useParams();
+  const disco = params?.slug?.[1];
 
-  const { mutate, isLoading, data: status } = useLogin();
+  const { mutate, isLoading, data: status } = useLogin(disco);
 
   const {
     register,
