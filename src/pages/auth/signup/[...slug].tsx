@@ -10,6 +10,7 @@ import Image from "next/image";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams } from "next/navigation";
 
 const signupSchema = z
   .object({
@@ -30,6 +31,8 @@ export type ISignupSchema = z.infer<typeof signupSchema>;
 const Signup = () => {
   const [isPassword, setIsPassword] = useState(false);
   const [isRePassword, setIsRePassword] = useState(false);
+  const params = useParams();
+  const disco = params?.slug?.[1];
 
   const {
     register,
@@ -42,11 +45,15 @@ const Signup = () => {
 
   const credentials: any = getValues();
 
-  const { mutate, isLoading, isError, error } = useSignup(credentials);
+  const { mutate, isLoading, isError, error } = useSignup(credentials, disco);
 
   const onSubmit: SubmitHandler<ISignupSchema> = (data) => {
     mutate(data);
   };
+
+  if (!disco) {
+    return;
+  }
 
   return (
     <AuthLayout>
@@ -55,7 +62,7 @@ const Signup = () => {
           className={`${buttonVariants({
             variant: "outline",
           })} absolute left-6 top-5`}
-          href={"/auth/login"}
+          href={`/auth/login/disco/${disco}`}
         >
           <ChevronLeft />
         </Link>
@@ -141,12 +148,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-export interface SignupState {
-  name: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  password: string;
-  confirmPassword?: string;
-}

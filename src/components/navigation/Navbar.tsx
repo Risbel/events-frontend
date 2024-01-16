@@ -20,20 +20,20 @@ function Navbar() {
         </div>
 
         <div className="flex gap-2">
-          {/* <Link href={"/cart"} className="relative  rounded-full">
+          <Link href={"/cart"} className="relative  rounded-full">
             <Image
               className="hover:scale-110 transition-transform"
-              src={"/shopping-cart.png"}
+              src={"/shop-cart.svg"}
               alt="shop cart"
-              width={30}
-              height={30}
+              width={35}
+              height={35}
             />
             {Number(cartItems.length) >= 1 && (
               <div className="absolute translate-x-3 -translate-y-1 h-4 w-4 top-0 right-0 rounded-full bg-white font-semibold text-center text-xs">
                 {cartItems.length}
               </div>
             )}
-          </Link> */}
+          </Link>
           <div className="flex justify-center md:pr-5 lg:pr-10">
             {status === "loading" ? (
               <Skeleton className="relative z-0 rounded-full items-center w-8 h-8"></Skeleton>

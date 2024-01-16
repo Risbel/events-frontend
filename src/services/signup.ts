@@ -1,5 +1,4 @@
 import httpService from "@/config/axios.config";
-import { SignupState } from "@/pages/auth/signup";
 
 export const signup = async (personalDates: SignupState) => {
   const res = await httpService.post("/signup", personalDates, {
@@ -8,3 +7,11 @@ export const signup = async (personalDates: SignupState) => {
 
   return res.data;
 };
+export interface SignupState {
+  name: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  password: string;
+  confirmPassword?: string;
+}

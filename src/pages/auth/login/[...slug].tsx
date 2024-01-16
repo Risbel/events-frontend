@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -40,15 +40,19 @@ const Login = () => {
     mutate(data);
   };
 
+  if (!disco) {
+    return;
+  }
+
   return (
     <AuthLayout>
       <div className="flex flex-col gap-4">
-        <h1 className="text-4xl font-semibold text-center md:text-start">LOGIN</h1>
+        <h1 className="text-3xl font-semibold text-center md:text-start">{disco.toUpperCase()}</h1>
         <div className="pb-2">
           <p className="text-start font-light text-md leading-4">
             <span className="text-destructive/80 font-semibold">Login</span> to access to{" "}
-            <span className="font-semibold">MyEvents</span> or{" "}
-            <Link href={"/auth/signup"}>
+            <span className="font-semibold">{disco.toUpperCase()}</span> or{" "}
+            <Link href={`/auth/signup/disco/${disco}`}>
               <span className="text-destructive/80 font-semibold hover:underline">Sign Up</span>
             </Link>{" "}
             if you don&apos;t have an acount.
@@ -95,7 +99,7 @@ const Login = () => {
             <Separator className="w-full" />
           </div>
 
-          <Link className={`${buttonVariants({ variant: "outline" })} font-sans`} href={"/auth/signup"}>
+          <Link className={`${buttonVariants({ variant: "outline" })} font-sans`} href={`/auth/signup/disco/${disco}`}>
             CREATE NEW ACOUNT
           </Link>
         </form>

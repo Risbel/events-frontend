@@ -3,8 +3,10 @@ import { signup } from "@/services/signup";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export const useSignup: any = ({ password, email }: { password: string; email: string }) => {
+export const useSignup: any = (credentials: { password: string; email: string }, disco: string) => {
   const router = useRouter();
+
+  const { email, password } = credentials;
 
   return useMutation({
     mutationFn: signup,
@@ -14,7 +16,7 @@ export const useSignup: any = ({ password, email }: { password: string; email: s
           redirect: false,
           email,
           password,
-          callbackUrl: "/",
+          callbackUrl: `/disco/${disco}`,
         });
 
         if (status?.url) {
