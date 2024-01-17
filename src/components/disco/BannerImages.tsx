@@ -5,12 +5,12 @@ const BannerImages = ({ discoDetailsId }: { discoDetailsId: string }) => {
   const { data } = useGetBannerImages(discoDetailsId);
 
   return (
-    <div className="max-h-96 flex items-center overflow-hidden absolute -z-10">
-      <div className="absolute h-96 w-screen bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+    <div className="h-screen flex items-center overflow-hidden absolute -z-10">
+      <div className="absolute w-screen h-full bg-gradient-to-r from-black via-black/70 to-transparent"></div>
       {data &&
         data?.map((img) => (
           <Image
-            className="w-screen object-cover"
+            className="w-screen h-screen object-cover"
             src={img.image}
             alt={img.alt}
             key={img.id}

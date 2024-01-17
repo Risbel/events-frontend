@@ -5,24 +5,22 @@ import BannerImages from "./BannerImages";
 
 const Head = ({ disco }: { disco: DataDisco }) => {
   return (
-    <div className="relative">
+    <div className="relative h-screen">
       <BannerImages discoDetailsId={disco.discoDetail.id} />
-      <div className="flex flex-col md:flex-row items-center md:gap-8 p-8">
-        {disco && (
-          <Image
-            className="rounded-full h-25 w-25 md:h-36 md:w-36"
-            src={disco?.logo}
-            alt={disco?.name}
-            height={100}
-            width={100}
-          />
-        )}
-        <h1 className="py-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-400 font-bold text-3xl md:text-7xl">
-          {(disco?.name).toUpperCase()}
-        </h1>
-      </div>
+      <div className="grid grid-rows-4 h-full">
+        <div className="row-start-3">
+          <h1
+            className="px-8 font-bold text-3xl md:text-7xl text-center md:text-start"
+            style={{ color: `#${disco.discoDetail.discoColor.textColor}` }}
+          >
+            {(disco?.name).toUpperCase()}
+          </h1>
 
-      <p className="text-white text-xl md:text-2xl text-center md:text-left p-8">{disco?.discoDetail.description}</p>
+          <p className="text-white text-sm md:text-2xl text-center md:text-left p-8">
+            {disco?.discoDetail.description}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

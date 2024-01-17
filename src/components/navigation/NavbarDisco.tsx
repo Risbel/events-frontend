@@ -20,12 +20,18 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
     <div className="fixed z-50">
       <div
         style={{ backgroundColor: `#${discoData.discoDetail.discoColor.brandColor}` }}
-        className={cn("flex w-screen h-12 absolute z-30")}
+        className={cn("flex w-screen h-14 absolute z-30")}
       />
       <div className="flex justify-between items-center w-screen absolute z-40 px-2 md:px-6 py-2">
         <Link href={`/disco/${discoData.slug}`} className="flex gap-2 items-center cursor-pointer">
-          <Image className="rounded-full" src={`${discoData.logo}`} alt="tickets logo" width={30} height={30} />
-          <p className="text-white font-semibold">{discoData.name}</p>
+          <Image
+            className="rounded-full hover:scale-105"
+            src={`${discoData.logo}`}
+            alt="tickets logo"
+            width={45}
+            height={45}
+          />
+          <p className="text-white font-semibold hover:underline underline-offset-4">{discoData.name.toUpperCase()}</p>
         </Link>
 
         <div className="flex gap-2 items-center">
@@ -45,7 +51,7 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
               height={35}
             />
             {Number(cartItems.length) >= 1 && (
-              <div className="absolute translate-x-3 -translate-y-1 h-4 w-4 top-0 right-0 rounded-full bg-white font-semibold text-center text-xs">
+              <div className="absolute translate-x-1 h-4 w-4 top-0 right-0 rounded-full bg-white font-semibold text-center text-xs">
                 {cartItems.length}
               </div>
             )}
