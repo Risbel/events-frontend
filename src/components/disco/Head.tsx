@@ -1,17 +1,11 @@
 import { DataDisco } from "@/services/getDisco";
 import Image from "next/image";
 import React from "react";
-import AdminSettings from "./AdminSettings";
-import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
-import useHavePermissions from "@/utils/useHavePermissions";
 import BannerImages from "./BannerImages";
 
-const Head = ({ disco, myPermissions }: { disco: DataDisco; myPermissions: ImyPermissions }) => {
-  const { havePermission } = useHavePermissions(myPermissions);
-
+const Head = ({ disco }: { disco: DataDisco }) => {
   return (
     <div className="relative">
-      {havePermission("read", "Admin settings on disco") && <AdminSettings disco={disco} />}
       <BannerImages discoDetailsId={disco.discoDetail.id} />
       <div className="flex flex-col md:flex-row items-center md:gap-8 p-8">
         {disco && (

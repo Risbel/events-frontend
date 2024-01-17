@@ -8,7 +8,7 @@ import SubscribeNow from "./SubscribeNow";
 import AboutUs from "./AboutUs";
 import Experiencies from "./Experiencies";
 import { SkeletonAboutUs, SkeletonExperiences, SkeletonHead } from "./Skeleton";
-import Navbar from "../navigation/Navbar";
+import NavbarDisco from "../navigation/NavbarDisco";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import { useGetDiscoTicketsByIdDisco } from "@/hooks/useGetDiscoTicketsByIdDisco";
 import DiscoTickets from "./DiscoTickets";
@@ -41,9 +41,13 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
     );
   }
 
+  if (!discoData) {
+    return;
+  }
+
   return (
     <div className="relative overflow-hidden bg-black">
-      <Navbar />
+      <NavbarDisco discoData={discoData.disco} myPermissions={myPermissions} />
 
       {loadingDisco || !discoData ? (
         <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-4">
@@ -66,7 +70,7 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
       <div className="pt-12 relative z-10">
         <div>
           <div className="flex flex-col gap-4 md:gap-8">
-            {loadingDisco ? null : <Head disco={discoData?.disco} myPermissions={myPermissions} />}
+            {loadingDisco ? null : <Head disco={discoData?.disco} />}
 
             {loadingDisco
               ? null

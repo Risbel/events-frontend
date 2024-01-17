@@ -32,6 +32,7 @@ export interface DiscoDetail {
   discoNetworks: [];
   discoPhones: [];
   userBankCard: IUserBankCard;
+  discoColor: IDiscoColors;
 }
 
 export interface DiscoImages {
@@ -68,4 +69,15 @@ export interface IUserBankCard {
   createdAt: string;
   updatedAt: string;
   userId: string;
+}
+
+export interface IDiscoColors {
+  id: string;
+  brandColor: string;
+  secondary: string;
+  bgColor: string;
+  textColor: string;
+  createdAt: string;
+  updatedAt: string;
+  discoDetailId: string;
 }
