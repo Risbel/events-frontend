@@ -16,7 +16,7 @@ export const useSignup: any = (credentials: { password: string; email: string },
           redirect: false,
           email,
           password,
-          callbackUrl: `/disco/${disco}`,
+          callbackUrl: disco ? `/disco/${disco}` : `/`,
         });
 
         if (status?.url) {

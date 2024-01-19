@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -23,10 +22,8 @@ export type ILoginSchema = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const [isPassword, setIsPassword] = useState(false);
-  const params = useParams();
-  const disco = params?.slug?.[1];
 
-  const { mutate, isLoading, data: status } = useLogin(disco);
+  const { mutate, isLoading, data: status } = useLogin();
 
   const {
     register,
@@ -40,19 +37,15 @@ const Login = () => {
     mutate(data);
   };
 
-  if (!disco) {
-    return;
-  }
-
   return (
     <AuthLayout>
       <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-semibold text-center md:text-start">{disco.toUpperCase()}</h1>
+        <h1 className="text-3xl font-semibold text-center md:text-start">My Events</h1>
         <div className="pb-2">
           <p className="text-start font-light text-md leading-4">
             <span className="text-destructive/80 font-semibold">Login</span> to access to{" "}
-            <span className="font-semibold">{disco ? disco.toUpperCase() : "MyEvents"}</span> or{" "}
-            <Link href={disco ? `/auth/signup/disco/${disco}` : "/auth/signup"}>
+            <span className="font-semibold">MyEvents</span> or{" "}
+            <Link href={"/auth/signup"}>
               <span className="text-destructive/80 font-semibold hover:underline">Sign Up</span>
             </Link>{" "}
             if you don&apos;t have an acount.
@@ -99,10 +92,7 @@ const Login = () => {
             <Separator className="w-full" />
           </div>
 
-          <Link
-            className={`${buttonVariants({ variant: "outline" })} font-sans`}
-            href={disco ? `/auth/signup/disco/${disco}` : "/auth/signup"}
-          >
+          <Link className={`${buttonVariants({ variant: "outline" })} font-sans`} href={"/auth/signup"}>
             CREATE NEW ACOUNT
           </Link>
         </form>

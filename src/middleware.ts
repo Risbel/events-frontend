@@ -6,7 +6,9 @@ export async function middleware(req: NextRequest) {
 
   if (!session) {
     const url = req.nextUrl.clone();
-    url.pathname = `/auth/login/${url.pathname}`;
+    console.log(url);
+
+    url.pathname = url.pathname == "/" ? `/auth/login` : `/auth/login/${url.pathname}`;
     return NextResponse.redirect(url);
   }
 
