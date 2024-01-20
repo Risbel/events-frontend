@@ -1,12 +1,13 @@
 import { useGetBannerImages } from "@/hooks/useGetBannerImages";
+import { DiscoDetail } from "@/services/getDisco";
 import Image from "next/image";
 
-const BannerImages = ({ discoDetailsId }: { discoDetailsId: string }) => {
-  const { data } = useGetBannerImages(discoDetailsId);
+const BannerImages = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
+  const { data } = useGetBannerImages(discoDetails.id);
 
   return (
     <div className="h-screen flex items-center overflow-hidden absolute -z-10">
-      <div className="absolute w-screen h-full bg-gradient-to-r from-black via-black/70 to-transparent"></div>
+      <div className="absolute w-screen h-full"></div>
       {data &&
         data?.map((img) => (
           <Image

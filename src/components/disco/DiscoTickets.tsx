@@ -12,6 +12,7 @@ import { useListMonths } from "@/hooks/useListMonths";
 import AddCombosForm from "@/pages/disco/[slug]/details-ticket/[id]/components/AddCombosForm";
 import AddTicketsForm from "../forms/AddTicketsForm";
 import { compareAsc, compareDesc } from "date-fns";
+import { DiscoDetail } from "@/services/getDisco";
 
 export const LogoCategory = ({ category }: { category: string }) => {
   return (
@@ -61,11 +62,13 @@ const DiscoTickets = ({
   myPermissions,
   discoId,
   discoTickets,
+  discoDetail,
 }: {
   name: string;
   myPermissions: ImyPermissions;
   discoId: string;
   discoTickets: IDiscoTicket[];
+  discoDetail: DiscoDetail;
 }) => {
   const weekdays = useListDays();
   const months = useListMonths();
@@ -90,23 +93,30 @@ const DiscoTickets = ({
                   return (
                     <button
                       key={i}
-                      className="flex flex-col items-center px-4 py-2 bg-slate-900/80 hover:bg-slate-900/90 leading-none rounded-md hover:-translate-y-[2px] shadow hover:shadow-lg hover:shadow-purple-600/40 transition-transform"
+                      style={{ background: `#${discoDetail.discoColor.secondary}` }}
+                      className="flex flex-col items-center px-4 py-2 hover:opacity-90 leading-none rounded-md hover:-translate-y-[2px] transition-transform"
                       onClick={() => setDay(date)}
                     >
-                      <p className="text-white text-xs">{weekdays[new Date(date).getDay()].slice(0, 3)}</p>
-                      <p className="text-white text-xl">{new Date(date).getDate()}</p>
-                      <p className="text-white text-xs">{months[new Date(date).getMonth()]}</p>
+                      <p style={{ color: `#${discoDetail.discoColor.textColor}` }} className="text-xs">
+                        {weekdays[new Date(date).getDay()].slice(0, 3)}
+                      </p>
+                      <p style={{ color: `#${discoDetail.discoColor.textColor}` }} className="text-xl">
+                        {new Date(date).getDate()}
+                      </p>
+                      <p style={{ color: `#${discoDetail.discoColor.textColor}` }} className="text-xs">
+                        {months[new Date(date).getMonth()]}
+                      </p>
                     </button>
                   );
                 }
               })}
             </div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 p-2 rounded-md bg-black/20">
+          <div className="flex flex-col items-center gap-4 mb-10 p-2 rounded-md bg-black/20 lg:px-8">
             {discoTickets?.map((ticket) => {
               if (new Date(ticket.expDate).toDateString() === day) {
                 return (
-                  <div key={ticket.id}>
+                  <div key={ticket.id} className="w-full md:w-1/2 lg:w-1/3">
                     <div className="relative">
                       {Number(ticket.countInStock) === 0 ? (
                         <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-md flex items-center justify-center">
@@ -121,8 +131,12 @@ const DiscoTickets = ({
                         )
                       )}
                       <Link
+                        style={{
+                          background: `#${discoDetail.discoColor.brandColor}`,
+                          border: `solid #${discoDetail.discoColor.textColor} 2px`,
+                        }}
                         href={`/disco/${name}/details-ticket/${ticket.id}`}
-                        className="flex justify-between gap-2 border-2 bg-gradient-to-r from-black/70 to-slate-900/70 rounded-md p-2 relative shadow-lg hover:shadow-purple-800/60 hover:-translate-y-1 transition-transform duration-300"
+                        className="flex justify-between gap-2 rounded-md p-2 relative shadow-lg hover:shadow-purple-800/60 hover:-translate-y-1 transition-transform duration-300"
                       >
                         <div className="text-white w-full">
                           <p className="text-sm">Reserve {ticket.category} tickets</p>
@@ -137,7 +151,7 @@ const DiscoTickets = ({
                           </div>
                           <div>
                             <p className="text-xs font-light text-gray-100"> {ticket.shortDescription}</p>
-                            <p className="text-xs font-semibold text-center text-gray-400 pt-2">
+                            <p className="text-xs font-thin text-center pt-2">
                               📆 {weekdays[new Date(ticket.expDate).getDay()]} {new Date(ticket.expDate).getDate()}
                             </p>
                           </div>

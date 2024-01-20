@@ -7,33 +7,72 @@ import { DiscoDetail } from "@/services/getDisco";
 import useHavePermissions from "@/utils/useHavePermissions";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 import DeleteExperienceButton from "../buttons/DeleteExperienceButton";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../ui/carousel";
 
 const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail; myPermissions: ImyPermissions }) => {
   const { havePermission } = useHavePermissions(myPermissions);
 
   return (
-    <div className="flex flex-col gap-2">
-      <h1 className="font-extrabold text-4xl text-white pt-5 pb-2 text-center md:text-start">Experiencies</h1>
-      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-5 gap-4">
-        {discoDetail?.discoImages?.map(
-          (discoImage, index) =>
-            discoImage && (
-              <div key={index}>
-                <Image
-                  className="object-cover max-h-72 rounded-2xl"
-                  src={discoImage.image}
-                  width={400}
-                  height={400}
-                  alt={`experiencie${discoImage.id}`}
-                />
-                <p className="text-white text-xs md:text-md font-light text-start">{discoImage?.imageText}</p>
-                {havePermission("delete", "Disco Images") && <DeleteExperienceButton id={discoImage.id} />}
-              </div>
-            )
-        )}
+    <div
+      style={{ background: `#${discoDetail.discoColor.secondary}70` }}
+      className="flex flex-col items-center h-screen justify-center md:m-8 rounded-2xl relative"
+    >
+      <h1 className="font-extrabold text-4xl text-white pb-8 text-center">Experiencies</h1>
+      <div className="px-12">
+        <Carousel className="w-full max-w-7xl">
+          <CarouselContent>
+            {discoDetail?.discoImages?.map(
+              (discoImage, index) =>
+                discoImage && (
+                  <CarouselItem key={index} className="pl-6 md:basis-1/2 lg:basis-1/4">
+                    <div
+                      style={{
+                        borderRadius: "20px",
+                        border: `solid 5px`,
+                        borderColor: `#${discoDetail.discoColor.textColor}`,
+                      }}
+                      className="relative mb-4 overflow-hidden"
+                    >
+                      <p className="bg-gradient-to-t from-black via-black/60 to-transparent  absolute text-center w-full text-white text-xs md:text-md font-light bottom-0">
+                        {discoImage?.imageText}
+                      </p>
+                      <Image
+                        className="object-cover max-h-72 rounded-2xl"
+                        src={discoImage.image}
+                        width={400}
+                        height={400}
+                        alt={`experiencie${discoImage.id}`}
+                      />{" "}
+                    </div>
+
+                    {havePermission("delete", "Disco Images") && <DeleteExperienceButton id={discoImage.id} />}
+                  </CarouselItem>
+                )
+            )}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
+      <div className="flex justify-center">
+        {havePermission("create", "Disco Images") && <AddExperienceButton discoDetailId={discoDetail.id} />}
       </div>
 
-      {havePermission("create", "Disco Images") && <AddExperienceButton discoDetailId={discoDetail.id} />}
+      <div
+        style={{ background: `#${discoDetail.discoColor.textColor}80` }}
+        className="absolute rounded-full -z-20 h-80 w-80 blur-3xl opacity-70 right-32 bottom-0 -translate-y-1/2"
+      ></div>
+
+      {/* <div className="flex justify-between pt-9 w-full">
+        <div
+          style={{ borderColor: `#${discoDetail.discoColor.brandColor}` }}
+          className="border-4 w-3/5 rounded-r-full"
+        />
+        <div
+          style={{ borderColor: `#${discoDetail.discoColor.brandColor}` }}
+          className="border-4 w-1/4 rounded-l-full"
+        />
+      </div> */}
     </div>
   );
 };

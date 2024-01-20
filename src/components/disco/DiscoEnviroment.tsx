@@ -46,7 +46,7 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
   }
 
   return (
-    <div className="relative overflow-hidden bg-black">
+    <div className="relative overflow-hidden">
       <NavbarDisco discoData={discoData.disco} myPermissions={myPermissions} />
 
       {loadingDisco || !discoData ? (
@@ -56,20 +56,29 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
           <SkeletonExperiences />
         </div>
       ) : (
-        <Image
-          className="absolute h-full object-cover"
-          src={discoData?.disco?.discoDetail?.bgImage}
-          width={1800}
-          height={800}
-          alt="Picture of the author"
-          placeholder="blur"
-          blurDataURL={discoData?.disco?.discoDetail?.bgImage}
-        />
+        <div>
+          {discoData?.disco?.discoDetail?.bgImage ? (
+            <Image
+              className="absolute h-full object-cover"
+              src={discoData?.disco?.discoDetail?.bgImage}
+              width={1800}
+              height={800}
+              alt="Picture of the author"
+              placeholder="blur"
+              blurDataURL={discoData?.disco?.discoDetail?.bgImage}
+            />
+          ) : (
+            <div
+              className="absolute h-full w-full"
+              style={{ background: `#${discoData.disco.discoDetail.discoColor.bgColor}` }}
+            />
+          )}
+        </div>
       )}
 
       <div className="pt-5 relative z-10">
         <div>
-          <div className="flex flex-col gap-4 md:gap-8">
+          <div className="flex flex-col">
             {loadingDisco ? null : <Head disco={discoData?.disco} />}
 
             {loadingDisco
@@ -79,11 +88,7 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
                 userId &&
                 !discoData?.subscription && <SubscribeNow userId={userId} discoId={discoId} />}
 
-            <>
-              {loadingDisco
-                ? null
-                : discoData && <AboutUs largeDescription={discoData?.disco?.discoDetail?.largeDescription} />}
-            </>
+            <>{loadingDisco ? null : discoData && <AboutUs discoDetails={discoData?.disco?.discoDetail} />}</>
             {loadingDisco
               ? null
               : discoData && <Experiencies myPermissions={myPermissions} discoDetail={discoData?.disco.discoDetail} />}
@@ -94,7 +99,13 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
             ? null
             : discoId &&
               discotickets && (
-                <DiscoTickets name={name} myPermissions={myPermissions} discoId={discoId} discoTickets={discotickets} />
+                <DiscoTickets
+                  name={name}
+                  myPermissions={myPermissions}
+                  discoDetail={discoData?.disco.discoDetail}
+                  discoId={discoId}
+                  discoTickets={discotickets}
+                />
               )}
         </div>
       </div>
