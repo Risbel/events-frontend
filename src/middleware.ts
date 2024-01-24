@@ -16,5 +16,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/disco/:path*", "/profile", "/admin-settings/permissions", "/admin-settings/add-discos"],
+  matcher: ["/disco/:path*", "/profile", "/admin-settings/permissions", "/admin-settings/add-discos"],
 };

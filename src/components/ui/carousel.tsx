@@ -1,9 +1,7 @@
-"use client";
-
 import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/shadcnUtils";
@@ -180,7 +178,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         className={cn(
           "absolute h-8 w-8 rounded-full hidden",
           orientation === "horizontal"
-            ? "left-5 top-1/2 -translate-y-1/2"
+            ? "-left-3 top-1/2 -translate-y-1/2"
             : "top-12 left-1/2 -translate-x-1/2 rotate-90",
           className
         )}
@@ -188,7 +186,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         onClick={scrollPrev}
         {...props}
       >
-        <ArrowLeft className="h-4 w-4" />
+        <ChevronLeft className="h-4 w-4" />
         <span className="sr-only">Previous slide</span>
       </Button>
     );
@@ -201,21 +199,21 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
     const { orientation, scrollNext, scrollPrev, canScrollNext } = useCarousel();
     const [totalShots, setTotalShots] = useState(0);
 
-    useEffect(() => {
-      const intervalId = setInterval(() => {
-        if (totalShots < 4) {
-          scrollNext();
-          setTotalShots((prevShots) => prevShots + 1);
-        } else if (totalShots < 8) {
-          scrollPrev();
-          setTotalShots((prevShots) => prevShots + 1);
-        } else {
-          setTotalShots(0);
-        }
-      }, 3000);
+    // useEffect(() => {
+    //   const intervalId = setInterval(() => {
+    //     if (totalShots < 4) {
+    //       scrollNext();
+    //       setTotalShots((prevShots) => prevShots + 1);
+    //     } else if (totalShots < 8) {
+    //       scrollPrev();
+    //       setTotalShots((prevShots) => prevShots + 1);
+    //     } else {
+    //       setTotalShots(0);
+    //     }
+    //   }, 10000);
 
-      return () => clearInterval(intervalId);
-    }, [scrollNext, scrollPrev, totalShots]);
+    //   return () => clearInterval(intervalId);
+    // }, [scrollNext, scrollPrev, totalShots]);
 
     return (
       <Button
@@ -225,7 +223,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
         className={cn(
           "absolute h-8 w-8 rounded-full hidden",
           orientation === "horizontal"
-            ? "right-5 top-1/2 -translate-y-1/2"
+            ? "-right-3 top-1/2 -translate-y-1/2"
             : "bottom-12 left-1/2 -translate-x-1/2 rotate-90",
           className
         )}
@@ -233,7 +231,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
         onClick={scrollNext}
         {...props}
       >
-        <ArrowRight className="h-4 w-4" />
+        <ChevronRight className="h-4 w-4" />
         <span className="sr-only">Next slide</span>
       </Button>
     );

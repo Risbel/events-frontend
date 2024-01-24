@@ -1,46 +1,34 @@
 import Link from "next/link";
-import DropdownNavbar from "./DropdownNavbar";
-
-import { useSession } from "next-auth/react";
-import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
-import useCart from "@/store/useCart";
+import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/shadcnUtils";
 
 function Navbar() {
-  const { data: session, status } = useSession();
-  const { cartItems } = useCart();
-
   return (
     <div className="fixed z-50">
-      <div className="flex w-screen h-12 absolute z-30 bg-gray-700" />
-      <div className="flex justify-between items-center w-screen absolute z-40 pl-4 py-2">
-        <div className="flex gap-2 items-center">
+      <div className="flex w-screen h-16 absolute z-30 bg-primary/95 backdrop-blur-md border-b border-silverdark" />
+      <div className="flex justify-between w-screen absolute z-40 pl-4 h-16">
+        <Link href={"/"} className="flex gap-2 items-center text-white font-semibold">
           <Image src={"/tickets-logo.svg"} alt="tickets logo" width={35} height={35} />
-          <p className="text-white font-semibold">MyEvents</p>
+          MyEvents
+        </Link>
+
+        <div className="hidden md:flex items-center gap-6">
+          <Link href={"/#"} className="text-lg text-primary-foreground hover:underline underline-offset-4">
+            About
+          </Link>
+          <Link href={"/#"} className="text-lg text-primary-foreground hover:underline underline-offset-4">
+            Services
+          </Link>
+          <Link href={"/#"} className="text-lg text-primary-foreground hover:underline underline-offset-4">
+            FAQ
+          </Link>
         </div>
 
-        <div className="flex gap-2">
-          <Link href={"/cart"} className="relative  rounded-full">
-            <Image
-              className="hover:scale-110 transition-transform"
-              src={"/shop-cart.svg"}
-              alt="shop cart"
-              width={35}
-              height={35}
-            />
-            {Number(cartItems.length) >= 1 && (
-              <div className="absolute translate-x-1 h-4 w-4 top-0 right-0 rounded-full bg-white font-semibold text-center text-xs">
-                {cartItems.length}
-              </div>
-            )}
+        <div className="hidden md:flex items-center gap-2 px-8">
+          <Link href={"/auth/login"} className={cn(buttonVariants({ variant: "outline" }))}>
+            Login
           </Link>
-          <div className="flex justify-center md:pr-5 lg:pr-10">
-            {status === "loading" ? (
-              <Skeleton className="relative z-0 rounded-full items-center w-8 h-8"></Skeleton>
-            ) : (
-              session && <DropdownNavbar session={session} />
-            )}
-          </div>
         </div>
       </div>
     </div>
