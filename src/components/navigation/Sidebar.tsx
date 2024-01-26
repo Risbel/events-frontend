@@ -4,10 +4,10 @@ import Link from "next/link";
 import { Skeleton } from "../ui/skeleton";
 
 const menuItems = [
-  { id: 1, label: "All Events", icon: GalleryVerticalEndIcon, link: "/allevents" },
-  { id: 1, label: "Discover", icon: CatIcon, link: "/discover" },
-  { id: 2, label: "Tutorials", icon: VideoIcon, link: "/tutorials" },
-  { id: 3, label: "Manage Users", icon: UsersIcon, link: "/users" },
+  { id: 1, label: "All Events", icon: GalleryVerticalEndIcon, link: "/dashboard/allevents" },
+  { id: 1, label: "Discover", icon: CatIcon, link: "/dashboard/discover" },
+  { id: 2, label: "Tutorials", icon: VideoIcon, link: "/dashboard/tutorials" },
+  { id: 3, label: "Manage Users", icon: UsersIcon, link: "/dashboard/users" },
   { id: 4, label: "Home", icon: HomeIcon, link: "/" },
 ];
 
