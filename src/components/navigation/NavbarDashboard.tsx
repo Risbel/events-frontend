@@ -1,16 +1,14 @@
 import Link from "next/link";
-import DropdownNavbar from "./DropdownNavbar";
 
 import { useSession } from "next-auth/react";
 import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
-import useCart from "@/store/useCart";
+
 import DropdownNavbarDashboard from "./DropdownNavbarDashboard";
 import MenubarDashboard from "./MenubarDashboard";
 
 const NavbarDashboard = () => {
   const { data: session, status } = useSession();
-  const { cartItems } = useCart();
 
   return (
     <div className="fixed z-50">

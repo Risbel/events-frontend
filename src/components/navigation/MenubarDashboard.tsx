@@ -76,7 +76,7 @@ const MenubarDashboard = () => {
       </MenubarMenu>
       <div className="border-r border-muted h-8"></div>
       <MenubarMenu>
-        <MenubarTrigger>Profiles</MenubarTrigger>
+        <MenubarTrigger>Users</MenubarTrigger>
         <MenubarContent className="w-80">
           <MenubarItem className="bg-secondary m-2 border cursor-pointer">
             <span className="md:text-base">Add user</span>

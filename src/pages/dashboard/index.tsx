@@ -1,13 +1,11 @@
-import HomeLayout from "@/components/layouts/HomeLayout";
-import NavbarDashboard from "@/components/navigation/NavbarDashboard";
+import DashboardLayout from "@/components/layouts/DashboardLayout";
 
-const index = () => {
+const Dashboard = () => {
   return (
-    <HomeLayout>
-      <NavbarDashboard />
-      <div></div>
-    </HomeLayout>
+    <DashboardLayout>
+      <div className="pt-16">Hola</div>
+    </DashboardLayout>
   );
 };
 
-export default index;
+export default Dashboard;

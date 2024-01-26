@@ -1,16 +1,15 @@
-import HomeLayout from "@/components/layouts/HomeLayout";
 import ButtonStart from "./components/ButtonStart";
 
 import Link from "next/link";
 import Image from "next/image";
 import FormContact from "./components/FormContact";
 import CarouselAdvantages from "./components/Carousel";
-import NavbarLanding from "@/components/navigation/NavbarLanding";
+
+import LandingLayout from "@/components/layouts/LandingLayouts";
 
 const Home = () => {
   return (
-    <HomeLayout>
-      <NavbarLanding />
+    <LandingLayout>
       <div className="relative h-screen flex justify-center items-center">
         <div className="z-10 absolute h-80 w-80 bg-primary-foreground blur-3xl right-32"></div>
         <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
@@ -208,7 +207,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </HomeLayout>
+    </LandingLayout>
   );
 };
 

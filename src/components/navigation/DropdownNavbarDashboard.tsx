@@ -50,12 +50,10 @@ const DropdownNavbarDashboard = ({ session }: { session: Session }) => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        <Link href={"/profile"}>
-          <DropdownMenuItem>
+        <Link href={"/account"}>
+          <DropdownMenuItem className="flex justify-between">
             Settings
-            <DropdownMenuShortcut>
-              <Settings className="h-5 w-5" />
-            </DropdownMenuShortcut>
+            <Settings className="h-4 w-4" />
           </DropdownMenuItem>
         </Link>
 
