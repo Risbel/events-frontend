@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
     console.log(url);
 
-    url.pathname = url.pathname == "/" ? `/auth/login` : `/auth/login/${url.pathname}`;
+    url.pathname = url.pathname == "/dashboard" ? `/auth/login` : `/auth/login/${url.pathname}`;
     return NextResponse.redirect(url);
   }
 
@@ -16,5 +16,11 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/disco/:path*", "/profile", "/admin-settings/permissions", "/admin-settings/add-discos"],
+  matcher: [
+    "/disco/:path*",
+    "/profile",
+    "/admin-settings/permissions",
+    "/dashboard/:path*",
+    "/admin-settings/add-discos",
+  ],
 };

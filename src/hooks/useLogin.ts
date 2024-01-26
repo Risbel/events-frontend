@@ -10,7 +10,7 @@ const useLogin = (disco?: string) => {
       if (status === 200 && disco) {
         router.push(`/disco/${disco}`);
       } else if (status === 200) {
-        router.push("/");
+        router.push("/dashboard");
       }
     },
   });

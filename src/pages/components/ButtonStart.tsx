@@ -36,7 +36,7 @@ const ButtonStart = () => {
   };
 
   return (
-    <Link href={"/"}>
+    <Link href={"/dashboard"}>
       <button
         ref={divRef}
         onMouseMove={handleMouseMove}

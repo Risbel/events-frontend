@@ -5,10 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import FormContact from "./components/FormContact";
 import CarouselAdvantages from "./components/Carousel";
+import NavbarLanding from "@/components/navigation/NavbarLanding";
 
 const Home = () => {
   return (
     <HomeLayout>
+      <NavbarLanding />
       <div className="relative h-screen flex justify-center items-center">
         <div className="z-10 absolute h-80 w-80 bg-primary-foreground blur-3xl right-32"></div>
         <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
@@ -160,7 +162,28 @@ const Home = () => {
                 <li className="text-primary-foreground/60">123 Street, Cityville, State, ZIP</li>
                 <li className="text-primary-foreground/60">© 2024 Your Company.</li>
               </ol>
+              <div>
+                <h3 className="text-white text-2xl font-semibold mt-6">Social:</h3>
+                <div className="flex gap-4 items-center py-2">
+                  <Link href={"/#"} className="hover:scale-105">
+                    <Image src={"/facebook-icon.svg"} height={30} width={30} alt="facebook icon" />
+                  </Link>
+
+                  <Link href={"/#"} className="hover:scale-105">
+                    <Image src={"/instagram-icon.svg"} height={30} width={30} alt="instagram icon" />
+                  </Link>
+
+                  <Link href={"/#"} className="hover:scale-105">
+                    <Image src={"/twitter-icon.svg"} height={30} width={30} alt="twitter icon" />
+                  </Link>
+
+                  <Link href={"/#"} className="hover:scale-105">
+                    <Image src={"/youtube-icon.svg"} height={30} width={30} alt="youtube icon" />
+                  </Link>
+                </div>
+              </div>
             </div>
+
             <div>
               <h3 className="text-white text-2xl font-semibold">Quick Links:</h3>
               <ul>
@@ -177,27 +200,6 @@ const Home = () => {
                 <li className="text-primary-foreground/60">Email: info@example.com</li>
                 <li className="text-primary-foreground/60">Phone: +1 (555) 123-4567</li>
               </ol>
-            </div>
-
-            <div>
-              <h3 className="text-white text-2xl font-semibold">Social:</h3>
-              <div className="flex gap-4 items-center py-2">
-                <Link href={"/#"} className="hover:scale-105">
-                  <Image src={"/facebook-icon.svg"} height={30} width={30} alt="facebook icon" />
-                </Link>
-
-                <Link href={"/#"} className="hover:scale-105">
-                  <Image src={"/instagram-icon.svg"} height={30} width={30} alt="instagram icon" />
-                </Link>
-
-                <Link href={"/#"} className="hover:scale-105">
-                  <Image src={"/twitter-icon.svg"} height={30} width={30} alt="twitter icon" />
-                </Link>
-
-                <Link href={"/#"} className="hover:scale-105">
-                  <Image src={"/youtube-icon.svg"} height={30} width={30} alt="youtube icon" />
-                </Link>
-              </div>
             </div>
           </div>
 

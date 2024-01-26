@@ -25,8 +25,6 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
             width={22}
             height={22}
             alt="Picture of the author"
-            placeholder="blur"
-            blurDataURL={"/setting.png"}
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="backdrop-blur-sm bg-black/70 text-white rounded-r-none">

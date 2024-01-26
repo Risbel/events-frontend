@@ -33,51 +33,57 @@ const Reservations = () => {
   return (
     sortedReservations && (
       <HomeLayout>
-        <div className="pt-20 px-4">
+        <div className="pt-20 px-4 bg-black h-full">
           <h1 className="text-white text-xl mb-2">
             {sortedReservations.length === 0 ? "You don't have any reservations yet" : "My Reservations:"}
           </h1>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
-            {sortedReservations &&
+            {sortedReservations.length &&
               sortedReservations.map((reservation) => (
                 <div className="border rounded-md p-2 bg-gradient-to-l from-white/10 to-black/40" key={reservation.id}>
                   <div>
                     <div className="flex justify-between">
                       <p className="text-white font-semibold">
-                        {reservation.ticketsReservations[0]?.DiscoTicket.Disco.name}
+                        {reservation.ticketsReservations.length &&
+                          reservation.ticketsReservations[0]?.DiscoTicket.Disco.name}
                       </p>
 
                       <div>
-                        {new Date(reservation.ticketsReservations[0]?.DiscoTicket.expDate).getDate() ==
-                        new Date().getDate() ? (
-                          <p className="text-green-500 text-xs flex items-center gap-2">
-                            Active{" "}
-                            <span className="relative flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                            </span>
-                          </p>
-                        ) : new Date(reservation.ticketsReservations[0]?.DiscoTicket.expDate).toISOString() <
-                          new Date().toISOString() ? (
-                          <p className="text-gray-400 text-xs">expired</p>
-                        ) : (
-                          <p className="text-gray-400 text-xs">pending</p>
-                        )}
+                        {reservation.ticketsReservations.length &&
+                          (new Date(reservation.ticketsReservations[0]?.DiscoTicket.expDate).getDate() ==
+                          new Date().getDate() ? (
+                            <p className="text-green-500 text-xs flex items-center gap-2">
+                              Active{" "}
+                              <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                              </span>
+                            </p>
+                          ) : new Date(reservation?.ticketsReservations[0]?.DiscoTicket?.expDate).toISOString() <
+                            new Date().toISOString() ? (
+                            <p className="text-gray-400 text-xs">expired</p>
+                          ) : (
+                            <p className="text-gray-400 text-xs">pending</p>
+                          ))}
                       </div>
                     </div>
                     <p className="text-white">
                       <span className="bg-black/20">Invoice:</span>
                       <span className="font-light"> {reservation.id.slice(0, 13)}</span>
                     </p>
-                    <p className="text-white">
+                    <div className="text-white">
                       To use:{" "}
-                      <span className="font-light">
-                        {weekdays[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
-                        {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
-                        {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}
-                      </span>
-                    </p>
+                      <div className="font-light">
+                        {reservation.ticketsReservations.length && (
+                          <span>
+                            {weekdays[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
+                            {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
+                            {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}
+                          </span>
+                        )}
+                      </div>
+                    </div>
 
                     <p className="text-white">
                       <span className="bg-black/20">Reserved:</span>{" "}

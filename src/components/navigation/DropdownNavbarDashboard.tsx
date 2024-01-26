@@ -4,6 +4,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -11,13 +12,14 @@ import Link from "next/link";
 
 import { Session } from "next-auth";
 import Logout from "../buttons/Logout";
-import SuperAdminSettings from "./SuperAdminSettings";
 import Image from "next/image";
+import { Button } from "../ui/button";
+import { Settings } from "lucide-react";
 
-const DropdownNavbar = ({ session }: { session: Session }) => {
+const DropdownNavbarDashboard = ({ session }: { session: Session }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="outline-none">
+      <DropdownMenuTrigger className="rounded-full">
         <Avatar>
           {!session.user?.image ? (
             <Image
@@ -35,22 +37,40 @@ const DropdownNavbar = ({ session }: { session: Session }) => {
           )}
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="backdrop-blur-sm bg-black/50 text-white rounded-r-none ">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuContent className="translate-y-4 md:-translate-x-4 w-screen md:w-80">
+        <DropdownMenuLabel className="flex items-center gap-4">
+          <Avatar>
+            <AvatarImage className="h-20 w-20 rounded-full" src={session.user.image} />
+            <AvatarFallback className="h-20 w-20" />
+          </Avatar>
+          <div className="flex flex-col">
+            <span>{session.user.name}</span>
+            <span>{session.user.email}</span>
+          </div>
+        </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <SuperAdminSettings />
+
         <Link href={"/profile"}>
-          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem>
+            Settings
+            <DropdownMenuShortcut>
+              <Settings className="h-5 w-5" />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
         </Link>
-        <Link href={"/reservations"}>
-          <DropdownMenuItem>Reservations</DropdownMenuItem>
-        </Link>
+
         <DropdownMenuItem>
           <Logout />
+        </DropdownMenuItem>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem className="focus:bg-white">
+          <Button className="w-full">Upgrade to Pro</Button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 };
 
-export default DropdownNavbar;
+export default DropdownNavbarDashboard;

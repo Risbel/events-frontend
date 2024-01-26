@@ -25,7 +25,7 @@ const Profile = () => {
 
   return (
     <HomeLayout>
-      <div className="pt-20">
+      <div className="pt-20 bg-black">
         {session ? (
           <div className="flex md:px-12 lg:px-16 gap-2 md:gap-4 justify-center md:justify-start items-center text-white">
             <div className="rounded-full overflow-hidden float-left">

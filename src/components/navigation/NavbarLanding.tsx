@@ -2,8 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/shadcnUtils";
+import ButtonStart from "@/pages/components/ButtonStart";
 
-function Navbar() {
+const NavbarLanding = () => {
   return (
     <div className="fixed z-50">
       <div className="flex w-screen h-16 absolute z-30 bg-primary/95 backdrop-blur-md border-b border-silverdark" />
@@ -14,13 +15,16 @@ function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-6">
-          <Link href={"/#"} className="text-lg text-primary-foreground hover:underline underline-offset-4">
+          <Link href={"/#"} className="text-lg text-primary-foreground/80 hover:text-white">
             About
           </Link>
-          <Link href={"/#"} className="text-lg text-primary-foreground hover:underline underline-offset-4">
+          <Link href={"/#"} className="text-lg text-primary-foreground/80 hover:text-white">
             Services
           </Link>
-          <Link href={"/#"} className="text-lg text-primary-foreground hover:underline underline-offset-4">
+          <Link href={"/#"} className="text-lg text-primary-foreground/80 hover:text-white">
+            Contact
+          </Link>
+          <Link href={"/#"} className="text-lg text-primary-foreground/80 hover:text-white">
             FAQ
           </Link>
         </div>
@@ -29,10 +33,11 @@ function Navbar() {
           <Link href={"/auth/login"} className={cn(buttonVariants({ variant: "outline" }))}>
             Login
           </Link>
+          <ButtonStart />
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default Navbar;
+export default NavbarLanding;

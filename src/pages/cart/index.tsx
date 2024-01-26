@@ -34,7 +34,7 @@ const Cart = () => {
 
   return (
     <HomeLayout>
-      <div className="text-center px-4 md:px-8">
+      <div className="text-center px-4 md:px-8 bg-black h-full">
         {cartItems.length && (
           <p className="text-center text-slate-400 font-thin pt-16 pb-4 text-xl">
             <span className="text-white underline underline-2">Cart</span>/
