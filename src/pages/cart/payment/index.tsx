@@ -1,4 +1,4 @@
-import HomeLayout from "@/components/layouts/HomeLayout";
+import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,7 +32,7 @@ const Payment = () => {
   };
 
   return (
-    <HomeLayout>
+    <EventLayout>
       <div className="pt-16 flex justify-center px-2">
         <p className="text-center text-slate-400 font-thin  text-xl">
           <Link className="hover:text-white hover:underline" href={"/cart"}>
@@ -70,7 +70,7 @@ const Payment = () => {
         </Tabs>
       </div>
       ;
-    </HomeLayout>
+    </EventLayout>
   );
 };
 export default Payment;

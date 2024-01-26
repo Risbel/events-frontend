@@ -50,12 +50,12 @@ const DropdownNavbarDashboard = ({ session }: { session: Session }) => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
 
-        <Link href={"/account"}>
-          <DropdownMenuItem className="flex justify-between">
+        <DropdownMenuItem>
+          <Link href={"/dashboard/settings-account"} className="flex justify-between w-full">
             Settings
             <Settings className="h-4 w-4" />
-          </DropdownMenuItem>
-        </Link>
+          </Link>{" "}
+        </DropdownMenuItem>
 
         <DropdownMenuItem>
           <Logout />

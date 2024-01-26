@@ -1,4 +1,4 @@
-import HomeLayout from "@/components/layouts/HomeLayout";
+import EventLayout from "@/components/layouts/EventLayout";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -24,7 +24,7 @@ const Profile = () => {
   const { data: session } = useSession();
 
   return (
-    <HomeLayout>
+    <EventLayout>
       <div className="pt-20 bg-black">
         {session ? (
           <div className="flex md:px-12 lg:px-16 gap-2 md:gap-4 justify-center md:justify-start items-center text-white">
@@ -57,7 +57,7 @@ const Profile = () => {
 
         {session?.user.id && <Cards userId={session.user.id} />}
       </div>
-    </HomeLayout>
+    </EventLayout>
   );
 };
 

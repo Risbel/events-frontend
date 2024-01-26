@@ -1,13 +1,13 @@
-import HomeLayout from "@/components/layouts/HomeLayout";
+import EventLayout from "@/components/layouts/EventLayout";
 import UsersContainer from "./components/UsersContainer";
 
 const Users = () => {
   return (
-    <HomeLayout>
+    <EventLayout>
       <div className="pt-20 px-6 md:px-16">
         <UsersContainer />
       </div>
-    </HomeLayout>
+    </EventLayout>
   );
 };
 

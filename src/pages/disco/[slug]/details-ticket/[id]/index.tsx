@@ -1,5 +1,5 @@
 import { LogoCategory } from "@/components/disco/DiscoTickets";
-import HomeLayout from "@/components/layouts/HomeLayout";
+import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,17 +59,17 @@ const DiscoTicketDetails = () => {
 
   if (isLoading || !data) {
     return (
-      <HomeLayout>
+      <EventLayout>
         <div className="flex gap-4 w-full h-screen justify-center items-center">
           <Spinner diameter={8} />
         </div>
-      </HomeLayout>
+      </EventLayout>
     );
   }
 
   if (data) {
     return (
-      <HomeLayout>
+      <EventLayout>
         <div className="grid grid-flow-row  md:grid-flow-col md:grid-cols-3 py-16">
           <div className="flex w-full flex-col gap-4 px-2 md:px-8">
             <Link
@@ -181,7 +181,7 @@ const DiscoTicketDetails = () => {
             </div>
           )}
         </div>
-      </HomeLayout>
+      </EventLayout>
     );
   }
 };

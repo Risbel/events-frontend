@@ -1,4 +1,4 @@
-import HomeLayout from "@/components/layouts/HomeLayout";
+import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { useGetDiscos } from "@/hooks/useGetDiscos";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
@@ -8,7 +8,7 @@ const Permissions = () => {
   const { data: discos, isLoading, isFetched } = useGetDiscos();
 
   return (
-    <HomeLayout>
+    <EventLayout>
       <div className="pt-24 px-4 md:px-8">
         {isLoading && (
           <div className="w-full flex justify-center">
@@ -38,7 +38,7 @@ const Permissions = () => {
           </>
         )}
       </div>
-    </HomeLayout>
+    </EventLayout>
   );
 };
 

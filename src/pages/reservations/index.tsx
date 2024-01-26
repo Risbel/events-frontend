@@ -1,4 +1,4 @@
-import HomeLayout from "@/components/layouts/HomeLayout";
+import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { useGetMyReservations } from "@/hooks/useGetMyReservations";
 import { useListDays } from "@/hooks/useListDays";
@@ -15,11 +15,11 @@ const Reservations = () => {
 
   if (isLoading || !myReservationsData) {
     return (
-      <HomeLayout>
+      <EventLayout>
         <div className="flex justify-center pt-20">
           <Spinner diameter={8} />
         </div>
-      </HomeLayout>
+      </EventLayout>
     );
   }
 
@@ -32,7 +32,7 @@ const Reservations = () => {
 
   return (
     sortedReservations && (
-      <HomeLayout>
+      <EventLayout>
         <div className="pt-20 px-4 bg-black h-full">
           <h1 className="text-white text-xl mb-2">
             {sortedReservations.length === 0 ? "You don't have any reservations yet" : "My Reservations:"}
@@ -141,7 +141,7 @@ const Reservations = () => {
               ))}
           </div>
         </div>
-      </HomeLayout>
+      </EventLayout>
     )
   );
 };

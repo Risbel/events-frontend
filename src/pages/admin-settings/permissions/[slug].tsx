@@ -1,7 +1,7 @@
 import Resource405 from "@/components/alerts/Resource405";
 import AddPermissionButton from "@/components/buttons/AddPermissionButton";
 import AddRoleButton from "@/components/buttons/AddRoleButton";
-import HomeLayout from "@/components/layouts/HomeLayout";
+import EventLayout from "@/components/layouts/EventLayout";
 import BackToHome from "@/components/links/BackToHome";
 import Spinner from "@/components/loaders/Spinner";
 import PermissionsByDiscoRole from "@/components/permissions/PermissionsByDiscoRole";
@@ -21,11 +21,11 @@ const DiscoPerssions = () => {
 
   if (isLoadingMy || isLoading) {
     return (
-      <HomeLayout>
+      <EventLayout>
         <div className="flex pt-24 justify-center">
           <Spinner diameter={10} />
         </div>
-      </HomeLayout>
+      </EventLayout>
     );
   }
 
@@ -41,7 +41,7 @@ const DiscoPerssions = () => {
   }
 
   return (
-    <HomeLayout>
+    <EventLayout>
       <div className="pt-24 px-6 md:px-16">
         <div className="flex items-center gap-4 rounded-full bg-gradient-to-r from-blue-700/30 via-transparent to-transparent">
           <Avatar className="rounded-full overflow-hidden">
@@ -88,7 +88,7 @@ const DiscoPerssions = () => {
           </TableBody>
         </Table>
       </div>
-    </HomeLayout>
+    </EventLayout>
   );
 };
 

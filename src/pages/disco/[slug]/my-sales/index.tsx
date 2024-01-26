@@ -1,5 +1,5 @@
 import { LogoCategory } from "@/components/disco/DiscoTickets";
-import HomeLayout from "@/components/layouts/HomeLayout";
+import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { useGetReservationsByDiscoSlug } from "@/hooks/useGetReservationsByDiscoSlug";
 import { useListDays } from "@/hooks/useListDays";
@@ -22,11 +22,11 @@ const MySales = () => {
 
   if (isLoading) {
     return (
-      <HomeLayout>
+      <EventLayout>
         <div className="pt-20 flex justify-center">
           <Spinner diameter={8} />
         </div>
-      </HomeLayout>
+      </EventLayout>
     );
   }
 
@@ -56,7 +56,7 @@ const MySales = () => {
   const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
 
   return (
-    <HomeLayout>
+    <EventLayout>
       <div className="pt-16 px-4 md:px-8">
         <Link
           className="absolute flex gap-2 text-white font-light border px-[1px] rounded-md hover:bg-white/10"
@@ -227,7 +227,7 @@ const MySales = () => {
             }
           })}
       </div>
-    </HomeLayout>
+    </EventLayout>
   );
 };
 
