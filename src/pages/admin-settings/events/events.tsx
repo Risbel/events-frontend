@@ -1,4 +1,4 @@
-import TargetDisco from "@/components/home/TargetDisco";
+import TargetDisco from "@/pages/dashboard/allevents/components/TargetEvent";
 import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { useGetDiscos } from "@/hooks/useGetDiscos";
