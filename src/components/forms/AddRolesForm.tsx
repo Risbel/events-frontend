@@ -1,7 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 import ButtomDiscart from "../buttons/ButtonDiscart";
-import ButtomSubmit from "../buttons/ButtomSubmit";
+import ButtomSubmit from "../buttons/ButtonSubmit";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useCreateDiscoRoles from "@/hooks/useCreateDiscoRoles";
 

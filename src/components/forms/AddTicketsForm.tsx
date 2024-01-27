@@ -1,5 +1,5 @@
 import { z } from "zod";
-import ButtomSubmit from "../buttons/ButtomSubmit";
+import ButtomSubmit from "../buttons/ButtonSubmit";
 import ButtomDiscart from "../buttons/ButtonDiscart";
 import { Input } from "../ui/input";
 import { SubmitHandler, useForm } from "react-hook-form";

@@ -4,7 +4,7 @@ const Spinner = ({ diameter }: { diameter: number }) => {
   return (
     <div
       className={clsx(
-        "inline-block animate-spin rounded-full border-[3px] border-solid border-white border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]",
+        "inline-block animate-spin rounded-full border-[3px] border-solid border-primary border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]",
         `h-${diameter} w-${diameter}`
       )}
       role="status"

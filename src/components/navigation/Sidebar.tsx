@@ -5,10 +5,10 @@ import { Skeleton } from "../ui/skeleton";
 
 const menuItems = [
   { id: 1, label: "All Events", icon: GalleryVerticalEndIcon, link: "/dashboard/allevents" },
-  { id: 1, label: "Discover", icon: CatIcon, link: "/dashboard/discover" },
-  { id: 2, label: "Tutorials", icon: VideoIcon, link: "/dashboard/tutorials" },
-  { id: 3, label: "Manage Users", icon: UsersIcon, link: "/dashboard/users" },
-  { id: 4, label: "Home", icon: HomeIcon, link: "/" },
+  { id: 2, label: "Discover", icon: CatIcon, link: "/dashboard/discover" },
+  { id: 3, label: "Tutorials", icon: VideoIcon, link: "/dashboard/tutorials" },
+  { id: 4, label: "Manage Users", icon: UsersIcon, link: "/dashboard/users" },
+  { id: 5, label: "Home", icon: HomeIcon, link: "/" },
 ];
 
 const SidebarDivider = () => <div className="w-full border-b border-muted my-2 shadow-xl" />;
@@ -17,7 +17,7 @@ const Sidebar = () => {
   const { data: session, status } = useSession();
 
   return (
-    <div className="hidden md:flex flex-col relative overflow-hidden overflow-y-scroll h-full z-40 pt-14 md:w-1/3 lg:w-1/5 border-r">
+    <div className="hidden md:flex flex-col relative overflow-hidden overflow-y-scroll h-full z-40 pt-14 md:w-1/3 lg:w-1/5 border-primary/50 border-r">
       {status === "authenticated" ? (
         <div className="p-4 bg-secondary">
           <p>{session.user.name}&apos;s work space</p>

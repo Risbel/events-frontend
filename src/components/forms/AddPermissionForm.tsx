@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import ButtomDiscart from "../buttons/ButtonDiscart";
-import ButtomSubmit from "../buttons/ButtomSubmit";
+import ButtomSubmit from "../buttons/ButtonSubmit";
 import useGetPermissions from "@/hooks/useGetPermissions";
 import useCreatePermission from "@/hooks/useCreatePermission";
 import useGetResources from "@/hooks/useGetResources";

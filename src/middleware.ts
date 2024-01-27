@@ -8,7 +8,10 @@ export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
     console.log(url);
 
-    url.pathname = url.pathname == "/dashboard" ? `/auth/login` : `/auth/login/${url.pathname}`;
+    url.pathname =
+      url.pathname == "/dashboard" || url.pathname == "/dashboard/allevents" || url.pathname == "/dashboard/workspace"
+        ? `/auth/login`
+        : `auth/login/${url.pathname}`;
     return NextResponse.redirect(url);
   }
 

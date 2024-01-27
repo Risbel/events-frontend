@@ -1,4 +1,4 @@
-import ButtomSubmit from "@/components/buttons/ButtomSubmit";
+import ButtomSubmit from "@/components/buttons/ButtonSubmit";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";

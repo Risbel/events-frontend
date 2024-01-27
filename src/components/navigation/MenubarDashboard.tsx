@@ -11,6 +11,7 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { ArrowRight, PlusCircle } from "lucide-react";
+import Link from "next/link";
 
 const MenubarDashboard = () => {
   return (
@@ -19,10 +20,10 @@ const MenubarDashboard = () => {
         <MenubarTrigger>Events</MenubarTrigger>
         <MenubarContent className="w-96">
           <MenubarItem className="bg-secondary m-2 border cursor-pointer">
-            <span className="md:text-base">Create new event</span>
-            <MenubarShortcut>
+            <Link href="/dashboard/workspace" className="flex justify-between items-center w-full">
+              <span className="md:text-base">Create new event</span>
               <PlusCircle className="font-semibold hover:scale-105" height={20} width={20} />
-            </MenubarShortcut>
+            </Link>
           </MenubarItem>
 
           <div className="flex flex-col">
