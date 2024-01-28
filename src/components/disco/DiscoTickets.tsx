@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
-import AddCombosForm from "@/pages/disco/[slug]/details-ticket/[id]/components/AddCombosForm";
+import AddCombosForm from "@/pages/event/[slug]/details-ticket/[id]/components/AddCombosForm";
 import AddTicketsForm from "../forms/AddTicketsForm";
 import { compareAsc, compareDesc } from "date-fns";
 import { DiscoDetail } from "@/services/getDisco";
@@ -140,7 +140,7 @@ const DiscoTickets = ({
                           background: `${discoDetail.discoColor.brandColor}`,
                           border: `solid ${discoDetail.discoColor.textColor} 2px`,
                         }}
-                        href={`/disco/${name}/details-ticket/${ticket.id}`}
+                        href={`/event/${name}/details-ticket/${ticket.id}`}
                         className="flex justify-between gap-2 rounded-md p-2 relative  hover:shadow-xl hover:-translate-y-1 transition-transform duration-300"
                       >
                         <div className="text-white w-full">

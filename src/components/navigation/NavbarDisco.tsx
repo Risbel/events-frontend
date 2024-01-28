@@ -28,7 +28,7 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
         className={cn("flex w-screen h-14 absolute z-30 border-b backdrop-blur-2xl")}
       />
       <div className="flex justify-between items-center w-screen absolute z-40 px-2 md:px-6 py-2">
-        <Link href={`/disco/${discoData.slug}`} className="group flex gap-2 items-center cursor-pointer">
+        <Link href={`/event/${discoData.slug}`} className="group flex gap-2 items-center cursor-pointer">
           <Image
             className="rounded-full  group-hover:scale-105"
             src={`${discoData.logo}`}
@@ -49,7 +49,7 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
             width={18}
             height={18}
           />
-          <Link href={`/disco/${slug}/cart`} className="relative rounded-full">
+          <Link href={`/event/${slug}/cart`} className="relative rounded-full">
             <Image
               className="hover:scale-110 transition-transform"
               src={"/shop-cart.svg"}

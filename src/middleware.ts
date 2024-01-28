@@ -20,7 +20,7 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/disco/:path*",
+    "/event/:path*",
     "/profile",
     "/admin-settings/permissions",
     "/dashboard/:path*",

@@ -50,7 +50,7 @@ const DiscoTicketDetails = () => {
             {error?.response?.status === 500 ? <span>Page not found</span> : error?.response?.data?.message}
           </span>
 
-          <Link href={`/disco/${slug}`}>
+          <Link href={`/event/${slug}`}>
             <Button>Go back</Button>
           </Link>
         </div>
@@ -76,7 +76,7 @@ const DiscoTicketDetails = () => {
           <div className="flex w-full flex-col gap-4 px-2 md:px-8">
             <Link
               className="flex items-center pr-2 rounded-md border bg-primary text-primary-foreground w-fit"
-              href={`/disco/${data.Disco.slug}`}
+              href={`/event/${data.Disco.slug}`}
             >
               <ChevronLeft width={20} /> Go back
             </Link>

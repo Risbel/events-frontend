@@ -33,7 +33,7 @@ const TargetEvent = ({ event }: { event: IMyEvents }) => {
 
         <div className="flex px-2 md:px-4 justify-end">
           <a
-            href={`https://my-events-pi.vercel.app/disco/${event.slug}`}
+            href={`https://my-events-pi.vercel.app/event/${event.slug}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center bg-gray-200 hover:bg-gray-200/90 px-4 py-0.5 md:py-1 rounded-xl"

@@ -36,7 +36,7 @@ const Profile = () => {
       <NavbarEvent />
       <div className="h-screen overflow-hidden overflow-y-scroll bg-primary">
         <Link
-          href={`/disco/${slug}`}
+          href={`/event/${slug}`}
           className="absolute flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-4 py-2"
         >
           <ChevronLeftIcon /> Go back

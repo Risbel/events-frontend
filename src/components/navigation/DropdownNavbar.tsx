@@ -49,12 +49,12 @@ const DropdownNavbar = ({ session, discoData }: { session: Session; discoData: D
         <DropdownMenuSeparator />
         <SuperAdminSettings />
         <DropdownMenuItem>
-          <Link href={`/disco/${slug}/profile`} className="w-full">
+          <Link href={`/event/${slug}/profile`} className="w-full">
             Profile
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href={`/disco/${slug}/reservations`} className="w-full">
+          <Link href={`/event/${slug}/reservations`} className="w-full">
             Reservations
           </Link>
         </DropdownMenuItem>

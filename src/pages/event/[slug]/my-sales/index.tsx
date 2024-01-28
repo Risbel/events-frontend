@@ -60,7 +60,7 @@ const MySales = () => {
       <div className="pt-16 px-4 md:px-8">
         <Link
           className="absolute flex gap-2 text-white font-light border px-[1px] rounded-md hover:bg-white/10"
-          href={`/disco/${param?.slug}`}
+          href={`/event/${param?.slug}`}
         >
           <ChevronLeft width={20} />
         </Link>

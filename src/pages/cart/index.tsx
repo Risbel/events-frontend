@@ -94,7 +94,7 @@ const Cart = () => {
                   <div className="flex h-full items-start">
                     <Link
                       className="flex items-center text-white font-thin bg-blue-900/80 hover:bg-blue-800 pr-1 rounded-md"
-                      href={`/disco/${item.Disco.slug}/details-ticket/${item.id}`}
+                      href={`/event/${item.Disco.slug}/details-ticket/${item.id}`}
                     >
                       <ChevronLeftIcon height={15} width={15} /> Back
                     </Link>

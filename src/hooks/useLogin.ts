@@ -8,7 +8,7 @@ const useLogin = (disco?: string) => {
     mutationFn: loginCredentials,
     onSuccess: (status) => {
       if (status === 200 && disco) {
-        router.push(`/disco/${disco}`);
+        router.push(`/event/${disco}`);
       } else if (status === 200) {
         router.push("/dashboard");
       }

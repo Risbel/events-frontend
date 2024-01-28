@@ -52,7 +52,7 @@ const Login = () => {
           <p className="text-start font-light text-md leading-4">
             <span className="text-destructive/80 font-semibold">Login</span> to access to{" "}
             <span className="font-semibold">{disco ? disco.toUpperCase() : "MyEvents"}</span> or{" "}
-            <Link href={disco ? `/auth/signup/disco/${disco}` : "/auth/signup"}>
+            <Link href={disco ? `/auth/signup/event/${disco}` : "/auth/signup"}>
               <span className="text-destructive/80 font-semibold hover:underline">Sign Up</span>
             </Link>{" "}
             if you don&apos;t have an acount.
@@ -101,7 +101,7 @@ const Login = () => {
 
           <Link
             className={`${buttonVariants({ variant: "outline" })} font-sans`}
-            href={disco ? `/auth/signup/disco/${disco}` : "/auth/signup"}
+            href={disco ? `/auth/signup/event/${disco}` : "/auth/signup"}
           >
             CREATE NEW ACOUNT
           </Link>

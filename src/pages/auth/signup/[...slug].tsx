@@ -62,7 +62,7 @@ const Signup = () => {
           className={`${buttonVariants({
             variant: "outline",
           })} absolute left-6 top-5`}
-          href={`/auth/login/disco/${disco}`}
+          href={`/auth/login/event/${disco}`}
         >
           <ChevronLeft />
         </Link>

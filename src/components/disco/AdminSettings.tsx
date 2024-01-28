@@ -32,7 +32,7 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
           <DropdownMenuSeparator />
 
           <DropdownMenuItem>
-            <Link href={`/disco/${slug}/my-sales`}>My sales</Link>
+            <Link href={`/event/${slug}/my-sales`}>My sales</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>My users</DropdownMenuItem>
           <DropdownMenuItem>Permissions</DropdownMenuItem>

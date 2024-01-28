@@ -32,7 +32,7 @@ const NavbarEvent = () => {
             width={18}
             height={18}
           />
-          <Link href={`/disco/${slug}/cart`} className="relative rounded-full">
+          <Link href={`/event/${slug}/cart`} className="relative rounded-full">
             <Image
               className="hover:scale-110 transition-transform"
               src={"/shop-cart.svg"}

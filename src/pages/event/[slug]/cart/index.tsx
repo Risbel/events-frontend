@@ -41,7 +41,7 @@ const Cart = () => {
     <div className="h-screen relative z-0 text-center bg-primary">
       <NavbarEvent />
       <Link
-        href={`/disco/${slug}`}
+        href={`/event/${slug}`}
         className="absolute flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-4 py-2 mt-20"
       >
         <ChevronLeftIcon /> Go back
@@ -106,7 +106,7 @@ const Cart = () => {
                   <div className="flex h-full items-start">
                     <Link
                       className="flex items-center text-white font-thin bg-blue-900/80 hover:bg-blue-800 pr-1 rounded-md"
-                      href={`/disco/${item.Disco.slug}/details-ticket/${item.id}`}
+                      href={`/event/${item.Disco.slug}/details-ticket/${item.id}`}
                     >
                       <ChevronLeftIcon height={15} width={15} /> Back
                     </Link>
