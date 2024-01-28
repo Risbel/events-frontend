@@ -1,17 +1,16 @@
-import { DataDisco } from "@/services/getDisco";
 import { IMyEvents } from "@/services/getMyEvents";
-import { Divide } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 const TargetEvent = ({ event }: { event: IMyEvents }) => {
+  if (!event) {
+    return;
+  }
+
   return (
     <div className="flex items-center rounded-2xl bg-primary/95 p-2 md:p-3">
       <Image
         className="rounded-full h-25 w-25 md:h-24 md:w-24"
-        placeholder="blur"
-        blurDataURL={event.logo}
         src={event.logo}
         alt="image-next-auth"
         width={80}
@@ -33,12 +32,14 @@ const TargetEvent = ({ event }: { event: IMyEvents }) => {
         </div>
 
         <div className="flex px-2 md:px-4 justify-end">
-          <Link
-            href={`/disco/${event.slug}`}
+          <a
+            href={`https://my-events-pi.vercel.app/disco/${event.slug}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center bg-gray-200 hover:bg-gray-200/90 px-4 py-0.5 md:py-1 rounded-xl"
           >
             <span className="text-xs md:text-sm">access</span>
-          </Link>
+          </a>
         </div>
       </div>
     </div>

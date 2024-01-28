@@ -1,4 +1,4 @@
-import { CatIcon, GalleryVerticalEndIcon, HomeIcon, Settings, UsersIcon, VideoIcon } from "lucide-react";
+import { CatIcon, GalleryVerticalEndIcon, HomeIcon, LockKeyhole, Settings, UsersIcon, VideoIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Skeleton } from "../ui/skeleton";
@@ -8,7 +8,9 @@ const menuItems = [
   { id: 2, label: "Discover", icon: CatIcon, link: "/dashboard/discover" },
   { id: 3, label: "Tutorials", icon: VideoIcon, link: "/dashboard/tutorials" },
   { id: 4, label: "Manage Users", icon: UsersIcon, link: "/dashboard/users" },
-  { id: 5, label: "Home", icon: HomeIcon, link: "/" },
+  { id: 5, label: "Permissions", icon: LockKeyhole, link: "/dashboard/permissions" },
+
+  { id: 6, label: "Home", icon: HomeIcon, link: "/" },
 ];
 
 const SidebarDivider = () => <div className="w-full border-b border-muted my-2 shadow-xl" />;

@@ -91,19 +91,20 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
   };
 
   return (
-    <div>
+    <>
       <Button
-        className={cn(isActive && "bg-yellow-600 hover:bg-yellow-500 ", "text-xs h-8 mb-2")}
+        variant={isActive ? "outline" : "default"}
+        className={cn(isActive && "bg-secondary", "text-xs h-8")}
         onClick={() => setIsActive((prev) => !prev)}
       >
         {isActive ? "Discard" : "Add Ticket"}
       </Button>
       <form
         encType="multipart/form-data"
-        className={cn("md:w-1/2 lg:w-1/3 bg-black/20 p-3 rounded-md", !isActive && "hidden")}
+        className={cn("bg-primary border border-primary-foreground p-3 rounded-md", !isActive && "hidden")}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="grid grid-cols-2  gap-2">
+        <div className="grid grid-cols-2 gap-2">
           <div>
             <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="category">
               category
@@ -219,7 +220,7 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
 
         <ButtomSubmit className="mt-2" text="Add" isLoading={isLoading} />
       </form>
-    </div>
+    </>
   );
 };
 

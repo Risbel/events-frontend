@@ -6,9 +6,11 @@ const UsersContainer = () => {
   const { isLoading, data } = useGetUsers();
 
   return (
-    <div>
-      <h1 className="text-2xl text-white pb-4">Users:</h1>
-      <div className="w-full flex justify-center">{isLoading && !data && <Spinner diameter={10} />} </div>
+    <div className="p-8">
+      <h1 className="text-2xl text-primary font-semibold pb-4">Users:</h1>
+      <div className="w-full flex justify-center">
+        {isLoading && !data && <Spinner diameter={10} stroke={"black"} />}{" "}
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {data &&
           data.map((user) => (

@@ -74,9 +74,13 @@ export interface IUserBankCard {
 export interface IDiscoColors {
   id: string;
   brandColor: string;
-  secondary: string;
+  secondaryColor: string;
   bgColor: string;
   textColor: string;
+  h1Color: string;
+  h2Color: string;
+  buttonColor: string;
+  buttonForeground: string;
   createdAt: string;
   updatedAt: string;
   discoDetailId: string;

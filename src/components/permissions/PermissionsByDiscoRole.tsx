@@ -34,7 +34,7 @@ const PermissionsByDiscoRole = ({
         <div key={permission.name}>
           <Table>
             <TableBody>
-              <TableRow className="hover:bg-black/40">
+              <TableRow className="hover:bg-primary-foreground">
                 <TableCell className="w-48 py-1">{permission.name}</TableCell>
                 <TableCell className="flex gap-2 py-1">
                   <Resources discoRoleId={permission.roleId} permissionId={permission.permissionId} />

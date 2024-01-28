@@ -14,11 +14,16 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
 
   return (
     <div
-      style={{ background: `#${discoDetail.discoColor.secondary}70` }}
-      className="flex flex-col items-center h-screen justify-center md:m-8 rounded-2xl relative"
+      style={{ background: `${discoDetail.discoColor.buttonColor}70` }}
+      className="flex flex-col items-center h-screen justify-center relative"
     >
-      <h1 className="font-extrabold text-4xl text-white pb-8 text-center">Experiencies</h1>
-      <div className="px-12">
+      <h1
+        style={{ color: `${discoDetail.discoColor.buttonForeground}` }}
+        className="font-extrabold text-4xl md:text-5xl lg:text-7xl pb-12 md:pb-10 lg:pb-24 text-center"
+      >
+        Experiencies
+      </h1>
+      <div className="px-4 pb-12">
         <Carousel className="w-full max-w-7xl">
           <CarouselContent>
             {discoDetail?.discoImages?.map(
@@ -28,8 +33,8 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
                     <div
                       style={{
                         borderRadius: "20px",
-                        border: `solid 5px`,
-                        borderColor: `#${discoDetail.discoColor.textColor}`,
+                        border: `solid 3px`,
+                        borderColor: `${discoDetail.discoColor.buttonForeground}`,
                       }}
                       className="relative mb-4 overflow-hidden"
                     >
@@ -42,7 +47,7 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
                         width={400}
                         height={400}
                         alt={`experiencie${discoImage.id}`}
-                      />{" "}
+                      />
                     </div>
 
                     {havePermission("delete", "Disco Images") && <DeleteExperienceButton id={discoImage.id} />}
@@ -59,7 +64,7 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
       </div>
 
       <div
-        style={{ background: `#${discoDetail.discoColor.textColor}80` }}
+        style={{ background: `${discoDetail.discoColor.textColor}80` }}
         className="absolute rounded-full -z-20 h-80 w-80 blur-3xl opacity-70 right-32 bottom-0 -translate-y-1/2"
       ></div>
 

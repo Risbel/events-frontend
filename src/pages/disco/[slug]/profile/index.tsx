@@ -2,11 +2,11 @@ import EventLayout from "@/components/layouts/EventLayout";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Subscriptions, { SkeletonSubs } from "./components/Subscriptions";
-import Cards from "./components/Cards";
 import Link from "next/link";
 import { ChevronLeftIcon } from "lucide-react";
 import { useRouter } from "next/router";
+import Subscriptions from "@/pages/profile/components/Subscriptions";
+import Cards from "@/pages/profile/components/Cards";
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 const SkeletonAvatar = () => {
@@ -34,15 +34,15 @@ const Profile = () => {
   return (
     <EventLayout>
       <NavbarEvent />
-      <div className="h-screen overflow-hidden overflow-y-scroll bg-primary">
-        <Link
-          href={`/disco/${slug}`}
-          className="absolute flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-4 py-2"
-        >
-          <ChevronLeftIcon /> Go back
-        </Link>
+      <Link
+        href={`/disco/${slug}`}
+        className="absolute flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-4 py-2 mt-10"
+      >
+        <ChevronLeftIcon /> Go back
+      </Link>
+      <div className="pt-20 bg-primary">
         {session ? (
-          <div className="flex md:px-12 lg:px-16 gap-2 md:gap-4 justify-center md:justify-start items-center text-white">
+          <div className="flex md:px-12 lg:px-16 gap-2 md:gap-4 justify-center items-center text-white">
             <div className="rounded-full overflow-hidden float-left">
               {session?.user.image ? (
                 <Image

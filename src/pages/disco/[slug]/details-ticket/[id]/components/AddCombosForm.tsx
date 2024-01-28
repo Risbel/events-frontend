@@ -52,9 +52,10 @@ const AddCombosForm = ({ discoId }: { discoId: string }) => {
   };
 
   return (
-    <div>
+    <>
       <Button
-        className={cn(isActive && "bg-yellow-600 hover:bg-yellow-500 ", "text-xs h-8 mb-2")}
+        variant={isActive ? "outline" : "default"}
+        className={cn(isActive && "bg-secondary", "text-xs h-8 mb-2")}
         onClick={() => setIsActive((prev) => !prev)}
       >
         {isActive ? "Discard" : "Add Combo"}
@@ -62,7 +63,7 @@ const AddCombosForm = ({ discoId }: { discoId: string }) => {
       <form
         encType="multipart/form-data"
         onSubmit={handleSubmit(onSubmit)}
-        className={cn("md:w-1/2 flex flex-col gap-2 bg-black/20 p-2 rounded-md", !isActive && "hidden")}
+        className={cn("md:w-1/2 flex flex-col gap-2 bg-primary p-2 rounded-md mb-8", !isActive && "hidden")}
       >
         <input id="discoId" type="text" hidden value={discoId} {...register("discoId")} />
         <div className="flex gap-2">
@@ -135,9 +136,9 @@ const AddCombosForm = ({ discoId }: { discoId: string }) => {
           <Input id="image" type="file" accept=".png, .img, .jpg, .jpeg" {...register("image")} />
           {errors.image && <p className="text-xs italic text-red-500">Invalid image</p>}
         </div>
-        <Button>Add {isLoading && <Spinner diameter={8} />}</Button>
+        <Button>Add {isLoading && <Spinner diameter={8} stroke={"white"} />}</Button>
       </form>
-    </div>
+    </>
   );
 };
 

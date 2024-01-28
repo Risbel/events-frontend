@@ -5,13 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useGetDiscoTicketById } from "@/hooks/useGetDiscoTicketById";
 import useCart from "@/store/useCart";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ShoppingCart } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Combos from "./components/combos";
 import { useListMonths } from "@/hooks/useListMonths";
+import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 const DiscoTicketDetails = () => {
   const months = useListMonths();
@@ -60,8 +61,8 @@ const DiscoTicketDetails = () => {
   if (isLoading || !data) {
     return (
       <EventLayout>
-        <div className="flex gap-4 w-full h-screen justify-center items-center">
-          <Spinner diameter={8} />
+        <div className="flex gap-4 bg-primary w-full h-screen justify-center items-center">
+          <Spinner diameter={8} stroke={"white"} />
         </div>
       </EventLayout>
     );
@@ -70,45 +71,46 @@ const DiscoTicketDetails = () => {
   if (data) {
     return (
       <EventLayout>
-        <div className="grid grid-flow-row  md:grid-flow-col md:grid-cols-3 py-16">
+        <NavbarEvent />
+        <div className="grid grid-flow-row  md:grid-flow-col md:grid-cols-2 py-16 h-screen">
           <div className="flex w-full flex-col gap-4 px-2 md:px-8">
             <Link
-              className="flex items-center pr-2 rounded-md border hover:bg-white/20 text-white w-fit"
+              className="flex items-center pr-2 rounded-md border bg-primary text-primary-foreground w-fit"
               href={`/disco/${data.Disco.slug}`}
             >
               <ChevronLeft width={20} /> Go back
             </Link>
 
-            <div className="flex gap-4 items-center bg-gradient-to-r from-black/20 to-transparent rounded-md pl-2">
+            <div className="flex gap-4 items-center bg-primary to-primary-70 rounded-md pl-2">
               <h1 className="text-xl md:text-2xl text-white">
                 Tickets <span className="bg-blue-700/80 rounded-full px-2 text-lg">{data.category}</span>
               </h1>
               <LogoCategory category={data.category} />
             </div>
 
-            <div className="bg-gradient-to-r from-black/20 to-transparent rounded-l-md">
-              <h2 className="text-xl text-white underline-offset-2 underline bg-gradient-to-r from-black/20 via-transparent to-transparent  rounded-l-md py-1 pl-2">
+            <div className="bg-gradient-to-r bg-primary rounded-md">
+              <h2 className="text-xl text-white underline-offset-2 underline  via-transparent to-transparent  rounded-l-md py-1 pl-2">
                 Details:
               </h2>
               <div className="py-1 pl-2">
                 <p className="text-white text-sm text-start">
-                  <span className="font-normal bg-black/20">Tu use on:</span> {new Date(data.expDate).getDate()}/
+                  <span className="font-normal bg-primary">Tu use on:</span> {new Date(data.expDate).getDate()}/
                   {months[new Date(data.expDate).getMonth()]}/{new Date(data.expDate).getFullYear()}
                 </p>
 
                 <p className="text-md md:text-xl text-white font-thin">
-                  <span className="font-normal bg-black/20">Disco:</span> {data.Disco.name}
+                  <span className="font-normal bg-primary">Disco:</span> {data.Disco.name}
                 </p>
                 <p className="text-md md:text-xl text-white font-semibold">
-                  <span className="font-normal bg-black/20">Price:</span> {data.price} cup
+                  <span className="font-normal bg-primary">Price:</span> {data.price} cup
                   <span className="font-light pl-1">c/u</span>
                 </p>
                 <p className="text-md md:text-xl text-white font-thin">
-                  <span className="font-normal bg-black/20">Available ticket quantity:</span> {data.countInStock}
+                  <span className="font-normal bg-primary">Available ticket quantity:</span> {data.countInStock}
                 </p>
                 {data.largeDescription && (
                   <p className="md:text-md text-white font-light mt-4">
-                    <span className="text-md md:text-xl bg-black/20 mr-2">More:</span>
+                    <span className="text-md md:text-xl bg-primary mr-2">More:</span>
                     {data.largeDescription}
                   </p>
                 )}
@@ -125,8 +127,8 @@ const DiscoTicketDetails = () => {
 
               <div className="md:col-start-3 flex flex-col">
                 <div className="flex flex-col gap-4">
-                  <div className="p-2 rounded-md bg-gradient-to-r from-blue-700/30 to-transparent">
-                    <p className="flex items-center gap-2 text-xs font-medium text-gray-200">
+                  <div className="p-2 rounded-md bg-primary">
+                    <p className="flex items-center gap-2 text-xs font-medium text-primary-foreground">
                       Tickets available:
                       <span className="text-lg">
                         {existItem ? Number(data.countInStock) - existItem.quantity : Number(data.countInStock)}
@@ -136,7 +138,7 @@ const DiscoTicketDetails = () => {
 
                   <form onSubmit={addToCartHandler}>
                     <div className="flex flex-col">
-                      <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="addTickets">
+                      <label className="block mb-1 text-xs font-medium text-primary" htmlFor="addTickets">
                         Add tickets to shopping cart
                       </label>
                       <div className="flex items-center gap-2">
@@ -150,7 +152,7 @@ const DiscoTicketDetails = () => {
                         <LogoCategory category={data.category} />
 
                         <Button className="text-xs px-3 h-8" type="submit">
-                          Add 🛒
+                          Add <ShoppingCart height={15} />
                         </Button>
                         {existItem && (
                           <Button
@@ -165,7 +167,7 @@ const DiscoTicketDetails = () => {
                     </div>
                   </form>
                 </div>
-                <div className="flex flex-col justify-center py-2 mt-2 p-2 rounded-md bg-gradient-to-r from-blue-700/30 to-transparent text-xs font-medium text-gray-200">
+                <div className="flex flex-col justify-center py-2 mt-2 p-2 rounded-md bg-primary text-xs font-medium text-primary-foreground">
                   <p>Reserved quantity: {existItem ? existItem?.quantity : 0} </p>
                   <p>
                     Total: <span className="text-lg">${existItem ? existItem.quantity * Number(data.price) : 0}</span>

@@ -80,8 +80,8 @@ const AddNewCard = () => {
         </div>
         <input id="userId" hidden type="text" defaultValue={data?.user.id} {...register("userId")} />
         <div className="flex justify-end">
-          <Button className="flex items-center gap-2 text-xs h-8 px-2" type="submit">
-            Add card {isLoading && <Spinner diameter={4} />}
+          <Button className="flex items-center gap-2 text-xs h-8 px-2 bg-black" type="submit">
+            Add card {isLoading && <Spinner diameter={4} stroke={"primary"} />}
           </Button>
         </div>
       </form>

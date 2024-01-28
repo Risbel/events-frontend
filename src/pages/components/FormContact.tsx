@@ -6,7 +6,7 @@ import React from "react";
 
 const FormContact = () => {
   return (
-    <form className="p-4 bg-primary-foreground shadow-xl rounded-xl md:-translate-y-12 relative z-40">
+    <form className="p-4 bg-primary-foreground border shadow-xl rounded-xl md:-translate-y-12 relative z-40">
       <h3 className="text-center text-primary font-bold text-xl">Contact Us</h3>
       <div className="flex flex-col gap-5 pt-4">
         <div className="relative">

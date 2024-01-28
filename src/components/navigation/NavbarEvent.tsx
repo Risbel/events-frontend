@@ -12,35 +12,18 @@ import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 import AdminSettings from "../disco/AdminSettings";
 import { useRouter } from "next/router";
 
-const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPermissions: ImyPermissions }) => {
+const NavbarEvent = () => {
   const router = useRouter();
   const { query } = router;
   const { slug } = query;
 
   const { data: session, status } = useSession();
   const { cartItems } = useCart();
-  const { havePermission } = useHavePermissions(myPermissions);
 
   return (
     <div className="fixed z-50">
-      <div
-        style={{ backgroundColor: `${discoData.discoDetail.discoColor.brandColor}99` }}
-        className={cn("flex w-screen h-14 absolute z-30 border-b backdrop-blur-2xl")}
-      />
-      <div className="flex justify-between items-center w-screen absolute z-40 px-2 md:px-6 py-2">
-        <Link href={`/disco/${discoData.slug}`} className="group flex gap-2 items-center cursor-pointer">
-          <Image
-            className="rounded-full  group-hover:scale-105"
-            src={`${discoData.logo}`}
-            alt="tickets logo"
-            width={40}
-            height={40}
-          />
-          <p style={{ color: "white" }} className="font-semibold">
-            {discoData.name.toUpperCase()}
-          </p>
-        </Link>
-
+      <div className={cn("flex w-screen h-14 absolute z-30 border-b backdrop-blur-2xl bg-primary/90")} />
+      <div className="flex justify-center items-center w-screen absolute z-40 px-2 md:px-6 py-2">
         <div className="flex gap-2 items-center">
           <Image
             className="hover:scale-110 transition-transform cursor-pointer"
@@ -63,18 +46,10 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
               </div>
             )}
           </Link>
-          <div className="flex justify-center">
-            {status === "loading" ? (
-              <Skeleton className="relative z-0 rounded-full items-center w-8 h-8"></Skeleton>
-            ) : (
-              session && <DropdownNavbar discoData={discoData} session={session} />
-            )}
-          </div>
-          {havePermission("read", "Admin settings on disco") && <AdminSettings disco={discoData} />}
         </div>
       </div>
     </div>
   );
 };
 
-export default NavbarDisco;
+export default NavbarEvent;

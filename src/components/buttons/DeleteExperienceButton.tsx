@@ -9,7 +9,7 @@ const DeleteExperienceButton = ({ id }: { id: string }) => {
     <div className="flex w-full justify-end">
       <Button variant={"destructive"} onClick={() => mutate(id)}>
         <div className="flex gap-2">
-          {isLoading && <Spinner diameter={6} />}
+          {isLoading && <Spinner diameter={6} stroke={"white"} />}
           <p>Delete</p>
         </div>
       </Button>

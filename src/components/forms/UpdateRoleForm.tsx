@@ -48,12 +48,12 @@ const UpdateRoleForm = ({ discoId, idSubscription }: { discoId: string; idSubscr
       <div
         className={clsx(
           !isActiveForm && "hidden",
-          "absolute -translate-x-20 bg-blue-950/40 backdrop-blur-xl rounded-md pt-3"
+          "absolute -translate-x-20 bg-blue-950/40 backdrop-blur-xl rounded-md py-3 px-2"
         )}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label className="block mb-1 pl-2 text-xs font-medium text-gray-200" htmlFor="role">
+            <label className="block mb-1 pl-2 text-xs font-medium text-primary-foreground" htmlFor="role">
               select a role
             </label>
             <select
@@ -78,7 +78,7 @@ const UpdateRoleForm = ({ discoId, idSubscription }: { discoId: string; idSubscr
           </div>
           <Button type="submit" className="flex items-center gap-2 h-8 my-1">
             Send
-            {isLoading && <Spinner diameter={3} />}
+            {isLoading && <Spinner diameter={3} stroke={"white"} />}
           </Button>
         </form>
       </div>

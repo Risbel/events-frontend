@@ -1,7 +1,7 @@
-import EventLayout from "@/components/layouts/EventLayout";
-import UserContainer from "./components/UserContainer";
-import { useRouter } from "next/router";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
+import UserContainer from "@/pages/admin-settings/users/components/UserContainer";
+
+import { useRouter } from "next/router";
 
 const UserDetail = () => {
   const router = useRouter();
@@ -10,9 +10,7 @@ const UserDetail = () => {
 
   return (
     <DashboardLayout>
-      <div className="pt-20 px-6 md:px-16">
-        <UserContainer id={userId} />
-      </div>
+      <UserContainer id={userId} />
     </DashboardLayout>
   );
 };

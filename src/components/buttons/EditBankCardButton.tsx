@@ -40,7 +40,7 @@ const EditBankCardButton = ({
   if (isLoadingCards) {
     return (
       <div className="flex w-full justify-center py-4">
-        <Spinner diameter={4} />
+        <Spinner diameter={4} stroke={"primary"} />
       </div>
     );
   }
@@ -91,7 +91,7 @@ const EditBankCardButton = ({
                   <input value={discoDetailId} hidden id="discoDetailId" {...register("discoDetailId")} />
                   <Button type="submit">
                     <div className="flex gap-2 justify-center">
-                      {!isLoading && <span>Save</span>} {isLoading && <Spinner diameter={4} />}
+                      {!isLoading && <span>Save</span>} {isLoading && <Spinner diameter={4} stroke={"primary"} />}
                     </div>
                   </Button>
                 </div>

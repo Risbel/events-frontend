@@ -23,7 +23,7 @@ const SuperAdminSettings = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="w-full">
-        <span className="text-white text-sm px-2 pb-2 pt-1 flex  hover:bg-blue-800 rounded-sm ">Super Admin</span>
+        <span className="text-white text-sm px-2 pb-2 pt-1 flex  hover:bg-black rounded-sm ">Super Admin</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="backdrop-blur-sm bg-black/50 text-white">
         <DropdownMenuLabel className="bg-blue-700/40">Admin Settings</DropdownMenuLabel>

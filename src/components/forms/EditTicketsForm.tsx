@@ -96,7 +96,7 @@ const EditTicketsForm = ({
         <div className="pt-2">
           <Button className="flex items-center gap-2">
             Send
-            {isLoading && <Spinner diameter={4} />}
+            {isLoading && <Spinner diameter={4} stroke={"primary"} />}
           </Button>
         </div>
       </form>

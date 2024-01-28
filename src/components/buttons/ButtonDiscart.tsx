@@ -9,8 +9,9 @@ const ButtomDiscart = ({
 }) => {
   return (
     <Button
+      variant={"outline"}
       onClick={() => setIsActiveForm(false)}
-      className="w-full px-4 py-2 leading-none font-medium text-white bg-yellow-600 hover:bg-yellow-500/80 focus:outline-none focus:shadow-outline"
+      className="w-full px-4 py-2 leading-none font-medium bg-secondary focus:outline-none focus:shadow-outline"
     >
       {text}
     </Button>

@@ -13,7 +13,7 @@ const MyEventsList = () => {
   if (isLoading) {
     return (
       <div className="flex pt-24 justify-center">
-        <Spinner diameter={8} />
+        <Spinner diameter={8} stroke={"black"} />
       </div>
     );
   }

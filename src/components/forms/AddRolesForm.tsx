@@ -40,11 +40,11 @@ const AddRolesForm = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label className="block mb-1 text-sm font-medium text-gray-200" htmlFor="name">
+        <label className="block mb-1 text-sm font-medium text-primary" htmlFor="name">
           Role name
         </label>
         <input
-          className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+          className="w-full py-2 pl-2 text-sm leading-tight text-primary border border-primary rounded appearance-none focus:outline-none focus:shadow-outline"
           placeholder="Role name"
           id="name"
           type="text"

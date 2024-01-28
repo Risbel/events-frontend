@@ -85,7 +85,12 @@ const DiscoTickets = ({
     <>
       {discoTickets?.length !== 0 && (
         <>
-          <h1 className="font-extrabold text-4xl text-center text-white mt-10 pb-2">Tickets</h1>
+          <h1
+            style={{ color: `${discoDetail.discoColor.textColor}` }}
+            className="font-extrabold text-4xl text-center pb-2 pt-20"
+          >
+            Tickets
+          </h1>
           <div className="flex justify-center pb-4">
             <div className="flex gap-1 overflow-hidden max-w-screen-lg overflow-x-auto border rounded-md p-2 bg-white/10">
               {unicDates.map((date, i) => {
@@ -93,17 +98,17 @@ const DiscoTickets = ({
                   return (
                     <button
                       key={i}
-                      style={{ background: `#${discoDetail.discoColor.secondary}` }}
+                      style={{ background: `${discoDetail.discoColor.brandColor}` }}
                       className="flex flex-col items-center px-4 py-2 hover:opacity-90 leading-none rounded-md hover:-translate-y-[2px] transition-transform"
                       onClick={() => setDay(date)}
                     >
-                      <p style={{ color: `#${discoDetail.discoColor.textColor}` }} className="text-xs">
+                      <p style={{ color: `${"white"}` }} className="text-xs">
                         {weekdays[new Date(date).getDay()].slice(0, 3)}
                       </p>
-                      <p style={{ color: `#${discoDetail.discoColor.textColor}` }} className="text-xl">
+                      <p style={{ color: `${"white"}` }} className="text-xl">
                         {new Date(date).getDate()}
                       </p>
-                      <p style={{ color: `#${discoDetail.discoColor.textColor}` }} className="text-xs">
+                      <p style={{ color: `${"white"}` }} className="text-xs">
                         {months[new Date(date).getMonth()]}
                       </p>
                     </button>
@@ -112,11 +117,11 @@ const DiscoTickets = ({
               })}
             </div>
           </div>
-          <div className="flex flex-col items-center gap-4 mb-10 p-2 rounded-md bg-black/20 lg:px-8">
+          <div className="flex flex-col items-center gap-4 mb-10 p-2 rounded-md lg:px-8">
             {discoTickets?.map((ticket) => {
               if (new Date(ticket.expDate).toDateString() === day) {
                 return (
-                  <div key={ticket.id} className="w-full md:w-1/2 lg:w-1/3">
+                  <div key={ticket.id} className="w-full md:w-1/2 lg:w-2/3">
                     <div className="relative">
                       {Number(ticket.countInStock) === 0 ? (
                         <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-md flex items-center justify-center">
@@ -132,11 +137,11 @@ const DiscoTickets = ({
                       )}
                       <Link
                         style={{
-                          background: `#${discoDetail.discoColor.brandColor}`,
-                          border: `solid #${discoDetail.discoColor.textColor} 2px`,
+                          background: `${discoDetail.discoColor.brandColor}`,
+                          border: `solid ${discoDetail.discoColor.textColor} 2px`,
                         }}
                         href={`/disco/${name}/details-ticket/${ticket.id}`}
-                        className="flex justify-between gap-2 rounded-md p-2 relative shadow-lg hover:shadow-purple-800/60 hover:-translate-y-1 transition-transform duration-300"
+                        className="flex justify-between gap-2 rounded-md p-2 relative  hover:shadow-xl hover:-translate-y-1 transition-transform duration-300"
                       >
                         <div className="text-white w-full">
                           <p className="text-sm">Reserve {ticket.category} tickets</p>
@@ -163,7 +168,7 @@ const DiscoTickets = ({
                       </Link>
                     </div>
 
-                    <div className="flex gap-4 my-2 ">
+                    <div className="flex gap-4 my-2">
                       {havePermission("update", "Tickets") &&
                         (ticket.ticketsReservations.length < 1 || ticket.category === "common") && (
                           <div>
@@ -187,7 +192,12 @@ const DiscoTickets = ({
           </div>
         </>
       )}
-      <div className={clsx(!havePermission("create", "Tickets") && "hidden", "my-10 flex flex-col gap-4")}>
+      <div
+        className={clsx(
+          !havePermission("create", "Tickets") && "hidden",
+          "my-10 flex flex-col items-center gap-4 w-screen"
+        )}
+      >
         <AddTicketsForm discoId={discoId} />
 
         <AddCombosForm discoId={discoId} />

@@ -12,10 +12,10 @@ const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
           <h1 className="font-extrabold text-4xl text-white pb-5">About us</h1>
           <p className="text-white text-md md:text-lg font-light text-center">{discoDetails.largeDescription}</p>
           <Button
-            className="mt-8 hover:opacity-90"
-            style={{ backgroundColor: `#${discoDetails.discoColor.brandColor}` }}
+            className="mt-8 hover:opacity-90 px-8"
+            style={{ backgroundColor: `${discoDetails.discoColor.buttonColor}` }}
           >
-            More
+            <span style={{ color: `${discoDetails.discoColor.buttonForeground}` }}>More</span>
           </Button>
         </div>
 

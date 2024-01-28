@@ -16,7 +16,7 @@ const DeleteTicketButton = ({ id }: { id: string }) => {
         className={clsx("flex items-center gap-2 bg-red-800 hover:bg-red-700")}
       >
         Delete
-        {isLoading && <Spinner diameter={3} />}
+        {isLoading && <Spinner diameter={3} stroke={"white"} />}
       </Button>
     </div>
   );

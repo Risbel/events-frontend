@@ -1,14 +1,19 @@
 import { LogoCategory } from "@/components/disco/DiscoTickets";
+import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 import { Button } from "@/components/ui/button";
 import { useListMonths } from "@/hooks/useListMonths";
 import useCart, { ICart } from "@/store/useCart";
 import clsx from "clsx";
-import { ChevronLeftIcon } from "lucide-react";
+import { ChevronLeftIcon, ChevronsLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Cart = () => {
+  const router = useRouter();
+  const { query } = router;
+  const { slug } = query;
   const months = useListMonths();
   const { cartItems, removeFromCart, addToCart } = useCart();
 
@@ -33,7 +38,14 @@ const Cart = () => {
   };
 
   return (
-    <div className="h-screen relative z-0 text-center px-4 md:px-8 bg-primary">
+    <div className="h-screen relative z-0 text-center bg-primary">
+      <NavbarEvent />
+      <Link
+        href={`/disco/${slug}`}
+        className="absolute flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-4 py-2 mt-20"
+      >
+        <ChevronLeftIcon /> Go back
+      </Link>
       {cartItems.length > 0 && (
         <p className="text-center text-slate-400 font-thin pt-16 pb-4 text-xl">
           <span className="text-white underline underline-2">Cart</span>/
@@ -45,12 +57,12 @@ const Cart = () => {
       )}
       {!cartItems.length && <h1 className="text-white text-xl md:text-2xl pt-20">The shopping cart is empty</h1>}
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4">
+      <div className="flex justify-center gap-2 md:gap-4 px-4 md:px-8">
         {cartItems.map((item) =>
           item.ticketImages ? (
             <div
               key={item.id}
-              className="flex flex-col relative overflow-hidden bg-gradient-to-tr from-blue-800/70 via-black/80 to-purple-900/80 rounded-md  border border-t-white"
+              className="flex flex-col relative overflow-hidden bg-gradient-to-tr from-blue-800/70 via-black/80 to-purple-900/80 rounded-md  border border-t-white w-1/2"
             >
               <Image
                 className="absolute -z-10 right-0 object-cover rounded-full opacity-60"

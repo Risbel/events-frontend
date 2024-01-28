@@ -1,12 +1,20 @@
 import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
+import NavbarEvent from "@/components/navigation/NavbarEvent";
 import { useGetMyReservations } from "@/hooks/useGetMyReservations";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
 import { IReservationByUserId } from "@/services/getMyReservations";
+import { ChevronLeftIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Reservations = () => {
+  const router = useRouter();
+  const { query } = router;
+  const { slug } = query;
+
   const weekdays = useListDays();
   const months = useListMonths();
   const { data } = useSession();
@@ -16,7 +24,7 @@ const Reservations = () => {
   if (isLoading || !myReservationsData) {
     return (
       <EventLayout>
-        <div className="flex justify-center pt-20">
+        <div className="flex justify-center pt-20 bg-primary h-screen">
           <Spinner diameter={8} stroke={"white"} />
         </div>
       </EventLayout>
@@ -33,13 +41,20 @@ const Reservations = () => {
   return (
     sortedReservations && (
       <EventLayout>
-        <div className="pt-20 px-4 bg-black h-full">
-          <h1 className="text-white text-xl mb-2">
+        <NavbarEvent />
+        <div className="pt-20 px-4 bg-primary h-full">
+          <Link
+            href={`/disco/${slug}`}
+            className="absolute flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-4 py-2 mt-10"
+          >
+            <ChevronLeftIcon /> Go back
+          </Link>
+          <h1 className="text-white text-center text-xl mb-2">
             {sortedReservations.length === 0 ? "You don't have any reservations yet" : "My Reservations:"}
           </h1>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
-            {sortedReservations.length &&
+            {sortedReservations.length > 0 &&
               sortedReservations.map((reservation) => (
                 <div className="border rounded-md p-2 bg-gradient-to-l from-white/10 to-black/40" key={reservation.id}>
                   <div>

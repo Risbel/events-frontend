@@ -51,7 +51,7 @@ const AddPermissionForm = ({
           <div>
             <select
               defaultValue={""}
-              className="w-40 h-8 text-white bg-white/10 rounded-md"
+              className="w-40 h-8 text-primary bg-primary/10 pl-2 rounded-md"
               id="permission"
               {...register("permission")}
             >
@@ -61,7 +61,11 @@ const AddPermissionForm = ({
 
               {permissions &&
                 permissions.map((permission) => (
-                  <option key={permission.id} className="bg-black/70" value={permission.id}>
+                  <option
+                    key={permission.id}
+                    className="bg-primary text-primary-foreground shadow"
+                    value={permission.id}
+                  >
                     {permission.name}
                   </option>
                 ))}
@@ -71,7 +75,7 @@ const AddPermissionForm = ({
           <div>
             <select
               defaultValue={""}
-              className="w-40 h-8 text-white bg-white/10 rounded-md"
+              className="w-40 h-8 text-primary bg-primary/10 pl-2 rounded-md"
               id="resource"
               {...register("resource")}
             >
@@ -81,7 +85,7 @@ const AddPermissionForm = ({
 
               {resources &&
                 resources.map((resource) => (
-                  <option key={resource.id} className="bg-black/70" value={resource.id}>
+                  <option key={resource.id} className="bg-primary text-primary-foreground shadow" value={resource.id}>
                     {resource.name}
                   </option>
                 ))}

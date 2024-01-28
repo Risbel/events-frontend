@@ -2,6 +2,7 @@ import { useDeleteRolePermissionResource } from "@/hooks/useDeleteRolePermission
 import useGetResourcesByPermissionId from "@/hooks/useGetResourcesByPermissionId";
 import Spinner from "../loaders/Spinner";
 import clsx from "clsx";
+import { X, XCircle } from "lucide-react";
 
 const Resources = ({ discoRoleId, permissionId }: { discoRoleId: string; permissionId: string }) => {
   const {
@@ -32,17 +33,17 @@ const Resources = ({ discoRoleId, permissionId }: { discoRoleId: string; permiss
     <div className="flex items-center gap-2">
       {data &&
         data.map((resource) => (
-          <div key={resource.id} className="flex items-center gap-2 bg-purple-700/70 rounded-md text-xs pl-2 pr-1 py-1">
+          <div
+            key={resource.id}
+            className="flex items-center gap-2 bg-primary text-primary-foreground rounded-md text-xs pl-2 pr-1 py-1"
+          >
             <div>{resource.Resource.name}</div>
-            <button
-              onClick={() => handleDelete(resource.id)}
-              className={" bg-red-500 hover:bg-red-600 rounded-full px-1"}
-            >
-              ×
+            <button onClick={() => handleDelete(resource.id)}>
+              <XCircle className="hover:scale-105" height={20} />
             </button>
           </div>
         ))}
-      {isLoading && <Spinner diameter={4} />}
+      {isLoading && <Spinner diameter={4} stroke={"white"} />}
     </div>
   );
 };

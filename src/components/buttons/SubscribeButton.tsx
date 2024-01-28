@@ -8,11 +8,11 @@ const SubscribeButton = ({ userId, discoId }: { userId: string; discoId: string 
   return (
     <Button
       onClick={() => subscribe({ userId, discoId })}
-      className="bg-blue-700/40 shadow-xl hover:bg-blue-500/40 hover:shadow-blue-500/40 hover:border-b px-2 md:px-4"
+      className="flex items-center gap-2 bg-blue-700 shadow-xl hover:bg-blue-600 px-2 md:px-4"
       size={"lg"}
     >
       <span className="text-md md:text-xl">Subscribe</span>
-      {isLoading && <Spinner diameter={4} />}
+      {isLoading && <Spinner diameter={4} stroke={"white"} />}
     </Button>
   );
 };

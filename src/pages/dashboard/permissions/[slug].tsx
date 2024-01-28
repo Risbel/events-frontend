@@ -1,7 +1,7 @@
 import Resource405 from "@/components/alerts/Resource405";
 import AddPermissionButton from "@/components/buttons/AddPermissionButton";
 import AddRoleButton from "@/components/buttons/AddRoleButton";
-import EventLayout from "@/components/layouts/EventLayout";
+import DashboardLayout from "@/components/layouts/DashboardLayout";
 import BackToHome from "@/components/links/BackToHome";
 import Spinner from "@/components/loaders/Spinner";
 import PermissionsByDiscoRole from "@/components/permissions/PermissionsByDiscoRole";
@@ -21,11 +21,11 @@ const DiscoPerssions = () => {
 
   if (isLoadingMy || isLoading) {
     return (
-      <EventLayout>
+      <DashboardLayout>
         <div className="flex pt-24 justify-center">
-          <Spinner diameter={10} stroke="white" />
+          <Spinner diameter={10} stroke="black" />
         </div>
-      </EventLayout>
+      </DashboardLayout>
     );
   }
 
@@ -41,21 +41,21 @@ const DiscoPerssions = () => {
   }
 
   return (
-    <EventLayout>
-      <div className="pt-24 px-6 md:px-16">
-        <div className="flex items-center gap-4 rounded-full bg-gradient-to-r from-blue-700/30 via-transparent to-transparent">
-          <Avatar className="rounded-full overflow-hidden">
+    <DashboardLayout>
+      <div className="pt-24 px-6">
+        <div className="flex items-center gap-4 rounded-full bg-gradient-to-r from-primary/30 via-transparent to-transparent">
+          <Avatar className="rounded-full overflow-hidden h-10 w-10">
             <AvatarImage height={40} width={40} src={data?.logo} />
           </Avatar>
-          <h1 className="text-white text-xl">{data?.name}</h1>
+          <h1 className="text-primary text-xl font-semibold">{data?.name}</h1>
         </div>
 
         <div className="flex gap-4 py-4">
           <div className="px-2">
-            <h2 className="text-white text-lg font-semibold">Roles</h2>
+            <h2 className="text-primary text-lg font-semibold">Roles</h2>
             {data?.DiscoRoles.map((rol) => (
               <div key={rol.id}>
-                <span className="text-white">{rol.name}</span>
+                <span className="text-primary">{rol.name}</span>
               </div>
             ))}
           </div>
@@ -66,16 +66,16 @@ const DiscoPerssions = () => {
       <div className="overflow-y-scroll">
         <Table>
           <TableHeader>
-            <TableRow className="hover:bg-white/10">
-              <TableHead className="w-[120px] text-white">Roles</TableHead>
-              <TableHead className="text-white">Permissions on resources</TableHead>
+            <TableRow className="hover:bg-secondary">
+              <TableHead className="w-[120px] text-primary">Roles</TableHead>
+              <TableHead className="text-primary">Permissions on resources</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {data?.DiscoRoles.map((role) => (
-              <TableRow className="hover:bg-white/10" key={role.id}>
-                <TableCell className="text-white py-2">{role.name}</TableCell>
-                <TableCell className="text-white py-2">
+              <TableRow className="hover:bg-secondary/50 items-center" key={role.id}>
+                <TableCell className="text-primary py-2">{role.name}</TableCell>
+                <TableCell className="text-primary py-2">
                   <div className="flex gap-36 md:gap-x-44 pb-2">
                     <AddPermissionButton roleId={role.id} />
                   </div>
@@ -88,7 +88,7 @@ const DiscoPerssions = () => {
           </TableBody>
         </Table>
       </div>
-    </EventLayout>
+    </DashboardLayout>
   );
 };
 

@@ -9,52 +9,54 @@ const UserContainer = ({ id }: { id: any }) => {
   if (isLoading && !data) {
     return (
       <div className="flex justify-center">
-        <Spinner diameter={10} />
+        <Spinner diameter={10} stroke={"black"} />
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="p-4 md:p-8 mt-12">
       <div className="flex gap-4 items-center">
         <Avatar>
           {!data?.imageUrl ? (
-            <div className="bg-zinc-200 rounded-full flex justify-center items-center w-full">
+            <div className="rounded-full flex justify-center items-center w-full">
               <span className="text-md font-bold text-black">{data?.name && data.name[0]}</span>
             </div>
           ) : (
-            <div className="rounded-full overflow-hidden h-full w-full bg-slate-300">
+            <div className="rounded-full overflow-hidden h-10 w-10 bg-slate-300">
               {data.imageUrl && <AvatarImage src={data.imageUrl} />}
             </div>
           )}
         </Avatar>
-        <h1 className="text-white text-2xl">
+        <h1 className="text-primary text-2xl">
           {data?.name} {data?.lastName}
         </h1>
       </div>
 
       <div className="py-4">
-        <h2 className="text-white text-xl font-thin bg-blue-900/20 pb-2">Personal dates:</h2>
-        <p className="text-white">Email: {data?.phone}</p>
-        <p className="text-white">Phone: {data?.email}</p>
-        <p className="text-white">Joined: {data?.createdAt?.slice(0, 10)}</p>
+        <h2 className="text-primary font-semibold text-xl rounded-md bg-secondary py-2 pl-4">Personal dates:</h2>
+        <p className="text-primary">Email: {data?.phone}</p>
+        <p className="text-primary">Phone: {data?.email}</p>
+        <p className="text-primary">Joined: {data?.createdAt?.slice(0, 10)}</p>
       </div>
 
       <div className="py-4">
-        <h2 className="text-white text-xl font-thin bg-blue-900/20 pb-2 mb-2">Subscriptions:</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <h2 className="text-primary text-xl font-semibold bg-secondary py-2 pl-4 mb-4 rounded-md">
+          Subscriptions & Roles:
+        </h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data?.subscriptions.map((subscription) => {
             return (
               <div
                 key={subscription.id}
-                className="flex gap-2 items-center justify-between pr-1 bg-blue-800/40 hover:bg-blue-700/50 rounded-l-full "
+                className="flex gap-2 items-center justify-between pr-2 bg-secondary rounded-lg overflow-hidden"
               >
-                <Avatar>
+                <Avatar className="h-12 w-12">
                   <AvatarImage src={subscription.Disco.logo} />
                 </Avatar>
-                <div className="flex flex-col">
-                  <p className="text-xl text-white">{subscription.Disco.name}</p>
-                  <p className="text-xs text-white">Role: {subscription.DiscoRole.name}</p>
+                <div className="flex flex-col items-center">
+                  <p className="text-xl text-primary">{subscription.Disco.name}</p>
+                  <p className="text-xs text-primary">Role: {subscription.DiscoRole.name}</p>
                 </div>
                 <UpdateRoleForm discoId={subscription.discoId} idSubscription={subscription.id} />
               </div>

@@ -45,7 +45,7 @@ const AddDiscos = () => {
   if (isLoadingMy) {
     return (
       <div className="flex pt-24 justify-center">
-        <Spinner diameter={8} />
+        <Spinner diameter={8} stroke="black" />
       </div>
     );
   }
@@ -192,7 +192,7 @@ const AddDiscos = () => {
             <Label name={"Text color"} htmlfor={"textColor"} className="block mb-1 text-sm font-medium text-primary" />
 
             <Input
-              defaultValue={"#344256"}
+              defaultValue={"#ffffff"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="textColor"
@@ -205,7 +205,7 @@ const AddDiscos = () => {
             <Label name={"Text h1 color"} htmlfor={"h1Color"} className="block mb-1 text-sm font-medium text-primary" />
 
             <Input
-              defaultValue={"#ffffff"}
+              defaultValue={"#344256"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="h1Color"
@@ -218,7 +218,7 @@ const AddDiscos = () => {
             <Label name={"Text h2 color"} htmlfor={"h2Color"} className="block mb-1 text-sm font-medium text-primary" />
 
             <Input
-              defaultValue={"#a8ddfb"}
+              defaultValue={"#344256"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="h2Color"
@@ -252,7 +252,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#000000"}
+              defaultValue={"#ffffff"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="buttonForeground"

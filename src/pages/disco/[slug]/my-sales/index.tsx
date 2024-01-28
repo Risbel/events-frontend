@@ -24,7 +24,7 @@ const MySales = () => {
     return (
       <EventLayout>
         <div className="pt-20 flex justify-center">
-          <Spinner diameter={8} />
+          <Spinner diameter={8} stroke="white" />
         </div>
       </EventLayout>
     );
@@ -68,7 +68,7 @@ const MySales = () => {
 
         <SearchReservationsForm setSearchParams={setSearchParams} />
 
-        <div className="flex justify-center">{isLoading && <Spinner diameter={8} />}</div>
+        <div className="flex justify-center">{isLoading && <Spinner diameter={8} stroke="white" />}</div>
 
         <h1 className="text-white text-xl mb-4 text-center md:text-start">Sold to use today</h1>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">

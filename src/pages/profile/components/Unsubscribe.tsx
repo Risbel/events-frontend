@@ -13,7 +13,7 @@ const Unsubscribe = ({ id }: { id: string }) => {
       variant={"secondary"}
     >
       <span>Unsubscribe</span>
-      {isLoading && <Spinner diameter={4} />}
+      {isLoading && <Spinner diameter={4} stroke={"primary"} />}
     </Button>
   );
 };
