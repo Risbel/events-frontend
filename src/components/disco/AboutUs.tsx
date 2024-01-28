@@ -9,7 +9,7 @@ const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
 
       <div className="absoulute z-20 h-full">
         <div className="flex flex-col items-center px-8 py-24 md:py-32">
-          <h1 className="font-extrabold text-4xl text-white pb-5">About us</h1>
+          <h1 className="font-extrabold text-4xl md:text-5xl lg:text-7xl text-white pb-5">About us</h1>
           <p className="text-white text-md md:text-lg font-light text-center">{discoDetails.largeDescription}</p>
           <Button
             className="mt-8 hover:opacity-90 px-8"

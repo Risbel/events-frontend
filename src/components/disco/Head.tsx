@@ -15,7 +15,7 @@ const Head = ({ discoData }: { discoData: { disco: DataDisco; subscription: Subs
 
       <div className="absolute z-10 h-screen w-screen top-[60%]">
         <h1
-          className="relative px-8 font-bold text-3xl md:text-7xl text-center md:text-start"
+          className="relative px-8 font-bold text-4xl md:text-5xl lg:text-7xl text-center md:text-start"
           style={{ color: `${discoData.disco.discoDetail.discoColor.h1Color}` }}
         >
           {(discoData?.disco.name).toUpperCase()}

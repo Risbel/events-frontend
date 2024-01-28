@@ -87,7 +87,7 @@ const DiscoTickets = ({
         <>
           <h1
             style={{ color: `${discoDetail.discoColor.textColor}` }}
-            className="font-extrabold text-4xl text-center pb-2 pt-20"
+            className="font-extrabold text-4xl md:text-5xl lg:text-7xl text-center pb-2 pt-20"
           >
             Tickets
           </h1>

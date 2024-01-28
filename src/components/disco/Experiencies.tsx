@@ -14,7 +14,7 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
 
   return (
     <div
-      style={{ background: `${discoDetail.discoColor.buttonColor}70` }}
+      style={{ background: `${discoDetail.discoColor.buttonColor}999` }}
       className="flex flex-col items-center h-screen justify-center relative"
     >
       <h1
