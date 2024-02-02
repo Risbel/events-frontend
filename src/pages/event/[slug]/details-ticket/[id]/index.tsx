@@ -85,7 +85,6 @@ const DiscoTicketDetails = () => {
               <h1 className="text-xl md:text-2xl text-white">
                 Tickets <span className="bg-blue-700/80 rounded-full px-2 text-lg">{data.category}</span>
               </h1>
-              <LogoCategory category={data.category} />
             </div>
 
             <div className="bg-gradient-to-r bg-primary rounded-md">
@@ -149,7 +148,6 @@ const DiscoTicketDetails = () => {
                           name="amount"
                           className="w-11 text-center text-lg h-8"
                         />
-                        <LogoCategory category={data.category} />
 
                         <Button className="text-xs px-3 h-8" type="submit">
                           Add <ShoppingCart height={15} />

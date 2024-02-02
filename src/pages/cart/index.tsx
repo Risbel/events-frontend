@@ -65,7 +65,6 @@ const Cart = () => {
               </p>
               <div className="flex flex-col gap-2 p-2 pt-0">
                 <div className="flex items-center justify-between gap-2">
-                  <LogoCategory category={item.category} />
                   <table className="-translate-x-2">
                     <tbody>
                       <tr className="text-sm font-thin text-white">

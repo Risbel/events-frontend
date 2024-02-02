@@ -103,8 +103,6 @@ const MySales = () => {
                         <div key={ticket.id}>
                           <div className="bg-black/20 p-2 rounded-md">
                             <div className="flex justify-between items-center">
-                              <LogoCategory category={ticket.DiscoTicket.category} />
-
                               <p className="text-white text-sm">
                                 {ticket.quantity} {ticket.DiscoTicket.category}{" "}
                                 {Number(ticket.quantity) > 1 ? "tickets" : "ticket"}
@@ -153,8 +151,6 @@ const MySales = () => {
                           <div key={ticket.id}>
                             <div className="bg-black/20 p-2 rounded-md">
                               <div className="flex justify-between items-center">
-                                <LogoCategory category={ticket.DiscoTicket.category} />
-
                                 <p className="text-white text-sm">
                                   {ticket.quantity} {ticket.DiscoTicket.category}{" "}
                                   {Number(ticket.quantity) > 1 ? "tickets" : "ticket"}
@@ -207,8 +203,6 @@ const MySales = () => {
                           <div key={ticket.id}>
                             <div className="bg-black/20 p-2 rounded-md">
                               <div className="flex justify-between items-center">
-                                <LogoCategory category={ticket.DiscoTicket.category} />
-
                                 <p className="text-white text-sm">
                                   {ticket.quantity} {ticket.DiscoTicket.category}{" "}
                                   {Number(ticket.quantity) > 1 ? "tickets" : "ticket"}
