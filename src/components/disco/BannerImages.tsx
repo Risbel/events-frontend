@@ -6,7 +6,7 @@ const BannerImages = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
   const { data } = useGetBannerImages(discoDetails.id);
 
   return (
-    <div className="relative flex justify-center items-center overflow-hidden -z-20">
+    <div className="absolute flex justify-center items-center overflow-hidden -z-20">
       {data &&
         data?.map((img) => (
           <Image
@@ -20,9 +20,9 @@ const BannerImages = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
         ))}
       <div
         style={{
-          background: `linear-gradient(to top, ${discoDetails.discoColor.bgColor}, ${discoDetails.discoColor.bgColor}80 , transparent, transparent)`,
+          background: `linear-gradient(to top, ${discoDetails.discoColor.bannerGradientColor}, ${discoDetails.discoColor.bannerGradientColor}80 , transparent, transparent)`,
         }}
-        className="absolute h-screen w-screen"
+        className="absolute h-5/6 w-screen bottom-0"
       ></div>
     </div>
   );

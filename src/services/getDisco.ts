@@ -18,14 +18,13 @@ export interface DataDisco {
 }
 export interface DiscoDetail {
   id: string;
-  description: string;
-  largeDescription: string;
+  bannerDescription: string;
+  aboutDescription: string;
   bgImage: string;
   address: string;
-  phone: string;
-  email: string;
   createdAt: string;
   updatedAt: string;
+  userBankCardId: string;
   administrator: string;
   discoId: string;
   discoImages: DiscoImages[];
@@ -74,13 +73,21 @@ export interface IUserBankCard {
 export interface IDiscoColors {
   id: string;
   brandColor: string;
-  secondaryColor: string;
-  bgColor: string;
-  textColor: string;
-  h1Color: string;
-  h2Color: string;
+  bgNavbarColor: string;
+  navbarForeground: string;
+  h1BannerColor: string;
+  bannerGradientColor: string;
+  bannerDescriptionColor: string;
+  bgAboutColor: string;
+  textAboutColor: string;
   buttonColor: string;
   buttonForeground: string;
+  bgExperiencies: string;
+  experienciesH1Color: string;
+  bgTicketsSection: string;
+  ticketH1Color: string;
+  buttonsTicketsColor: string;
+  buttonTicketForeground: string;
   createdAt: string;
   updatedAt: string;
   discoDetailId: string;

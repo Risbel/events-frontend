@@ -88,7 +88,7 @@ const Login = () => {
             Login
             {isLoading && (
               <div>
-                <Spinner diameter={4} stroke={"primary"} />
+                <Spinner diameter={4} stroke={"white"} />
               </div>
             )}
           </Button>

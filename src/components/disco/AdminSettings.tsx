@@ -27,8 +27,14 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
             alt="Picture of the author"
           />
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="backdrop-blur-sm bg-black/70 text-white rounded-r-none">
-          <DropdownMenuLabel className="bg-blue-500/20">Admin settings</DropdownMenuLabel>
+        <DropdownMenuContent
+          style={{
+            background: `${disco.discoDetail.discoColor.bgNavbarColor}99`,
+            color: `${disco.discoDetail.discoColor.navbarForeground}`,
+          }}
+          className="backdrop-blur-xl w-80 pb-4 translate-y-5 -translate-x-2 rounded-r-none "
+        >
+          <DropdownMenuLabel>Admin settings</DropdownMenuLabel>
           <DropdownMenuSeparator />
 
           <DropdownMenuItem>

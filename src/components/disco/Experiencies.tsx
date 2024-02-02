@@ -14,16 +14,31 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
 
   return (
     <div
-      style={{ background: `${discoDetail.discoColor.buttonColor}99` }}
-      className="flex flex-col items-center h-screen justify-center relative"
+      style={{
+        background: `${discoDetail.discoColor.bgExperiencies}`,
+      }}
+      className="flex flex-col items-center justify-center relative"
     >
       <h1
-        style={{ color: `${discoDetail.discoColor.buttonForeground}` }}
-        className="font-extrabold text-4xl md:text-5xl lg:text-7xl pb-12 md:pb-10 lg:pb-24 text-center"
+        style={{ color: `${discoDetail.discoColor.experienciesH1Color}` }}
+        className="font-extrabold text-4xl md:text-5xl lg:text-7xl py-8 text-center"
       >
         Experiencies
       </h1>
-      <div className="px-4 pb-12">
+
+      <div className="flex justify-between w-full">
+        <div
+          style={{ borderColor: `${discoDetail.discoColor.experienciesH1Color}` }}
+          className="border-4 w-3/5 rounded-r-full"
+        />
+        <div
+          style={{ borderColor: `${discoDetail.discoColor.experienciesH1Color}` }}
+          className="border-4 w-1/4 rounded-l-full"
+        />
+      </div>
+
+      <div className="absolute -z-10 h-20 w-20 bg-white rounded-full blur-3xl top-28" />
+      <div className="relative z-20 px-4 py-12">
         <Carousel className="w-full max-w-7xl">
           <CarouselContent>
             {discoDetail?.discoImages?.map(
@@ -34,7 +49,7 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
                       style={{
                         borderRadius: "20px",
                         border: `solid 3px`,
-                        borderColor: `${discoDetail.discoColor.buttonForeground}`,
+                        borderColor: `${discoDetail.discoColor.experienciesH1Color}`,
                       }}
                       className="relative mb-4 overflow-hidden"
                     >
@@ -64,20 +79,20 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
       </div>
 
       <div
-        style={{ background: `${discoDetail.discoColor.textColor}80` }}
-        className="absolute rounded-full -z-20 h-80 w-80 blur-3xl opacity-70 right-32 bottom-0 -translate-y-1/2"
+        style={{ background: `${discoDetail.discoColor.experienciesH1Color}80` }}
+        className="absolute rounded-full z-10 h-80 w-80 blur-3xl opacity-70 right-32 bottom-0 -translate-y-1/3"
       ></div>
 
-      {/* <div className="flex justify-between pt-9 w-full">
+      <div className="flex justify-between w-full mb-12">
         <div
-          style={{ borderColor: `#${discoDetail.discoColor.brandColor}` }}
-          className="border-4 w-3/5 rounded-r-full"
-        />
+          style={{ borderColor: `${discoDetail.discoColor.experienciesH1Color}` }}
+          className="border-4 w-1/4 rounded-r-full"
+        />{" "}
         <div
-          style={{ borderColor: `#${discoDetail.discoColor.brandColor}` }}
-          className="border-4 w-1/4 rounded-l-full"
+          style={{ borderColor: `${discoDetail.discoColor.experienciesH1Color}` }}
+          className="border-4 w-3/5 rounded-l-full"
         />
-      </div> */}
+      </div>
     </div>
   );
 };

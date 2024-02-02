@@ -11,6 +11,7 @@ import useHavePermissions from "@/utils/useHavePermissions";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 import AdminSettings from "../disco/AdminSettings";
 import { useRouter } from "next/router";
+import { BellIcon, ShoppingCart } from "lucide-react";
 
 const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPermissions: ImyPermissions }) => {
   const router = useRouter();
@@ -24,7 +25,7 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
   return (
     <div className="fixed z-50">
       <div
-        style={{ backgroundColor: `${discoData.discoDetail.discoColor.brandColor}99` }}
+        style={{ backgroundColor: `${discoData.discoDetail.discoColor.bgNavbarColor}` }}
         className={cn("flex w-screen h-14 absolute z-30 border-b backdrop-blur-2xl")}
       />
       <div className="flex justify-between items-center w-screen absolute z-40 px-2 md:px-6 py-2">
@@ -36,29 +37,31 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
             width={40}
             height={40}
           />
-          <p style={{ color: "white" }} className="font-semibold">
+          <p style={{ color: `${discoData.discoDetail.discoColor.navbarForeground}` }} className="font-semibold">
             {discoData.name.toUpperCase()}
           </p>
         </Link>
 
         <div className="flex gap-2 items-center">
-          <Image
-            className="hover:scale-110 transition-transform cursor-pointer"
-            src={"/bell.svg"}
-            alt="bell notification"
-            width={18}
-            height={18}
+          <BellIcon
+            style={{ stroke: `${discoData.discoDetail.discoColor.navbarForeground}` }}
+            className="cursor-pointer hover:scale-110 transition-transform"
           />
+
           <Link href={`/event/${slug}/cart`} className="relative rounded-full">
-            <Image
-              className="hover:scale-110 transition-transform"
-              src={"/shop-cart.svg"}
-              alt="shop cart"
-              width={35}
-              height={35}
+            <ShoppingCart
+              style={{ stroke: `${discoData.discoDetail.discoColor.navbarForeground}` }}
+              className="cursor-pointer hover:scale-110 transition-transform"
             />
+
             {Number(cartItems.length) >= 1 && (
-              <div className="absolute translate-x-1 h-4 w-4 top-0 right-0 rounded-full bg-white font-semibold text-center text-xs">
+              <div
+                style={{
+                  background: `${discoData.discoDetail.discoColor.navbarForeground}`,
+                  color: `${discoData.discoDetail.discoColor.bgNavbarColor}`,
+                }}
+                className="absolute translate-x-1 h-4 w-4 top-0 right-0 rounded-full font-semibold text-center text-xs"
+              >
                 {cartItems.length}
               </div>
             )}

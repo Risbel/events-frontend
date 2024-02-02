@@ -77,11 +77,12 @@ const Login = () => {
           </div>
           {status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
 
-          <Button className="flex gap-2" type="submit">
-            Login
+          <Button className="flex items-center gap-2" type="submit">
+            <span>Login</span>
+
             {isLoading && (
               <div>
-                <Spinner diameter={4} stroke={"primary"} />
+                <Spinner diameter={4} stroke={"white"} />
               </div>
             )}
           </Button>

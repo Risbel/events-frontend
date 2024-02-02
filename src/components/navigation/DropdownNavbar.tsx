@@ -42,8 +42,11 @@ const DropdownNavbar = ({ session, discoData }: { session: Session; discoData: D
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        style={{ background: `${discoData.discoDetail.discoColor.brandColor}999` }}
-        className="backdrop-blur-xl bg-primary/80 w-80 pb-4 translate-y-2 -translate-x-2 text-white rounded-r-none "
+        style={{
+          background: `${discoData.discoDetail.discoColor.bgNavbarColor}99`,
+          color: `${discoData.discoDetail.discoColor.navbarForeground}`,
+        }}
+        className="backdrop-blur-xl w-80 pb-4 translate-y-3 -translate-x-2 rounded-r-none"
       >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />

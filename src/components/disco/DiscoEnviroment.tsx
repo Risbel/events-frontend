@@ -52,62 +52,41 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
   }
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative">
       <NavbarDisco discoData={discoData.disco} myPermissions={myPermissions} />
 
-      {loadingDisco || !discoData ? (
-        <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-4">
-          <SkeletonHead />
-          <SkeletonAboutUs />
-          <SkeletonExperiences />
-        </div>
-      ) : (
-        <div>
-          {discoData?.disco?.discoDetail?.bgImage ? (
-            <Image
-              className="absolute h-full object-cover"
-              src={discoData?.disco?.discoDetail?.bgImage}
-              width={1800}
-              height={800}
-              alt="Picture of the author"
-            />
-          ) : (
-            <div
-              className="absolute h-full w-full"
-              style={{ background: `${discoData.disco.discoDetail.discoColor.brandColor}` }}
-            />
-          )}
-        </div>
-      )}
-
-      <div className="pt-5 relative z-10">
-        <div>
-          <div className="flex flex-col">
-            {loadingDisco ? null : <Head discoData={discoData} />}
-
-            <>{loadingDisco ? null : discoData && <AboutUs discoDetails={discoData?.disco?.discoDetail} />}</>
-            {loadingDisco
-              ? null
-              : discoData && <Experiencies myPermissions={myPermissions} discoDetail={discoData?.disco.discoDetail} />}
+      {loadingDisco ||
+        (!discoData && (
+          <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-4">
+            <SkeletonHead />
+            <SkeletonAboutUs />
+            <SkeletonExperiences />
           </div>
-        </div>
-        <div style={{ background: `${discoData.disco.discoDetail.discoColor.bgColor}` }} className="pb-12">
-          {loadingDisco
-            ? null
-            : discoId &&
-              discotickets && (
-                <DiscoTickets
-                  name={name}
-                  myPermissions={myPermissions}
-                  discoDetail={discoData?.disco.discoDetail}
-                  discoId={discoId}
-                  discoTickets={discotickets}
-                />
-              )}
-        </div>
+        ))}
+
+      {loadingDisco ? null : <Head discoData={discoData} />}
+
+      {loadingDisco ? null : discoData && <AboutUs discoDetails={discoData?.disco?.discoDetail} />}
+      {loadingDisco
+        ? null
+        : discoData && <Experiencies myPermissions={myPermissions} discoDetail={discoData?.disco.discoDetail} />}
+
+      <div style={{ background: `${discoData.disco.discoDetail.discoColor.bgTicketsSection}` }} className="pb-12">
+        {loadingDisco
+          ? null
+          : discoId &&
+            discotickets && (
+              <DiscoTickets
+                name={name}
+                myPermissions={myPermissions}
+                discoDetail={discoData?.disco.discoDetail}
+                discoId={discoId}
+                discoTickets={discotickets}
+              />
+            )}
       </div>
 
-      <div className="relative bg-foreground">
+      <div className="relative bg-foreground pb-16">
         <div className="flex flex-col-reverse md:flex-row">
           <div className="flex flex-wrap px-6 md:p-12 gap-8 md:w-1/2 lg:w-3/4">
             <div>

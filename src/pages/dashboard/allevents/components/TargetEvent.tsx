@@ -1,8 +1,8 @@
-import { IMyEvents } from "@/services/getMyEvents";
+import { DataDisco } from "@/services/getDisco";
 import Image from "next/image";
 import React from "react";
 
-const TargetEvent = ({ event }: { event: IMyEvents }) => {
+const TargetEvent = ({ event }: { event: DataDisco }) => {
   if (!event) {
     return;
   }
@@ -19,9 +19,9 @@ const TargetEvent = ({ event }: { event: IMyEvents }) => {
 
       <div className="flex flex-col relative z-20 w-full">
         <div className="px-2 md:px-4">
-          <h1 className="font-bold text-base md:text-2xl text-white">{event.name.toUpperCase()}</h1>
+          <h1 className="font-bold text-base md:text-2xl text-white">{event?.name?.toUpperCase()}</h1>
           <p className="text-gray-100 font-extralight text-xs md:text-sm -translate-y-2 line-clamp-1">
-            {(event?.discoDetail?.description).toUpperCase()}
+            {event?.discoDetail?.aboutDescription?.toUpperCase()}
           </p>
         </div>
         <div className="border border-white w-2/3 md:w-1/2" />
@@ -33,7 +33,7 @@ const TargetEvent = ({ event }: { event: IMyEvents }) => {
 
         <div className="flex px-2 md:px-4 justify-end">
           <a
-            href={`https://my-events-pi.vercel.app/event/${event.slug}`}
+            href={`https://my-events-pi.vercel.app/event/${event?.slug}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center bg-gray-200 hover:bg-gray-200/90 px-4 py-0.5 md:py-1 rounded-xl"
