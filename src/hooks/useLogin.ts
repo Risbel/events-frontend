@@ -10,7 +10,7 @@ const useLogin = (disco?: string) => {
       if (status === 200 && disco) {
         router.push(`/event/${disco}`);
       } else if (status === 200) {
-        router.push("/dashboard");
+        router.push("/dashboard/allevents");
       }
     },
   });

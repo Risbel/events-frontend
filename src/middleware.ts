@@ -6,12 +6,13 @@ export async function middleware(req: NextRequest) {
 
   if (!session) {
     const url = req.nextUrl.clone();
-    console.log(url);
 
-    url.pathname =
-      url.pathname == "/dashboard" || url.pathname == "/dashboard/allevents" || url.pathname == "/dashboard/workspace"
-        ? `/auth/login`
-        : `auth/login/${url.pathname}`;
+    if (url.pathname.startsWith("/dashboard/")) {
+      url.pathname = `/auth/login`;
+    } else {
+      url.pathname = `auth/login/${url.pathname}`;
+    }
+
     return NextResponse.redirect(url);
   }
 
