@@ -5,14 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeftIcon } from "lucide-react";
 import { useRouter } from "next/router";
-import Subscriptions from "@/pages/profile/components/Subscriptions";
-import Cards from "@/pages/profile/components/Cards";
 
 import NavbarEvent from "@/components/navigation/NavbarEvent";
+import Subscriptions from "./components/Subscriptions";
+import Cards from "./components/Cards";
 
 const SkeletonAvatar = () => {
   return (
-    <div className="flex items-center gap-2 md:gap-4 px-14 ">
+    <div className="flex items-center gap-2 md:gap-4 px-14 h-screen bg-primary overflow-hidden">
       <div>
         <Skeleton className="h-16 w-16 md:h-24 md:w-24 rounded-full" />
       </div>
@@ -32,6 +32,10 @@ const Profile = () => {
 
   const { data: session } = useSession();
 
+  if (!session) {
+    return <SkeletonAvatar />;
+  }
+
   return (
     <EventLayout>
       <NavbarEvent />
@@ -42,32 +46,28 @@ const Profile = () => {
         <ChevronLeftIcon /> Go back
       </Link>
       <div className="pt-20 bg-primary">
-        {session ? (
-          <div className="flex md:px-12 lg:px-16 gap-2 md:gap-4 justify-center items-center text-white">
-            <div className="rounded-full overflow-hidden float-left">
-              {session?.user.image ? (
-                <Image
-                  src={session?.user.image}
-                  alt="image-next-auth"
-                  width={100}
-                  height={100}
-                  placeholder="blur"
-                  blurDataURL={session?.user.image}
-                />
-              ) : (
-                <div className="flex items-center justify-center bg-violet-800 h-16 w-16 md:w-24 md:h-24 text-2xl md:text-5xl text-white font-semibold">
-                  {session?.user?.name[0]}
-                </div>
-              )}
-            </div>
-            <div className="md:txt-md text-sm">
-              <p className="text-xl font-semibold">{session.user.name}</p>
-              <p>{session.user.email}</p>
-            </div>
+        <div className="flex md:px-12 lg:px-16 gap-2 md:gap-4 justify-center items-center text-white">
+          <div className="rounded-full overflow-hidden float-left">
+            {session?.user.image ? (
+              <Image
+                src={session?.user.image}
+                alt="image-next-auth"
+                width={100}
+                height={100}
+                placeholder="blur"
+                blurDataURL={session?.user.image}
+              />
+            ) : (
+              <div className="flex items-center justify-center bg-violet-800 h-16 w-16 md:w-24 md:h-24 text-2xl md:text-5xl text-white font-semibold">
+                {session?.user?.name[0]}
+              </div>
+            )}
           </div>
-        ) : (
-          <SkeletonAvatar />
-        )}
+          <div className="md:txt-md text-sm">
+            <p className="text-xl font-semibold">{session.user.name}</p>
+            <p>{session.user.email}</p>
+          </div>
+        </div>
 
         {session?.user.id && <Subscriptions userId={session?.user.id} />}
 

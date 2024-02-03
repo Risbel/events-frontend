@@ -17,7 +17,7 @@ const Reservations = () => {
     return (
       <EventLayout>
         <div className="flex justify-center pt-20">
-          <Spinner diameter={8} stroke={"white"} />
+          <Spinner diameter={8} stroke={"black"} />
         </div>
       </EventLayout>
     );

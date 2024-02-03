@@ -24,6 +24,7 @@ const Reservations = () => {
   if (isLoading || !myReservationsData) {
     return (
       <EventLayout>
+        <NavbarEvent />
         <div className="flex justify-center pt-20 bg-primary h-screen">
           <Spinner diameter={8} stroke={"white"} />
         </div>

@@ -1,6 +1,6 @@
+import Spinner from "@/components/loaders/Spinner";
+import { Button } from "@/components/ui/button";
 import { useDeleteSubscription } from "@/hooks/useDeleteSubscription";
-import { Button } from "../../../components/ui/button";
-import Spinner from "../../../components/loaders/Spinner";
 
 const Unsubscribe = ({ id }: { id: string }) => {
   const { mutate, isLoading } = useDeleteSubscription();
@@ -13,7 +13,7 @@ const Unsubscribe = ({ id }: { id: string }) => {
       variant={"secondary"}
     >
       <span>Unsubscribe</span>
-      {isLoading && <Spinner diameter={4} stroke={"primary"} />}
+      {isLoading && <Spinner diameter={4} stroke={"white"} />}
     </Button>
   );
 };
