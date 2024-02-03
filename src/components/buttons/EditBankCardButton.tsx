@@ -4,7 +4,7 @@ import { cn } from "@/lib/shadcnUtils";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IUserBankCard } from "@/services/getDisco";
+import { DiscoDetail, IUserBankCard } from "@/services/getDisco";
 import { useGetBankCardsByUserId } from "@/hooks/useGetBankCardsByUserId";
 import { useUpdateDiscoBankCard } from "@/hooks/useUpdateDiscoBankCardAsociated";
 import Spinner from "../loaders/Spinner";
@@ -17,10 +17,10 @@ const editBankCardSchema = z.object({
 export type EditBankCardSchema = z.infer<typeof editBankCardSchema>;
 
 const EditBankCardButton = ({
-  discoDetailId,
+  discoDetail,
   discoBankCard,
 }: {
-  discoDetailId: string;
+  discoDetail: DiscoDetail;
   discoBankCard: IUserBankCard;
 }) => {
   const [isActive, setIsActive] = useState(false);
@@ -78,7 +78,8 @@ const EditBankCardButton = ({
                         (item) =>
                           discoBankCard.id !== item.id && (
                             <option className="py-2" key={item.id} value={item.id}>
-                              {item.number.replace(/(\d{4})/g, "$1-").slice(0, -1)}
+                              {/* {item.number.replace(/(\d{4})/g, "$1-").slice(0, -1)} */}
+                              {item.number}
                             </option>
                           )
                       )}
@@ -88,7 +89,7 @@ const EditBankCardButton = ({
                   )}
                 </div>
                 <div>
-                  <input value={discoDetailId} hidden id="discoDetailId" {...register("discoDetailId")} />
+                  <input value={discoDetail.id} hidden id="discoDetailId" {...register("discoDetailId")} />
                   <Button type="submit">
                     <div className="flex gap-2 justify-center">
                       {!isLoading && <span>Save</span>} {isLoading && <Spinner diameter={4} stroke={"primary"} />}

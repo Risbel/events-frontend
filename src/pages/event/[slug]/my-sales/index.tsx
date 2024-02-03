@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import SearchReservationsForm from "./components/SearchReservationsBar";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 const MySales = () => {
   const days = useListDays();
@@ -57,7 +58,8 @@ const MySales = () => {
 
   return (
     <EventLayout>
-      <div className="pt-16 px-4 md:px-8">
+      <NavbarEvent />
+      <div className="pt-16 px-4 md:px-8 bg-primary h-full">
         <Link
           className="absolute flex gap-2 text-white font-light border px-[1px] rounded-md hover:bg-white/10"
           href={`/event/${param?.slug}`}

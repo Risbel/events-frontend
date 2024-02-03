@@ -11,7 +11,6 @@ import Link from "next/link";
 
 import { Session } from "next-auth";
 import Logout from "../buttons/Logout";
-import SuperAdminSettings from "./SuperAdminSettings";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { DataDisco } from "@/services/getDisco";
@@ -45,12 +44,13 @@ const DropdownNavbar = ({ session, discoData }: { session: Session; discoData: D
         style={{
           background: `${discoData.discoDetail.discoColor.bgNavbarColor}99`,
           color: `${discoData.discoDetail.discoColor.navbarForeground}`,
+          border: `2px solid ${discoData.discoDetail.discoColor.navbarForeground}`,
         }}
         className="backdrop-blur-xl w-80 pb-4 translate-y-3 -translate-x-6 rounded-r-none"
       >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <SuperAdminSettings />
+        <DropdownMenuSeparator style={{ border: `0.5px solid ${discoData.discoDetail.discoColor.navbarForeground}` }} />
+
         <DropdownMenuItem>
           <Link href={`/event/${slug}/profile`} className="w-full">
             Profile

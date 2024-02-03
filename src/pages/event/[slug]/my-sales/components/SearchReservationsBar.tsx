@@ -15,7 +15,7 @@ const SearchReservationsBar = ({
         <Input
           placeholder="Search sales by name"
           autoComplete="off"
-          className="h-7 pl-2 bg-white/10 text-white"
+          className="h-7 pl-2 bg-white"
           id="searchReservations"
           type="text"
           onChange={handleChange}

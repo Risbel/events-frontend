@@ -76,7 +76,7 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
               session && <DropdownNavbar discoData={discoData} session={session} />
             )}
           </div>
-          {havePermission("read", "Admin settings on disco") && <AdminSettings disco={discoData} />}
+          {<AdminSettings disco={discoData} />}
         </div>
       </div>
     </div>
