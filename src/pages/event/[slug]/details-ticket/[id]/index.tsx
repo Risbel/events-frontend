@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import Combos from "./components/combos";
 import { useListMonths } from "@/hooks/useListMonths";
+
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 const DiscoTicketDetails = () => {

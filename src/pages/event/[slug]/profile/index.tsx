@@ -7,6 +7,7 @@ import { ChevronLeftIcon } from "lucide-react";
 import { useRouter } from "next/router";
 import Subscriptions from "@/pages/profile/components/Subscriptions";
 import Cards from "@/pages/profile/components/Cards";
+
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 const SkeletonAvatar = () => {

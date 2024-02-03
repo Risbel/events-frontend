@@ -7,7 +7,7 @@ import Head from "./Head";
 import AboutUs from "./AboutUs";
 import Experiencies from "./Experiencies";
 import { SkeletonAboutUs, SkeletonExperiences, SkeletonHead } from "./Skeleton";
-import NavbarDisco from "../navigation/NavbarDisco";
+import NavbarEvent from "../navigation/NavbarEvent";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import { useGetDiscoTicketsByIdDisco } from "@/hooks/useGetDiscoTicketsByIdDisco";
 import DiscoTickets from "./DiscoTickets";
@@ -15,11 +15,11 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import FormContact from "@/pages/components/FormContact";
 
-const DiscoEnviroment = ({ name }: { name: any }) => {
+const DiscoEnviroment = ({ slug }: { slug: any }) => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
-  const { data: discoData, isLoading: loadingDisco, isError: isErrordisco, error } = useGetDisco({ name, userId });
+  const { data: discoData, isLoading: loadingDisco, isError: isErrordisco, error } = useGetDisco({ slug, userId });
   const discoId = discoData?.disco?.id;
 
   const { data: myPermissions } = useGetMyPermissions(userId, discoId);
@@ -53,7 +53,7 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
 
   return (
     <div className="relative overflow-hidden">
-      <NavbarDisco discoData={discoData.disco} myPermissions={myPermissions} />
+      <NavbarEvent />
 
       {loadingDisco ||
         (!discoData && (
@@ -77,7 +77,7 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
           : discoId &&
             discotickets && (
               <DiscoTickets
-                name={name}
+                name={slug}
                 myPermissions={myPermissions}
                 discoDetail={discoData?.disco.discoDetail}
                 discoId={discoId}

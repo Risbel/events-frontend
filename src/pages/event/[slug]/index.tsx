@@ -7,7 +7,7 @@ const Disco = () => {
   const { slug } = query;
 
   if (slug) {
-    return <DiscoEnviroment name={slug} />;
+    return <DiscoEnviroment slug={slug} />;
   }
 };
 

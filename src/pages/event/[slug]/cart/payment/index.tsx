@@ -1,6 +1,7 @@
 import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import NavbarEvent from "@/components/navigation/NavbarEvent";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

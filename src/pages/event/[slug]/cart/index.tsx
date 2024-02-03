@@ -1,5 +1,4 @@
 import NavbarEvent from "@/components/navigation/NavbarEvent";
-
 import { Button } from "@/components/ui/button";
 import { useListMonths } from "@/hooks/useListMonths";
 import useCart, { ICart } from "@/store/useCart";

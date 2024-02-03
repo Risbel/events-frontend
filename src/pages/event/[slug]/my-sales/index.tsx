@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import SearchReservationsForm from "./components/SearchReservationsBar";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
+
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 const MySales = () => {

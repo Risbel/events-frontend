@@ -7,7 +7,6 @@ import Cards from "./components/Cards";
 import Link from "next/link";
 import { ChevronLeftIcon } from "lucide-react";
 import { useRouter } from "next/router";
-import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 const SkeletonAvatar = () => {
   return (
