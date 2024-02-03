@@ -46,7 +46,7 @@ const DropdownNavbar = ({ session, discoData }: { session: Session; discoData: D
           background: `${discoData.discoDetail.discoColor.bgNavbarColor}99`,
           color: `${discoData.discoDetail.discoColor.navbarForeground}`,
         }}
-        className="backdrop-blur-xl w-80 pb-4 translate-y-3 -translate-x-2 rounded-r-none"
+        className="backdrop-blur-xl w-80 pb-4 translate-y-3 -translate-x-6 rounded-r-none"
       >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />

@@ -1,5 +1,5 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
-import UsersContainer from "@/pages/admin-settings/users/components/UsersContainer";
+import UsersContainer from "./components/UsersContainer";
 
 const Users = () => {
   return (

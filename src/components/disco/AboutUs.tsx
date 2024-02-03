@@ -5,10 +5,7 @@ import { Button } from "../ui/button";
 const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
   return (
     <div style={{ background: discoDetails.discoColor.bgAboutColor }} className="relative">
-      <div
-        style={{ background: `${discoDetails.discoColor.textAboutColor}` }}
-        className="absolute z-30 h-20 w-20 rounded-full blur-3xl top-28"
-      />
+      <div style={{ background: "white" }} className="absolute z-30 h-20 w-20 rounded-full blur-3xl top-28" />
 
       <div className="absoulute z-20 ">
         <div className="flex flex-col items-center px-4 lg:px-16 py-24 md:py-32">
@@ -47,7 +44,7 @@ const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
       </div>
 
       <div
-        style={{ background: `${discoDetails.discoColor.textAboutColor}` }}
+        style={{ background: "white" }}
         className="absolute h-20 w-20 rounded-full blur-3xl right-0 -translate-y-20"
       />
     </div>

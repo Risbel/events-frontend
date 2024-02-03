@@ -8,7 +8,7 @@ const UserContainer = ({ id }: { id: any }) => {
 
   if (isLoading && !data) {
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center items-center pt-24">
         <Spinner diameter={10} stroke={"black"} />
       </div>
     );
@@ -19,7 +19,7 @@ const UserContainer = ({ id }: { id: any }) => {
       <div className="flex gap-4 items-center">
         <Avatar>
           {!data?.imageUrl ? (
-            <div className="rounded-full flex justify-center items-center w-full">
+            <div className="rounded-full flex justify-center items-center bg-secondary h-12 w-12">
               <span className="text-md font-bold text-black">{data?.name && data.name[0]}</span>
             </div>
           ) : (

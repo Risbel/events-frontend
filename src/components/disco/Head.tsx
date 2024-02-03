@@ -12,11 +12,11 @@ const Head = ({ discoData }: { discoData: { disco: DataDisco; subscription: Subs
   return (
     <div className="relative h-screen">
       <BannerImages discoDetails={discoData.disco.discoDetail} />
-
+      {userId && !discoData.subscription && <SubscribeNow userId={userId} discoId={discoData.disco.id} />}
       <div className="relative flex items-end z-10 h-screen">
-        <div className="lg:mb-8">
+        <div className="mb-4 lg:mb-8 md:pl-12">
           <h1
-            className="px-8 font-bold text-4xl md:text-5xl lg:text-7xl text-center md:text-start"
+            className="font-bold text-4xl md:text-5xl lg:text-7xl text-center md:text-start"
             style={{ color: `${discoData.disco.discoDetail.discoColor.h1BannerColor}` }}
           >
             {(discoData?.disco.name).toUpperCase()}
@@ -24,13 +24,12 @@ const Head = ({ discoData }: { discoData: { disco: DataDisco; subscription: Subs
 
           <p
             style={{ color: `${discoData.disco.discoDetail.discoColor.bannerDescriptionColor}` }}
-            className="text-xl md:text-3xl text-center md:text-left px-8 py-4 md:py-8 md:w-2/3"
+            className="text-xl md:text-3xl text-center md:text-left py-4 md:py-8 md:w-2/3"
           >
             {discoData?.disco.discoDetail.bannerDescription}
           </p>
         </div>
       </div>
-      {userId && !discoData.subscription && <SubscribeNow userId={userId} discoId={discoData.disco.id} />}
     </div>
   );
 };

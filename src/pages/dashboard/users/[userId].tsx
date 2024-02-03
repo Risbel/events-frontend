@@ -1,7 +1,7 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
-import UserContainer from "@/pages/admin-settings/users/components/UserContainer";
 
 import { useRouter } from "next/router";
+import UserContainer from "./components/UserContainer";
 
 const UserDetail = () => {
   const router = useRouter();

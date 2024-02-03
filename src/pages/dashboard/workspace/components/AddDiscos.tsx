@@ -65,7 +65,7 @@ const AddDiscos = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex gap-2">
           <div className="relative mb-4 md:mr-2 md:w-1/4">
-            <Label name={"Event name"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
+            <Label name={"Sponsor"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
 
             <Input
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"

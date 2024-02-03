@@ -1,3 +1,4 @@
+import { DiscoDetail } from "@/services/getDisco";
 import { create } from "zustand";
 
 interface State {
@@ -59,7 +60,7 @@ export interface ICart {
     slug: string;
     createdAt: string;
     updatedAt: string;
-    discoDetail: IDiscoDetail;
+    discoDetail: DiscoDetail;
   };
   comboReservations: [];
   ticketImages: {
@@ -71,27 +72,6 @@ export interface ICart {
     discoTicketId: string;
   }[];
   quantity: number;
-}
-
-export interface IDiscoDetail {
-  id: string;
-  description: string;
-  largeDescription: string;
-  bgImage: string;
-  address: string;
-  createdAt: string;
-  updatedAt: string;
-  userBankCardId: string;
-  administrator: string;
-  discoId: string;
-  userBankCard: {
-    id: string;
-    number: string;
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-    userId: string;
-  };
 }
 
 interface IComboDetail {

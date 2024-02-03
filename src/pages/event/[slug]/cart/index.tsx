@@ -1,11 +1,10 @@
-import { LogoCategory } from "@/components/disco/DiscoTickets";
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 import { Button } from "@/components/ui/button";
 import { useListMonths } from "@/hooks/useListMonths";
 import useCart, { ICart } from "@/store/useCart";
 import clsx from "clsx";
-import { ChevronLeftIcon, ChevronsLeft } from "lucide-react";
+import { ChevronLeftIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,6 +13,7 @@ const Cart = () => {
   const router = useRouter();
   const { query } = router;
   const { slug } = query;
+
   const months = useListMonths();
   const { cartItems, removeFromCart, addToCart } = useCart();
 
@@ -37,6 +37,10 @@ const Cart = () => {
     return addToCart({ ...item, quantity });
   };
 
+  if (!slug || !cartItems) {
+    return;
+  }
+
   return (
     <div className="h-screen relative z-0 text-center bg-primary">
       <NavbarEvent />
@@ -49,7 +53,7 @@ const Cart = () => {
       {cartItems.length > 0 && (
         <p className="text-center text-slate-400 font-thin pt-16 pb-4 text-xl">
           <span className="text-white underline underline-2">Cart</span>/
-          <Link className="hover:text-white hover:underline underline-2" href={"/cart/payment"}>
+          <Link className="hover:text-white hover:underline underline-2" href={`/event/${slug}/cart/payment`}>
             Reservation
           </Link>
           /Status
@@ -188,7 +192,7 @@ const Cart = () => {
       </div>
       <div className={clsx("w-full text-center mt-28 mb-8", !cartItems.length && "hidden")}>
         <Button className="shadow-xl hover:shadow-blue-400/40 hover:border-b hover:bg-violet-700 transition-shadow duration-300">
-          <Link href={"/cart/payment"}> Make Reservation</Link>
+          <Link href={`/event/${slug}/cart/payment`}> Make Reservation</Link>
         </Button>
         <p className="text-white text-xl font-thin my-4">
           Total to pay: $

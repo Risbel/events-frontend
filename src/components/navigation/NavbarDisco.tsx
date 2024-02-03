@@ -25,10 +25,13 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
   return (
     <div className="fixed z-50">
       <div
-        style={{ backgroundColor: `${discoData.discoDetail.discoColor.bgNavbarColor}` }}
-        className={cn("flex w-screen h-14 absolute z-30 border-b backdrop-blur-2xl")}
+        style={{
+          backgroundColor: `${discoData.discoDetail.discoColor.bgNavbarColor}`,
+          borderBottom: `2px solid ${discoData.discoDetail.discoColor.navbarForeground}`,
+        }}
+        className={cn("flex w-screen h-14 absolute z-30 backdrop-blur-2xl")}
       />
-      <div className="flex justify-between items-center w-screen absolute z-40 px-2 md:px-6 py-2">
+      <div className="flex justify-between items-center w-screen absolute z-40 px-2 md:pl-6 md:pr-8 py-2">
         <Link href={`/event/${discoData.slug}`} className="group flex gap-2 items-center cursor-pointer">
           <Image
             className="rounded-full  group-hover:scale-105"
@@ -42,7 +45,7 @@ const NavbarDisco = ({ discoData, myPermissions }: { discoData: DataDisco; myPer
           </p>
         </Link>
 
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 md:gap-4 items-center">
           <BellIcon
             style={{ stroke: `${discoData.discoDetail.discoColor.navbarForeground}` }}
             className="cursor-pointer hover:scale-110 transition-transform"

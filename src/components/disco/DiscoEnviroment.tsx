@@ -52,7 +52,7 @@ const DiscoEnviroment = ({ name }: { name: any }) => {
   }
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
       <NavbarDisco discoData={discoData.disco} myPermissions={myPermissions} />
 
       {loadingDisco ||

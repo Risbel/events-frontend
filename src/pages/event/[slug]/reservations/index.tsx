@@ -44,7 +44,7 @@ const Reservations = () => {
         <NavbarEvent />
         <div className="pt-20 px-4 bg-primary h-full">
           <Link
-            href={`/disco/${slug}`}
+            href={`/event/${slug}`}
             className="absolute flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-4 py-2 mt-10"
           >
             <ChevronLeftIcon /> Go back

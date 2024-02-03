@@ -3,8 +3,8 @@ import SubscribeButton from "../buttons/SubscribeButton";
 
 const SubscribeNow = ({ userId, discoId }: { userId: string; discoId: string }) => {
   return (
-    <div className="absolute z-40 top-[10%] right-10 md:right-8 md:mx-8 flex items-center gap-4 bg-gradient-to-r from-violet-900 via-transparent to-transparent  pl-2">
-      <h1 className="font-normal  md:text-lg text-white">Subscribe now here:</h1>
+    <div className="fixed top-16 z-40 flex items-center gap-4 bg-gradient-to-r from-violet-900 via-transparent to-transparent pl-2">
+      <h1 className="font-normal md:text-lg text-white">Subscribe now here:</h1>
       <SubscribeButton userId={userId} discoId={discoId} />
     </div>
   );

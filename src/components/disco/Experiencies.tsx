@@ -17,7 +17,7 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
       style={{
         background: `${discoDetail.discoColor.bgExperiencies}`,
       }}
-      className="flex flex-col items-center justify-center relative"
+      className="flex flex-col items-center justify-center relative overflow-hidden"
     >
       <h1
         style={{ color: `${discoDetail.discoColor.experienciesH1Color}` }}
@@ -78,16 +78,13 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
         {havePermission("create", "Disco Images") && <AddExperienceButton discoDetailId={discoDetail.id} />}
       </div>
 
-      <div
-        style={{ background: `${discoDetail.discoColor.experienciesH1Color}80` }}
-        className="absolute rounded-full z-10 h-80 w-80 blur-3xl opacity-70 right-32 bottom-0 -translate-y-1/3"
-      ></div>
+      <div className="absolute rounded-full z-10 h-80 w-80 blur-3xl opacity-70 right-32 bottom-0 -translate-y-1/3 bg-white/50"></div>
 
       <div className="flex justify-between w-full mb-12">
         <div
           style={{ borderColor: `${discoDetail.discoColor.experienciesH1Color}` }}
           className="border-4 w-1/4 rounded-r-full"
-        />{" "}
+        />
         <div
           style={{ borderColor: `${discoDetail.discoColor.experienciesH1Color}` }}
           className="border-4 w-3/5 rounded-l-full"
