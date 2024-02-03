@@ -71,7 +71,7 @@ const AddDiscos = () => {
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="discoName"
               type="text"
-              placeholder="e.g. Lunar Event"
+              placeholder="e.g. Chocobar Caribe"
               {...register("name")}
             />
             {errors.name && <p className="text-xs italic text-red-500">{errors.name?.message}</p>}
@@ -83,7 +83,7 @@ const AddDiscos = () => {
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="slug"
               type="text"
-              placeholder="e.g. lunar-event"
+              placeholder="e.g. chocobar-caribe"
               {...register("slug")}
             />
             {errors.slug && <p className="text-xs italic text-red-500">{errors.slug?.message}</p>}
@@ -96,11 +96,11 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#344256"}
+              defaultValue={"#522E00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="brandColor"
-              placeholder="Select color to the h1 clor"
+              placeholder="Select color to the h1 color"
               {...register("brandColor")}
             />
             {errors.brandColor && <p className="text-xs italic text-red-500">{errors.brandColor?.message}</p>}
@@ -129,7 +129,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#432371"}
+              defaultValue={"#fac985"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="bgNavbarColor"
@@ -146,7 +146,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#ffffff"}
+              defaultValue={"#492a00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="navbarForeground"
@@ -173,7 +173,7 @@ const AddDiscos = () => {
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="h1Banner"
               type="text"
-              placeholder="e.g. Lunar Event or whatever you want to highlight"
+              placeholder="e.g. Chocolate event or whatever you want to highlight"
               {...register("h1Banner")}
             />
             {errors.h1Banner && <p className="text-xs italic text-red-500">{errors.h1Banner?.message}</p>}
@@ -222,7 +222,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#f2f2f2"}
+              defaultValue={"#492a00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="bannerGradientColor"
@@ -263,7 +263,7 @@ const AddDiscos = () => {
           />
 
           <Input
-            defaultValue={"#f2f2f2"}
+            defaultValue={"#ffffff"}
             type="color"
             className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
             id="bannerDescriptionColor"
@@ -302,7 +302,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#ffffff"}
+              defaultValue={"#fad29a"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="bgAboutColor"
@@ -320,7 +320,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#ffffff"}
+              defaultValue={"#492a00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="textColor"
@@ -338,7 +338,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#5f46ff"}
+              defaultValue={"#321d00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="buttonColor"
@@ -355,7 +355,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#ffffff"}
+              defaultValue={"#ffc36e"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="buttonForeground"
@@ -396,7 +396,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#ffffff"}
+              defaultValue={"#321d00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="experienciesH1Color"
@@ -439,7 +439,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#ffffff"}
+              defaultValue={"#321d00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="ticketH1Color"
@@ -456,7 +456,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#ffffff"}
+              defaultValue={"#291800"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="buttonsTicketsColor"
@@ -475,7 +475,7 @@ const AddDiscos = () => {
             />
 
             <Input
-              defaultValue={"#ffffff"}
+              defaultValue={"#edc58d"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="buttonTicketForeground"
@@ -576,7 +576,7 @@ const AddDiscos = () => {
         </div>
 
         <div className="my-6 mb-12 text-center">
-          <ButtonSubmit isLoading={isLoading} text={"Create new disco"} />
+          <ButtonSubmit isLoading={isLoading} text={"Create new Event"} />
         </div>
       </form>
     </>

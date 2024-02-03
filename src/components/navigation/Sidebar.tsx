@@ -10,7 +10,7 @@ const menuItems = [
   { id: 4, label: "Manage Users", icon: UsersIcon, link: "/dashboard/users" },
   { id: 5, label: "Permissions", icon: LockKeyhole, link: "/dashboard/permissions" },
 
-  { id: 6, label: "Home", icon: HomeIcon, link: "/" },
+  { id: 6, label: "Home", icon: HomeIcon, link: "/dashboard" },
 ];
 
 const SidebarDivider = () => <div className="w-full border-b border-muted my-2 shadow-xl" />;
