@@ -3,17 +3,19 @@ import Image from "next/image";
 import clsx from "clsx";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 import useHavePermissions from "@/utils/useHavePermissions";
-import EditTicketsForm from "../forms/EditTicketsForm";
-import DeleteTicketButton from "../buttons/DeleteTicketButton";
+
 import Link from "next/link";
 import { useState } from "react";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
 import AddCombosForm from "@/pages/event/[slug]/details-ticket/[id]/components/AddCombosForm";
-import AddTicketsForm from "../forms/AddTicketsForm";
+
 import { compareAsc, compareDesc } from "date-fns";
 import { DiscoDetail, IDiscoColors } from "@/services/getDisco";
 import { Banknote, CalendarDays, CreditCard, PiggyBank, RockingChair, SignalLow, Ticket } from "lucide-react";
+import EditTicketsForm from "@/components/forms/EditTicketsForm";
+import DeleteTicketButton from "@/components/buttons/DeleteTicketButton";
+import AddTicketsForm from "@/components/forms/AddTicketsForm";
 
 export const LogoCategory = ({ ticket, discoColors }: { ticket: IDiscoTicket; discoColors: IDiscoColors }) => {
   return (

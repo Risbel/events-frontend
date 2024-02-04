@@ -1,13 +1,14 @@
 import React from "react";
-import AddExperienceButton from "../buttons/AddExperienceButton";
+
 import Image from "next/image";
 
 import { DiscoDetail } from "@/services/getDisco";
 
 import useHavePermissions from "@/utils/useHavePermissions";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
-import DeleteExperienceButton from "../buttons/DeleteExperienceButton";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import DeleteExperienceButton from "@/components/buttons/DeleteExperienceButton";
+import AddExperienceButton from "@/components/buttons/AddExperienceButton";
 
 const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail; myPermissions: ImyPermissions }) => {
   const { havePermission } = useHavePermissions(myPermissions);

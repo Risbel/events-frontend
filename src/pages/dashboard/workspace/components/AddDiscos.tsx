@@ -235,7 +235,7 @@ const AddDiscos = () => {
           </div>
         </div>
 
-        <input hidden type="text" value={user.id} {...register("administrator")} />
+        <input hidden type="text" value={user?.id} {...register("administrator")} />
 
         <div className="relative mb-4 pb-2">
           <Label

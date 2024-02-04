@@ -1,5 +1,5 @@
+import SubscribeButton from "@/components/buttons/SubscribeButton";
 import React from "react";
-import SubscribeButton from "../buttons/SubscribeButton";
 
 const SubscribeNow = ({ userId, discoId }: { userId: string; discoId: string }) => {
   return (

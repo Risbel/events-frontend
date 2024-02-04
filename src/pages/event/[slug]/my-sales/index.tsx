@@ -1,4 +1,3 @@
-import { LogoCategory } from "@/components/disco/DiscoTickets";
 import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { useGetReservationsByDiscoSlug } from "@/hooks/useGetReservationsByDiscoSlug";
@@ -25,7 +24,8 @@ const MySales = () => {
   if (isLoading) {
     return (
       <EventLayout>
-        <div className="pt-20 flex justify-center">
+        <NavbarEvent />
+        <div className="pt-20 flex justify-center bg-primary h-full">
           <Spinner diameter={8} stroke="white" />
         </div>
       </EventLayout>

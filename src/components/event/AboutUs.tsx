@@ -1,6 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { DiscoDetail } from "@/services/getDisco";
 import React from "react";
-import { Button } from "../ui/button";
 
 const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
   return (

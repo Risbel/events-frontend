@@ -1,4 +1,4 @@
-import DiscoEnviroment from "@/components/disco/DiscoEnviroment";
+import DiscoEnviroment from "@/components/event/DiscoEnviroment";
 import { useRouter } from "next/router";
 
 const Disco = () => {

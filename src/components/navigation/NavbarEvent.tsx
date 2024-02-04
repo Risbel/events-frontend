@@ -9,11 +9,12 @@ import { cn } from "@/lib/shadcnUtils";
 import { DataDisco } from "@/services/getDisco";
 import useHavePermissions from "@/utils/useHavePermissions";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
-import AdminSettings from "../disco/AdminSettings";
+
 import { useRouter } from "next/router";
 import { BellIcon, ShoppingCart } from "lucide-react";
 import useGetDisco from "@/hooks/useGetDisco";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
+import AdminSettings from "../event/AdminSettings";
 
 const NavbarEvent = () => {
   const router = useRouter();

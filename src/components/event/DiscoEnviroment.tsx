@@ -7,13 +7,15 @@ import Head from "./Head";
 import AboutUs from "./AboutUs";
 import Experiencies from "./Experiencies";
 import { SkeletonAboutUs, SkeletonExperiences, SkeletonHead } from "./Skeleton";
-import NavbarEvent from "../navigation/NavbarEvent";
+
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import { useGetDiscoTicketsByIdDisco } from "@/hooks/useGetDiscoTicketsByIdDisco";
 import DiscoTickets from "./DiscoTickets";
 import Link from "next/link";
-import { Button } from "../ui/button";
+
 import FormContact from "@/pages/components/FormContact";
+import { Button } from "@/components/ui/button";
+import NavbarEvent from "@/components/navigation/NavbarEvent";
 
 const DiscoEnviroment = ({ slug }: { slug: any }) => {
   const { data: session } = useSession();
