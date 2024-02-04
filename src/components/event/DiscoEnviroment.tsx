@@ -16,6 +16,7 @@ import Link from "next/link";
 import FormContact from "@/pages/components/FormContact";
 import { Button } from "@/components/ui/button";
 import NavbarEvent from "@/components/navigation/NavbarEvent";
+import NavSidebarEventMobile from "../navigation/NavSidebarMobile";
 
 const DiscoEnviroment = ({ slug }: { slug: any }) => {
   const { data: session } = useSession();
@@ -56,6 +57,9 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
   return (
     <div className="relative overflow-hidden">
       <NavbarEvent />
+      <div className="fixed z-50 top-[60px] left-1 md:hidden">
+        <NavSidebarEventMobile disco={discoData.disco} />
+      </div>
 
       {loadingDisco ||
         (!discoData && (

@@ -1,4 +1,3 @@
-import { LogoCategory } from "@/components/disco/DiscoTickets";
 import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";

@@ -60,8 +60,11 @@ const NavbarEvent = () => {
           </p>
         </Link>
 
-        {path === "/event/" + slug && (
-          <div style={{ color: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }} className="flex gap-4">
+        {path === "/event/" + slug && ( //condition to show just on /event page instead all subpages
+          <div
+            style={{ color: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }}
+            className="hidden md:flex gap-4"
+          >
             <a
               className="font-semibold hover:opacity-80"
               onClick={(event) => handleClickScroll(event, "#hero")}
