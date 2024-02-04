@@ -10,7 +10,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import DeleteExperienceButton from "@/components/buttons/DeleteExperienceButton";
 import AddExperienceButton from "@/components/buttons/AddExperienceButton";
 
-const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail; myPermissions: ImyPermissions }) => {
+const Experiences = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail; myPermissions: ImyPermissions }) => {
   const { havePermission } = useHavePermissions(myPermissions);
 
   return (
@@ -18,13 +18,13 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
       style={{
         background: `${discoDetail.discoColor.bgExperiencies}`,
       }}
-      className="flex flex-col items-center justify-center relative overflow-hidden"
+      className="flex flex-col items-center justify-center relative overflow-hidden h-screen"
     >
       <h1
         style={{ color: `${discoDetail.discoColor.experienciesH1Color}` }}
         className="font-extrabold text-4xl md:text-5xl lg:text-7xl py-8 text-center"
       >
-        Experiencies
+        Experiences
       </h1>
 
       <div className="flex justify-between w-full">
@@ -95,4 +95,4 @@ const Experiencies = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail
   );
 };
 
-export default Experiencies;
+export default Experiences;

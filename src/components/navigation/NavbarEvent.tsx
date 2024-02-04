@@ -2,24 +2,24 @@ import Link from "next/link";
 import DropdownNavbar from "./DropdownNavbar";
 
 import { useSession } from "next-auth/react";
-import { Skeleton } from "../ui/skeleton";
 import Image from "next/image";
 import useCart from "@/store/useCart";
 import { cn } from "@/lib/shadcnUtils";
-import { DataDisco } from "@/services/getDisco";
 import useHavePermissions from "@/utils/useHavePermissions";
-import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 
 import { useRouter } from "next/router";
-import { BellIcon, ShoppingCart } from "lucide-react";
+import { BellIcon, Home, ShoppingCart } from "lucide-react";
 import useGetDisco from "@/hooks/useGetDisco";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import AdminSettings from "../event/AdminSettings";
+import useHandleScroll from "@/hooks/useHandlerScroll";
+import { usePathname } from "next/navigation";
 
 const NavbarEvent = () => {
   const router = useRouter();
   const { query } = router;
   const { slug } = query;
+  const path = usePathname();
 
   const { data: session, status } = useSession();
   const userId = session?.user?.id;
@@ -30,6 +30,8 @@ const NavbarEvent = () => {
 
   const { data: myPermissions } = useGetMyPermissions(userId, discoId);
   const { havePermission } = useHavePermissions(myPermissions);
+
+  const handleClickScroll = useHandleScroll();
 
   if (!discoData) {
     return;
@@ -57,6 +59,46 @@ const NavbarEvent = () => {
             {discoData.disco.name.toUpperCase()}
           </p>
         </Link>
+
+        {path === "/event/" + slug && (
+          <div style={{ color: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }} className="flex gap-4">
+            <a
+              className="font-semibold hover:opacity-80"
+              onClick={(event) => handleClickScroll(event, "#hero")}
+              href={"#hero"}
+            >
+              <Home height={22} />
+            </a>
+            <a
+              className="font-semibold hover:opacity-80"
+              onClick={(event) => handleClickScroll(event, "#about")}
+              href={"#about"}
+            >
+              About
+            </a>
+            <a
+              className="font-semibold hover:opacity-80"
+              onClick={(event) => handleClickScroll(event, "#experiences")}
+              href={"#experiences"}
+            >
+              Experiencies
+            </a>
+            <a
+              className="font-semibold hover:opacity-80"
+              onClick={(event) => handleClickScroll(event, "#contact")}
+              href={"#contact"}
+            >
+              Contact
+            </a>
+            <a
+              className="font-semibold hover:opacity-80"
+              onClick={(event) => handleClickScroll(event, "#FAQ")}
+              href={"#FAQ"}
+            >
+              FAQ
+            </a>
+          </div>
+        )}
 
         <div className="flex gap-2 md:gap-4 items-center">
           <BellIcon
