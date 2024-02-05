@@ -128,7 +128,7 @@ const Signup = () => {
           </div>
           {isError && <p className="text-center text-xs italic text-red-500">{error?.response?.data?.message}</p>}
           <Button className="flex gap-2" type="submit">
-            Sign up {isLoading && <Spinner diameter={4} stroke={"primary"} />}
+            Sign up {isLoading && <Spinner diameter={4} stroke={"white"} />}
           </Button>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import httpService from "@/config/axios.config";
 
 export const getDiscoBySlug = async (slug: any) => {
-  const response = await httpService.get<IDiscoRoles>(`/discoRoles/${slug}`);
+  const response = await httpService.get<IDiscoRoles>(`/discoRoles/${slug}`, { validateStatus: null });
 
   return response.data;
 };

@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
     if (url.pathname.startsWith("/dashboard/")) {
       url.pathname = `/auth/login`;
     } else {
-      url.pathname = `auth/login/${url.pathname}`;
+      url.pathname = `auth/signup${url.pathname}`;
     }
 
     return NextResponse.redirect(url);
@@ -21,7 +21,7 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/event/:path*",
+    "/event/(.*)/cart/payment",
     "/profile",
     "/admin-settings/permissions",
     "/dashboard/:path*",
