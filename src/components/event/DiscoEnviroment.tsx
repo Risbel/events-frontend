@@ -64,7 +64,7 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
         <NavSidebarEventMobile disco={discoData.disco} />
       </div>
 
-      <div className="absolute flex justify-center items-center z-50 h-screen w-screen bg-transparent">
+      <div className="absolute flex justify-center items-center z-40 h-screen w-screen bg-transparent">
         <Link
           style={{
             background: discoData.disco.discoDetail.discoColor.bgNavbarColor,

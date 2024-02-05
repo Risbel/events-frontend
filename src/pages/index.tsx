@@ -15,8 +15,8 @@ const Home = () => {
         <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
         <div className="relative z-20 flex flex-col items-center gap-6">
           <h1 className="text-secondary-foreground text-center text-3xl md:text-4xl lg:text-6xl font-extrabold w-4/5">
-            <span className="inline-flex animate-background-shine bg-[linear-gradient(110deg,#000000,45%,#686868,55%,#000000)] bg-[length:250%_100%] bg-clip-text text-transparent">
-              Create your virtual shop in minutes and turn events into unique experiences.
+            <span className="inline-flex animate-background-shine bg-[linear-gradient(110deg,#000000,45%,#686868,55%,#000000)] bg-[length:250%_100%] bg-clip-text text-transparent pb-4">
+              Quickly and easily build virtual spaces to promote your events with us
             </span>
           </h1>
           <h2 className="text-primary text-center text-md lg:text-2xl w-4/5">

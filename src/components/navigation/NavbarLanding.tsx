@@ -14,7 +14,7 @@ const NavbarLanding = () => {
           MyEvents
         </Link>
 
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6 translate-x-20">
           <Link href={"/#"} className="text-lg text-primary-foreground/80 hover:text-white">
             About
           </Link>
