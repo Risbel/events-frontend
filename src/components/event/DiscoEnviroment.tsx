@@ -17,6 +17,7 @@ import FormContact from "@/pages/components/FormContact";
 import { Button } from "@/components/ui/button";
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 import NavSidebarEventMobile from "../navigation/NavSidebarMobile";
+import useHandleScroll from "@/hooks/useHandlerScroll";
 
 const DiscoEnviroment = ({ slug }: { slug: any }) => {
   const { data: session } = useSession();
@@ -28,6 +29,8 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
   const { data: myPermissions } = useGetMyPermissions(userId, discoId);
 
   const { data: discotickets } = useGetDiscoTicketsByIdDisco(discoId);
+
+  const handleClickScroll = useHandleScroll();
 
   if (isErrordisco) {
     return (
@@ -61,6 +64,20 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
         <NavSidebarEventMobile disco={discoData.disco} />
       </div>
 
+      <div className="absolute flex justify-center items-center z-50 h-screen w-screen bg-transparent">
+        <Link
+          style={{
+            background: discoData.disco.discoDetail.discoColor.bgNavbarColor,
+            color: discoData.disco.discoDetail.discoColor.navbarForeground,
+            border: `2px solid ${discoData.disco.discoDetail.discoColor.navbarForeground}`,
+          }}
+          onClick={(event) => handleClickScroll(event, "#tickets")}
+          href={"#tickets"}
+          className="px-6 py-2 hover:opacity-95 rounded-lg font-semibold text-lg md:text-xl hover:-translate-y-1  shadow-2xl hover:shadow-white transition-transform"
+        >
+          RESERVE NOW
+        </Link>
+      </div>
       {loadingDisco ||
         (!discoData && (
           <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-4">
