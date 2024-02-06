@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
   if (!session) {
     const url = req.nextUrl.clone();
 
-    if (url.pathname.startsWith("/dashboard/")) {
+    if (url.pathname.startsWith("/dashboard")) {
       url.pathname = `/auth/login`;
     } else {
       url.pathname = `auth/signup${url.pathname}`;

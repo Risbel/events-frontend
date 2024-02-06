@@ -16,7 +16,7 @@ export const useSignup: any = (credentials: { password: string; email: string },
           redirect: false,
           email,
           password,
-          callbackUrl: slug ? `/event/${slug}` : `/`,
+          callbackUrl: slug ? `/event/${slug}` : `/dashboard/allevents`,
         });
 
         if (status?.url) {
