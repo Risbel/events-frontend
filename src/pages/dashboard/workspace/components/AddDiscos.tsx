@@ -68,6 +68,7 @@ const AddDiscos = () => {
             <Label name={"Sponsor"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
 
             <Input
+              autoComplete="off"
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="discoName"
               type="text"
@@ -80,6 +81,7 @@ const AddDiscos = () => {
             <Label name={"Slug URL"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
 
             <Input
+              autoComplete="off"
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="slug"
               type="text"
@@ -96,6 +98,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#522E00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -113,6 +116,7 @@ const AddDiscos = () => {
             <Label htmlfor={"logo"} name={"Image logo URL"} className="block mb-1 text-sm font-medium text-primary" />
 
             <Input
+              autoComplete="off"
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="logo"
               type="text"
@@ -129,6 +133,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#fac985"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -146,6 +151,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#492a00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -170,6 +176,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="h1Banner"
               type="text"
@@ -186,6 +193,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#ffffff"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -206,6 +214,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="bannerImage"
               type="text"
@@ -222,6 +231,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#492a00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -235,7 +245,7 @@ const AddDiscos = () => {
           </div>
         </div>
 
-        <input hidden type="text" value={user?.id} {...register("administrator")} />
+        <input autoComplete="off" hidden type="text" value={user?.id} {...register("administrator")} />
 
         <div className="relative mb-4 pb-2">
           <Label
@@ -263,6 +273,7 @@ const AddDiscos = () => {
           />
 
           <Input
+            autoComplete="off"
             defaultValue={"#ffffff"}
             type="color"
             className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -302,6 +313,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#fad29a"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -320,10 +332,11 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#492a00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="textColor"
+              id="textAboutColor"
               placeholder="Select color to the h1 clor"
               {...register("textAboutColor")}
             />
@@ -338,6 +351,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#321d00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -355,6 +369,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#ffc36e"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -379,6 +394,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#ffffff"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -396,6 +412,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#321d00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -420,6 +437,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#ffffff"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -439,6 +457,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#321d00"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -456,6 +475,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#291800"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -475,6 +495,7 @@ const AddDiscos = () => {
             />
 
             <Input
+              autoComplete="off"
               defaultValue={"#edc58d"}
               type="color"
               className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
@@ -495,6 +516,7 @@ const AddDiscos = () => {
             <Label name={"phone number"} htmlfor={"phone"} className="block mb-1 text-sm font-medium text-primary" />
 
             <Input
+              autoComplete="off"
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="phone"
               type="text"
@@ -507,6 +529,7 @@ const AddDiscos = () => {
             <Label name={"email"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
 
             <Input
+              autoComplete="off"
               className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
               id="email"
               type="text"
@@ -521,6 +544,7 @@ const AddDiscos = () => {
           <Label name={"Address"} htmlfor={"address"} className="block mb-1 text-sm font-medium text-primary" />
 
           <Input
+            autoComplete="off"
             className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
             id="address"
             type="text"
@@ -538,6 +562,7 @@ const AddDiscos = () => {
           />
 
           <Input
+            autoComplete="off"
             className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
             id="bankCardNumber"
             type="text"
@@ -566,6 +591,7 @@ const AddDiscos = () => {
           />
 
           <Input
+            autoComplete="off"
             className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
             id="background"
             type="text"
