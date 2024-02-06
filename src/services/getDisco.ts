@@ -1,6 +1,6 @@
 import httpService from "@/config/axios.config";
 
-const getDisco = async ({ slug, userId }: { slug: any; userId: any }) => {
+const getDisco = async ({ slug, userId }: { slug: any; userId?: any }) => {
   const response = await httpService.get<{ disco: DataDisco; subscription: Subscription }>(`/disco/${slug}/${userId}`);
   return response.data;
 };

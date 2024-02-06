@@ -3,7 +3,7 @@ import { signup } from "@/services/signup";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-export const useSignup: any = (credentials: { password: string; email: string }, disco: string) => {
+export const useSignup: any = (credentials: { password: string; email: string }, slug: string) => {
   const router = useRouter();
 
   const { email, password } = credentials;
@@ -16,7 +16,7 @@ export const useSignup: any = (credentials: { password: string; email: string },
           redirect: false,
           email,
           password,
-          callbackUrl: disco ? `/event/${disco}` : `/`,
+          callbackUrl: slug ? `/event/${slug}` : `/`,
         });
 
         if (status?.url) {
