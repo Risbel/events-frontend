@@ -4,7 +4,7 @@ import AddDiscos from "./components/AddDiscos";
 const WorkSpace = () => {
   return (
     <DashboardLayout>
-      <div className="pt-16 px-8">
+      <div className="relative">
         <AddDiscos />
       </div>
     </DashboardLayout>

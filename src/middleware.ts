@@ -10,7 +10,7 @@ export async function middleware(req: NextRequest) {
     if (url.pathname.startsWith("/dashboard")) {
       url.pathname = `/auth/login`;
     } else {
-      url.pathname = `auth/signup${url.pathname}`;
+      url.pathname = `auth/login${url.pathname}`;
     }
 
     return NextResponse.redirect(url);

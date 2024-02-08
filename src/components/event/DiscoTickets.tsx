@@ -10,9 +10,9 @@ import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
 import AddCombosForm from "@/pages/event/[slug]/details-ticket/[id]/components/AddCombosForm";
 
-import { compareAsc, compareDesc } from "date-fns";
+import { compareAsc } from "date-fns";
 import { DiscoDetail, IDiscoColors } from "@/services/getDisco";
-import { Banknote, CalendarDays, CreditCard, PiggyBank, RockingChair, SignalLow, Ticket } from "lucide-react";
+import { CalendarDays, CreditCard, RockingChair } from "lucide-react";
 import EditTicketsForm from "@/components/forms/EditTicketsForm";
 import DeleteTicketButton from "@/components/buttons/DeleteTicketButton";
 import AddTicketsForm from "@/components/forms/AddTicketsForm";
@@ -168,7 +168,7 @@ const DiscoTickets = ({
                         style={{ color: `${discoDetail.discoColor.buttonTicketForeground}` }}
                         className="text-xs font-semibold"
                       >
-                        {months[new Date(date).getMonth()]}
+                        {months[new Date(date).getMonth()].slice(0, 3)}
                       </p>
                     </button>
                   );
