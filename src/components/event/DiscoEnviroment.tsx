@@ -75,7 +75,7 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
           href={"#tickets"}
           className="px-6 py-2 hover:opacity-95 rounded-lg font-semibold text-lg md:text-xl hover:-translate-y-1  shadow-2xl hover:shadow-white transition-transform"
         >
-          RESERVE NOW
+          BOOK NOW
         </Link>
       </div>
       {loadingDisco ||

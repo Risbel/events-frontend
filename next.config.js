@@ -11,9 +11,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "image.lexica.art",
+        hostname: "img.lexica.art",
         pathname: "**",
       },
+
       {
         protocol: "https",
         hostname: "image.lexica.art",

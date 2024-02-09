@@ -28,21 +28,21 @@ const MenubarDashboard = () => {
 
           <div className="flex flex-col">
             <div className="flex justify-center">
-              <p>List of events</p>
+              <p className="font-semibold">List of events</p>
             </div>
             <div className="px-2">
               <ul>
-                <li className="flex gap-4 hover:gap-6 transition-all hover:bg-secondary pl-1 rounded cursor-pointer">
-                  <span>Fiesta Lunar</span> <ArrowRight height={20} width={20} />
+                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
+                  <span className="hover:translate-x-1  transition-transform duration-300">Fiesta Lunar</span>
                 </li>
-                <li className="flex gap-4 hover:gap-6 transition-all hover:bg-secondary pl-1 rounded cursor-pointer">
-                  <span>Encuentro Estelar</span> <ArrowRight height={20} width={20} />
+                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
+                  <span className="hover:translate-x-1  transition-transform duration-300">Encuentro Estelar</span>
                 </li>
-                <li className="flex gap-4 hover:gap-6 transition-all hover:bg-secondary pl-1 rounded cursor-pointer">
-                  <span>Festival de Innovación</span> <ArrowRight height={20} width={20} />
+                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
+                  <span className="hover:translate-x-1  transition-transform duration-300">Festival de Innovación</span>
                 </li>
-                <li className="flex gap-4 hover:gap-6 transition-all hover:bg-secondary pl-1 rounded cursor-pointer">
-                  <span>Noche de Gala Cultural</span> <ArrowRight height={20} width={20} />
+                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
+                  <span className="hover:translate-x-1  transition-transform duration-300">Noche de Gala Cultural</span>
                 </li>
               </ul>
             </div>
@@ -50,7 +50,7 @@ const MenubarDashboard = () => {
 
           <MenubarSeparator />
           <MenubarSub>
-            <MenubarSubTrigger className="md:text-base">Share my events via :</MenubarSubTrigger>
+            <MenubarSubTrigger className="md:text-base">Share events:</MenubarSubTrigger>
             <MenubarSubContent>
               <MenubarItem className="focus:bg-red-400">Email</MenubarItem>
               <MenubarItem className="focus:bg-blue-500">Telegram</MenubarItem>
@@ -92,17 +92,17 @@ const MenubarDashboard = () => {
             </div>
             <div className="px-2">
               <ul>
-                <li className="flex gap-4 hover:gap-6 transition-all hover:bg-secondary pl-1 rounded cursor-pointer">
-                  <span>Marta Pérez</span> <ArrowRight height={20} width={20} />
+                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
+                  <span className="hover:translate-x-1  transition-transform duration-300">Marta Pérez</span>
                 </li>
-                <li className="flex gap-4 hover:gap-6 transition-all hover:bg-secondary pl-1 rounded cursor-pointer">
-                  <span>Juan Rodríguez</span> <ArrowRight height={20} width={20} />
+                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
+                  <span className="hover:translate-x-1  transition-transform duration-300">Juan Rodríguez</span>
                 </li>
-                <li className="flex gap-4 hover:gap-6 transition-all hover:bg-secondary pl-1 rounded cursor-pointer">
-                  <span>Carla Gómez</span> <ArrowRight height={20} width={20} />
+                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
+                  <span className="hover:translate-x-1  transition-transform duration-300">Carla Gómez</span>
                 </li>
-                <li className="flex gap-4 hover:gap-6 transition-all hover:bg-secondary pl-1 rounded cursor-pointer">
-                  <span>Alejandro García</span> <ArrowRight height={20} width={20} />
+                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
+                  <span className="hover:translate-x-1  transition-transform duration-300">Alejandro García</span>
                 </li>
               </ul>
             </div>

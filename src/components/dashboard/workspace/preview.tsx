@@ -18,7 +18,7 @@ const Preview = ({ values }: any) => {
             color: values.navbarForeground,
             border: `2px solid ${values.navbarForeground}`,
           }}
-          className="px-6 py-2 hover:opacity-95 rounded-lg font-semibold text-lg md:text-xl hover:-translate-y-1  shadow-2xl hover:shadow-white transition-transform"
+          className="px-6 py-2 hover:opacity-95 rounded-lg font-semibold text-lg md:text-xl hover:-translate-y-1  shadow-2xl hover:shadow-white transition-transform cursor-pointer"
         >
           RESERVE NOW
         </div>

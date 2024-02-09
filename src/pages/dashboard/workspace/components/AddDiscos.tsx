@@ -82,12 +82,14 @@ const AddDiscos = () => {
         <Preview values={values} />
       </div>
       <div className="pt-16 px-8">
-        <h1 className="text-xl md:text-2xl text-primary font-bold pb-8">Let&apos;s create an Event: </h1>
+        <h1 className="text-xl md:text-2xl text-primary font-bold mb-8 p-2 bg-secondary">
+          Let&apos;s create your webpage:{" "}
+        </h1>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex gap-2">
             <div className="relative mb-4 md:mr-2 md:w-1/4">
-              <Label name={"Sponsor"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
+              <Label name={"Brand"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
 
               <Input
                 autoComplete="off"
@@ -135,7 +137,7 @@ const AddDiscos = () => {
           <DividerWorkSpace text={"Navbar"} className={"pb-5"} />
           <div className="flex gap-2">
             <div className="relative mb-4 pb-2 w-2/3">
-              <Label htmlfor={"logo"} name={"Image logo URL"} className="block mb-1 text-sm font-medium text-primary" />
+              <Label htmlfor={"logo"} name={"Logo URL"} className="block mb-1 text-sm font-medium text-primary" />
 
               <Input
                 autoComplete="off"
@@ -187,12 +189,12 @@ const AddDiscos = () => {
             </div>
           </div>
 
-          <DividerWorkSpace text={"Home"} className={"pb-5"} />
+          <DividerWorkSpace text={"Banner"} className={"pb-5"} />
 
           <div className="md:grid md:grid-cols-2">
             <div className="relative mb-4 md:mr-2">
               <Label
-                name={"h1 text (event title)"}
+                name={"Event title"}
                 htmlfor={"h1Banner"}
                 className="block mb-1 text-sm font-medium text-primary"
               />
@@ -209,7 +211,7 @@ const AddDiscos = () => {
             </div>
             <div className="relative pb-2">
               <Label
-                name={"h1 color"}
+                name={"Title color"}
                 htmlfor={"h1BannerColor"}
                 className="block mb-1 text-sm font-medium text-primary"
               />
@@ -271,7 +273,7 @@ const AddDiscos = () => {
 
           <div className="relative mb-4 pb-2">
             <Label
-              name={"Banner short description"}
+              name={"Banner description"}
               htmlfor={"bannerDescription"}
               className="block mb-1 text-sm font-medium text-primary"
             />
@@ -289,7 +291,7 @@ const AddDiscos = () => {
           </div>
           <div className="relative pb-2 w-1/3">
             <Label
-              name={"Banner description color"}
+              name={"Banner color"}
               htmlfor={"bannerDescriptionColor"}
               className="block mb-1 text-sm font-medium text-primary"
             />
