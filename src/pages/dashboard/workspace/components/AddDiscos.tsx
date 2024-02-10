@@ -648,10 +648,10 @@ const addDiscoSchema = z.object({
   navbarForeground: z.string().min(1, { message: "Text color required" }), // new
   //home
   bannerImage: z.string().min(1, { message: "Banner URL image required" }),
-  h1Banner: z.string().min(1, { message: "Text h1 required" }), //new replace h1Color
+  h1Banner: z.string().min(2, "Invalid title").optional().or(z.literal("")), //new replace h1Color
   h1BannerColor: z.string().min(1, { message: "h1 color required" }), //new
   bannerGradientColor: z.string().min(1, { message: "h1 color required" }), //new
-  bannerDescription: z.string().min(1, { message: "Description required" }), //new replace description
+  bannerDescription: z.string().min(2, "Invalid description").optional().or(z.literal("")), //new replace description
   bannerDescriptionColor: z.string().min(1, { message: "Description color required" }), //new
   //about
   bgAboutColor: z.string().min(1, { message: "Background color required" }), //new

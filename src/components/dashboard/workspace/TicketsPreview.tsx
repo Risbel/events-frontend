@@ -114,7 +114,7 @@ const TicketsPreview = ({ values }: { values: any }) => {
                     </div>
                   )
                 )}
-                <p
+                <div
                   style={{
                     background: `${values.buttonsTicketsColor}`,
                     border: `solid ${values.buttonTicketForeground} 2px`,
@@ -149,7 +149,7 @@ const TicketsPreview = ({ values }: { values: any }) => {
                     <div>{ticket.countInStock}</div>
                     <LogoCategory ticket={ticket} discoColors={values} />
                   </div>
-                </p>
+                </div>
               </div>
             </div>
           );
