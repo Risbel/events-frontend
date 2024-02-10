@@ -7,7 +7,7 @@ const Label = ({ name, htmlfor, className }: { name: string; htmlfor: string; cl
   return (
     <label
       className={cn(
-        "absolute -top-[14px] md:-top-[16px] left-3 bg-white rounded-md text-black px-1 text-sm md:text-base",
+        "absolute -top-[14px] md:-top-[16px] left-3 bg-white rounded-md text-black px-1 text-sm",
         className
       )}
       htmlFor={htmlfor}

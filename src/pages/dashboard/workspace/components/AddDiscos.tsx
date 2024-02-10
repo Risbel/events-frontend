@@ -5,13 +5,16 @@ import useCreateDisco from "@/hooks/useCreateDisco";
 import ButtonSubmit from "../../../../components/buttons/ButtonSubmit";
 import useGetMe from "@/hooks/useGetMe";
 import Spinner from "../../../../components/loaders/Spinner";
-import { useState } from "react";
+import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 import { Input, Label } from "../../../../components/ui/input";
 import { Textarea } from "../../../../components/ui/textarea";
 import { cn } from "@/lib/shadcnUtils";
-import { BellIcon, Eye, Home, ShoppingCart, UserCircle2, X } from "lucide-react";
-import Image from "next/image";
+import { Eye, X } from "lucide-react";
 import Preview from "@/components/dashboard/workspace/preview";
+import ColorPicker from "@/components/dashboard/workspace/ColorPicker";
+import Image from "next/image";
+import ColorPaletteGenerator from "@/components/dashboard/workspace/ColorPaletGenerator";
+import LabelColor from "@/components/dashboard/workspace/LabelColor";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
 
@@ -81,549 +84,415 @@ const AddDiscos = () => {
         </button>
         <Preview values={values} />
       </div>
-      <div className="pt-16 px-8">
-        <h1 className="text-xl md:text-2xl text-primary font-bold mb-8 p-2 bg-secondary">
+      <div className="pt-20 px-8 bg-secondary">
+        <h1 className="text-xl md:text-2xl text-primary font-bold mb-8 p-2 bg-primary-foreground rounded-md">
           Let&apos;s create your webpage:{" "}
         </h1>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex gap-2">
-            <div className="relative mb-4 md:mr-2 md:w-1/4">
-              <Label name={"Brand"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
+          <div className="flex gap-8">
+            <div className="flex flex-col w-1/3 bg-primary-foreground p-6 rounded-md shadow-md">
+              <p className="pb-4 text-xl text-center font-bold text-primary">General info</p>
+              <div className="relative mb-4">
+                <Label name={"Brand"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
 
-              <Input
-                autoComplete="off"
-                className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="discoName"
-                type="text"
-                placeholder="e.g. Chocobar Caribe"
-                {...register("name")}
-              />
-              {errors.name && <p className="text-xs italic text-red-500">{errors.name?.message}</p>}
+                <Input
+                  autoComplete="off"
+                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                  id="discoName"
+                  type="text"
+                  placeholder="e.g. Chocobar Caribe"
+                  {...register("name")}
+                />
+                {errors.name && <p className="text-xs italic text-red-500">{errors.name?.message}</p>}
+              </div>
+              <div className="relative mb-4">
+                <Label name={"Slug URL"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
+
+                <Input
+                  autoComplete="off"
+                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                  id="slug"
+                  type="text"
+                  placeholder="e.g. chocobar-caribe"
+                  {...register("slug")}
+                />
+                {errors.slug && <p className="text-xs italic text-red-500">{errors.slug?.message}</p>}
+              </div>
+              <div className="flex gap-2 w-full">
+                <div className="relative mb-4 w-1/2">
+                  <Label name={"Start date"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
+
+                  <Input
+                    autoComplete="off"
+                    className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                    id="slug"
+                    type="date"
+                    placeholder="e.g. chocobar-caribe"
+                  />
+                  {errors.slug && <p className="text-xs italic text-red-500">{errors.slug?.message}</p>}
+                </div>
+                <div className="relative mb-4 w-1/2">
+                  <Label name={"End date"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
+
+                  <Input
+                    autoComplete="off"
+                    className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                    id="slug"
+                    type="date"
+                    placeholder="e.g. chocobar-caribe"
+                  />
+                  {errors.slug && <p className="text-xs italic text-red-500">{errors.slug?.message}</p>}
+                </div>
+              </div>
+              <div className="relative pb-2 ">
+                <LabelColor htmlFor="brandColor" text="Color brand" />
+
+                <ColorPicker register={register} id="brandColor" />
+                {errors.brandColor && <p className="text-xs italic text-red-500">{errors.brandColor?.message}</p>}
+              </div>
             </div>
-            <div className="relative mb-4 md:w-2/4">
-              <Label name={"Slug URL"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
 
-              <Input
-                autoComplete="off"
-                className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="slug"
-                type="text"
-                placeholder="e.g. chocobar-caribe"
-                {...register("slug")}
+            <ColorPaletteGenerator />
+            <div className="flex justify-center w-1/3 bg-primary-foreground rounded-xl shadow-md overflow-hidden p-6">
+              <Image
+                src={"/progress-to-addDiscos.png"}
+                width={250}
+                height={250}
+                alt="progress to addDiscos"
+                className="object-cover w-full"
               />
-              {errors.slug && <p className="text-xs italic text-red-500">{errors.slug?.message}</p>}
             </div>
-            <div className="relative pb-2 w-1/4">
-              <Label
-                name={"Brand color"}
-                htmlfor={"brandColor"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
+          </div>
+          <div className="grid grid-cols-3 gap-8">
+            <div className="flex flex-col justify-between gap-2 col-span-1 bg-primary-foreground p-6 rounded-md shadow-md">
+              <p className="pb-4 text-xl text-center font-bold text-primary">Navbar</p>
+              <div className="relative">
+                <Label htmlfor={"logo"} name={"Logo URL"} className="block mb-1 text-sm font-medium text-primary" />
 
-              <Input
-                autoComplete="off"
-                defaultValue={"#522E00"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="brandColor"
-                placeholder="Select color to the h1 color"
-                {...register("brandColor")}
-              />
-              {errors.brandColor && <p className="text-xs italic text-red-500">{errors.brandColor?.message}</p>}
+                <Input
+                  autoComplete="off"
+                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                  id="logo"
+                  type="text"
+                  placeholder="logo URL"
+                  {...register("logo")}
+                />
+                {errors.logo && <p className="text-xs italic text-red-500">{errors.logo?.message}</p>}
+              </div>
+              <div className="relative">
+                <LabelColor htmlFor="bgNavbarColor" text="Background color" />
+                <ColorPicker defaultColor="#fac985" register={register} id="bgNavbarColor" />
+
+                {errors.bgNavbarColor && <p className="text-xs italic text-red-500">{errors.bgNavbarColor?.message}</p>}
+              </div>
+              <div className="relative">
+                <LabelColor text="Text color" htmlFor="navbarForeground" />
+                <ColorPicker defaultColor="#492a00" register={register} id="navbarForeground" />
+
+                {errors.navbarForeground && (
+                  <p className="text-xs italic text-red-500">{errors.navbarForeground?.message}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2 col-span-2 p-6 bg-primary-foreground rounded-md shadow-md">
+              <p className="text-xl text-center font-bold text-primary mb-4">Banner</p>
+              <div className="flex gap-4">
+                <div className="flex flex-col gap-2 w-1/2">
+                  <div className="relative">
+                    <Label
+                      name={"Event title"}
+                      htmlfor={"h1Banner"}
+                      className="block mb-1 text-sm font-medium text-primary"
+                    />
+
+                    <Input
+                      autoComplete="off"
+                      className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                      id="h1Banner"
+                      type="text"
+                      placeholder="e.g. Chocolate event or whatever you want to highlight"
+                      {...register("h1Banner")}
+                    />
+                    {errors.h1Banner && <p className="text-xs italic text-red-500">{errors.h1Banner?.message}</p>}
+                  </div>
+                  <div className="relative">
+                    <LabelColor text="Title color" htmlFor="h1BannerColor" />
+                    <ColorPicker id="h1BannerColor" register={register} defaultColor="#ffffff" />
+
+                    {errors.h1BannerColor && (
+                      <p className="text-xs italic text-red-500">{errors.h1BannerColor?.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-2 w-1/2">
+                  <div className="relative">
+                    <Label
+                      htmlfor={"bannerImage"}
+                      name="Banner Image"
+                      className="block mb-1 text-sm font-medium text-primary"
+                    />
+
+                    <Input
+                      autoComplete="off"
+                      className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                      id="bannerImage"
+                      type="text"
+                      placeholder="Type the URL banner image"
+                      {...register("bannerImage")}
+                    />
+                    {errors.bannerImage && <p className="text-xs italic text-red-500">{errors.bannerImage?.message}</p>}
+                  </div>
+                  <div className="relative">
+                    <LabelColor htmlFor="bannerGradientColor" text="Gradient color" />
+                    <ColorPicker register={register} id="bannerGradientColor" defaultColor="#492a00" />
+
+                    {errors.bannerGradientColor && (
+                      <p className="text-xs italic text-red-500">{errors.bannerGradientColor?.message}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              <input autoComplete="off" hidden type="text" value={user?.id} {...register("administrator")} />
+              <div className="flex items-center gap-4 border-t pt-4 mt-4">
+                <div className="relative w-1/2 mt-6">
+                  <Label
+                    name={"Banner description"}
+                    htmlfor={"bannerDescription"}
+                    className="block mb-1 text-sm font-medium text-primary"
+                  />
+
+                  <Textarea
+                    className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                    id="bannerDescription"
+                    placeholder="Banner description"
+                    rows={2}
+                    {...register("bannerDescription")}
+                  />
+                  {errors.bannerDescription && (
+                    <p className="text-xs italic text-red-500">{errors.bannerDescription?.message}</p>
+                  )}
+                </div>
+                <div className="relative w-1/2">
+                  <LabelColor text="Banner color" htmlFor="bannerDescriptionColor" />
+
+                  <ColorPicker id="bannerDescriptionColor" register={register} />
+
+                  {errors.bannerDescriptionColor && (
+                    <p className="text-xs italic text-red-500">{errors.bannerDescriptionColor?.message}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-8">
+            <div className="flex flex-col justify-between col-span-2 bg-primary-foreground rounded-md p-6 shadow-md">
+              <p className="text-xl text-center font-bold text-primary mb-4">About</p>
+              <div className="relative mb-4 pb-2">
+                <Label
+                  name={"About description"}
+                  htmlfor={"aboutDescription"}
+                  className="block mb-1 text-sm font-medium text-primary"
+                />
+
+                <Textarea
+                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                  id="aboutDescription"
+                  placeholder="About Description"
+                  rows={4}
+                  {...register("aboutDescription")}
+                />
+                {errors.aboutDescription && (
+                  <p className="text-xs italic text-red-500">{errors.aboutDescription?.message}</p>
+                )}
+              </div>
+              <div className="flex gap-4 pb-4">
+                <div className="relative pb-2">
+                  <LabelColor htmlFor="bgAboutColor" text="Background color" />
+                  <ColorPicker id="bgAboutColor" register={register} defaultColor="#fad29a" />
+                  {errors.bgAboutColor && <p className="text-xs italic text-red-500">{errors.bgAboutColor?.message}</p>}
+                </div>
+
+                <div className="relative pb-2">
+                  <LabelColor htmlFor="textAboutColor" text="Text about color" />
+                  <ColorPicker register={register} id="textAboutColor" defaultColor="#492a00" />
+                  {errors.textAboutColor && (
+                    <p className="text-xs italic text-red-500">{errors.textAboutColor?.message}</p>
+                  )}
+                </div>
+
+                <div className="h-28 w-0 border-l" />
+
+                <div className="relative pb-2">
+                  <LabelColor text="Button color" htmlFor="buttonColor" />
+                  <ColorPicker register={register} id="buttonColor" defaultColor="#321d00" />
+                  {errors.buttonColor && <p className="text-xs italic text-red-500">{errors.buttonColor?.message}</p>}
+                </div>
+                <div className="relative pb-2">
+                  <LabelColor htmlFor="buttonForeground" text="Button foreground" />
+                  <ColorPicker register={register} id="buttonForeground" defaultColor="#eed2ac" />
+                  {errors.buttonForeground && (
+                    <p className="text-xs italic text-red-500">{errors.buttonForeground?.message}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="col-span-1 bg-primary-foreground rounded-md p-6 shadow-md">
+              <div className="flex flex-col gap-2 pb-4">
+                <p className="text-xl text-center font-bold text-primary mb-4">Carousel</p>
+                <div className="relative pb-2">
+                  <LabelColor htmlFor="bgExperiencies" text="Background color" />
+                  <ColorPicker register={register} id="bgExperiencies" defaultColor="#ffffff" />
+
+                  {errors.bgExperiencies && (
+                    <p className="text-xs italic text-red-500">{errors.bgExperiencies?.message}</p>
+                  )}
+                </div>
+                <div className="relative pb-2">
+                  <LabelColor htmlFor="experienciesH1Color" text="Title color" />
+                  <ColorPicker register={register} id="experienciesH1Color" defaultColor="#321d00" />
+                  {errors.experienciesH1Color && (
+                    <p className="text-xs italic text-red-500">{errors.experienciesH1Color?.message}</p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
 
-          <DividerWorkSpace text={"Navbar"} className={"pb-5"} />
-          <div className="flex gap-2">
-            <div className="relative mb-4 pb-2 w-2/3">
-              <Label htmlfor={"logo"} name={"Logo URL"} className="block mb-1 text-sm font-medium text-primary" />
+          <div className="grid grid-cols-3 gap-8">
+            <div className="p-6 bg-primary-foreground rounded-md shadow-md">
+              <div className="flex flex-col gap-2 pb-4">
+                <p className="text-xl text-center font-bold text-primary mb-4">Tickets</p>
+                <div className="relative pb-2">
+                  <LabelColor htmlFor="bgTicketsSection" text="Background color" />
+                  <ColorPicker id="bgTicketsSection" register={register} defaultColor="ffffff" />
+                  {errors.bgTicketsSection && (
+                    <p className="text-xs italic text-red-500">{errors.bgTicketsSection?.message}</p>
+                  )}
+                </div>
+                <div className="relative pb-2">
+                  <LabelColor htmlFor="ticketH1Color" text="Title section color" />
+                  <ColorPicker register={register} id="ticketH1Color" defaultColor="#321d00" />
+                  {errors.ticketH1Color && (
+                    <p className="text-xs italic text-red-500">{errors.ticketH1Color?.message}</p>
+                  )}
+                </div>
+                <div className="relative pb-2">
+                  <LabelColor htmlFor="buttonsTicketsColor" text="Buttons color" />
+                  <ColorPicker register={register} id="buttonsTicketsColor" defaultColor="#291800" />
 
-              <Input
-                autoComplete="off"
-                className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="logo"
-                type="text"
-                placeholder="logo URL"
-                {...register("logo")}
-              />
-              {errors.logo && <p className="text-xs italic text-red-500">{errors.logo?.message}</p>}
-            </div>
-            <div className="relative pb-2 w-1/3">
-              <Label
-                name={"Background color"}
-                htmlfor={"bgNavbarColor"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#fac985"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="bgNavbarColor"
-                placeholder="Select color to the h1 clor"
-                {...register("bgNavbarColor")}
-              />
-              {errors.bgNavbarColor && <p className="text-xs italic text-red-500">{errors.bgNavbarColor?.message}</p>}
-            </div>
-            <div className="relative pb-2 w-1/3">
-              <Label
-                name={"Text color"}
-                htmlfor={"navbarForeground"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#492a00"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="navbarForeground"
-                placeholder="Select color to the h1 clor"
-                {...register("navbarForeground")}
-              />
-              {errors.navbarForeground && (
-                <p className="text-xs italic text-red-500">{errors.navbarForeground?.message}</p>
-              )}
-            </div>
-          </div>
-
-          <DividerWorkSpace text={"Banner"} className={"pb-5"} />
-
-          <div className="md:grid md:grid-cols-2">
-            <div className="relative mb-4 md:mr-2">
-              <Label
-                name={"Event title"}
-                htmlfor={"h1Banner"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="h1Banner"
-                type="text"
-                placeholder="e.g. Chocolate event or whatever you want to highlight"
-                {...register("h1Banner")}
-              />
-              {errors.h1Banner && <p className="text-xs italic text-red-500">{errors.h1Banner?.message}</p>}
-            </div>
-            <div className="relative pb-2">
-              <Label
-                name={"Title color"}
-                htmlfor={"h1BannerColor"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#ffffff"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="h1BannerColor"
-                placeholder="Select color to the h1 clor"
-                {...register("h1BannerColor")}
-              />
-              {errors.h1BannerColor && <p className="text-xs italic text-red-500">{errors.h1BannerColor?.message}</p>}
-            </div>
-          </div>
-
-          <div className="flex gap-2">
-            <div className="relative mb-4 pb-2 w-2/3">
-              <Label
-                htmlfor={"bannerImage"}
-                name="Banner Image"
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="bannerImage"
-                type="text"
-                placeholder="Type the URL banner image"
-                {...register("bannerImage")}
-              />
-              {errors.bannerImage && <p className="text-xs italic text-red-500">{errors.bannerImage?.message}</p>}
-            </div>
-            <div className="relative pb-2 w-1/3">
-              <Label
-                name={"Gradient color"}
-                htmlfor={"bannerGradientColor"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#492a00"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="bannerGradientColor"
-                placeholder="Select color to the h1 clor"
-                {...register("bannerGradientColor")}
-              />
-              {errors.bannerGradientColor && (
-                <p className="text-xs italic text-red-500">{errors.bannerGradientColor?.message}</p>
-              )}
-            </div>
-          </div>
-
-          <input autoComplete="off" hidden type="text" value={user?.id} {...register("administrator")} />
-
-          <div className="relative mb-4 pb-2">
-            <Label
-              name={"Banner description"}
-              htmlfor={"bannerDescription"}
-              className="block mb-1 text-sm font-medium text-primary"
-            />
-
-            <Textarea
-              className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="bannerDescription"
-              placeholder="Banner description"
-              rows={2}
-              {...register("bannerDescription")}
-            />
-            {errors.bannerDescription && (
-              <p className="text-xs italic text-red-500">{errors.bannerDescription?.message}</p>
-            )}
-          </div>
-          <div className="relative pb-2 w-1/3">
-            <Label
-              name={"Banner color"}
-              htmlfor={"bannerDescriptionColor"}
-              className="block mb-1 text-sm font-medium text-primary"
-            />
-
-            <Input
-              autoComplete="off"
-              defaultValue={"#ffffff"}
-              type="color"
-              className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="bannerDescriptionColor"
-              placeholder="Select color to the h1 clor"
-              {...register("bannerDescriptionColor")}
-            />
-            {errors.bannerDescriptionColor && (
-              <p className="text-xs italic text-red-500">{errors.bannerDescriptionColor?.message}</p>
-            )}
-          </div>
-
-          <DividerWorkSpace text={"About section"} className={"pb-5"} />
-
-          <div className="relative mb-4 pb-2">
-            <Label
-              name={"About description"}
-              htmlfor={"aboutDescription"}
-              className="block mb-1 text-sm font-medium text-primary"
-            />
-
-            <Textarea
-              className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="aboutDescription"
-              placeholder="About Description"
-              rows={4}
-              {...register("aboutDescription")}
-            />
-            {errors.aboutDescription && (
-              <p className="text-xs italic text-red-500">{errors.aboutDescription?.message}</p>
-            )}
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
-            <div className="relative pb-2">
-              <Label
-                name={"Background color"}
-                htmlfor={"bgAboutColor"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#fad29a"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="bgAboutColor"
-                placeholder="Select color to the h1 clor"
-                {...register("bgAboutColor")}
-              />
-              {errors.bgAboutColor && <p className="text-xs italic text-red-500">{errors.bgAboutColor?.message}</p>}
+                  {errors.buttonsTicketsColor && (
+                    <p className="text-xs italic text-red-500">{errors.buttonsTicketsColor?.message}</p>
+                  )}
+                </div>
+                <div className="relative pb-2">
+                  <LabelColor htmlFor="buttonTicketForeground" text="Buttons foreground" />
+                  <ColorPicker register={register} id="buttonTicketForeground" defaultColor="#edc58d" />
+                  {errors.buttonTicketForeground && (
+                    <p className="text-xs italic text-red-500">{errors.buttonTicketForeground?.message}</p>
+                  )}
+                </div>
+              </div>
             </div>
 
-            <div className="relative pb-2">
-              <Label
-                name={"Text about color"}
-                htmlfor={"textAboutColor"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
+            <div className="col-span-2 bg-primary-foreground p-6 rounded-md shadow-md h-3/5">
+              <p className="text-xl text-center font-bold text-primary mb-4">Footer</p>
+              <div className="flex gap-2">
+                <div className="relative mb-4 md:mr-2 w-1/2">
+                  <Label
+                    name={"phone number"}
+                    htmlfor={"phone"}
+                    className="block mb-1 text-sm font-medium text-primary"
+                  />
 
-              <Input
-                autoComplete="off"
-                defaultValue={"#492a00"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="textAboutColor"
-                placeholder="Select color to the h1 clor"
-                {...register("textAboutColor")}
-              />
-              {errors.textAboutColor && <p className="text-xs italic text-red-500">{errors.textAboutColor?.message}</p>}
+                  <Input
+                    autoComplete="off"
+                    className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                    id="phone"
+                    type="text"
+                    placeholder="e.g. +53 54353930"
+                    {...register("phone")}
+                  />
+                  {errors.phone && <p className="text-xs italic text-red-500">{errors.phone?.message}</p>}
+                </div>
+                <div className="relative mb-4 md:mr-2  w-1/2">
+                  <Label name={"email"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
+
+                  <Input
+                    autoComplete="off"
+                    className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                    id="email"
+                    type="text"
+                    placeholder="type your email"
+                    {...register("email")}
+                  />
+                  {errors.email && <p className="text-xs italic text-red-500">{errors.email?.message}</p>}
+                </div>
+              </div>
+
+              <div className="relative mb-4 pb-2">
+                <Label name={"Address"} htmlfor={"address"} className="block mb-1 text-sm font-medium text-primary" />
+
+                <Input
+                  autoComplete="off"
+                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                  id="address"
+                  type="text"
+                  placeholder="Address"
+                  {...register("address")}
+                />
+                {errors.address && <p className="text-xs italic text-red-500">{errors.address?.message}</p>}
+              </div>
+
+              <div className="relative mb-4 pb-2">
+                <Label
+                  name={"Bank card number"}
+                  htmlfor={"bankCardNumber"}
+                  className="block mb-1 text-sm font-medium text-primary"
+                />
+
+                <Input
+                  autoComplete="off"
+                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                  id="bankCardNumber"
+                  type="text"
+                  max={16}
+                  placeholder="Bank card number"
+                  value={bankCardInput}
+                  {...register("bankCardNumber")}
+                  onChange={(e) => {
+                    let value = e.target.value.replace(/\D/g, "");
+                    value = value.replace(/(\d{4})(?=\d)/g, "$1-");
+                    if (value.length > 20) {
+                      return;
+                    }
+                    setBankCardInput(value);
+                  }}
+                />
+                {errorBankCard.length > 5 && <p className="text-xs italic text-red-500">{errorBankCard}</p>}
+              </div>
+
+              <div className="relative mb-4 pb-2">
+                <Label
+                  htmlfor={"background"}
+                  name={"Background Image URL (optional)"}
+                  className="block mb-1 text-sm font-medium text-primary"
+                />
+
+                <Input
+                  autoComplete="off"
+                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                  id="background"
+                  type="text"
+                  placeholder="Background image"
+                  {...register("bgImage")}
+                />
+                {errors.bgImage && <p className="text-xs italic text-red-500">{errors.bgImage?.message}</p>}
+              </div>
             </div>
-
-            <div className="relative pb-2">
-              <Label
-                name={"Button color"}
-                htmlfor={"buttonColor"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#321d00"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="buttonColor"
-                placeholder="Select color to the h1 clor"
-                {...register("buttonColor")}
-              />
-              {errors.buttonColor && <p className="text-xs italic text-red-500">{errors.buttonColor?.message}</p>}
-            </div>
-            <div className="relative pb-2">
-              <Label
-                name={"Button foreground"}
-                htmlfor={"buttonForeground"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#eed2ac"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="buttonForeground"
-                placeholder="Select color to the h1 clor"
-                {...register("buttonForeground")}
-              />
-              {errors.buttonForeground && (
-                <p className="text-xs italic text-red-500">{errors.buttonForeground?.message}</p>
-              )}
-            </div>
-          </div>
-
-          <DividerWorkSpace text={"Experiencies section"} className={"pb-5"} />
-
-          <div className="flex gap-2 pb-4">
-            <div className="relative pb-2 w-1/3">
-              <Label
-                name={"Background color"}
-                htmlfor={"bgExperiencies"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#ffffff"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="bgExperiencies"
-                placeholder="Select color to the h1 clor"
-                {...register("bgExperiencies")}
-              />
-              {errors.bgExperiencies && <p className="text-xs italic text-red-500">{errors.bgExperiencies?.message}</p>}
-            </div>
-            <div className="relative pb-2 w-1/3">
-              <Label
-                name={"Title section color"}
-                htmlfor={"experienciesH1Color"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#321d00"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="experienciesH1Color"
-                placeholder="Select color to the h1 clor"
-                {...register("experienciesH1Color")}
-              />
-              {errors.experienciesH1Color && (
-                <p className="text-xs italic text-red-500">{errors.experienciesH1Color?.message}</p>
-              )}
-            </div>
-          </div>
-
-          <DividerWorkSpace text={"Tickets section"} className={"pb-5"} />
-
-          <div className="flex gap-2 pb-4">
-            <div className="relative pb-2 w-1/4">
-              <Label
-                name={"Background color"}
-                htmlfor={"bgTicketsSection"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#ffffff"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="bgTicketsSection"
-                placeholder="Select color to the h1 clor"
-                {...register("bgTicketsSection")}
-              />
-              {errors.bgTicketsSection && (
-                <p className="text-xs italic text-red-500">{errors.bgTicketsSection?.message}</p>
-              )}
-            </div>
-            <div className="relative pb-2 w-1/4">
-              <Label
-                name={"Title section color"}
-                htmlfor={"ticketH1Color"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#321d00"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="ticketH1Color"
-                placeholder="Select color to the h1 clor"
-                {...register("ticketH1Color")}
-              />
-              {errors.ticketH1Color && <p className="text-xs italic text-red-500">{errors.ticketH1Color?.message}</p>}
-            </div>
-            <div className="relative pb-2 w-1/4">
-              <Label
-                name={"Buttons color"}
-                htmlfor={"buttonsTicketsColor"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#291800"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="buttonsTicketsColor"
-                placeholder="Select color to the h1 clor"
-                {...register("buttonsTicketsColor")}
-              />
-              {errors.buttonsTicketsColor && (
-                <p className="text-xs italic text-red-500">{errors.buttonsTicketsColor?.message}</p>
-              )}
-            </div>
-            <div className="relative pb-2 w-1/4">
-              <Label
-                name={"Buttons foreground"}
-                htmlfor={"buttonTicketForeground"}
-                className="block mb-1 text-sm font-medium text-primary"
-              />
-
-              <Input
-                autoComplete="off"
-                defaultValue={"#edc58d"}
-                type="color"
-                className="py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="buttonTicketForeground"
-                placeholder="Select color to the h1 clor"
-                {...register("buttonTicketForeground")}
-              />
-              {errors.buttonTicketForeground && (
-                <p className="text-xs italic text-red-500">{errors.buttonTicketForeground?.message}</p>
-              )}
-            </div>
-          </div>
-
-          <DividerWorkSpace text={"Footer"} className={"pb-5"} />
-
-          <div className="flex gap-2">
-            <div className="relative mb-4 md:mr-2 w-1/2">
-              <Label name={"phone number"} htmlfor={"phone"} className="block mb-1 text-sm font-medium text-primary" />
-
-              <Input
-                autoComplete="off"
-                className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="phone"
-                type="text"
-                placeholder="e.g. +53 54353930"
-                {...register("phone")}
-              />
-              {errors.phone && <p className="text-xs italic text-red-500">{errors.phone?.message}</p>}
-            </div>
-            <div className="relative mb-4 md:mr-2  w-1/2">
-              <Label name={"email"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
-
-              <Input
-                autoComplete="off"
-                className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                id="email"
-                type="text"
-                placeholder="type your email"
-                {...register("email")}
-              />
-              {errors.email && <p className="text-xs italic text-red-500">{errors.email?.message}</p>}
-            </div>
-          </div>
-
-          <div className="relative mb-4 pb-2">
-            <Label name={"Address"} htmlfor={"address"} className="block mb-1 text-sm font-medium text-primary" />
-
-            <Input
-              autoComplete="off"
-              className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="address"
-              type="text"
-              placeholder="Address"
-              {...register("address")}
-            />
-            {errors.address && <p className="text-xs italic text-red-500">{errors.address?.message}</p>}
-          </div>
-
-          <div className="relative mb-4 pb-2">
-            <Label
-              name={"Bank card number"}
-              htmlfor={"bankCardNumber"}
-              className="block mb-1 text-sm font-medium text-primary"
-            />
-
-            <Input
-              autoComplete="off"
-              className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="bankCardNumber"
-              type="text"
-              max={16}
-              placeholder="Bank card number"
-              value={bankCardInput}
-              {...register("bankCardNumber")}
-              onChange={(e) => {
-                let value = e.target.value.replace(/\D/g, "");
-                value = value.replace(/(\d{4})(?=\d)/g, "$1-");
-                if (value.length > 20) {
-                  return;
-                }
-                setBankCardInput(value);
-              }}
-            />
-            {errorBankCard.length > 5 && <p className="text-xs italic text-red-500">{errorBankCard}</p>}
-          </div>
-
-          <div className="relative mb-4 pb-2">
-            <Label
-              htmlfor={"background"}
-              name={"Background Image URL (optional)"}
-              className="block mb-1 text-sm font-medium text-primary"
-            />
-
-            <Input
-              autoComplete="off"
-              className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-              id="background"
-              type="text"
-              placeholder="Background image"
-              {...register("bgImage")}
-            />
-            {errors.bgImage && <p className="text-xs italic text-red-500">{errors.bgImage?.message}</p>}
           </div>
 
           <div className="my-6 mb-12 text-center">
