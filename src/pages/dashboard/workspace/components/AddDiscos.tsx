@@ -148,7 +148,7 @@ const AddDiscos = () => {
               <div className="relative pb-2 ">
                 <LabelColor htmlFor="brandColor" text="Color brand" />
 
-                <ColorPicker register={register} id="brandColor" />
+                <ColorPicker register={register} id="brandColor" defaultColor="#512f03" />
                 {errors.brandColor && <p className="text-xs italic text-red-500">{errors.brandColor?.message}</p>}
               </div>
             </div>
@@ -366,21 +366,21 @@ const AddDiscos = () => {
             <div className="p-6 bg-primary-foreground rounded-md shadow-md">
               <div className="flex flex-col gap-2 pb-4">
                 <p className="text-xl text-center font-bold text-primary mb-4">Tickets</p>
-                <div className="relative pb-2">
+                <div className="relative">
                   <LabelColor htmlFor="bgTicketsSection" text="Background color" />
-                  <ColorPicker id="bgTicketsSection" register={register} defaultColor="ffffff" />
+                  <ColorPicker id="bgTicketsSection" register={register} defaultColor="#ffffff" />
                   {errors.bgTicketsSection && (
                     <p className="text-xs italic text-red-500">{errors.bgTicketsSection?.message}</p>
                   )}
                 </div>
-                <div className="relative pb-2">
+                <div className="relative">
                   <LabelColor htmlFor="ticketH1Color" text="Title section color" />
                   <ColorPicker register={register} id="ticketH1Color" defaultColor="#321d00" />
                   {errors.ticketH1Color && (
                     <p className="text-xs italic text-red-500">{errors.ticketH1Color?.message}</p>
                   )}
                 </div>
-                <div className="relative pb-2">
+                <div className="relative">
                   <LabelColor htmlFor="buttonsTicketsColor" text="Buttons color" />
                   <ColorPicker register={register} id="buttonsTicketsColor" defaultColor="#291800" />
 
@@ -388,7 +388,7 @@ const AddDiscos = () => {
                     <p className="text-xs italic text-red-500">{errors.buttonsTicketsColor?.message}</p>
                   )}
                 </div>
-                <div className="relative pb-2">
+                <div className="relative">
                   <LabelColor htmlFor="buttonTicketForeground" text="Buttons foreground" />
                   <ColorPicker register={register} id="buttonTicketForeground" defaultColor="#edc58d" />
                   {errors.buttonTicketForeground && (

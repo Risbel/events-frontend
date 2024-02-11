@@ -1,24 +1,18 @@
 import React, { ChangeEvent, useState } from "react";
 
-const ColorPicker = ({
-  register,
-  defaultColor = "#ffffff",
-  id,
-}: {
-  register: any;
-  defaultColor?: string;
-  id: string;
-}) => {
+const ColorPicker = ({ register, defaultColor, id }: { register: any; defaultColor?: string; id: string }) => {
   const [color, setColor] = useState<any>(defaultColor);
   const handleColorChange = (e: ChangeEvent<HTMLInputElement>) => {
     setColor(e.target.value);
   };
+
   return (
     <div className="flex flex-col gap-2 bg-secondary p-2 rounded-xl">
       <div className="relative group">
         <input
           id={id}
           {...register(id)}
+          value={color}
           onChange={handleColorChange}
           type="color"
           className="opacity-0 absolute z-10 h-full w-full cursor-pointer"
