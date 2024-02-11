@@ -40,6 +40,7 @@ const AddDiscos = () => {
     formState: { errors },
     reset,
     getValues,
+    setValue,
   } = useForm<AddDiscoSchema>({
     resolver: zodResolver(addDiscoSchema),
   });
@@ -90,8 +91,8 @@ const AddDiscos = () => {
         </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
-          <div className="flex gap-8">
-            <div className="flex flex-col w-1/3 bg-primary-foreground p-6 rounded-md shadow-md">
+          <div className="grid grid-cols-12 gap-8">
+            <div className="flex flex-col col-span-4 bg-primary-foreground p-6 rounded-md shadow-md">
               <p className="pb-4 text-xl text-center font-bold text-primary">General info</p>
               <div className="relative mb-4">
                 <Label name={"Brand"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
@@ -153,8 +154,8 @@ const AddDiscos = () => {
               </div>
             </div>
 
-            <ColorPaletteGenerator />
-            <div className="flex justify-center w-1/3 bg-primary-foreground rounded-xl shadow-md overflow-hidden p-6">
+            <ColorPaletteGenerator setValues={setValue} />
+            <div className="flex justify-center col-start-9 col-span-4 bg-primary-foreground rounded-xl shadow-md overflow-hidden p-6">
               <Image
                 src={"/progress-to-addDiscos.png"}
                 width={250}
@@ -182,13 +183,13 @@ const AddDiscos = () => {
               </div>
               <div className="relative">
                 <LabelColor htmlFor="bgNavbarColor" text="Background color" />
-                <ColorPicker defaultColor="#fac985" register={register} id="bgNavbarColor" />
+                <ColorPicker defaultColor="#472a00" register={register} id="bgNavbarColor" />
 
                 {errors.bgNavbarColor && <p className="text-xs italic text-red-500">{errors.bgNavbarColor?.message}</p>}
               </div>
               <div className="relative">
                 <LabelColor text="Text color" htmlFor="navbarForeground" />
-                <ColorPicker defaultColor="#492a00" register={register} id="navbarForeground" />
+                <ColorPicker defaultColor="#ffffff" register={register} id="navbarForeground" />
 
                 {errors.navbarForeground && (
                   <p className="text-xs italic text-red-500">{errors.navbarForeground?.message}</p>
@@ -247,7 +248,7 @@ const AddDiscos = () => {
                   </div>
                   <div className="relative">
                     <LabelColor htmlFor="bannerGradientColor" text="Gradient color" />
-                    <ColorPicker register={register} id="bannerGradientColor" defaultColor="#492a00" />
+                    <ColorPicker register={register} id="bannerGradientColor" defaultColor="#301c00" />
 
                     {errors.bannerGradientColor && (
                       <p className="text-xs italic text-red-500">{errors.bannerGradientColor?.message}</p>
@@ -277,9 +278,9 @@ const AddDiscos = () => {
                   )}
                 </div>
                 <div className="relative w-1/2">
-                  <LabelColor text="Banner color" htmlFor="bannerDescriptionColor" />
+                  <LabelColor text="Text color" htmlFor="bannerDescriptionColor" />
 
-                  <ColorPicker id="bannerDescriptionColor" register={register} />
+                  <ColorPicker id="bannerDescriptionColor" register={register} defaultColor="#ffffff" />
 
                   {errors.bannerDescriptionColor && (
                     <p className="text-xs italic text-red-500">{errors.bannerDescriptionColor?.message}</p>
@@ -318,7 +319,7 @@ const AddDiscos = () => {
 
                 <div className="relative pb-2">
                   <LabelColor htmlFor="textAboutColor" text="Text about color" />
-                  <ColorPicker register={register} id="textAboutColor" defaultColor="#492a00" />
+                  <ColorPicker register={register} id="textAboutColor" defaultColor="#3d1900" />
                   {errors.textAboutColor && (
                     <p className="text-xs italic text-red-500">{errors.textAboutColor?.message}</p>
                   )}
@@ -333,7 +334,7 @@ const AddDiscos = () => {
                 </div>
                 <div className="relative pb-2">
                   <LabelColor htmlFor="buttonForeground" text="Button foreground" />
-                  <ColorPicker register={register} id="buttonForeground" defaultColor="#eed2ac" />
+                  <ColorPicker register={register} id="buttonForeground" defaultColor="#ffffff" />
                   {errors.buttonForeground && (
                     <p className="text-xs italic text-red-500">{errors.buttonForeground?.message}</p>
                   )}
@@ -362,43 +363,48 @@ const AddDiscos = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 gap-8">
             <div className="p-6 bg-primary-foreground rounded-md shadow-md">
-              <div className="flex flex-col gap-2 pb-4">
-                <p className="text-xl text-center font-bold text-primary mb-4">Tickets</p>
-                <div className="relative">
-                  <LabelColor htmlFor="bgTicketsSection" text="Background color" />
-                  <ColorPicker id="bgTicketsSection" register={register} defaultColor="#ffffff" />
-                  {errors.bgTicketsSection && (
-                    <p className="text-xs italic text-red-500">{errors.bgTicketsSection?.message}</p>
-                  )}
+              <p className="text-xl text-center font-bold text-primary mb-4">Tickets</p>
+              <div className="flex gap-2 pb-4">
+                <div className="w-1/2">
+                  <div className="relative">
+                    <LabelColor htmlFor="bgTicketsSection" text="Background color" />
+                    <ColorPicker id="bgTicketsSection" register={register} defaultColor="#ffffff" />
+                    {errors.bgTicketsSection && (
+                      <p className="text-xs italic text-red-500">{errors.bgTicketsSection?.message}</p>
+                    )}
+                  </div>
+                  <div className="relative">
+                    <LabelColor htmlFor="ticketH1Color" text="Title section color" />
+                    <ColorPicker register={register} id="ticketH1Color" defaultColor="#321d00" />
+                    {errors.ticketH1Color && (
+                      <p className="text-xs italic text-red-500">{errors.ticketH1Color?.message}</p>
+                    )}
+                  </div>
                 </div>
-                <div className="relative">
-                  <LabelColor htmlFor="ticketH1Color" text="Title section color" />
-                  <ColorPicker register={register} id="ticketH1Color" defaultColor="#321d00" />
-                  {errors.ticketH1Color && (
-                    <p className="text-xs italic text-red-500">{errors.ticketH1Color?.message}</p>
-                  )}
-                </div>
-                <div className="relative">
-                  <LabelColor htmlFor="buttonsTicketsColor" text="Buttons color" />
-                  <ColorPicker register={register} id="buttonsTicketsColor" defaultColor="#291800" />
 
-                  {errors.buttonsTicketsColor && (
-                    <p className="text-xs italic text-red-500">{errors.buttonsTicketsColor?.message}</p>
-                  )}
-                </div>
-                <div className="relative">
-                  <LabelColor htmlFor="buttonTicketForeground" text="Buttons foreground" />
-                  <ColorPicker register={register} id="buttonTicketForeground" defaultColor="#edc58d" />
-                  {errors.buttonTicketForeground && (
-                    <p className="text-xs italic text-red-500">{errors.buttonTicketForeground?.message}</p>
-                  )}
+                <div className="w-1/2">
+                  <div className="relative">
+                    <LabelColor htmlFor="buttonsTicketsColor" text="Buttons color" />
+                    <ColorPicker register={register} id="buttonsTicketsColor" defaultColor="#291800" />
+
+                    {errors.buttonsTicketsColor && (
+                      <p className="text-xs italic text-red-500">{errors.buttonsTicketsColor?.message}</p>
+                    )}
+                  </div>
+                  <div className="relative">
+                    <LabelColor htmlFor="buttonTicketForeground" text="Buttons foreground" />
+                    <ColorPicker register={register} id="buttonTicketForeground" defaultColor="#edc58d" />
+                    {errors.buttonTicketForeground && (
+                      <p className="text-xs italic text-red-500">{errors.buttonTicketForeground?.message}</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="col-span-2 bg-primary-foreground p-6 rounded-md shadow-md h-3/5">
+            <div className="col-span-1 bg-primary-foreground p-6 rounded-md shadow-md">
               <p className="text-xl text-center font-bold text-primary mb-4">Footer</p>
               <div className="flex gap-2">
                 <div className="relative mb-4 md:mr-2 w-1/2">

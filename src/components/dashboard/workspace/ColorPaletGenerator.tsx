@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
 import { useState } from "react";
+import { UseFormSetValue } from "react-hook-form";
 
-const ColorPaletteGenerator = () => {
+const ColorPaletteGenerator = ({ setValues }: { setValues: UseFormSetValue<AddDiscoSchema> }) => {
   const [colorPalette, setColorPalette] = useState(["#808080", "#666666", "#4d4d4d", "#333333", "#1a1a1a"]);
 
   const generateRandomColor = () => {
@@ -17,10 +19,12 @@ const ColorPaletteGenerator = () => {
       newPalette.push(generateRandomColor());
     }
     setColorPalette(newPalette);
+    setValues("bgNavbarColor", newPalette[0]);
+    setValues("bannerGradientColor", newPalette[0]);
   };
 
   return (
-    <div className="flex flex-col justify-between w-1/3 px-6 pt-6 pb-10 bg-white rounded-md shadow-md">
+    <div className="flex flex-col col-span-4 justify-between px-6 pt-6 pb-10 bg-white rounded-md shadow-md">
       <h2 className="text-xl text-primary text-center font-bold mb-4">Color Palette Generator</h2>
 
       <div className="flex flex-col gap-3 items-center justify-between mb-6">

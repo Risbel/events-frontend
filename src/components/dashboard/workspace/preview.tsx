@@ -11,7 +11,7 @@ const Preview = ({ values }: any) => {
   return (
     <div className="relative">
       <NavbarPreview values={values} />
-      <div className="absolute flex justify-center items-center z-40 h-screen w-full bg-transparent">
+      <div className="absolute flex justify-center items-start translate-y-36 z-40 h-screen w-full bg-transparent">
         <div
           style={{
             background: values.bgNavbarColor,

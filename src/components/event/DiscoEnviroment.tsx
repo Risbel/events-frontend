@@ -64,7 +64,7 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
         <NavSidebarEventMobile disco={discoData.disco} />
       </div>
 
-      <div className="absolute flex justify-center items-center z-40 h-screen w-screen bg-transparent">
+      <div className="absolute flex justify-center items-start translate-y-32 z-40 h-screen w-full bg-transparent">
         <Link
           style={{
             background: discoData.disco.discoDetail.discoColor.bgNavbarColor,
@@ -75,7 +75,7 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
           href={"#tickets"}
           className="px-6 py-2 hover:opacity-95 rounded-lg font-semibold text-lg md:text-xl hover:-translate-y-1  shadow-2xl hover:shadow-white transition-transform"
         >
-          BOOK NOW
+          RESERVE NOW
         </Link>
       </div>
       {loadingDisco ||

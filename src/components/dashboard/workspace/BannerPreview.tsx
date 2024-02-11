@@ -21,18 +21,23 @@ const BannerPreview = ({ values }: { values: AddDiscoSchema }) => {
           className="absolute h-5/6 w-full bottom-0"
         ></div>
       </div>
+
       <div className="relative flex items-end z-10 h-screen">
-        <div className="mb-4 lg:mb-8 px-2 md:px-6 lg:px-10">
-          <h1
-            className="font-bold text-3xl md:text-4xl lg:text-6xl text-center md:text-start"
-            style={{ color: `${values.h1BannerColor}` }}
-          >
-            {values.h1Banner?.toUpperCase()}
-          </h1>
+        <div className="flex flex-col gap-2 items-baseline mb-4 lg:mb-8 px-2 md:px-6 lg:px-10 w-full">
+          <div className="flex flex-col items-center md:items-baseline w-full">
+            <h1
+              className="font-bold text-3xl md:text-4xl lg:text-6xl text-center md:text-start"
+              style={{ color: `${values.h1BannerColor}` }}
+            >
+              {values.h1Banner?.toUpperCase()}
+            </h1>
+
+            <p style={{ color: values.h1BannerColor }}>Miercoles 14 - Jueves 22 de febrero.</p>
+          </div>
 
           <p
             style={{ color: `${values.bannerDescriptionColor}` }}
-            className="text-xl md:text-3xl text-center md:text-left py-4 md:py-8 md:w-2/3"
+            className="text-xl md:text-3xl text-center md:text-left py-4 md:w-2/3"
           >
             {values.bannerDescription}
           </p>
