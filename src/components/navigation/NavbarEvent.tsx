@@ -38,7 +38,7 @@ const NavbarEvent = () => {
   }
 
   return (
-    <div className="fixed z-50">
+    <div className="fixed z-[100]">
       <div
         style={{
           backgroundColor: `${discoData.disco.discoDetail.discoColor.bgNavbarColor}`,

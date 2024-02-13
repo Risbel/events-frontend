@@ -13,7 +13,7 @@ const BankCardAsociated = ({
   return (
     <div>
       <Dialog>
-        <DialogTrigger className="text-start text-sm px-2 py-1 hover:bg-white hover:text-black rounded-sm w-full">
+        <DialogTrigger className="text-start text-sm px-2 py-1 hover:bg-black hover:text-white rounded-sm w-full transition-colors">
           Asociated card
         </DialogTrigger>
         <DialogContent
@@ -21,7 +21,7 @@ const BankCardAsociated = ({
             background: `${discoDetail.discoColor.bgNavbarColor}`,
             border: `2px solid ${discoDetail.discoColor.navbarForeground}`,
           }}
-          className="h-3/4 text-left overflow-auto backdrop-blur-xl"
+          className="h-3/4 w-1/3 text-left overflow-auto backdrop-blur-xl"
         >
           <div className="flex h-full justify-between p-2 flex-col gap-4">
             <div>
@@ -29,7 +29,7 @@ const BankCardAsociated = ({
                 Associated card
               </h2>
 
-              <div className="bg-black text-white p-2 rounded-md w-full mb-4">
+              <div className="bg-black text-center text-white p-2 rounded-md w-full mb-4">
                 <p>{discoBankCard.name}</p>
                 <p className="text-xl md:text-2xl">{discoBankCard.number}</p>
               </div>

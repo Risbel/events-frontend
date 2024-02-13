@@ -1,7 +1,7 @@
 import httpService from "@/config/axios.config";
 
 export const getBannerImages = async (discoDetailsId: string) => {
-  const response = await httpService.get<IBannerImages[]>(`/discoBannerImages/${discoDetailsId}`);
+  const response = await httpService.get<IBannerImages[]>(`/discoBannerImage/${discoDetailsId}`);
   return response.data;
 };
 
