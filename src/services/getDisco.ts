@@ -19,6 +19,8 @@ export interface DataDisco {
 export interface DiscoDetail {
   id: string;
   bannerDescription: string;
+  titleTextAbout: string;
+  titleTextCarousel: string;
   aboutDescription: string;
   bgImage: string;
   address: string;

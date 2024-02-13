@@ -24,7 +24,7 @@ const Experiences = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail;
         style={{ color: `${discoDetail.discoColor.experienciesH1Color}` }}
         className="font-extrabold text-4xl md:text-5xl lg:text-7xl py-8 text-center"
       >
-        Experiences
+        {discoDetail.titleTextCarousel ? discoDetail.titleTextCarousel : "Experiencies"}
       </h1>
 
       <div className="flex justify-between w-full">

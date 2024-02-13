@@ -47,7 +47,7 @@ const ExperiencesPreview = ({ values }: { values: AddDiscoSchema }) => {
         style={{ color: `${values.experienciesH1Color}` }}
         className="font-extrabold text-3xl md:text-4xl lg:text-6xl py-8 text-center"
       >
-        Experiences
+        {values.titleTextCarousel ? values.titleTextCarousel : "Experiencies"}
       </h1>
 
       <div className="flex justify-between w-full">

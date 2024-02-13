@@ -294,6 +294,23 @@ const AddDiscos = () => {
               <p className="text-xl text-center font-bold text-primary mb-4">About</p>
               <div className="relative mb-4 pb-2">
                 <Label
+                  name={"Title text"}
+                  htmlfor={"titleTextAbout"}
+                  className="block mb-1 text-sm font-medium text-primary"
+                />
+
+                <Input
+                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                  id="titleTextAbout"
+                  placeholder="Title text"
+                  {...register("titleTextAbout")}
+                />
+                {errors.titleTextAbout && (
+                  <p className="text-xs italic text-red-500">{errors.titleTextAbout?.message}</p>
+                )}
+              </div>
+              <div className="relative mb-4 pb-2">
+                <Label
                   name={"About description"}
                   htmlfor={"aboutDescription"}
                   className="block mb-1 text-sm font-medium text-primary"
@@ -344,6 +361,23 @@ const AddDiscos = () => {
             <div className="col-span-1 bg-primary-foreground rounded-md p-6 shadow-md">
               <div className="flex flex-col gap-2 pb-4">
                 <p className="text-xl text-center font-bold text-primary mb-4">Carousel</p>
+                <div className="relative">
+                  <Label
+                    name={"Title text"}
+                    htmlfor={"titleTextCarousel"}
+                    className="block mb-1 text-sm font-medium text-primary"
+                  />
+
+                  <Input
+                    className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                    id="titleTextCarousel"
+                    placeholder="Title text"
+                    {...register("titleTextCarousel")}
+                  />
+                  {errors.titleTextCarousel && (
+                    <p className="text-xs italic text-red-500">{errors.titleTextCarousel?.message}</p>
+                  )}
+                </div>
                 <div className="relative pb-2">
                   <LabelColor htmlFor="bgExperiencies" text="Background color" />
                   <ColorPicker register={register} id="bgExperiencies" defaultColor="#ffffff" />
@@ -519,31 +553,33 @@ const addDiscoSchema = z.object({
   brandColor: z.string().min(1, { message: "Brand color required" }),
   //navbar
   logo: z.string().min(1, { message: "Logo is required" }),
-  bgNavbarColor: z.string().min(1, { message: "Background is required" }), //new
-  navbarForeground: z.string().min(1, { message: "Text color required" }), // new
+  bgNavbarColor: z.string().min(1, { message: "Background is required" }),
+  navbarForeground: z.string().min(1, { message: "Text color required" }),
   //home
   bannerImage: z.string().min(1, { message: "Banner URL image required" }),
-  h1Banner: z.string().min(2, "Invalid title").optional().or(z.literal("")), //new replace h1Color
-  h1BannerColor: z.string().min(1, { message: "h1 color required" }), //new
-  bannerGradientColor: z.string().min(1, { message: "h1 color required" }), //new
-  bannerDescription: z.string().min(2, "Invalid description").optional().or(z.literal("")), //new replace description
-  bannerDescriptionColor: z.string().min(1, { message: "Description color required" }), //new
+  h1Banner: z.string().min(2, "Invalid title").optional().or(z.literal("")),
+  h1BannerColor: z.string().min(1, { message: "h1 color required" }),
+  bannerGradientColor: z.string().min(1, { message: "h1 color required" }),
+  bannerDescription: z.string().min(2, "Invalid description").optional().or(z.literal("")),
+  bannerDescriptionColor: z.string().min(1, { message: "Description color required" }),
   //about
-  bgAboutColor: z.string().min(1, { message: "Background color required" }), //new
-  aboutDescription: z.string().min(1, { message: "About description required" }), //new
-  textAboutColor: z.string().min(1, { message: "About description required" }), //new
+  titleTextAbout: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")), //new
+  bgAboutColor: z.string().min(1, { message: "Background color required" }),
+  aboutDescription: z.string().min(1, { message: "About description required" }),
+  textAboutColor: z.string().min(1, { message: "About description required" }),
   buttonColor: z.string().min(1, { message: "Button color required" }),
   buttonForeground: z.string().min(1, { message: "ButtonForeground color required" }),
   //experiencies
-  bgExperiencies: z.string().min(1, { message: "Background Experiencies required" }), //new
-  experienciesH1Color: z.string().min(1, { message: "Experiencies title color required" }), //new
+  titleTextCarousel: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")), //new
+  bgExperiencies: z.string().min(1, { message: "Background Experiencies required" }),
+  experienciesH1Color: z.string().min(1, { message: "Experiencies title color required" }),
   //tickes
-  bgTicketsSection: z.string().min(1, { message: "Secondary color required" }), //new
-  ticketH1Color: z.string().min(1, { message: "Ticket title color required" }), //new
-  buttonsTicketsColor: z.string().min(1, { message: "Button color required" }), //new
-  buttonTicketForeground: z.string().min(1, { message: "Button color required" }), //new
+  bgTicketsSection: z.string().min(1, { message: "Secondary color required" }),
+  ticketH1Color: z.string().min(1, { message: "Ticket title color required" }),
+  buttonsTicketsColor: z.string().min(1, { message: "Button color required" }),
+  buttonTicketForeground: z.string().min(1, { message: "Button color required" }),
   //footer
-  phone: z.string().min(1, { message: "Phone number required" }), //new
+  phone: z.string().min(1, { message: "Phone number required" }),
   email: z.string().email().min(1, { message: "Email required" }),
   address: z.string().min(1, { message: "Address is required" }),
   administrator: z.string().min(1, { message: "Field must be atleast 8 characters" }),

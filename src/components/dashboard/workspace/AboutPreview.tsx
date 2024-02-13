@@ -12,7 +12,7 @@ const AboutPreview = ({ values }: { values: AddDiscoSchema }) => {
             style={{ color: `${values.textAboutColor}` }}
             className="font-extrabold text-3xl md:text-4xl lg:text-6xl pb-5"
           >
-            About us
+            {values.titleTextAbout ? values.titleTextAbout : "About us"}
           </h1>
 
           <p

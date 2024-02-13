@@ -13,7 +13,7 @@ const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
             style={{ color: `${discoDetails.discoColor.textAboutColor}` }}
             className="font-extrabold text-4xl md:text-5xl lg:text-7xl pb-5"
           >
-            About us
+            {discoDetails.titleTextAbout ? discoDetails.titleTextAbout : "About us"}
           </h1>
 
           <p
