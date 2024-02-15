@@ -122,28 +122,38 @@ const AddDiscos = () => {
               </div>
               <div className="flex gap-2 w-full">
                 <div className="relative mb-4 w-1/2">
-                  <Label name={"Start date"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
+                  <Label
+                    name={"Start date"}
+                    htmlfor={"startDate"}
+                    className="block mb-1 text-sm font-medium text-primary"
+                  />
 
                   <Input
+                    {...register("startDate")}
                     autoComplete="off"
                     className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                    id="slug"
+                    id="startDate"
                     type="date"
                     placeholder="e.g. chocobar-caribe"
                   />
-                  {errors.slug && <p className="text-xs italic text-red-500">{errors.slug?.message}</p>}
+                  {errors.startDate && <p className="text-xs italic text-red-500">{errors.startDate?.message}</p>}
                 </div>
                 <div className="relative mb-4 w-1/2">
-                  <Label name={"End date"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
+                  <Label
+                    name={"End date"}
+                    htmlfor={"endDate"}
+                    className="block mb-1 text-sm font-medium text-primary"
+                  />
 
                   <Input
+                    {...register("endDate")}
                     autoComplete="off"
                     className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                    id="slug"
+                    id="endDate"
                     type="date"
                     placeholder="e.g. chocobar-caribe"
                   />
-                  {errors.slug && <p className="text-xs italic text-red-500">{errors.slug?.message}</p>}
+                  {errors.endDate && <p className="text-xs italic text-red-500">{errors.endDate?.message}</p>}
                 </div>
               </div>
               <div className="relative pb-2 ">
@@ -551,6 +561,8 @@ const addDiscoSchema = z.object({
   name: z.string().min(1, { message: "The name is required" }),
   slug: z.string().min(1, { message: "Slug is required" }),
   brandColor: z.string().min(1, { message: "Brand color required" }),
+  startDate: z.string().min(1, { message: "Start date required" }),
+  endDate: z.string().min(1, { message: "End date required" }),
   //navbar
   logo: z.string().min(1, { message: "Logo is required" }),
   bgNavbarColor: z.string().min(1, { message: "Background is required" }),

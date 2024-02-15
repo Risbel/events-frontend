@@ -1,4 +1,7 @@
 import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
+import { getDayOfYear, getDay, getDaysInMonth, getMonth, format, addDays } from "date-fns";
+import { getDate } from "date-fns/esm";
+import {} from "date-fns/locale";
 import Image from "next/image";
 
 const BannerPreview = ({ values }: { values: AddDiscoSchema }) => {
@@ -32,7 +35,15 @@ const BannerPreview = ({ values }: { values: AddDiscoSchema }) => {
               {values.h1Banner?.toUpperCase()}
             </h1>
 
-            <p style={{ color: values.h1BannerColor }}>Miercoles 14 - Jueves 22 de febrero.</p>
+            <p style={{ color: values.h1BannerColor }}>
+              {values.startDate && values.endDate && (
+                <span className="font-thin pl-4">
+                  From {format(addDays(new Date(values.startDate), 1), "MMMM-d/yy")}
+                  {" to "}
+                  {format(addDays(new Date(values.endDate), 1), "MMMM-d/yy")}
+                </span>
+              )}
+            </p>
           </div>
 
           <p

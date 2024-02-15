@@ -4,6 +4,7 @@ import React from "react";
 import BannerImages from "./BannerImages";
 import SubscribeNow from "./SubscribeNow";
 import { useSession } from "next-auth/react";
+import { addDays, format } from "date-fns";
 
 const Head = ({ discoData }: { discoData: { disco: DataDisco; subscription: Subscription } }) => {
   const { data: session } = useSession();
@@ -24,12 +25,19 @@ const Head = ({ discoData }: { discoData: { disco: DataDisco; subscription: Subs
             </h1>
 
             <p
+              className="text-center"
               style={{
                 color: discoData.disco.discoDetail.discoColor.h1BannerColor,
                 borderTopColor: discoData.disco.discoDetail.discoColor.h1BannerColor,
               }}
             >
-              Miercoles 14 - Jueves 22 de febrero.
+              {discoData.disco.startDate && discoData.disco.endDate && (
+                <span className="font-thin pl-4">
+                  From {format(addDays(new Date(discoData.disco.startDate), 1), "MMMM-d/yy")}
+                  {" to "}
+                  {format(addDays(new Date(discoData.disco.endDate), 1), "MMMM-d/yy")}
+                </span>
+              )}
             </p>
           </div>
 

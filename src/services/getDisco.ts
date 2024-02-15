@@ -8,6 +8,8 @@ const getDisco = async ({ slug, userId }: { slug: any; userId?: any }) => {
 export default getDisco;
 
 export interface DataDisco {
+  endDate: string;
+  startDate: string;
   createdAt: string;
   discoDetail: DiscoDetail;
   id: string;
