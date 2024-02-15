@@ -11,18 +11,6 @@ const Preview = ({ values }: any) => {
   return (
     <div className="relative">
       <NavbarPreview values={values} />
-      <div className="absolute flex justify-center items-start translate-y-36 z-40 h-screen w-full bg-transparent">
-        <div
-          style={{
-            background: values.bgNavbarColor,
-            color: values.navbarForeground,
-            border: `2px solid ${values.navbarForeground}`,
-          }}
-          className="px-6 py-2 hover:opacity-95 rounded-lg font-semibold text-lg md:text-xl hover:-translate-y-1  shadow-2xl hover:shadow-white transition-transform cursor-pointer"
-        >
-          RESERVE NOW
-        </div>
-      </div>
       <BannerPreview values={values} />
       <AboutPreview values={values} />
       <ExperiencesPreview values={values} />

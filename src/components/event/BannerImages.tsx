@@ -45,14 +45,14 @@ const BannerImages = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
           className="absolute h-5/6 w-screen bottom-0"
         ></div>
       </div>
-      <div className="absolute z-50 flex justify-center items-center space-x-4 bottom-8 w-full">
+      <div className="absolute z-50 flex justify-center items-center space-x-4 bottom-4 w-full">
         {data &&
           data.map((_, index) => (
             <button
               style={{ background: discoDetails.discoColor.h1BannerColor }}
               key={index}
               onClick={() => changeImage(index)}
-              className={`w-4 h-4 rounded-full cursor-pointer hover:scale-110 ${
+              className={`w-3 h-3 rounded-full cursor-pointer hover:scale-110 ${
                 index === currentImage ? "opacity-100" : "opacity-50"
               }`}
             ></button>

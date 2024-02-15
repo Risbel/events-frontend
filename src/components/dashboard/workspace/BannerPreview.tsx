@@ -37,21 +37,32 @@ const BannerPreview = ({ values }: { values: AddDiscoSchema }) => {
 
             <p style={{ color: values.h1BannerColor }}>
               {values.startDate && values.endDate && (
-                <span className="font-thin pl-4">
+                <span className="font-thin">
                   From {format(addDays(new Date(values.startDate), 1), "MMMM-d/yy")}
                   {" to "}
                   {format(addDays(new Date(values.endDate), 1), "MMMM-d/yy")}
                 </span>
               )}
             </p>
-          </div>
 
-          <p
-            style={{ color: `${values.bannerDescriptionColor}` }}
-            className="text-xl md:text-3xl text-center md:text-left py-4 md:w-2/3"
-          >
-            {values.bannerDescription}
-          </p>
+            <p
+              style={{ color: `${values.bannerDescriptionColor}` }}
+              className="text-xl md:text-3xl text-center md:text-left py-4 md:w-2/3"
+            >
+              {values.bannerDescription}
+            </p>
+
+            <div
+              style={{
+                background: values.bgNavbarColor,
+                color: values.navbarForeground,
+                border: `2px solid ${values.navbarForeground}`,
+              }}
+              className="px-6 py-2 hover:opacity-95 rounded-lg font-semibold text-lg md:text-xl hover:-translate-y-1  shadow-2xl hover:shadow-white transition-transform cursor-pointer"
+            >
+              RESERVE NOW
+            </div>
+          </div>
         </div>
       </div>
     </div>
