@@ -30,6 +30,7 @@ const ColorPicker = ({ register, defaultColor, id }: { register: any; defaultCol
         </div>
       </div>
       <input
+        id={id}
         onChange={handleColorChange}
         value={color}
         className="rlative z-20 text-primary text-center text-sm w-full border py-2 rounded-xl hover:bg-secondary transition-colors hover:border-black hover:text-primary"
