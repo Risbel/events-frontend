@@ -5,32 +5,32 @@ import Image from "next/image";
 const experiencies = [
   {
     id: 1,
-    image: "https://image.lexica.art/full_webp/1f22aaef-9688-46fe-b29a-a4d186e7ca6e",
+    image: "/img-random.png",
     imageText: "example text",
   },
   {
     id: 2,
-    image: "https://image.lexica.art/full_webp/80aba2aa-77d3-4420-a9a7-d8170d1ca5a8",
+    image: "/img-random.png",
     imageText: "example text",
   },
   {
     id: 3,
-    image: "https://image.lexica.art/full_webp/1f7d5de9-ac39-4a31-8cbc-60ae459c298c",
+    image: "/img-random.png",
     imageText: "example text",
   },
   {
     id: 4,
-    image: "https://image.lexica.art/full_webp/40f0a341-390e-4696-9145-f13816fab36f",
+    image: "/img-random.png",
     imageText: "example text",
   },
   {
     id: 4,
-    image: "https://image.lexica.art/full_webp/3f64c1f3-b5b1-41d1-89ba-793c0563fb1c",
+    image: "/img-random.png",
     imageText: "example text",
   },
   {
     id: 4,
-    image: "https://image.lexica.art/full_webp/bdd56115-07de-4d11-9b09-f3699328d078",
+    image: "/img-random.png",
     imageText: "example text",
   },
 ];
@@ -77,8 +77,8 @@ const ExperiencesPreview = ({ values }: { values: AddDiscoSchema }) => {
                       <Image
                         className="object-cover rounded-2xl w-full h-full"
                         src={discoImage.image}
-                        width={300}
-                        height={350}
+                        width={350}
+                        height={400}
                         alt={`experiencie${discoImage.id}`}
                       />
                     </div>

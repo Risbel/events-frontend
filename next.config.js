@@ -14,15 +14,9 @@ const nextConfig = {
         hostname: "img.lexica.art",
         pathname: "**",
       },
-
       {
         protocol: "https",
         hostname: "image.lexica.art",
-        pathname: "**",
-      },
-      {
-        protocol: "https",
-        hostname: "i.pinimg.com",
         pathname: "**",
       },
       {

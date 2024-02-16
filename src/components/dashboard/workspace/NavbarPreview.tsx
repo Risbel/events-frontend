@@ -1,8 +1,9 @@
 import { cn } from "@/lib/shadcnUtils";
+import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
 import { BellIcon, Home, ShoppingCart, UserCircle2 } from "lucide-react";
 import Image from "next/image";
 
-const NavbarPreview = ({ values }: any) => {
+const NavbarPreview = ({ values }: { values: any }) => {
   return (
     <div className="fixed w-full md:w-3/4 lg:w-5/6 z-50">
       {values && (
@@ -18,12 +19,12 @@ const NavbarPreview = ({ values }: any) => {
             <div className="group flex gap-2 items-center cursor-pointer">
               <Image
                 className="rounded-full group-hover:scale-105 object-cover"
-                src={`${values?.logo ? values.logo : "/"}`}
+                src={values?.logo && values?.logo?.[0] ? URL.createObjectURL(values?.logo?.[0]) : "/img-random.png"}
                 alt="logo"
                 width={40}
                 height={40}
               />
-              <p className="font-semibold">{values.name?.toUpperCase()}</p>
+              <p className="font-semibold">{values.name}</p>
             </div>
 
             <div className="hidden md:flex gap-4">

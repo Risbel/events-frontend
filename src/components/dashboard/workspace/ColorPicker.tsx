@@ -1,7 +1,11 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 const ColorPicker = ({ register, defaultColor, id }: { register: any; defaultColor?: string; id: string }) => {
   const [color, setColor] = useState<any>(defaultColor);
+  useEffect(() => {
+    setColor(defaultColor);
+  }, [defaultColor]);
+
   const handleColorChange = (e: ChangeEvent<HTMLInputElement>) => {
     setColor(e.target.value);
   };

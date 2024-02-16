@@ -6,8 +6,9 @@ import NavbarPreview from "./NavbarPreview";
 import TicketsPreview from "./TicketsPreview";
 import Image from "next/image";
 import FormContact from "@/pages/components/FormContact";
+import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
 
-const Preview = ({ values }: any) => {
+const Preview = ({ values }: { values: AddDiscoSchema }) => {
   return (
     <div className="relative">
       <NavbarPreview values={values} />

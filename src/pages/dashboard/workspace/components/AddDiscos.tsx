@@ -5,7 +5,7 @@ import useCreateDisco from "@/hooks/useCreateDisco";
 import ButtonSubmit from "../../../../components/buttons/ButtonSubmit";
 import useGetMe from "@/hooks/useGetMe";
 import Spinner from "../../../../components/loaders/Spinner";
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
+import { useState } from "react";
 import { Input, Label } from "../../../../components/ui/input";
 import { Textarea } from "../../../../components/ui/textarea";
 import { cn } from "@/lib/shadcnUtils";
@@ -17,16 +17,6 @@ import ColorPaletteGenerator from "@/components/dashboard/workspace/ColorPaletGe
 import LabelColor from "@/components/dashboard/workspace/LabelColor";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
-
-const DividerWorkSpace = ({ text, className }: { text: string; className?: string }) => {
-  return (
-    <div className={cn("flex items-center", className)}>
-      <div className="border border-primary w-full"></div>
-      <p className="px-4 text-xl text-primary text-nowrap font-semibold">{text}</p>
-      <div className="border border-primary w-full"></div>
-    </div>
-  );
-};
 
 const AddDiscos = () => {
   const [isActive, setIsActive] = useState(false);
@@ -54,9 +44,42 @@ const AddDiscos = () => {
     setErrorBankCard("");
     data.bankCardNumber = bankCardInput;
 
-    submitDataDisco(data);
-    reset();
-    setBankCardInput("");
+    const formData = new FormData();
+
+    formData.append("logo", data?.logo?.[0]);
+    formData.append("bannerImage", data.bannerImage?.[0]);
+    formData.append("name", data.name);
+    formData.append("slug", data.slug);
+    formData.append("brandColor", data.brandColor);
+    formData.append("startDate", data.startDate);
+    formData.append("endDate", data.endDate);
+    formData.append("bgNavbarColor", data.bgNavbarColor);
+    formData.append("navbarForeground", data.navbarForeground);
+    data.h1Banner && formData.append("h1Banner", data.h1Banner);
+    formData.append("h1BannerColor", data.h1BannerColor);
+    formData.append("bannerGradientColor", data.bannerGradientColor);
+    data.bannerDescription && formData.append("bannerDescription", data.bannerDescription);
+    formData.append("bannerDescriptionColor", data.bannerDescriptionColor);
+    data.titleTextAbout && formData.append("titleTextAbout", data.titleTextAbout);
+    formData.append("bgAboutColor", data.bgAboutColor);
+    formData.append("aboutDescription", data.aboutDescription);
+    formData.append("textAboutColor", data.textAboutColor);
+    formData.append("buttonColor", data.buttonColor);
+    formData.append("buttonForeground", data.buttonForeground);
+    data.titleTextCarousel && formData.append("titleTextCarousel", data.titleTextCarousel);
+    formData.append("bgExperiencies", data.bgExperiencies);
+    formData.append("experienciesH1Color", data.experienciesH1Color);
+    formData.append("bgTicketsSection", data.bgTicketsSection);
+    formData.append("ticketH1Color", data.ticketH1Color);
+    formData.append("buttonsTicketsColor", data.buttonsTicketsColor);
+    formData.append("buttonTicketForeground", data.buttonTicketForeground);
+    formData.append("phone", data.phone);
+    formData.append("email", data.email);
+    formData.append("address", data.address);
+    formData.append("administrator", data.administrator);
+    formData.append("bankCardNumber", data.bankCardNumber);
+    data.bgImage && formData.append("bgImage", data.bgImage);
+    submitDataDisco(formData);
   };
 
   if (isLoadingMy) {
@@ -90,7 +113,7 @@ const AddDiscos = () => {
           Let&apos;s create your webpage:{" "}
         </h1>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8">
+        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="flex flex-col gap-8">
           <div className="grid grid-cols-12 gap-8">
             <div className="flex flex-col col-span-4 bg-primary-foreground p-6 rounded-md shadow-md">
               <p className="pb-4 text-xl text-center font-bold text-primary">General info</p>
@@ -179,21 +202,22 @@ const AddDiscos = () => {
             <div className="flex flex-col justify-between gap-2 col-span-1 bg-primary-foreground p-6 rounded-md shadow-md">
               <p className="pb-4 text-xl text-center font-bold text-primary">Navbar</p>
               <div className="relative">
-                <Label htmlfor={"logo"} name={"Logo URL"} className="block mb-1 text-sm font-medium text-primary" />
+                <Label htmlfor={"logo"} name={"Logo"} className="block mb-1 text-sm font-medium text-primary" />
 
                 <Input
                   autoComplete="off"
                   className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
                   id="logo"
-                  type="text"
-                  placeholder="logo URL"
+                  type="file"
+                  accept=".png, .img, .jpg, .jpeg"
+                  placeholder="logo"
                   {...register("logo")}
                 />
-                {errors.logo && <p className="text-xs italic text-red-500">{errors.logo?.message}</p>}
+                {errors.logo && <p className="text-xs italic text-red-500">{"Image required"}</p>}
               </div>
               <div className="relative">
                 <LabelColor htmlFor="bgNavbarColor" text="Background color" />
-                <ColorPicker defaultColor="#472a00" register={register} id="bgNavbarColor" />
+                <ColorPicker defaultColor={"#000000"} register={register} id="bgNavbarColor" />
 
                 {errors.bgNavbarColor && <p className="text-xs italic text-red-500">{errors.bgNavbarColor?.message}</p>}
               </div>
@@ -249,12 +273,13 @@ const AddDiscos = () => {
                     <Input
                       autoComplete="off"
                       className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                      type="file"
+                      accept=".png, .img, .jpg, .jpeg"
                       id="bannerImage"
-                      type="text"
                       placeholder="Type the URL banner image"
                       {...register("bannerImage")}
                     />
-                    {errors.bannerImage && <p className="text-xs italic text-red-500">{errors.bannerImage?.message}</p>}
+                    {errors.bannerImage && <p className="text-xs italic text-red-500">{"Image required"}</p>}
                   </div>
                   <div className="relative">
                     <LabelColor htmlFor="bannerGradientColor" text="Gradient color" />
@@ -564,11 +589,11 @@ const addDiscoSchema = z.object({
   startDate: z.string().min(1, { message: "Start date required" }),
   endDate: z.string().min(1, { message: "End date required" }),
   //navbar
-  logo: z.string().min(1, { message: "Logo is required" }),
+  logo: z.any().refine((file) => file?.[0], `Image required`),
   bgNavbarColor: z.string().min(1, { message: "Background is required" }),
   navbarForeground: z.string().min(1, { message: "Text color required" }),
   //home
-  bannerImage: z.string().min(1, { message: "Banner URL image required" }),
+  bannerImage: z.any().refine((file) => file?.[0], `Image required`),
   h1Banner: z.string().min(2, "Invalid title").optional().or(z.literal("")),
   h1BannerColor: z.string().min(1, { message: "h1 color required" }),
   bannerGradientColor: z.string().min(1, { message: "h1 color required" }),
@@ -596,6 +621,5 @@ const addDiscoSchema = z.object({
   address: z.string().min(1, { message: "Address is required" }),
   administrator: z.string().min(1, { message: "Field must be atleast 8 characters" }),
   bankCardNumber: z.string().optional(),
-
   bgImage: z.string().optional(),
 });

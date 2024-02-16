@@ -1,17 +1,19 @@
 import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
-import { getDayOfYear, getDay, getDaysInMonth, getMonth, format, addDays } from "date-fns";
-import { getDate } from "date-fns/esm";
-import {} from "date-fns/locale";
+import { format, addDays } from "date-fns";
 import Image from "next/image";
 
-const BannerPreview = ({ values }: { values: AddDiscoSchema }) => {
+const BannerPreview = ({ values }: { values: any }) => {
   return (
     <div className="relative h-screen w-full">
       <div className="absolute flex justify-center items-center overflow-hidden -z-20 w-full">
         {values && (
           <Image
             className="h-screen w-full object-cover"
-            src={values?.bannerImage ? values?.bannerImage : "/"}
+            src={
+              values?.bannerImage && values?.bannerImage?.[0]
+                ? URL.createObjectURL(values?.bannerImage?.[0])
+                : "/img-random.png"
+            }
             alt="Banner image"
             width={1000}
             height={500}
@@ -32,7 +34,7 @@ const BannerPreview = ({ values }: { values: AddDiscoSchema }) => {
               className="font-bold text-3xl md:text-4xl lg:text-6xl text-center md:text-start"
               style={{ color: `${values.h1BannerColor}` }}
             >
-              {values.h1Banner?.toUpperCase()}
+              {values.h1Banner}
             </h1>
 
             <p style={{ color: values.h1BannerColor }}>

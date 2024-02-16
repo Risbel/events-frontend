@@ -56,7 +56,7 @@ const NavbarEvent = () => {
             height={40}
           />
           <p style={{ color: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }} className="font-semibold">
-            {discoData.disco.name.toUpperCase()}
+            {discoData.disco.name}
           </p>
         </Link>
 
