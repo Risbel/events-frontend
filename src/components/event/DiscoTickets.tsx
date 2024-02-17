@@ -186,7 +186,7 @@ const DiscoTickets = ({
                 ) : (
                   ticket.ticketsReservations.length >= 1 &&
                   ticket.category !== "common" && (
-                    <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-md flex items-center justify-center">
+                    <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-3xl flex items-center justify-center">
                       <p className="text-slate-200 text-2xl">Reserved</p>
                     </div>
                   )

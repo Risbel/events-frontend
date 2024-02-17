@@ -60,10 +60,10 @@ const TicketsPreview = ({ values }: { values: any }) => {
   const months = useListMonths();
 
   return (
-    <div style={{ background: `${values.bgTicketsSection}` }} className="h-screen">
+    <div style={{ background: `${values.bgTicketsSection}` }} className="pb-20">
       <h1
         style={{ color: `${values.ticketH1Color}` }}
-        className="font-extrabold text-4xl md:text-5xl lg:text-7xl text-center pb-2 pt-20"
+        className="font-extrabold text-4xl md:text-5xl lg:text-7xl text-center mb-8 pt-20"
       >
         Tickets
       </h1>
@@ -74,7 +74,7 @@ const TicketsPreview = ({ values }: { values: any }) => {
             border: `solid 3px`,
             borderColor: `${values.ticketH1Color}`,
           }}
-          className="flex gap-1 overflow-hidden max-w-screen-lg overflow-x-auto rounded-md p-2"
+          className="flex gap-1 overflow-hidden max-w-screen-lg overflow-x-auto rounded-xl p-2"
         >
           {[28, 29, 30, 31].map((date: any, i) => {
             return (
@@ -97,19 +97,19 @@ const TicketsPreview = ({ values }: { values: any }) => {
           })}
         </div>
       </div>
-      <div className="flex flex-col items-center gap-4 mb-10 p-2 rounded-md lg:px-8">
+      <div className="flex justify-center max-w-screen flex-wrap gap-4 mb-10 p-2 rounded-md px-8">
         {discoTickets?.map((ticket: any) => {
           return (
-            <div key={ticket.id} className="w-full md:w-1/2 lg:w-2/3">
-              <div className="relative">
+            <div key={ticket.id} className="relative w-full md:w-1/3 lg:w-1/5 min-w-64">
+              <div className="relative h-full">
                 {Number(ticket.countInStock) === 0 ? (
-                  <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-md flex items-center justify-center">
+                  <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-3xl flex items-center justify-center">
                     <p className="text-slate-200 text-2xl">Sold out</p>
                   </div>
                 ) : (
                   ticket.ticketsReservations.length >= 1 &&
                   ticket.category !== "common" && (
-                    <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-md flex items-center justify-center">
+                    <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-3xl flex items-center justify-center">
                       <p className="text-slate-200 text-2xl">Reserved</p>
                     </div>
                   )
@@ -119,35 +119,57 @@ const TicketsPreview = ({ values }: { values: any }) => {
                     background: `${values.buttonsTicketsColor}`,
                     border: `solid ${values.buttonTicketForeground} 2px`,
                   }}
-                  className="flex justify-between gap-2 rounded-md p-2 relative hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 cursor-pointer"
+                  className="flex flex-col h-full gap-2 justify-between items-center rounded-3xl py-8 relative"
                 >
-                  <div style={{ color: `${values.buttonTicketForeground}` }} className="w-full">
-                    <p className="text-sm font-semibold">Reserve {ticket.category} tickets</p>
-                    <div className="flex gap-3 items-center">
-                      <div className="flex items-center gap-2">
-                        <CreditCard style={{ stroke: `${values.buttonTicketForeground}` }} />
-                        <div className="text-sm"> ${ticket.price} c/u</div>
-                      </div>
-                      {(ticket.category === "VIP" || ticket.category === "economy") && (
-                        <div className="flex items-center gap-2">
-                          <RockingChair stroke={`${values.buttonTicketForeground}`} />
-                          <p className="text-xs">{ticket.countInStock} available</p>
-                        </div>
-                      )}
-                    </div>
-                    <div style={{ color: `${values.buttonTicketForeground}` }}>
-                      <p className="text-xs"> {ticket?.shortDescription}</p>
-                      <div className="w-full flex items-center justify-center gap-2">
-                        <CalendarDays style={{ stroke: `${values.buttonTicketForeground}` }} />
-                        <p className="text-xs text-center">
-                          {weekdays[new Date(ticket.expDate).getDay()]} {new Date(ticket.expDate).getDate()}
-                        </p>
-                      </div>
+                  <p
+                    style={{
+                      border: `solid ${values.buttonTicketForeground}90 1px`,
+                      color: `${values.buttonTicketForeground}`,
+                    }}
+                    className="text-center text-xl font-bold mb-2 border px-2 rounded-full"
+                  >
+                    {ticket.category}
+                  </p>
+
+                  <div className="flex items-center gap-2 pb-4">
+                    <div style={{ color: `${values.buttonTicketForeground}` }} className="text-5xl font-bold">
+                      ${ticket.price}
                     </div>
                   </div>
-                  <div className="flex absolute items-center gap-1 md:gap-2 right-1">
-                    <div>{ticket.countInStock}</div>
+
+                  {(ticket.category === "VIP" || ticket.category === "economy") && (
+                    <div className="flex items-center gap-2">
+                      <p style={{ color: `${values.buttonTicketForeground}` }} className="font-semibold text-xl">
+                        {ticket.countInStock} seats available
+                      </p>
+                    </div>
+                  )}
+
+                  <p style={{ color: `${values.buttonTicketForeground}` }} className="text-center text-xs pb-6 w-2/3">
+                    {ticket?.shortDescription}
+                  </p>
+
+                  <div className="flex absolute right-1 top-1 items-center gap-1 md:gap-2">
                     <LogoCategory ticket={ticket} discoColors={values} />
+                  </div>
+
+                  <div
+                    className="text-center font-semibold py-1 px-4 rounded-md hover:-translate-y-1 shadow-lg transition-transform duration-300"
+                    style={{
+                      background: `${values.buttonsTicketsColor}`,
+                      border: `solid ${values.buttonTicketForeground} 1px`,
+                      color: `${values.buttonTicketForeground}`,
+                    }}
+                  >
+                    Get tickets
+                  </div>
+                  <p>{ticket.largeDescription}</p>
+                  <div style={{ color: `${values.buttonTicketForeground}` }}>
+                    <div style={{ color: `${values.buttonTicketForeground}` }}>
+                      <p className="text-xs text-center">
+                        {weekdays[new Date(ticket.expDate).getDay()]} {new Date(ticket.expDate).getDate()}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
