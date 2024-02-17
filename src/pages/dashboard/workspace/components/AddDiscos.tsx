@@ -131,7 +131,7 @@ const AddDiscos = () => {
                 {errors.name && <p className="text-xs italic text-red-500">{errors.name?.message}</p>}
               </div>
               <div className="relative mb-4">
-                <Label name={"Slug URL"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
+                <Label name={"Link name"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
 
                 <Input
                   autoComplete="off"
