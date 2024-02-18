@@ -584,7 +584,12 @@ export default AddDiscos;
 const addDiscoSchema = z.object({
   //general
   name: z.string().min(1, { message: "The name is required" }),
-  slug: z.string().min(1, { message: "Slug is required" }),
+  slug: z
+    .string()
+    .min(1, { message: "Slug is required" })
+    .refine((data) => /^[A-Za-z0-9_-]+$/.test(data), {
+      message: "Only [a-z], [A-Z], [-] and [_] allowed",
+    }),
   brandColor: z.string().min(1, { message: "Brand color required" }),
   startDate: z.string().min(1, { message: "Start date required" }),
   endDate: z.string().min(1, { message: "End date required" }),
