@@ -125,11 +125,12 @@ const Signup = () => {
           </Button>
         </form>
       </div>
-      <div className="relative hidden md:flex flex-col text-gray-700">
-        <h2 className="absolute left-0 right-0 text-white text-4xl font-bold">My Events</h2>
+      <div className="relative hidden md:flex flex-col items-center justify-center text-gray-700 overflow-hidden rounded-3xl">
+        <div style={{ background: "rgba(0, 0, 0, 0.5)" }} className="absolute h-full w-full rounded-3xl"></div>
+        <Image className="absolute" src={"/MyEvents-logo.svg"} alt="MyEvents logo" width={350} height={350} />
         <Image
           priority
-          className="w-auto"
+          className="w-full object-cover h-full"
           src={"/image-auth-hands-tickets.jpg"}
           height={400}
           width={400}
@@ -141,3 +142,17 @@ const Signup = () => {
 };
 
 export default Signup;
+
+<div className="relative hidden md:flex flex-col items-center justify-center text-gray-700">
+  <div style={{ background: "rgba(0, 0, 0, 0.5)" }} className="absolute h-full w-full rounded-3xl"></div>
+  <Image className="absolute" src={"/MyEvents-logo.svg"} alt="MyEvents logo" width={350} height={350} />
+
+  <Image
+    priority
+    className="w-full"
+    src={"/image-auth-hands-tickets.jpg"}
+    height={500}
+    width={500}
+    alt=" image auth hands tickets"
+  />
+</div>;
