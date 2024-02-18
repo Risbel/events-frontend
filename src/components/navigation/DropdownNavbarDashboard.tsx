@@ -14,7 +14,7 @@ import { Session } from "next-auth";
 import Logout from "../buttons/Logout";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { Settings } from "lucide-react";
+import { Settings, UserCircle2 } from "lucide-react";
 
 const DropdownNavbarDashboard = ({ session }: { session: Session }) => {
   return (
@@ -40,8 +40,14 @@ const DropdownNavbarDashboard = ({ session }: { session: Session }) => {
       <DropdownMenuContent className="translate-y-4 md:-translate-x-4 w-screen md:w-80">
         <DropdownMenuLabel className="flex items-center gap-4">
           <Avatar>
-            <AvatarImage className="h-20 w-20 rounded-full" src={session.user.image} />
-            <AvatarFallback className="h-20 w-20" />
+            {!session.user?.image ? (
+              <UserCircle2 height={45} width={45} />
+            ) : (
+              <div className="flex items-center rounded-full overflow-hidden relative z-20">
+                <AvatarImage className="h-10 w-10" src={session.user.image} />
+                <AvatarFallback className="h-10 w-10" />
+              </div>
+            )}
           </Avatar>
           <div className="flex flex-col">
             <span>{session.user.name}</span>
