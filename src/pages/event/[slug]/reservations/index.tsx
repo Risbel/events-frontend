@@ -143,13 +143,12 @@ const Reservations = () => {
                           .map((tiket) => {
                             return Number(tiket.quantity) * Number(tiket.DiscoTicket.price);
                           })
-                          .reduce((acc, curr) => acc + Number(curr), 0)}
-                        +
-                        {reservation.comboReservations
-                          .map((combo) => {
-                            return Number(combo.quantity) * Number(combo.Combo.price);
-                          })
-                          .reduce((acc, curr) => acc + Number(curr), 0)}
+                          .reduce((acc, curr) => acc + Number(curr), 0) +
+                          reservation.comboReservations
+                            .map((combo) => {
+                              return Number(combo.quantity) * Number(combo.Combo.price);
+                            })
+                            .reduce((acc, curr) => acc + Number(curr), 0)}
                       </p>
                     </div>
                   </div>
