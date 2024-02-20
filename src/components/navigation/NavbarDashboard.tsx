@@ -16,7 +16,7 @@ const NavbarDashboard = () => {
       <div className="flex justify-between items-center w-screen absolute z-40 px-2 md:px-6 py-2">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex gap-2 items-center cursor-pointer">
-            <Image src={"/tickets-logo.svg"} alt="tickets logo" width={35} height={35} />
+            <Image src={"/MyEvents-logo.svg"} alt="tickets logo" width={40} height={40} />
 
             <span className="text-primary-foreground">MyEvents</span>
           </Link>

@@ -9,13 +9,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
 
-import { Session } from "next-auth";
 import Logout from "../buttons/Logout";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { DataDisco } from "@/services/getDisco";
 import { useSession } from "next-auth/react";
 import useGetDisco from "@/hooks/useGetDisco";
+import { UserCircle2 } from "lucide-react";
 
 const DropdownNavbar = () => {
   const router = useRouter();
@@ -25,7 +23,6 @@ const DropdownNavbar = () => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
   const { data: discoData, isLoading: loadingDisco, isError: isErrordisco, error } = useGetDisco({ slug, userId });
-  const discoId = discoData?.disco?.id;
 
   if (!session || !discoData) {
     return;
@@ -36,12 +33,11 @@ const DropdownNavbar = () => {
       <DropdownMenuTrigger className="outline-none">
         <Avatar>
           {!session.user?.image ? (
-            <Image
-              className="hover:scale-110 transition-transform"
-              src={"/avatar-icon.svg"}
-              alt="avatar icon"
-              width={25}
-              height={25}
+            <UserCircle2
+              className="hover:scale-105"
+              height={30}
+              width={30}
+              stroke={`${discoData.disco.discoDetail.discoColor.navbarForeground}`}
             />
           ) : (
             <div className="flex items-center rounded-full overflow-hidden relative z-20">
