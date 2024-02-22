@@ -20,6 +20,7 @@ export interface DataDisco {
 }
 export interface DiscoDetail {
   id: string;
+  h1Banner: string;
   bannerDescription: string;
   titleTextAbout: string;
   titleTextCarousel: string;
