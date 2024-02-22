@@ -4,15 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useGetDiscoTicketById } from "@/hooks/useGetDiscoTicketById";
 import useCart from "@/store/useCart";
-import { ChevronLeft, ShoppingCart } from "lucide-react";
+import { ChevronLeft, ShoppingCart, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import Combos from "./components/combos";
 import { useListMonths } from "@/hooks/useListMonths";
 
 import NavbarEvent from "@/components/navigation/NavbarEvent";
+import { useSession } from "next-auth/react";
+import useGetDisco from "@/hooks/useGetDisco";
+import { cn } from "@/lib/shadcnUtils";
 
 const DiscoTicketDetails = () => {
   const months = useListMonths();
@@ -20,7 +23,14 @@ const DiscoTicketDetails = () => {
   const slug = params && params.slug;
   const idTicket = params && params.id;
 
-  const { isLoading, data, isError, error } = useGetDiscoTicketById(idTicket);
+  const path = usePathname();
+
+  const { data: session, status } = useSession();
+  const userId = session?.user?.id;
+
+  const { data: discoData, isLoading: loadingDisco, isError: isErrordisco, error } = useGetDisco({ slug, userId });
+
+  const { isLoading, data, isError, error: errorPage } = useGetDiscoTicketById(idTicket);
 
   const { cartItems, addToCart, removeFromCart } = useCart();
 
@@ -47,7 +57,7 @@ const DiscoTicketDetails = () => {
         <span className="text-white text-8xl font-semibold">404</span>
         <div className="flex flex-col gap-2">
           <span className="text-white text-xl">
-            {error?.response?.status === 500 ? <span>Page not found</span> : error?.response?.data?.message}
+            {errorPage?.response?.status === 500 ? <span>Page not found</span> : errorPage?.response?.data?.message}
           </span>
 
           <Link href={`/event/${slug}`}>
@@ -58,7 +68,9 @@ const DiscoTicketDetails = () => {
     );
   }
 
-  if (isLoading || !data) {
+  const discoColors = discoData?.disco.discoDetail.discoColor;
+
+  if (isLoading || !data || !discoData) {
     return (
       <EventLayout>
         <div className="flex gap-4 bg-primary w-full h-screen justify-center items-center">
@@ -68,117 +80,162 @@ const DiscoTicketDetails = () => {
     );
   }
 
-  if (data) {
+  if (data && discoColors) {
     return (
-      <EventLayout>
+      <EventLayout background={`${discoColors.bgNavbarColor}30`}>
         <NavbarEvent />
-        <div className="grid grid-flow-row  md:grid-flow-col md:grid-cols-2 py-16 h-screen">
-          <div className="flex w-full flex-col gap-4 px-2 md:px-8">
-            <Link
-              className="flex items-center pr-2 rounded-md border bg-primary text-primary-foreground w-fit"
-              href={`/event/${data.Disco.slug}`}
-            >
-              <ChevronLeft width={20} /> Go back
-            </Link>
+        <Link
+          style={{ color: discoColors.navbarForeground, background: `${discoColors.bgNavbarColor}` }}
+          className="fixed z-20 flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-2 md:pr-4 py-1 mt-8"
+          href={`/event/${data.Disco.slug}`}
+        >
+          <ChevronLeft width={20} /> Go back
+        </Link>
 
-            <div className="flex gap-4 items-center bg-primary to-primary-70 rounded-md pl-2">
-              <h1 className="text-xl md:text-2xl text-white">
-                Tickets <span className="bg-blue-700/80 rounded-full px-2 text-lg">{data.category}</span>
-              </h1>
+        <div className="flex flex-col gap-12 pt-32 px-4 lg:px-32">
+          <div
+            style={{ background: `${discoColors.bgNavbarColor}60` }}
+            className="grid grid-cols-12 p-6 rounded-3xl w-full shadow-md"
+          >
+            <div
+              style={{ background: `${discoColors.bgNavbarColor}` }}
+              className="flex flex-col items-center justify-around col-span-12 md:col-span-4 lg:col-span-4 rounded-3xl relative shadow-md"
+            >
+              <div className="flex justify-center relative p-8">
+                <Image
+                  className="object-cover w-full h-full min-h-28 min-w-28 md:min-h-32 md:min-w-32 drop-shadow-2xl"
+                  src="/ticket-base.svg"
+                  alt="logo disco"
+                  height={100}
+                  width={100}
+                />
+                <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-around p-12 lg:pb-10">
+                  <div
+                    style={{ background: `${discoColors.bgNavbarColor}` }}
+                    className="flex flex-col justify-center items-center rounded-xl h-2/5 md:h-3/4 lg:h-2/5 "
+                  >
+                    <p
+                      style={{ color: discoColors.navbarForeground }}
+                      className="text-2xl md:text-xl lg:text-2xl text-center font-semibold"
+                    >
+                      {data.category}
+                    </p>
+                    <p style={{ color: discoColors.navbarForeground }} className="text-xl lg:text-2xl font-semibold">
+                      TICKET
+                    </p>
+                  </div>
+                  <p className="text-center text-4xl md:text-2xl lg:text-5xl font-semibold">${data.price}</p>
+
+                  <div
+                    style={{ border: `solid 2px ${discoColors.navbarForeground}` }}
+                    className="mx-6 md:mx-2 rounded-md p-1"
+                  >
+                    <p
+                      style={{ background: `${discoColors.bgNavbarColor}`, color: discoColors.navbarForeground }}
+                      className="text-center text-xs lg:text-base p-1 rounded-md"
+                    >
+                      {data.id.slice(0, 8)}
+                    </p>
+                  </div>
+                </div>
+                <p
+                  style={{ color: discoColors.navbarForeground }}
+                  className="absolute bottom-0 right-0 left-0 font-semibold text-xs md:text-sm text-center rounded-md py-2"
+                >
+                  {new Date(data.expDate).getDate()}-{months[new Date(data.expDate).getMonth()].slice(0, 3)}-
+                  {new Date(data.expDate).getFullYear()}
+                </p>
+              </div>
+            </div>
+            <div
+              className={cn(
+                "hidden md:flex flex-col justify-between gap-2 md:col-span-8 px-8 py-2",
+                data?.ticketImages?.[0]?.image && "md:col-span-5"
+              )}
+            >
+              <p className="font-extrabold text-start text-4xl">{data.Disco.name}</p>
+              <div className="flex items-center">
+                <div>
+                  <p className="text-start font-semibold text-xl">
+                    Category: <span className="text-2xl">{data.category}</span>
+                  </p>
+                  <p className="text-start text-xl font-semibold">Price: ${data.price}</p>
+                </div>
+              </div>
+              <p className="text-start">{data.shortDescription}</p>
+              <p className="text-start">{data.largeDescription}</p>
+              <div
+                style={{ color: discoColors.navbarForeground, background: discoColors.bgNavbarColor }}
+                className="flex p-4 rounded-xl text-xs font-medium shadow-md"
+              >
+                <div>
+                  <p>Reserved quantity: {existItem ? existItem?.quantity : 0} </p>
+                  <p className="text-lg" style={{ color: discoColors.navbarForeground }}>
+                    Total: <span>${existItem ? existItem.quantity * Number(data.price) : 0}</span>
+                  </p>
+                </div>
+
+                <form className="flex-1 flex justify-center" onSubmit={addToCartHandler}>
+                  <div className="flex flex-col">
+                    <label
+                      style={{ color: discoColors.navbarForeground }}
+                      className="block mb-1 text-xs font-medium text-primary"
+                      htmlFor="amount"
+                    >
+                      Add tickets
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        defaultValue={1}
+                        min={1}
+                        type="number"
+                        name="amount"
+                        className="w-11 text-center text-lg h-8 text-black rounded-lg"
+                      />
+
+                      <Button
+                        style={{ color: discoColors.bgNavbarColor, background: discoColors.navbarForeground }}
+                        className="text-xs px-3 h-8"
+                        type="submit"
+                      >
+                        Add <ShoppingCart height={15} />
+                      </Button>
+                      {existItem && (
+                        <button
+                          style={{ color: discoColors.navbarForeground }}
+                          type="button"
+                          onClick={() => removeFromCart(data)}
+                        >
+                          <X />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
 
-            <div className="bg-gradient-to-r bg-primary rounded-md">
-              <h2 className="text-xl text-white underline-offset-2 underline  via-transparent to-transparent  rounded-l-md py-1 pl-2">
-                Details:
-              </h2>
-              <div className="py-1 pl-2">
-                <p className="text-white text-sm text-start">
-                  <span className="font-normal bg-primary">Tu use on:</span> {new Date(data.expDate).getDate()}/
-                  {months[new Date(data.expDate).getMonth()]}/{new Date(data.expDate).getFullYear()}
-                </p>
-
-                <p className="text-md md:text-xl text-white font-thin">
-                  <span className="font-normal bg-primary">Disco:</span> {data.Disco.name}
-                </p>
-                <p className="text-md md:text-xl text-white font-semibold">
-                  <span className="font-normal bg-primary">Price:</span> {data.price} cup
-                  <span className="font-light pl-1">c/u</span>
-                </p>
-                <p className="text-md md:text-xl text-white font-thin">
-                  <span className="font-normal bg-primary">Available ticket quantity:</span> {data.countInStock}
-                </p>
-                {data.largeDescription && (
-                  <p className="md:text-md text-white font-light mt-4">
-                    <span className="text-md md:text-xl bg-primary mr-2">More:</span>
-                    {data.largeDescription}
-                  </p>
+            <div
+              className={cn(
+                "hidden md:flex items-center justify-start lg:items-start col-span-3",
+                !data?.ticketImages?.[0]?.image && "md:hidden"
+              )}
+            >
+              <div className="lg:h-72 w-full flex justify-center items-center overflow-hidden rounded-3xl">
+                {data?.ticketImages?.[0]?.image && (
+                  <Image
+                    className="object-cover rounded-2xl shadow-md"
+                    src={`${data.ticketImages[0]?.image}`}
+                    alt={data.shortDescription.slice(0, 12)}
+                    width={300}
+                    height={300}
+                  />
                 )}
               </div>
             </div>
-
-            <div className="flex flex-col gap-2 justify-start">
-              {data?.ticketImages[0]?.image &&
-                data.ticketImages.map((ticketImage) => (
-                  <div className="flex items-center overflow-hidden rounded-xl" key={ticketImage.id}>
-                    <Image src={ticketImage.image} alt={data.Disco.slug} height={300} width={300} />
-                  </div>
-                ))}
-
-              <div className="md:col-start-3 flex flex-col">
-                <div className="flex flex-col gap-4">
-                  <div className="p-2 rounded-md bg-primary">
-                    <p className="flex items-center gap-2 text-xs font-medium text-primary-foreground">
-                      Tickets available:
-                      <span className="text-lg">
-                        {existItem ? Number(data.countInStock) - existItem.quantity : Number(data.countInStock)}
-                      </span>
-                    </p>
-                  </div>
-
-                  <form onSubmit={addToCartHandler}>
-                    <div className="flex flex-col">
-                      <label className="block mb-1 text-xs font-medium text-primary" htmlFor="addTickets">
-                        Add tickets to shopping cart
-                      </label>
-                      <div className="flex items-center gap-2">
-                        <Input
-                          defaultValue={1}
-                          min={1}
-                          type="number"
-                          name="amount"
-                          className="w-11 text-center text-lg h-8"
-                        />
-
-                        <Button className="text-xs px-3 h-8" type="submit">
-                          Add <ShoppingCart height={15} />
-                        </Button>
-                        {existItem && (
-                          <Button
-                            className="text-xs px-3 h-8 bg-yellow-600 hover:bg-yellow-500/80"
-                            type="button"
-                            onClick={() => removeFromCart(data)}
-                          >
-                            Discart
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div className="flex flex-col justify-center py-2 mt-2 p-2 rounded-md bg-primary text-xs font-medium text-primary-foreground">
-                  <p>Reserved quantity: {existItem ? existItem?.quantity : 0} </p>
-                  <p>
-                    Total: <span className="text-lg">${existItem ? existItem.quantity * Number(data.price) : 0}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
-
           {new Date(data.expDate).toLocaleString().slice(0, 9) === new Date().toLocaleString().slice(0, 9) && (
-            <div className="col-span-2">
-              <Combos discoId={data.discoId} />
-            </div>
+            <Combos discoData={discoData.disco} />
           )}
         </div>
       </EventLayout>

@@ -24,7 +24,7 @@ const Head = ({ discoData }: { discoData: { disco: DataDisco; subscription: Subs
             className="font-bold text-4xl md:text-5xl lg:text-7xl text-center md:text-start"
             style={{ color: `${discoData.disco.discoDetail.discoColor.h1BannerColor}` }}
           >
-            {discoData?.disco.name}
+            {discoData?.disco.discoDetail.h1Banner}
           </h1>
           <p
             className="text-center"

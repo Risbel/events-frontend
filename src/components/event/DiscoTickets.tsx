@@ -232,7 +232,7 @@ const DiscoTickets = ({
                   >
                     Get tickets
                   </Link>
-                  <p>{ticket.largeDescription}</p>
+
                   <div style={{ color: `${discoDetail.discoColor.buttonTicketForeground}` }}>
                     <div className="font-semibold w-full flex items-center justify-center gap-2">
                       <p className="text-xs text-center">

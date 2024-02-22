@@ -203,6 +203,7 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
           optional large description
         </label>
         <textarea
+          maxLength={250}
           className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
           placeholder="Large description"
           id="largeDescription"
