@@ -1,17 +1,28 @@
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 import { Button } from "@/components/ui/button";
+import useGetDisco from "@/hooks/useGetDisco";
 import { useListMonths } from "@/hooks/useListMonths";
+import { cn } from "@/lib/shadcnUtils";
 import useCart, { ICart } from "@/store/useCart";
 import clsx from "clsx";
 import { ChevronLeftIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 
 const Cart = () => {
   const router = useRouter();
   const { query } = router;
   const { slug } = query;
+
+  const path = usePathname();
+
+  const { data: session, status } = useSession();
+  const userId = session?.user?.id;
+
+  const { data: discoData, isLoading: loadingDisco, isError: isErrordisco, error } = useGetDisco({ slug, userId });
 
   const months = useListMonths();
   const { cartItems, removeFromCart, addToCart } = useCart();
@@ -36,169 +47,299 @@ const Cart = () => {
     return addToCart({ ...item, quantity });
   };
 
-  if (!slug || !cartItems) {
+  if (!slug || !cartItems || !discoData) {
     return;
   }
 
+  const discoColors = discoData?.disco.discoDetail.discoColor;
+
   return (
-    <div className="h-screen relative z-0 text-center bg-primary">
+    <div className="h-screen relative z-0 text-center">
       <NavbarEvent />
       <Link
+        style={{ background: discoColors.bgNavbarColor }}
         href={`/event/${slug}`}
-        className="absolute flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-4 py-2 mt-20"
+        className="absolute z-20 flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-2 md:pr-4 py-1 mt-8"
       >
-        <ChevronLeftIcon /> Go back
+        <ChevronLeftIcon stroke={discoColors.navbarForeground} />
+        <span className="hidden md:block" style={{ color: discoColors.navbarForeground }}>
+          Go back
+        </span>
       </Link>
-      {cartItems.length > 0 && (
-        <p className="text-center text-slate-400 font-thin pt-16 pb-4 text-xl">
-          <span className="text-white underline underline-2">Cart</span>/
-          <Link className="hover:text-white hover:underline underline-2" href={`/event/${slug}/cart/payment`}>
-            Reservation
-          </Link>
-          /Status
-        </p>
-      )}
-      {!cartItems.length && <h1 className="text-white text-xl md:text-2xl pt-20">The shopping cart is empty</h1>}
-
-      <div className="flex justify-center gap-2 md:gap-4 px-4 md:px-8">
+      <div
+        style={{ background: `${discoColors.bgNavbarColor}20` }}
+        className="flex flex-col items-center gap-2 md:gap-4 h-screen overflow-y-scroll"
+      >
+        {cartItems.length > 0 && (
+          <div className="flex justify-center mt-16">
+            <p
+              style={{
+                color: ` ${discoColors.navbarForeground}`,
+                background: `${discoColors.bgNavbarColor}`,
+              }}
+              className="text-center text-slate-400 font-thin py-1 px-4 rounded-2xl text-xl"
+            >
+              <span className="underline underline-2 cursor-default">Cart</span>/
+              <Link className="hover:underline underline-2" href={`/event/${slug}/cart/payment`}>
+                Reservation
+              </Link>
+              <span className="cursor-default">/Status</span>
+            </p>
+          </div>
+        )}
+        {!cartItems.length && (
+          <h1 style={{ color: discoColors.bgNavbarColor }} className="text-xl md:text-2xl pt-20">
+            Shopping cart empty.
+          </h1>
+        )}
         {cartItems.map((item) =>
           item.ticketImages ? (
             <div
+              style={{ background: `${discoColors.bgNavbarColor}90` }}
+              className="flex gap-6 rounded-3xl w-full shadow-md md:w-11/12 lg:w-9/12 p-6"
               key={item.id}
-              className="flex flex-col relative overflow-hidden bg-gradient-to-tr from-blue-800/70 via-black/80 to-purple-900/80 rounded-md  border border-t-white w-1/2"
             >
-              <Image
-                className="absolute -z-10 right-0 object-cover rounded-full opacity-60"
-                src={`${item.Disco.logo}`}
-                alt="logo disco"
-                height={400}
-                width={400}
-              />
-              <p className="text-gray-300 text-xs text-start p-1">
-                📆 {new Date(item.expDate).getDate()}-{months[new Date(item.expDate).getMonth()]}-
-                {new Date(item.expDate).getFullYear()}
-              </p>
-              <div className="flex flex-col gap-2 p-2 pt-0">
-                <div className="flex items-center justify-between gap-2">
-                  <table className="-translate-x-2">
-                    <tbody>
-                      <tr className="text-sm font-thin text-white">
-                        <td className="pr-1 text-right">Disco: </td>
-                        <td>
-                          <span className="font-semibold">{item.Disco.name}</span>
-                        </td>
-                      </tr>
+              <div
+                style={{ background: `${discoColors.bgNavbarColor}` }}
+                className="flex flex-col justify-between rounded-2xl relative p-6"
+              >
+                <div className="flex flex-col gap-2 bg-white border-2 border-t-black border-b-black border-dashed">
+                  <div
+                    style={{ background: `${discoColors.bgNavbarColor}` }}
+                    className="flex flex-col justify-center items-center rounded-xl p-4 mx-3 mt-3"
+                  >
+                    <p
+                      style={{ color: discoColors.navbarForeground }}
+                      className="text-center font-semibold md:leading-3"
+                    >
+                      {item.category}
+                    </p>
+                    <p style={{ color: discoColors.navbarForeground }} className="text-lg font-semibold">
+                      TICKET
+                    </p>
+                  </div>
+                  <p className="text-2xl font-bold">${item.price}</p>
+                  <div className="border-t-2 border-black border-dotted"></div>
+                  <div className="rounded-md p-1 m-3 md:p-0.5 border-2 border-dotted border-black">
+                    <p
+                      style={{ background: `${discoColors.bgNavbarColor}`, color: discoColors.navbarForeground }}
+                      className="text-xs p-1 rounded-md"
+                    >
+                      {item.id.slice(0, 8)}
+                    </p>
+                  </div>
+                </div>
 
-                      <tr className="text-sm font-thin text-white">
-                        <td className="pr-1 text-right">Category: </td>
-                        <td>
-                          <span className="font-semibold">{item.category}</span>
-                        </td>
-                      </tr>
+                <p
+                  style={{ color: discoColors.navbarForeground }}
+                  className="absolute bottom-0 right-0 left-0 font-semibold text-xs text-center rounded-md py-2 md:py-1"
+                >
+                  {new Date(item.expDate).getDate()}-{months[new Date(item.expDate).getMonth()].slice(0, 3)}-
+                  {new Date(item.expDate).getFullYear()}
+                </p>
+              </div>
 
-                      <tr className="text-sm font-thin text-white">
-                        <td className="pr-1 text-right">Price: </td>
-                        <td>
-                          <span className="font-semibold">${item.price}</span>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div className="hidden md:flex flex-1 flex-col justify-around gap-4">
+                <div
+                  style={{ background: discoColors.bgNavbarColor }}
+                  className="flex items-center gap-4 p-4 rounded-xl"
+                >
+                  <Image
+                    className="rounded-full"
+                    src={item.Disco.logo}
+                    alt={`logo of ${item.Disco.name}`}
+                    width={50}
+                    height={50}
+                  />
+                  <p style={{ color: discoColors.navbarForeground }} className="font-extrabold text-start text-4xl">
+                    {item.Disco.name} -
+                  </p>
+                  <p style={{ color: discoColors.navbarForeground }} className="font-extrabold text-start text-4xl">
+                    {item.Disco.discoDetail.h1Banner}
+                  </p>
+                  <div className="flex-1 flex gap-4 justify-end">
+                    <Button
+                      size={"sm"}
+                      className="bg-red-800 hover:bg-red-700 text-xs rounded-lg"
+                      onClick={() => removeFromCart(item)}
+                    >
+                      Descart
+                    </Button>
+                  </div>
+                </div>
 
-                  <div className="flex h-full items-start">
+                <div className="flex gap-4 relative">
+                  <div className="flex-1 p-2 px-4 rounded-xl" style={{ background: discoColors.bgNavbarColor }}>
+                    <p style={{ color: discoColors.navbarForeground }} className="text-start font-semibold text-xl">
+                      Category: <span className="text-2xl">{item.category}</span>
+                    </p>
+                    <p style={{ color: discoColors.navbarForeground }} className="text-start text-xl font-semibold">
+                      Price: ${item.price}
+                    </p>
+                  </div>
+                  <div
+                    style={{ background: discoColors.bgNavbarColor }}
+                    className="flex justify-between items-center flex-1 p-2 px-4 rounded-xl"
+                  >
+                    <div>
+                      <p style={{ color: discoColors.navbarForeground }} className="font-semibold text-xl text-start">
+                        <span></span> {item.quantity} ticket{item.quantity > 1 && "s"} reserved
+                      </p>
+                      <div className="flex items-center">
+                        <Button
+                          style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+                          onClick={() => decrement(item)}
+                          className="hover:opacity-95 opacity-90 text-xs font-bold h-6 w-6 px-1 rounded-r-none "
+                        >
+                          -
+                        </Button>
+                        <div
+                          style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+                          className="text-center font-semibold w-5 h-6"
+                        >
+                          {item.quantity}
+                        </div>
+                        <Button
+                          style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+                          onClick={() => increment(item)}
+                          className="hover:opacity-95 opacity-90 text-xs font-bold h-6 w-6 px-1 rounded-l-none"
+                        >
+                          +
+                        </Button>
+                      </div>
+                    </div>
+
                     <Link
-                      className="flex items-center text-white font-thin bg-blue-900/80 hover:bg-blue-800 pr-1 rounded-md"
+                      style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+                      className="flex items-center text-white font-semibold p-1 pr-4 rounded-md hover:opacity-90"
                       href={`/event/${item.Disco.slug}/details-ticket/${item.id}`}
                     >
                       <ChevronLeftIcon height={15} width={15} /> Back
                     </Link>
                   </div>
                 </div>
-                <div className="flex flex-col items-center">
-                  <p className="text-white">
-                    <span className="font-thin"></span> {item.quantity} ticket{item.quantity > 1 && "s"}
+                <div
+                  style={{ background: discoColors.bgNavbarColor }}
+                  className="flex items-center justify-center rounded-xl p-2"
+                >
+                  <p style={{ color: discoColors.navbarForeground }} className="font-semibold">
+                    Subtotal: ${item.quantity * Number(item.price)}
                   </p>
+                </div>
+              </div>
 
-                  <div className="flex items-center justify-around w-full gap-2">
-                    <div className="flex items-center">
-                      <Button
-                        onClick={() => decrement(item)}
-                        className="text-xs font-bold h-6 w-6 px-1 rounded-r-none "
-                      >
-                        -
-                      </Button>
-                      <div className="text-center font-semibold w-5 h-6 bg-white">{item.quantity}</div>
-                      <Button onClick={() => increment(item)} className="text-xs font-bold h-6 w-6 px-1 rounded-l-none">
-                        +
-                      </Button>
-                    </div>
-                    <Button
-                      size={"sm"}
-                      className="bg-red-800 hover:bg-red-700 text-xs h-7 px-1"
-                      onClick={() => removeFromCart(item)}
-                    >
-                      Descart
-                    </Button>
+              {item?.ticketImages?.[0]?.image && (
+                <div className="hidden md:flex items-center lg:items-start col-span-3 py-4">
+                  <div className="w-full flex justify-center items-center overflow-hidden rounded-3xl">
+                    <Image
+                      className="object-cover"
+                      src={`${item.ticketImages[0]?.image}`}
+                      alt={item.shortDescription.slice(0, 12)}
+                      width={300}
+                      height={300}
+                    />
                   </div>
                 </div>
-                <p className="text-white text-center bg-black rounded-full">
-                  <span className="font-thin">Amount:</span> ${Number(item.price) * Number(item.quantity)}
-                </p>
-              </div>
+              )}
             </div>
           ) : (
-            <div key={item.id}>
-              <div className="overflow-hidden relative rounded-lg border">
-                <div className="flex items-center justify-center w-full overflow-hidden h-32">
-                  <Image
-                    className="object-cover"
-                    src={item.comboDetail.image}
-                    width={350}
-                    height={175}
-                    alt="combo image"
-                  />
-                </div>
-
-                <div className="flex flex-col items-start p-2 bg-gradient-to-bl from-black/90 via-purple-950/70 to-black/10">
-                  <div className="flex justify-between w-full">
-                    <div className="flex flex-col items-start">
-                      <p className="text-white text-sm font-light leading-4">
-                        Category: <span className="font-semibold">{item.category}</span>{" "}
+            <div
+              style={{ background: `${discoColors.bgNavbarColor}90` }}
+              className="flex gap-6 rounded-3xl w-full shadow-md md:w-11/12 lg:w-9/12 p-6"
+              key={item.id}
+            >
+              <div style={{ background: `${discoColors.bgNavbarColor}` }} className="p-4 rounded-xl">
+                <Image
+                  className="object-cover rounded-2xl"
+                  src={item.comboDetail.image}
+                  width={150}
+                  height={150}
+                  alt="combo image"
+                />
+              </div>
+              <div className="flex flex-col justify-between gap-4 w-full">
+                <div className="flex gap-4 w-full justify-between">
+                  <div
+                    style={{ background: `${discoColors.bgNavbarColor}` }}
+                    className="flex-1 flex flex-col p-4 rounded-xl"
+                  >
+                    <p style={{ color: discoColors.navbarForeground }} className="text-start text-xl font-semibold">
+                      Category: {item.category}
+                    </p>
+                    <p style={{ color: discoColors.navbarForeground }} className="text-start text-xl font-semibold">
+                      Price: ${item.price}
+                    </p>
+                  </div>
+                  <div
+                    style={{ background: `${discoColors.bgNavbarColor}` }}
+                    className="flex-1 flex justify-between p-4 rounded-xl"
+                  >
+                    <div className="flex flex-col">
+                      <p style={{ color: discoColors.navbarForeground }} className="text-start text-xl font-semibold">
+                        Quantity reserved: {item.quantity}
                       </p>
-                      <p className="text-white text-sm font-light leading-4">
-                        Price: <span className="font-semibold">{item.price}</span> cup c/u
-                      </p>
-                      <p className="text-white text-sm font-light leading-4">
-                        Quantity: <span className="font-semibold">{item.quantity}</span>{" "}
-                      </p>
+                      <div className="flex items-center">
+                        <Button
+                          style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+                          onClick={() => decrement(item)}
+                          className="hover:opacity-95 opacity-90 text-xs font-bold h-6 w-6 px-1 rounded-r-none "
+                        >
+                          -
+                        </Button>
+                        <div
+                          style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+                          className="text-center font-semibold w-5 h-6"
+                        >
+                          {item.quantity}
+                        </div>
+                        <Button
+                          style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+                          onClick={() => increment(item)}
+                          className="hover:opacity-95 opacity-90 text-xs font-bold h-6 w-6 px-1 rounded-l-none"
+                        >
+                          +
+                        </Button>
+                      </div>
                     </div>
+
                     <Button
                       size={"sm"}
-                      className="bg-red-800 hover:bg-red-700 text-xs h-7 px-1"
+                      className="bg-red-800 hover:bg-red-700 text-xs"
                       onClick={() => removeFromCart(item)}
                     >
                       Descart
                     </Button>
                   </div>
-                  <p className="text-white text-center bg-black rounded-full w-full mt-2">
-                    <span className="font-thin">Amount:</span> ${Number(item.price) * Number(item.quantity)}
+                </div>
+                <div style={{ background: `${discoColors.bgNavbarColor}` }} className="p-2 rounded-xl">
+                  <p style={{ color: discoColors.navbarForeground }} className="font-semibold rounded-full w-full">
+                    Subtotal: ${Number(item.price) * Number(item.quantity)}
                   </p>
                 </div>
               </div>
             </div>
           )
         )}
-      </div>
-      <div className={clsx("w-full text-center mt-28 mb-8", !cartItems.length && "hidden")}>
-        <Button className="shadow-xl hover:shadow-blue-400/40 hover:border-b hover:bg-violet-700 transition-shadow duration-300">
-          <Link href={`/event/${slug}/cart/payment`}> Make Reservation</Link>
-        </Button>
-        <p className="text-white text-xl font-thin my-4">
-          Total to pay: $
-          <span className="font-semibold">
-            {cartItems.reduce((acc, currentItem) => Number(currentItem.quantity) * Number(currentItem.price) + acc, 0)}
-          </span>
-        </p>
+        <div
+          style={{ color: discoColors.navbarForeground, background: discoColors.bgNavbarColor }}
+          className={clsx("w-full text-center mt-28 py-8", !cartItems.length && "hidden")}
+        >
+          <Button
+            style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+            className="hover:opacity-90"
+          >
+            <Link href={`/event/${slug}/cart/payment`}>Make Reservation</Link>
+          </Button>
+          <p style={{ color: discoColors.navbarForeground }} className="text-xl my-4">
+            Total to pay: $
+            <span className="font-semibold">
+              {cartItems.reduce(
+                (acc, currentItem) => Number(currentItem.quantity) * Number(currentItem.price) + acc,
+                0
+              )}
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   );
