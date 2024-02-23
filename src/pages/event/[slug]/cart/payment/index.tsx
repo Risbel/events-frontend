@@ -85,39 +85,50 @@ const Payment = () => {
               {cartItems.map((item) => {
                 return (
                   <div key={item.id} className="flex gap-4">
-                    {item?.ticketImages?.[0]?.image && (
-                      <Image src={item.ticketImages[0].image} alt={item.id} width={100} height={100} />
-                    )}
-
                     <div
                       style={{ background: `${discoColors.bgNavbarColor}50` }}
                       className="flex flex-1 items-center justify-between gap-1 md:gap-4 p-2 md:p-4 rounded-xl"
                     >
-                      <div
-                        style={{ color: "black" }}
-                        className="flex flex-col items-center bg-white px-2 pt-2 border-t border-b border-black border-dashed"
-                      >
+                      {item?.comboDetail?.image ? (
+                        <Image
+                          src={item.comboDetail.image}
+                          alt={item.id}
+                          width={100}
+                          height={100}
+                          className="object-cover rounded-xl shadow-md h-20 w-20 md:h-28 md:w-28"
+                        />
+                      ) : item?.ticketImages?.[0]?.image ? (
+                        <Image src={item.ticketImages[0].image} alt={item.id} width={100} height={100} />
+                      ) : (
                         <div
-                          style={{
-                            color: `${discoColors.navbarForeground}`,
-                            background: `${discoColors.bgNavbarColor}`,
-                          }}
-                          className="flex flex-col items-center p-1 rounded-md"
+                          style={{ color: "black" }}
+                          className="flex flex-col items-center bg-white px-2 pt-2 border-t border-b border-black border-dashed"
                         >
-                          <p className="text-xs md:text-sm lg:text-base">{item.category}</p>
-                          <p className="text-xs md:text-sm lg:text-base">TICKET</p>
+                          <div
+                            style={{
+                              color: `${discoColors.navbarForeground}`,
+                              background: `${discoColors.bgNavbarColor}`,
+                            }}
+                            className="flex flex-col items-center p-1 rounded-md"
+                          >
+                            <p className="text-xs md:text-sm lg:text-base">{item.category}</p>
+                            <p className="text-xs md:text-sm lg:text-base">
+                              {item?.comboDetail?.image ? "COMBO" : "TICKET"}
+                            </p>
+                          </div>
+                          <div className="border-b border-black border-dotted w-full py-1"></div>
+                          <div
+                            style={{
+                              color: ` ${discoColors.navbarForeground}`,
+                              background: `${discoColors.bgNavbarColor}`,
+                            }}
+                            className="flex flex-col items-center p-1 rounded-md my-2 text-xs w-full"
+                          >
+                            <p>{item.id.slice(0, 6)}</p>
+                          </div>
                         </div>
-                        <div className="border-b border-black border-dotted w-full py-1"></div>
-                        <div
-                          style={{
-                            color: ` ${discoColors.navbarForeground}`,
-                            background: `${discoColors.bgNavbarColor}`,
-                          }}
-                          className="flex flex-col items-center p-1 rounded-md my-2 text-xs w-full"
-                        >
-                          <p>{item.id.slice(0, 6)}</p>
-                        </div>
-                      </div>
+                      )}
+
                       <div
                         style={{ color: `${discoColors.navbarForeground}`, background: `${discoColors.bgNavbarColor}` }}
                         className="flex w-1/3 flex-col p-2 rounded-md"
