@@ -70,17 +70,18 @@ const DiscoTicketDetails = () => {
 
   const discoColors = discoData?.disco.discoDetail.discoColor;
 
-  if (isLoading || !data || !discoData) {
+  if (isLoading || !data || !discoData || !discoColors) {
     return (
-      <EventLayout>
-        <div className="flex gap-4 bg-primary w-full h-screen justify-center items-center">
-          <Spinner diameter={8} stroke={"white"} />
+      <EventLayout background={`#ffffff`}>
+        <NavbarEvent />
+        <div className="flex w-full h-screen justify-center items-center">
+          <Spinner diameter={8} stroke={"#000000"} />
         </div>
       </EventLayout>
     );
   }
 
-  if (data && discoColors) {
+  if (true) {
     return (
       <EventLayout background={`${discoColors.bgNavbarColor}30`}>
         <NavbarEvent />
@@ -126,10 +127,7 @@ const DiscoTicketDetails = () => {
                   </div>
                   <p className="text-center text-4xl md:text-2xl lg:text-5xl font-semibold">${data.price}</p>
 
-                  <div
-                    style={{ border: `solid 2px ${discoColors.navbarForeground}` }}
-                    className="mx-6 md:mx-2 rounded-md p-1"
-                  >
+                  <div className="mx-6 md:mx-2 rounded-md p-1 border-2 border-black">
                     <p
                       style={{ background: `${discoColors.bgNavbarColor}`, color: discoColors.navbarForeground }}
                       className="text-center text-xs lg:text-base p-1 rounded-md"
@@ -149,21 +147,41 @@ const DiscoTicketDetails = () => {
             </div>
             <div
               className={cn(
-                "hidden md:flex flex-col justify-between gap-2 md:col-span-8 px-8 py-2",
+                "hidden md:flex flex-col gap-2 md:col-span-8 px-8 py-2",
                 data?.ticketImages?.[0]?.image && "md:col-span-5"
               )}
             >
-              <p className="font-extrabold text-start text-4xl">{data.Disco.name}</p>
-              <div className="flex items-center">
+              <div className="p-2 rounded-xl shadow-md" style={{ background: discoColors.navbarForeground }}>
+                <p style={{ color: discoColors.bgNavbarColor }} className="font-extrabold text-start text-4xl">
+                  {data.Disco.name}
+                </p>
+              </div>
+
+              <div
+                style={{ background: discoColors.bgNavbarColor }}
+                className="flex items-center p-2 rounded-xl shadow-md"
+              >
                 <div>
-                  <p className="text-start font-semibold text-xl">
-                    Category: <span className="text-2xl">{data.category}</span>
+                  <p style={{ color: discoColors.navbarForeground }} className="text-start text-md font-semibold">
+                    Price: <span className="text-3xl">${data.price}</span>
                   </p>
-                  <p className="text-start text-xl font-semibold">Price: ${data.price}</p>
+                  <p style={{ color: discoColors.navbarForeground }} className="text-start font-semibold text-md">
+                    Quantity available:
+                    <span className="text-2xl pl-2">
+                      {Number(data.countInStock) - (Number(existItem?.quantity) ? Number(existItem?.quantity) : 0)}
+                    </span>
+                  </p>
                 </div>
               </div>
-              <p className="text-start">{data.shortDescription}</p>
-              <p className="text-start">{data.largeDescription}</p>
+              <div style={{ background: discoColors.navbarForeground }} className="flex p-2 rounded-xl shadow-md">
+                <p style={{ color: discoColors.bgNavbarColor }} className="text-start text-xl font-semibold">
+                  {data.shortDescription}
+                </p>
+                <p style={{ color: discoColors.bgNavbarColor }} className="text-start text-xl font-semibold">
+                  {data.largeDescription}
+                </p>
+              </div>
+
               <div
                 style={{ color: discoColors.navbarForeground, background: discoColors.bgNavbarColor }}
                 className="flex p-4 rounded-xl text-xs font-medium shadow-md"

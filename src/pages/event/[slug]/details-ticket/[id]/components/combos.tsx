@@ -38,28 +38,13 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
           <div
             style={{ background: `${discoColors.bgNavbarColor}60` }}
             key={combo.id}
-            className="rounded-3xl overflow-hidden shadow-md flex flex-col items-center md:flex-row gap-8 p-8 relative"
+            className="rounded-3xl overflow-hidden shadow-md flex flex-col justify-between items-center md:flex-row gap-8 p-8 relative"
           >
             <div>
-              <div
-                style={{ color: discoColors.navbarForeground, background: `${discoColors.bgNavbarColor}90` }}
-                className="absolute left-4 top-4 flex justify-center items-center h-8 w-8 rounded-full font-semibold"
-              >
-                <div>{cartItems.find((com) => com.id == combo.id)?.quantity ?? 0}</div>
-              </div>
-              <div className="flex justify-center">
-                <p
-                  style={{ color: discoColors.bgNavbarColor, background: discoColors.navbarForeground }}
-                  className="px-4 py-1 rounded-full text-xl"
-                >
-                  {combo.category}
-                </p>
-              </div>
-
               <div className="flex flex-col gap-2">
-                <div>
-                  <p style={{ color: discoColors.navbarForeground }} className="font-semibold">
-                    <span>Price:</span> <span className="font-bold">${combo.price}</span>
+                <div style={{ background: discoColors.bgNavbarColor }} className="p-2 rounded-md rounded-t-xl">
+                  <p style={{ color: discoColors.navbarForeground }} className="font-semibold text-3xl">
+                    <span className="text-base">Price:</span> <span className="font-bold">${combo.price}</span>
                   </p>
                   <p style={{ color: discoColors.navbarForeground }}>
                     <span>Quantity available: </span>
@@ -69,13 +54,16 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
                   </p>
                 </div>
 
-                <p style={{ color: discoColors.navbarForeground }} className="py-2 text-xs leading-none">
+                <p
+                  style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+                  className="p-2 rounded-md leading-3"
+                >
                   {combo.comboDetail.description}
                 </p>
 
                 <div
                   style={{ background: `${discoColors.bgNavbarColor}` }}
-                  className="flex items-center gap-8 p-4 rounded-xl shadow-md"
+                  className="flex items-center gap-8 p-4 rounded-md rounded-b-xl shadow-md"
                 >
                   <div>
                     <p className="text-xs md:text-base" style={{ color: discoColors.navbarForeground }}>
@@ -113,14 +101,34 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
                 </div>
               </div>
             </div>
-
-            <Image
-              className="object-cover rounded-3xl shadow-md"
-              src={combo.comboDetail.image}
-              alt="combo image"
-              height={200}
-              width={200}
-            />
+            <div className="relative">
+              <div
+                style={{ color: discoColors.navbarForeground, background: `${discoColors.bgNavbarColor}90` }}
+                className="absolute right-2 top-2 flex justify-center items-center h-8 w-8 rounded-full font-semibold"
+              >
+                <div>{cartItems.find((com) => com.id == combo.id)?.quantity ?? 0}</div>
+              </div>
+              <Image
+                style={{ border: `solid 2px ${discoColors.bgNavbarColor}` }}
+                className="object-cover rounded-2xl shadow-md"
+                src={combo.comboDetail.image}
+                alt="combo image"
+                height={200}
+                width={200}
+              />
+              <div className="absolute w-full flex justify-center -translate-y-4">
+                <p
+                  style={{
+                    border: `solid 2px ${discoColors.bgNavbarColor}`,
+                    color: discoColors.bgNavbarColor,
+                    background: discoColors.navbarForeground,
+                  }}
+                  className="px-4 rounded-full text-xl"
+                >
+                  {combo.category}
+                </p>
+              </div>
+            </div>
           </div>
         ))}
 
