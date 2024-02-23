@@ -135,7 +135,7 @@ const DiscoTickets = ({
       <div className="flex justify-center mb-4">
         <div
           style={{
-            background: `${discoDetail.discoColor.buttonTicketForeground}90`,
+            background: `${discoDetail.discoColor.buttonsTicketsColor}60`,
             border: `solid ${discoDetail.discoColor.buttonTicketForeground} 4px`,
           }}
           className="flex gap-1 overflow-hidden max-w-screen-lg overflow-x-auto rounded-xl p-2"
@@ -145,7 +145,10 @@ const DiscoTickets = ({
               return (
                 <button
                   key={i}
-                  style={{ background: `${discoDetail.discoColor.buttonsTicketsColor}` }}
+                  style={{
+                    border: `solid ${discoDetail.discoColor.buttonTicketForeground} 2px`,
+                    background: `${discoDetail.discoColor.buttonsTicketsColor}`,
+                  }}
                   className="flex flex-col items-center px-4 py-2 hover:opacity-90 leading-none rounded-md hover:-translate-y-[2px] transition-transform"
                   onClick={() => setDay(date)}
                 >
@@ -194,7 +197,7 @@ const DiscoTickets = ({
                 <div
                   style={{
                     background: `${discoDetail.discoColor.buttonsTicketsColor}`,
-                    border: `solid ${discoDetail.discoColor.buttonTicketForeground} 4px`,
+                    border: `solid ${discoDetail.discoColor.buttonTicketForeground} 2px`,
                     color: `${discoDetail.discoColor.buttonTicketForeground}`,
                   }}
                   className="flex flex-col h-full gap-2 justify-between items-center rounded-3xl py-8 relative"

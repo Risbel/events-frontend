@@ -70,9 +70,8 @@ const TicketsPreview = ({ values }: { values: any }) => {
       <div className="flex justify-center pb-4">
         <div
           style={{
-            background: `${values.ticketH1Color}99`,
-            border: `solid 3px`,
-            borderColor: `${values.ticketH1Color}`,
+            background: `${values.buttonsTicketsColor}60`,
+            border: `solid ${values.buttonTicketForeground} 4px`,
           }}
           className="flex gap-1 overflow-hidden max-w-screen-lg overflow-x-auto rounded-xl p-2"
         >
@@ -80,7 +79,10 @@ const TicketsPreview = ({ values }: { values: any }) => {
             return (
               <button
                 key={i}
-                style={{ background: `${values.buttonsTicketsColor}` }}
+                style={{
+                  border: `solid ${values.buttonTicketForeground} 3px`,
+                  background: `${values.buttonsTicketsColor}`,
+                }}
                 className="flex flex-col items-center px-4 py-2 hover:opacity-90 leading-none rounded-md hover:-translate-y-[2px] transition-transform"
               >
                 <p style={{ color: `${values.buttonTicketForeground}` }} className="text-xs font-semibold">
