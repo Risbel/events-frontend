@@ -77,7 +77,7 @@ const Cart = () => {
                 color: ` ${discoColors.navbarForeground}`,
                 background: `${discoColors.bgNavbarColor}`,
               }}
-              className="text-center text-slate-400 font-thin py-1 px-4 rounded-2xl text-xl"
+              className="text-center font-thin py-1 px-4 rounded-2xl text-xl"
             >
               <span className="underline underline-2 cursor-default">Cart</span>/
               <Link className="hover:underline underline-2" href={`/event/${slug}/cart/payment`}>
