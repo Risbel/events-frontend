@@ -23,8 +23,6 @@ const DiscoTicketDetails = () => {
   const slug = params && params.slug;
   const idTicket = params && params.id;
 
-  const path = usePathname();
-
   const { data: session, status } = useSession();
   const userId = session?.user?.id;
 
