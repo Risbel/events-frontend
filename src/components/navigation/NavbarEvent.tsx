@@ -114,7 +114,6 @@ const NavbarEvent = () => {
               style={{ stroke: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }}
               className="cursor-pointer hover:scale-110 transition-transform"
             />
-
             {Number(cartItems.length) >= 1 && (
               <div
                 style={{
@@ -127,6 +126,19 @@ const NavbarEvent = () => {
               </div>
             )}
           </Link>
+          {!session && (
+            <Link
+              className="px-3 py-1 rounded-xl font-semibold"
+              style={{
+                background: `${discoData.disco.discoDetail.discoColor.navbarForeground}`,
+                color: `${discoData.disco.discoDetail.discoColor.bgNavbarColor}`,
+              }}
+              href={`/auth/login/event/${slug}`}
+            >
+              Login
+            </Link>
+          )}
+
           <div className="flex justify-center">
             <DropdownNavbar />
           </div>
