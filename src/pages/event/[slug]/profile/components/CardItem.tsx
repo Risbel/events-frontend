@@ -1,19 +1,24 @@
 import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
 import { useDeleteBankCard } from "@/hooks/useDeleteBankCard";
+import { IDiscoColors } from "@/services/getDisco";
 import { IUserBankCardByUserId } from "@/services/getUserBankCardsByUserId";
 import React from "react";
 
-const CardItem = ({ bankCard }: { bankCard: IUserBankCardByUserId }) => {
+const CardItem = ({ bankCard, discoColors }: { bankCard: IUserBankCardByUserId; discoColors: IDiscoColors }) => {
   const { mutate, isLoading: isLoadingDelete } = useDeleteBankCard();
   if (!bankCard) {
     return;
   }
 
   return (
-    <div className="flex flex-col items-center bg-white/80 p-4 rounded-md" key={bankCard.id}>
+    <div
+      style={{ background: "#ffff", border: `solid 2px ${discoColors.navbarForeground}` }}
+      className="flex flex-col items-center p-4 rounded-xl"
+      key={bankCard.id}
+    >
       <p className="text-black text-sm md:text-md">{bankCard.name} </p>
-      <p className="text-black text-xl md:text-2xl">{bankCard.number}</p>
+      <p className="font-semibold text-black text-xl md:text-3xl">{bankCard.number}</p>
       {bankCard.discoDetails.length < 1 ? (
         <div className="flex justify-end w-full pt-4">
           <Button

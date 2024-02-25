@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 import Subscriptions from "./components/Subscriptions";
 import Cards from "./components/Cards";
+import useGetDisco from "@/hooks/useGetDisco";
 
 const SkeletonAvatar = () => {
   return (
@@ -31,22 +32,30 @@ const Profile = () => {
   const { slug } = query;
 
   const { data: session } = useSession();
+  const userId = session?.user?.id;
 
-  if (!session) {
+  const { data: discoData, isLoading: loadingDisco, isError: isErrordisco, error } = useGetDisco({ slug, userId });
+  const discoColors = discoData?.disco.discoDetail.discoColor;
+
+  if (!session || !discoColors) {
     return <SkeletonAvatar />;
   }
 
   return (
-    <EventLayout>
+    <EventLayout background={`${discoColors.bgNavbarColor}90`}>
       <NavbarEvent />
       <Link
+        style={{ background: discoColors.bgNavbarColor }}
         href={`/event/${slug}`}
-        className="absolute flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-4 py-2 mt-10"
+        className="absolute z-20 flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-2 md:pr-4 py-1 mt-8"
       >
-        <ChevronLeftIcon /> Go back
+        <ChevronLeftIcon stroke={discoColors.navbarForeground} />
+        <span className="hidden md:block" style={{ color: discoColors.navbarForeground }}>
+          Go back
+        </span>
       </Link>
-      <div className="pt-20 bg-primary">
-        <div className="flex md:px-12 lg:px-16 gap-2 md:gap-4 justify-center items-center text-white">
+      <div className="flex flex-col gap-8 pt-14">
+        <div className="flex pt-4 md:px-12 lg:px-16 gap-2 md:gap-4 justify-center items-center text-white">
           <div className="rounded-full overflow-hidden float-left">
             {session?.user.image ? (
               <Image
@@ -64,14 +73,18 @@ const Profile = () => {
             )}
           </div>
           <div className="md:txt-md text-sm">
-            <p className="text-xl font-semibold">{session.user.name}</p>
-            <p>{session.user.email}</p>
+            <p style={{ color: `${discoColors.navbarForeground}` }} className="text-2xl font-bold">
+              {session.user.name}
+            </p>
+            <p className="text-xl" style={{ color: `${discoColors.navbarForeground}` }}>
+              {session.user.email}
+            </p>
           </div>
         </div>
 
-        {session?.user.id && <Subscriptions userId={session?.user.id} />}
+        {session?.user.id && <Subscriptions discoColors={discoColors} userId={session?.user.id} />}
 
-        {session?.user.id && <Cards userId={session.user.id} />}
+        {session?.user.id && <Cards discoColors={discoColors} userId={session.user.id} />}
       </div>
     </EventLayout>
   );

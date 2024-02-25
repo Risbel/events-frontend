@@ -106,11 +106,16 @@ const NavbarEvent = () => {
         )}
 
         <div className="flex gap-2 md:gap-4 items-center">
-          {userId && !discoData.subscription && (
+          {userId && !discoData.subscription ? (
             <SubscribeNow
               discoColors={discoData.disco.discoDetail.discoColor}
               userId={userId}
               discoId={discoData.disco.id}
+            />
+          ) : (
+            <BellIcon
+              style={{ stroke: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }}
+              className="cursor-pointer hover:scale-110 transition-transform"
             />
           )}
 

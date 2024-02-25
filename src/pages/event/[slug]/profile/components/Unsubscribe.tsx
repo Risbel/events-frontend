@@ -9,7 +9,7 @@ const Unsubscribe = ({ id }: { id: string }) => {
     <Button
       size={"sm"}
       onClick={() => mutate(id)}
-      className="hover:bg-red-800 hover:text-white flex gap-2"
+      className="hover:bg-red-800 hover:text-white flex gap-2 rounded-lg"
       variant={"secondary"}
     >
       <span>Unsubscribe</span>

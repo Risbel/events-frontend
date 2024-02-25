@@ -2,6 +2,7 @@ import { useGetSubscriptionsByUserId } from "@/hooks/useGetSubscriptionsByUserId
 import Unsubscribe from "./Unsubscribe";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import { IDiscoColors } from "@/services/getDisco";
 
 export const SkeletonSubs = () => {
   return (
@@ -18,7 +19,7 @@ export const SkeletonSubs = () => {
   );
 };
 
-const Subscriptions = ({ userId }: { userId: string }) => {
+const Subscriptions = ({ userId, discoColors }: { userId: string; discoColors: IDiscoColors }) => {
   const { data, isLoading } = useGetSubscriptionsByUserId(userId);
 
   if (isLoading) {
@@ -26,23 +27,32 @@ const Subscriptions = ({ userId }: { userId: string }) => {
   }
 
   return (
-    <div className="py-4 md:py-10 px-4 md:px-12 text-white">
-      <h1 className="text-xl font-semibold my-4">My Subscriptions:</h1>
+    <div
+      style={{ background: `${discoColors.bgNavbarColor}90` }}
+      className="py-4 md:py-10 px-4 md:px-12 mx-2 md:mx-8 rounded-3xl shadow-md"
+    >
+      <h1 style={{ color: `${discoColors.navbarForeground}` }} className="text-xl font-semibold my-4">
+        My Subscriptions:
+      </h1>
       <div className="grid md:grid-cols-3 gap-2 md:gap-4">
         {data &&
           data.map((sub) => (
             <div
-              className="flex items-center justify-between border rounded-md overflow-hidden pr-2 bg-gray-800/30"
+              style={{
+                background: "#ffffff",
+                border: `solid 2px #000000`,
+              }}
+              className="flex items-center justify-between rounded-xl overflow-hidden pr-2 shadow-md"
               key={sub.id}
             >
               <div className="flex items-center gap-2">
                 <Image src={sub.Disco.logo} alt="logo sub" height={50} width={50} />
-                <p>{sub.Disco.name}</p>
+                <p className="font-semibold">{sub.Disco.name}</p>
               </div>
               {sub.DiscoRole.name !== "admin" ? (
                 <Unsubscribe id={sub.id} />
               ) : (
-                <div className="bg-white/10 p-1 px-2 rounded-md">
+                <div className="bg-black p-1 px-2 rounded-md cursor-default">
                   <p className="text-white font-light">You are admin</p>
                 </div>
               )}

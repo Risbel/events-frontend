@@ -71,13 +71,13 @@ const Reservations = () => {
 
           <div
             style={{ color: discoColors.navbarForeground, background: `${discoColors.bgNavbarColor}30` }}
-            className="flex flex-col items-center h-full p-8  md:mx-16 lg:mx-32 mb-32 rounded-3xl shadow-md"
+            className="flex flex-col items-center p-8 gap-4 md:mx-16 lg:mx-32 mb-32 rounded-3xl shadow-md"
           >
             {sortedReservations.length > 0 &&
               sortedReservations.map((reservation) => (
                 <div
                   style={{ background: `${discoColors.bgNavbarColor}` }}
-                  className="flex flex-col md:flex-row justify-between gap-8 border rounded-2xl p-6 w-full relative overflow-hidden"
+                  className="flex flex-col md:flex-row justify-between gap-8 rounded-2xl p-6 w-full relative overflow-hidden shadow-md"
                   key={reservation.id}
                 >
                   <Image
@@ -166,8 +166,8 @@ const Reservations = () => {
                       {reservation.ticketsReservations.length &&
                         (new Date(reservation.ticketsReservations[0]?.DiscoTicket.expDate).getDate() ==
                         new Date().getDate() ? (
-                          <p className="text-green-500 text-xs md:text-lg flex items-center gap-2">
-                            Active{" "}
+                          <p className="bg-black/70 px-2 rounded-full text-green-500 text-xs md:text-lg flex items-center gap-2">
+                            active{" "}
                             <span className="relative flex h-2 w-2">
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
