@@ -17,7 +17,6 @@ const Head = ({ discoData }: { discoData: { disco: DataDisco; subscription: Subs
   return (
     <div className="relative h-screen">
       <BannerImages discoDetails={discoData.disco.discoDetail} />
-      {userId && !discoData.subscription && <SubscribeNow userId={userId} discoId={discoData.disco.id} />}
       <div className="relative flex items-end z-10 h-screen">
         <div className="flex flex-col items-center md:items-start w-full mb-12 md:ml-8">
           <h1

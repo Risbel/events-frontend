@@ -14,6 +14,8 @@ import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import AdminSettings from "../event/AdminSettings";
 import useHandleScroll from "@/hooks/useHandlerScroll";
 import { usePathname } from "next/navigation";
+import SubscribeButton from "../buttons/SubscribeButton";
+import SubscribeNow from "../event/SubscribeNow";
 
 const NavbarEvent = () => {
   const router = useRouter();
@@ -104,10 +106,13 @@ const NavbarEvent = () => {
         )}
 
         <div className="flex gap-2 md:gap-4 items-center">
-          <BellIcon
-            style={{ stroke: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }}
-            className="cursor-pointer hover:scale-110 transition-transform"
-          />
+          {userId && !discoData.subscription && (
+            <SubscribeNow
+              discoColors={discoData.disco.discoDetail.discoColor}
+              userId={userId}
+              discoId={discoData.disco.id}
+            />
+          )}
 
           <Link href={`/event/${slug}/cart`} className="relative rounded-full">
             <ShoppingCart

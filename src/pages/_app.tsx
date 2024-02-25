@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 import "@/styles/globals.css";
@@ -9,6 +10,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
     <SessionProvider session={session}>
       <ReactQueryProvider>
         <Component {...pageProps} />
+        <Toaster />
       </ReactQueryProvider>
     </SessionProvider>
   );

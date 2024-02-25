@@ -1,13 +1,51 @@
 import SubscribeButton from "@/components/buttons/SubscribeButton";
+import { IDiscoColors } from "@/services/getDisco";
 import React from "react";
 
-const SubscribeNow = ({ userId, discoId }: { userId: string; discoId: string }) => {
+import { Button } from "@/components/ui/button";
+import { ToastAction, ToastClose } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+import { BellIcon } from "lucide-react";
+
+const SubscribeNow = ({
+  userId,
+  discoId,
+  discoColors,
+}: {
+  userId: string;
+  discoId: string;
+  discoColors: IDiscoColors;
+}) => {
+  const { toast } = useToast();
   return (
-    <div className="fixed top-16 z-40 flex items-center gap-4 bg-gradient-to-r from-violet-900 via-transparent to-transparent pl-2">
-      <h1 className="font-normal md:text-lg text-white">Subscribe now here:</h1>
-      <SubscribeButton userId={userId} discoId={discoId} />
-    </div>
+    <Button
+      className="p-0"
+      onClick={() => {
+        toast({
+          action: (
+            <ToastAction
+              className="pt-8 pb-4 rounded-2xl"
+              style={{ background: discoColors.bgNavbarColor, border: `solid 2px ${discoColors.navbarForeground}` }}
+              altText="Goto schedule to undo"
+            >
+              <ToastClose className="flex absolute right-2 top-2" />
+
+              <SubscribeButton discoColors={discoColors} userId={userId} discoId={discoId} />
+            </ToastAction>
+          ),
+        });
+      }}
+      style={{ background: discoColors.bgNavbarColor }}
+    >
+      <BellIcon
+        style={{ stroke: `${discoColors.navbarForeground}` }}
+        className="cursor-pointer hover:scale-110 transition-transform"
+      />
+    </Button>
   );
 };
 
 export default SubscribeNow;
+{
+  /*  */
+}

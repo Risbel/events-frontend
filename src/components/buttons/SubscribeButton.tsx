@@ -1,19 +1,34 @@
 import { useCreateSubscription } from "@/hooks/useCreateSubscription";
 import { Button } from "../ui/button";
 import Spinner from "../loaders/Spinner";
+import { IDiscoColors } from "@/services/getDisco";
 
-const SubscribeButton = ({ userId, discoId }: { userId: string; discoId: string }) => {
+const SubscribeButton = ({
+  userId,
+  discoId,
+  discoColors,
+}: {
+  userId: string;
+  discoId: string;
+  discoColors: IDiscoColors;
+}) => {
   const { subscribe, isLoading } = useCreateSubscription();
 
   return (
-    <Button
-      onClick={() => subscribe({ userId, discoId })}
-      className="flex items-center gap-2 bg-blue-700 shadow-xl hover:bg-blue-600 px-2 md:px-4"
-      size={"lg"}
-    >
-      <span className="text-md md:text-xl">Subscribe</span>
-      {isLoading && <Spinner diameter={4} stroke={"white"} />}
-    </Button>
+    <div className="flex flex-col gap-3">
+      <p className="text-lg" style={{ color: discoColors.navbarForeground }}>
+        Subscribe you here
+      </p>
+      <Button
+        style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+        onClick={() => subscribe({ userId, discoId })}
+        className="flex items-center gap-2 shadow-xl hover:opacity-90 rounded-xl"
+        size={"lg"}
+      >
+        <span className="text-md md:text-xl">Subscribe</span>
+        {isLoading && <Spinner diameter={4} stroke={discoColors.bgNavbarColor} />}
+      </Button>
+    </div>
   );
 };
 

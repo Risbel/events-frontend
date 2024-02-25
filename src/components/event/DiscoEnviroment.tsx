@@ -47,7 +47,7 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
 
   if (!discoData) {
     return (
-      <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-4">
+      <div className="flex flex-col gap-4 md:gap-8 h-full w-full bg-black overscroll-none pt-20 px-4">
         <SkeletonHead />
         <SkeletonAboutUs />
         <SkeletonExperiences />
@@ -64,7 +64,7 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
 
       {loadingDisco ||
         (!discoData && (
-          <div className="flex flex-col gap-4 md:gap-8 h-full w-screen bg-black overscroll-none pt-20 px-4">
+          <div className="flex flex-col gap-4 md:gap-8 h-full w-full bg-black overscroll-none pt-20 px-4">
             <SkeletonHead />
             <SkeletonAboutUs />
             <SkeletonExperiences />
