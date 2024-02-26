@@ -15,6 +15,7 @@ import ColorPicker from "@/components/dashboard/workspace/ColorPicker";
 import Image from "next/image";
 import ColorPaletteGenerator from "@/components/dashboard/workspace/ColorPaletGenerator";
 import LabelColor from "@/components/dashboard/workspace/LabelColor";
+import { useSession } from "next-auth/react";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
 
@@ -22,7 +23,9 @@ const AddDiscos = () => {
   const [isActive, setIsActive] = useState(false);
   const [bankCardInput, setBankCardInput] = useState("");
   const [errorBankCard, setErrorBankCard] = useState("");
-  const { isLoading: isLoadingMy, user } = useGetMe();
+
+  const { data } = useSession();
+  const userId = data?.user.id;
 
   const {
     register,
@@ -82,15 +85,11 @@ const AddDiscos = () => {
     submitDataDisco(formData);
   };
 
-  if (isLoadingMy) {
-    return (
-      <div className="flex pt-24 justify-center">
-        <Spinner diameter={8} stroke="black" />
-      </div>
-    );
-  }
-
   const values = getValues();
+
+  if (!data) {
+    return;
+  }
 
   return (
     <>
@@ -292,7 +291,7 @@ const AddDiscos = () => {
                 </div>
               </div>
 
-              <input autoComplete="off" hidden type="text" value={user?.id} {...register("administrator")} />
+              <input autoComplete="off" hidden type="text" value={userId} {...register("administrator")} />
               <div className="flex items-center gap-4 border-t pt-4 mt-4">
                 <div className="relative w-1/2 mt-6">
                   <Label
@@ -583,6 +582,7 @@ export default AddDiscos;
 
 const addDiscoSchema = z.object({
   //general
+  userId: z.string().min(1, { message: "UserId is missing" }),
   name: z.string().min(1, { message: "The name is required" }),
   slug: z
     .string()
