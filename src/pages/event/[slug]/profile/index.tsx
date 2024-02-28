@@ -10,6 +10,8 @@ import NavbarEvent from "@/components/navigation/NavbarEvent";
 import Subscriptions from "./components/Subscriptions";
 import Cards from "./components/Cards";
 import useGetDisco from "@/hooks/useGetDisco";
+import useGetMe from "@/hooks/useGetMe";
+import { useListMonths } from "@/hooks/useListMonths";
 
 const SkeletonAvatar = () => {
   return (
@@ -34,10 +36,14 @@ const Profile = () => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
 
+  const { user, isLoading } = useGetMe();
+
+  const months = useListMonths();
+
   const { data: discoData, isLoading: loadingDisco, isError: isErrordisco, error } = useGetDisco({ slug, userId });
   const discoColors = discoData?.disco.discoDetail.discoColor;
 
-  if (!session || !discoColors) {
+  if (!session || !discoColors || isLoading) {
     return <SkeletonAvatar />;
   }
 
@@ -54,11 +60,15 @@ const Profile = () => {
           Go back
         </span>
       </Link>
-      <div className="flex flex-col gap-8 pt-14">
-        <div className="flex pt-4 md:px-12 lg:px-16 gap-2 md:gap-4 justify-center items-center text-white">
-          <div className="rounded-full overflow-hidden float-left">
+      <div className="flex flex-col gap-8 pt-24">
+        <div
+          style={{ background: `${discoColors.bgNavbarColor}90` }}
+          className="py-4 md:py-10 px-4 md:px-12 mx-2 md:mx-8 rounded-3xl shadow-md flex flex-col md:flex-row gap-4"
+        >
+          <div className="rounded-full overflow-hidden md:float-left">
             {session?.user.image ? (
               <Image
+                className="rounded-full"
                 src={session?.user.image}
                 alt="image-next-auth"
                 width={100}
@@ -72,19 +82,25 @@ const Profile = () => {
               </div>
             )}
           </div>
-          <div className="md:txt-md text-sm">
-            <p style={{ color: `${discoColors.navbarForeground}` }} className="text-2xl font-bold">
-              {session.user.name}
-            </p>
+          <div>
             <p className="text-xl" style={{ color: `${discoColors.navbarForeground}` }}>
-              {session.user.email}
+              {user.name} {user.lastName}
+            </p>
+            <p className="text-lg" style={{ color: `${discoColors.navbarForeground}` }}>
+              {user.email}
+            </p>
+
+            <p style={{ color: `${discoColors.navbarForeground}` }}>{user.phone}</p>
+            <p style={{ color: `${discoColors.navbarForeground}` }}>
+              Joined on {new Date(user.createdAt).getDate()}-{months[new Date(user.createdAt).getMonth()].slice(0, 3)}-
+              {new Date(user.createdAt).getFullYear()}
             </p>
           </div>
         </div>
 
         {session?.user.id && <Subscriptions discoColors={discoColors} userId={session?.user.id} />}
 
-        {session?.user.id && <Cards discoColors={discoColors} userId={session.user.id} />}
+        {/* {session?.user.id && <Cards discoColors={discoColors} userId={session.user.id} />} */}
       </div>
     </EventLayout>
   );

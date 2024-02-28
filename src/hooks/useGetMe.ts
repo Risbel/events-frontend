@@ -26,6 +26,6 @@ export interface IMyself {
   password: string;
   imageUrl: string;
   role: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
