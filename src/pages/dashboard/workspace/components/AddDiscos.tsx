@@ -21,8 +21,6 @@ export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
 
 const AddDiscos = () => {
   const [isActive, setIsActive] = useState(false);
-  const [bankCardInput, setBankCardInput] = useState("");
-  const [errorBankCard, setErrorBankCard] = useState("");
 
   const { data } = useSession();
   const userId = data?.user.id;
@@ -40,13 +38,6 @@ const AddDiscos = () => {
 
   const { submitDataDisco, isLoading } = useCreateDisco();
   const onSubmit: SubmitHandler<AddDiscoSchema> = (data) => {
-    if (bankCardInput.length < 19) {
-      setErrorBankCard("This field most be at least 16 characters");
-      return;
-    }
-    setErrorBankCard("");
-    data.bankCardNumber = bankCardInput;
-
     const formData = new FormData();
 
     formData.append("logo", data?.logo?.[0]);
@@ -80,8 +71,6 @@ const AddDiscos = () => {
     formData.append("email", data.email);
     formData.append("address", data.address);
     formData.append("administrator", data.administrator);
-    formData.append("bankCardNumber", data.bankCardNumber);
-    data.bgImage && formData.append("bgImage", data.bgImage);
     submitDataDisco(formData);
   };
 
@@ -520,52 +509,6 @@ const AddDiscos = () => {
                 />
                 {errors.address && <p className="text-xs italic text-red-500">{errors.address?.message}</p>}
               </div>
-
-              <div className="relative mb-4 pb-2">
-                <Label
-                  name={"Bank card number"}
-                  htmlfor={"bankCardNumber"}
-                  className="block mb-1 text-sm font-medium text-primary"
-                />
-
-                <Input
-                  autoComplete="off"
-                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                  id="bankCardNumber"
-                  type="text"
-                  max={16}
-                  placeholder="Bank card number"
-                  value={bankCardInput}
-                  {...register("bankCardNumber")}
-                  onChange={(e) => {
-                    let value = e.target.value.replace(/\D/g, "");
-                    value = value.replace(/(\d{4})(?=\d)/g, "$1-");
-                    if (value.length > 20) {
-                      return;
-                    }
-                    setBankCardInput(value);
-                  }}
-                />
-                {errorBankCard.length > 5 && <p className="text-xs italic text-red-500">{errorBankCard}</p>}
-              </div>
-
-              <div className="relative mb-4 pb-2">
-                <Label
-                  htmlfor={"background"}
-                  name={"Background Image URL (optional)"}
-                  className="block mb-1 text-sm font-medium text-primary"
-                />
-
-                <Input
-                  autoComplete="off"
-                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                  id="background"
-                  type="text"
-                  placeholder="Background image"
-                  {...register("bgImage")}
-                />
-                {errors.bgImage && <p className="text-xs italic text-red-500">{errors.bgImage?.message}</p>}
-              </div>
             </div>
           </div>
 
@@ -625,6 +568,4 @@ const addDiscoSchema = z.object({
   email: z.string().email().min(1, { message: "Email required" }),
   address: z.string().min(1, { message: "Address is required" }),
   administrator: z.string().min(1, { message: "Field must be atleast 8 characters" }),
-  bankCardNumber: z.string().optional(),
-  bgImage: z.string().optional(),
 });
