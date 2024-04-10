@@ -6,6 +6,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "s3.myaipeople.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
         hostname: "my-events-pi.vercel.app",
         pathname: "**",
       },
