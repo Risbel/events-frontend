@@ -74,135 +74,139 @@ const Reservations = () => {
             className="flex flex-col items-center p-8 gap-4 md:mx-16 lg:mx-32 mb-32 rounded-3xl shadow-md"
           >
             {sortedReservations.length > 0 &&
-              sortedReservations.map((reservation) => (
-                <div
-                  style={{ background: `${discoColors.bgNavbarColor}` }}
-                  className="flex flex-col md:flex-row justify-between gap-8 rounded-2xl p-6 w-full relative overflow-hidden shadow-md"
-                  key={reservation.id}
-                >
-                  <Image
-                    className="object-cover absolute z-0 rounded-full opacity-25 bottom-1"
-                    src={discoData.disco.logo}
-                    alt="event image logo"
-                    width={200}
-                    height={200}
-                  />
-                  <div className="relative z-20">
-                    <p style={{ color: discoColors.navbarForeground }} className="font-semibold text-2xl">
-                      {reservation.ticketsReservations.length &&
-                        reservation.ticketsReservations[0]?.DiscoTicket.Disco.name}
-                    </p>
-                    <div>
-                      <p style={{ color: discoColors.navbarForeground }}>
-                        <span>Invoice:</span>
-                        <span className="font-light"> {reservation.id.slice(0, 13)}</span>
-                      </p>
-                      <div>
-                        <p style={{ color: discoColors.navbarForeground }}>
-                          <span>To use: </span>
-                          {reservation.ticketsReservations.length && (
-                            <span>
-                              {weekdays[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
-                              {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
-                              {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}
-                            </span>
-                          )}
+              sortedReservations.map(
+                (reservation) =>
+                  reservation.ticketsReservations[0].DiscoTicket.Disco.slug === slug && (
+                    <div
+                      style={{ background: `${discoColors.bgNavbarColor}` }}
+                      className="flex flex-col md:flex-row justify-between gap-8 rounded-2xl p-6 w-full relative overflow-hidden shadow-md"
+                      key={reservation.id}
+                    >
+                      <Image
+                        className="object-cover absolute z-0 rounded-full opacity-25 bottom-1"
+                        src={discoData.disco.logo}
+                        alt="event image logo"
+                        width={200}
+                        height={200}
+                      />
+                      <div className="relative z-20">
+                        <p style={{ color: discoColors.navbarForeground }} className="font-semibold text-2xl">
+                          {reservation.ticketsReservations.length &&
+                            reservation.ticketsReservations[0]?.DiscoTicket.Disco.name}
                         </p>
-                      </div>
-                      <p style={{ color: discoColors.navbarForeground }}>
-                        <span>Reserved: </span>
-                        <span className="font-light">
-                          {weekdays[new Date(reservation.createdAt).getDay()].slice(0, 3)}-
-                          {new Date(reservation.createdAt).getDate()}-
-                          {months[new Date(reservation.createdAt).getMonth()]}-{reservation.createdAt.slice(0, 4)}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col flex-1">
-                    <p style={{ color: discoColors.navbarForeground }} className="mb-1 text-2xl">
-                      Purchases:
-                    </p>
-                    <div className="flex flex-col lg:flex-row gap-2">
-                      {reservation.ticketsReservations.map((ticket) => (
-                        <div
-                          style={{ border: `solid 2px ${discoColors.navbarForeground}` }}
-                          className="relative overflow-hidden flex flex-col rounded-md px-2 py-1"
-                          key={ticket.id}
-                        >
-                          <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
-                            {ticket.quantity} {ticket.DiscoTicket.category}{" "}
-                            {Number(ticket.quantity) > 1 ? "tickets" : "ticket"}
+                        <div>
+                          <p style={{ color: discoColors.navbarForeground }}>
+                            <span>Invoice:</span>
+                            <span className="font-light"> {reservation.id.slice(0, 13)}</span>
                           </p>
-
-                          <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
-                            Price: ${ticket.DiscoTicket.price} each
-                          </p>
-                        </div>
-                      ))}
-                      <div>
-                        {reservation.comboReservations.map((combo) => (
-                          <div
-                            style={{ border: `solid 2px ${discoColors.navbarForeground}` }}
-                            className="relative overflow-hidden flex flex-col rounded-md px-2 py-1"
-                            key={combo.id}
-                          >
-                            <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
-                              {combo.quantity} {combo.Combo.category} {Number(combo.quantity) > 1 ? "combos" : "combo"}
-                            </p>
-
-                            <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
-                              Price: ${combo.Combo.price} each
+                          <div>
+                            <p style={{ color: discoColors.navbarForeground }}>
+                              <span>To use: </span>
+                              {reservation.ticketsReservations.length && (
+                                <span>
+                                  {weekdays[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
+                                  {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
+                                  {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}
+                                </span>
+                              )}
                             </p>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col justify-between items-end font-light text-xl">
-                    <div className="absolute right-4 top-4 md:right-0 md:top-0 md:relative">
-                      {reservation.ticketsReservations.length &&
-                        (new Date(reservation.ticketsReservations[0]?.DiscoTicket.expDate).getDate() ==
-                        new Date().getDate() ? (
-                          <p className="bg-black/70 px-2 rounded-full text-green-500 text-xs md:text-lg flex items-center gap-2">
-                            active{" "}
-                            <span className="relative flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                          <p style={{ color: discoColors.navbarForeground }}>
+                            <span>Reserved: </span>
+                            <span className="font-light">
+                              {weekdays[new Date(reservation.createdAt).getDay()].slice(0, 3)}-
+                              {new Date(reservation.createdAt).getDate()}-
+                              {months[new Date(reservation.createdAt).getMonth()]}-{reservation.createdAt.slice(0, 4)}
                             </span>
                           </p>
-                        ) : new Date(reservation?.ticketsReservations[0]?.DiscoTicket?.expDate).toISOString() <
-                          new Date().toISOString() ? (
-                          <p style={{ color: `${discoColors.navbarForeground}90` }} className="text-xs md:text-lg">
-                            expired
-                          </p>
-                        ) : (
-                          <p style={{ color: `${discoColors.navbarForeground}90` }} className="text-xs md:text-lg">
-                            pending
-                          </p>
-                        ))}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col flex-1">
+                        <p style={{ color: discoColors.navbarForeground }} className="mb-1 text-2xl">
+                          Purchases:
+                        </p>
+                        <div className="flex flex-col lg:flex-row gap-2">
+                          {reservation.ticketsReservations.map((ticket) => (
+                            <div
+                              style={{ border: `solid 2px ${discoColors.navbarForeground}` }}
+                              className="relative overflow-hidden flex flex-col rounded-md px-2 py-1"
+                              key={ticket.id}
+                            >
+                              <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
+                                {ticket.quantity} {ticket.DiscoTicket.category}{" "}
+                                {Number(ticket.quantity) > 1 ? "tickets" : "ticket"}
+                              </p>
+
+                              <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
+                                Price: ${ticket.DiscoTicket.price} each
+                              </p>
+                            </div>
+                          ))}
+                          <div>
+                            {reservation.comboReservations.map((combo) => (
+                              <div
+                                style={{ border: `solid 2px ${discoColors.navbarForeground}` }}
+                                className="relative overflow-hidden flex flex-col rounded-md px-2 py-1"
+                                key={combo.id}
+                              >
+                                <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
+                                  {combo.quantity} {combo.Combo.category}{" "}
+                                  {Number(combo.quantity) > 1 ? "combos" : "combo"}
+                                </p>
+
+                                <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
+                                  Price: ${combo.Combo.price} each
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col justify-between items-end font-light text-xl">
+                        <div className="absolute right-4 top-4 md:right-0 md:top-0 md:relative">
+                          {reservation.ticketsReservations.length &&
+                            (new Date(reservation.ticketsReservations[0]?.DiscoTicket.expDate).getDate() ==
+                            new Date().getDate() ? (
+                              <p className="bg-black/70 px-2 rounded-full text-green-500 text-xs md:text-lg flex items-center gap-2">
+                                active{" "}
+                                <span className="relative flex h-2 w-2">
+                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                                </span>
+                              </p>
+                            ) : new Date(reservation?.ticketsReservations[0]?.DiscoTicket?.expDate).toISOString() <
+                              new Date().toISOString() ? (
+                              <p style={{ color: `${discoColors.navbarForeground}90` }} className="text-xs md:text-lg">
+                                expired
+                              </p>
+                            ) : (
+                              <p style={{ color: `${discoColors.navbarForeground}90` }} className="text-xs md:text-lg">
+                                pending
+                              </p>
+                            ))}
+                        </div>
+                        <p style={{ color: discoColors.navbarForeground }}>
+                          <span>Total: </span>
+                          <span className="font-semibold text-3xl">
+                            $
+                            {reservation.ticketsReservations
+                              .map((tiket) => {
+                                return Number(tiket.quantity) * Number(tiket.DiscoTicket.price);
+                              })
+                              .reduce((acc, curr) => acc + Number(curr), 0) +
+                              reservation.comboReservations
+                                .map((combo) => {
+                                  return Number(combo.quantity) * Number(combo.Combo.price);
+                                })
+                                .reduce((acc, curr) => acc + Number(curr), 0)}
+                          </span>
+                        </p>
+                      </div>
                     </div>
-                    <p style={{ color: discoColors.navbarForeground }}>
-                      <span>Total: </span>
-                      <span className="font-semibold text-3xl">
-                        $
-                        {reservation.ticketsReservations
-                          .map((tiket) => {
-                            return Number(tiket.quantity) * Number(tiket.DiscoTicket.price);
-                          })
-                          .reduce((acc, curr) => acc + Number(curr), 0) +
-                          reservation.comboReservations
-                            .map((combo) => {
-                              return Number(combo.quantity) * Number(combo.Combo.price);
-                            })
-                            .reduce((acc, curr) => acc + Number(curr), 0)}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-              ))}
+                  )
+              )}
           </div>
         </div>
       </EventLayout>

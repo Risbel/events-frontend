@@ -1,11 +1,11 @@
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 import { Button } from "@/components/ui/button";
 import useGetDisco from "@/hooks/useGetDisco";
+import { useHandlePay } from "@/hooks/useHandlePay";
 import { useListMonths } from "@/hooks/useListMonths";
-import { cn } from "@/lib/shadcnUtils";
 import useCart, { ICart } from "@/store/useCart";
 import clsx from "clsx";
-import { ChevronLeftIcon } from "lucide-react";
+import { ChevronLeftIcon, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,8 +16,6 @@ const Cart = () => {
   const router = useRouter();
   const { query } = router;
   const { slug } = query;
-
-  const path = usePathname();
 
   const { data: session, status } = useSession();
   const userId = session?.user?.id;
@@ -45,6 +43,31 @@ const Cart = () => {
     }
 
     return addToCart({ ...item, quantity });
+  };
+
+  const { mutate, isLoading } = useHandlePay();
+
+  const handleSubmitReservation = (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (userId && cartItems) {
+      const payloadReservation = cartItems.map((item) => {
+        return {
+          discoTicketId: !item?.comboDetail?.id ? item.id : null,
+          comboId: item?.comboDetail?.id ? item.id : null,
+          quantity: item.quantity,
+          discoId: item.discoId,
+          category: item.category,
+          imagesTicket: item?.ticketImages?.[0]?.image ? item?.ticketImages?.[0]?.image : null,
+          imagesCombo: item?.comboDetail?.image ? item?.comboDetail?.image : null,
+          comboDescription: item?.comboDetail?.description ? item?.comboDetail?.description : null,
+          ticketDescription: item.shortDescription,
+          price: item.price,
+          discoSlug: item.Disco.slug,
+        };
+      });
+
+      mutate({ userId, payloadReservation });
+    }
   };
 
   if (!slug || !cartItems || !discoData) {
@@ -80,10 +103,9 @@ const Cart = () => {
               className="text-center font-thin py-1 px-4 rounded-2xl text-xl"
             >
               <span className="underline underline-2 cursor-default">Cart</span>/
-              <Link className="hover:underline underline-2" href={`/event/${slug}/cart/payment`}>
-                Reservation
-              </Link>
-              <span className="cursor-default">/Status</span>
+              <button onClick={() => handleSubmitReservation} className="hover:underline">
+                Checkout
+              </button>
             </p>
           </div>
         )}
@@ -325,13 +347,14 @@ const Cart = () => {
           className={clsx("w-full text-center mt-28 py-8", !cartItems.length && "hidden")}
         >
           <Button
+            onClick={handleSubmitReservation}
             style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
             className="hover:opacity-90"
           >
-            <Link href={`/event/${slug}/cart/payment`}>Make Reservation</Link>
+            Reserve {isLoading && <Loader2 className="animate-spin" />}
           </Button>
           <p style={{ color: discoColors.navbarForeground }} className="text-xl my-4">
-            Total to pay: $
+            Total: $
             <span className="font-semibold">
               {cartItems.reduce(
                 (acc, currentItem) => Number(currentItem.quantity) * Number(currentItem.price) + acc,

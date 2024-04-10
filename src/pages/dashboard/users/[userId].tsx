@@ -10,7 +10,7 @@ const UserDetail = () => {
 
   return (
     <DashboardLayout>
-      <UserContainer id={userId} />
+      <UserContainer />
     </DashboardLayout>
   );
 };

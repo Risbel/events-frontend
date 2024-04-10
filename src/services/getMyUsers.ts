@@ -1,5 +1,4 @@
 import httpService from "@/config/axios.config";
-import { string } from "zod";
 
 export const getMyUsers = async (userId: string | undefined) => {
   const response = await httpService.get<IMyUsers[]>(`/user/myUsers/${userId}`);

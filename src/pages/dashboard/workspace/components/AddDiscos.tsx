@@ -71,6 +71,7 @@ const AddDiscos = () => {
     formData.append("email", data.email);
     formData.append("address", data.address);
     formData.append("administrator", data.administrator);
+
     submitDataDisco(formData);
   };
 
@@ -525,7 +526,6 @@ export default AddDiscos;
 
 const addDiscoSchema = z.object({
   //general
-  userId: z.string().min(1, { message: "UserId is missing" }),
   name: z.string().min(1, { message: "The name is required" }),
   slug: z
     .string()
