@@ -41,7 +41,6 @@ interface IDisco {
     address: string;
     createdAt: string;
     updatedAt: string;
-    userBankCardId: string;
     administrator: string;
     discoId: string;
   };

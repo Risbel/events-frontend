@@ -1,4 +1,4 @@
-import { DiscoDetail, IUserBankCard } from "@/services/getDisco";
+import { DiscoDetail } from "@/services/getDisco";
 
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import Image from "next/image";
@@ -23,13 +23,7 @@ const addBannerImagesSchema = z.object({
 
 export type AddBannerImagesSchema = z.infer<typeof addBannerImagesSchema>;
 
-const AddBannerImages = ({
-  discoBankCard,
-  discoDetail,
-}: {
-  discoBankCard: IUserBankCard;
-  discoDetail: DiscoDetail;
-}) => {
+const AddBannerImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
   const { data } = useGetBannerImages(discoDetail.id);
 
   const { mutate: deleteBannerImage, isLoading } = useDeleteBannerImage();

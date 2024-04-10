@@ -29,13 +29,11 @@ export interface DiscoDetail {
   address: string;
   createdAt: string;
   updatedAt: string;
-  userBankCardId: string;
   administrator: string;
   discoId: string;
   discoImages: DiscoImages[];
   discoNetworks: [];
   discoPhones: [];
-  userBankCard: IUserBankCard;
   discoColor: IDiscoColors;
 }
 
@@ -64,15 +62,6 @@ export interface DiscoRole {
   createdAt: string;
   updatedAt: string;
   discoId: string;
-}
-
-export interface IUserBankCard {
-  id: string;
-  number: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  userId: string;
 }
 
 export interface IDiscoColors {

@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { DataDisco } from "@/services/getDisco";
-import BankCardAsociated from "./BankCardAsociated";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Settings2 } from "lucide-react";
@@ -39,9 +38,7 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
           <DropdownMenuItem className="transition-colors">
             <Link href={`/event/${slug}/my-sales`}>My sales</Link>
           </DropdownMenuItem>
-
-          <BankCardAsociated discoDetail={disco.discoDetail} discoBankCard={disco.discoDetail.userBankCard} />
-          <AddBannerImages discoDetail={disco.discoDetail} discoBankCard={disco.discoDetail.userBankCard} />
+          <AddBannerImages discoDetail={disco.discoDetail} />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

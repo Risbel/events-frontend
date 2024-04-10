@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 import Subscriptions from "./components/Subscriptions";
-import Cards from "./components/Cards";
 import useGetDisco from "@/hooks/useGetDisco";
 import useGetMe from "@/hooks/useGetMe";
 import { useListMonths } from "@/hooks/useListMonths";
@@ -99,8 +98,6 @@ const Profile = () => {
         </div>
 
         {session?.user.id && <Subscriptions discoColors={discoColors} userId={session?.user.id} />}
-
-        {/* {session?.user.id && <Cards discoColors={discoColors} userId={session.user.id} />} */}
       </div>
     </EventLayout>
   );

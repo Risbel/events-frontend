@@ -25,7 +25,6 @@ export const createReservation = async ({ userId, cartItems }: IReservation) => 
 export interface IReservation {
   userId: string;
   cartItems: {
-    cardNumber: string;
     discoId: string;
     discoTicketId: string | null;
     comboId: string | null;
