@@ -1,15 +1,8 @@
 import EventLayout from "@/components/layouts/EventLayout";
-import Spinner from "@/components/loaders/Spinner";
-import NavbarEvent from "@/components/navigation/NavbarEvent";
-
-import { Button } from "@/components/ui/button";
-import { Input, Label } from "@/components/ui/input";
 import { useCreateReservation } from "@/hooks/useCreateReservation";
 import useGetDisco from "@/hooks/useGetDisco";
 import useCart from "@/store/useCart";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 const Payment = () => {

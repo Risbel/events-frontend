@@ -10,6 +10,14 @@ const UsersContainer = () => {
 
   const { data: myUsers, isLoading } = useGetMyUsers(userId);
 
+  if (isLoading && !myUsers) {
+    return (
+      <div className="flex justify-center items-center pt-24">
+        <Spinner diameter={10} stroke={"black"} />
+      </div>
+    );
+  }
+
   return (
     <div className="p-8">
       <h1 className="text-2xl text-primary font-semibold pb-4">Users:</h1>
