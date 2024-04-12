@@ -1,33 +1,23 @@
 import httpService from "@/config/axios.config";
 
-export const createReservation = async ({ userId, cartItems }: IReservation) => {
-  const groupedByDiscoId = cartItems.reduce<any[]>((result, currentItem) => {
-    const obj = {
-      discoId: currentItem.discoId,
-      items: [currentItem],
-    };
-
-    const existingObj = result.find((group) => group.discoId === currentItem.discoId);
-
-    if (existingObj) {
-      existingObj.items.push(currentItem);
-    } else {
-      result.push(obj);
-    }
-
-    return result;
-  }, []);
-
-  const response = await httpService.post<IReservation>("/reservation", { userId, cartItems: groupedByDiscoId });
+export const createReservation = async ({ userId, payloadReservation: cartItems }: IReservation) => {
+  const response = await httpService.post<IReservation>("/reservation", { userId, cartItems });
   return response.data;
 };
 
 export interface IReservation {
   userId: string;
-  cartItems: {
+  payloadReservation: {
     discoId: string;
     discoTicketId: string | null;
     comboId: string | null;
     quantity: number;
+    category: string;
+    imagesTicket: string | null;
+    imagesCombo: string | null;
+    comboDescription: string | null;
+    ticketDescription: string;
+    price: string;
+    discoSlug: string;
   }[];
 }

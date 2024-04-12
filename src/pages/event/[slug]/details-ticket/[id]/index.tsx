@@ -123,7 +123,24 @@ const DiscoTicketDetails = () => {
                       TICKET
                     </p>
                   </div>
-                  <p className="text-center text-4xl md:text-2xl lg:text-5xl font-semibold">${data.price}</p>
+                  <p className="text-center text-4xl md:text-2xl lg:text-5xl font-semibold">
+                    {Number(data.price) >= 1 ? (
+                      `$ ${data.price}`
+                    ) : (
+                      <span
+                        className="text-3xl font-bold"
+                        style={{
+                          border: `solid ${discoColors.buttonsTicketsColor} 2px`,
+                          borderRadius: 100,
+                          color: `${discoColors.buttonsTicketsColor}`,
+                          paddingRight: 10,
+                          paddingLeft: 10,
+                        }}
+                      >
+                        free
+                      </span>
+                    )}
+                  </p>
 
                   <div className="mx-6 md:mx-2 rounded-md p-1 border-2 border-black">
                     <p
@@ -161,7 +178,22 @@ const DiscoTicketDetails = () => {
               >
                 <div>
                   <p style={{ color: discoColors.navbarForeground }} className="text-start text-md font-semibold">
-                    Price: <span className="text-3xl">${data.price}</span>
+                    {Number(data.price) >= 1 ? (
+                      <span className="text-3xl">Price: ${data.price}</span>
+                    ) : (
+                      <span
+                        className="text-xl font-bold"
+                        style={{
+                          border: `solid ${discoColors.buttonTicketForeground} 2px`,
+                          borderRadius: 100,
+                          color: `${discoColors.buttonTicketForeground}`,
+                          paddingRight: 10,
+                          paddingLeft: 10,
+                        }}
+                      >
+                        free
+                      </span>
+                    )}
                   </p>
                   <p style={{ color: discoColors.navbarForeground }} className="text-start font-semibold text-md">
                     Quantity available:

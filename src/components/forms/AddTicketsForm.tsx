@@ -166,7 +166,7 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
               className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
               placeholder="$"
               type="number"
-              min={1}
+              min={0}
               id="price"
               {...register("price")}
             />

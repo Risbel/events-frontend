@@ -139,7 +139,9 @@ const Reservations = () => {
                               </p>
 
                               <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
-                                Price: ${ticket.DiscoTicket.price} each
+                                {Number(ticket.DiscoTicket.price) >= 1
+                                  ? `Price: ${ticket.DiscoTicket.price} each`
+                                  : "free"}
                               </p>
                             </div>
                           ))}
@@ -156,7 +158,7 @@ const Reservations = () => {
                                 </p>
 
                                 <p style={{ color: discoColors.navbarForeground }} className="text-sm lg:text-xl">
-                                  Price: ${combo.Combo.price} each
+                                  {Number(combo.Combo.price) >= 1 ? `Price: ${combo.Combo.price} each` : "free"}
                                 </p>
                               </div>
                             ))}

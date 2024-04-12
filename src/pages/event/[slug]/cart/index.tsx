@@ -1,5 +1,6 @@
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 import { Button } from "@/components/ui/button";
+import { useCreateReservation } from "@/hooks/useCreateReservation";
 import useGetDisco from "@/hooks/useGetDisco";
 import { useHandlePay } from "@/hooks/useHandlePay";
 import { useListMonths } from "@/hooks/useListMonths";
@@ -46,6 +47,7 @@ const Cart = () => {
   };
 
   const { mutate, isLoading } = useHandlePay();
+  const { mutate: reserveFree, isLoading: isLoadingFreeReservation } = useCreateReservation();
 
   const handleSubmitReservation = (e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -66,7 +68,13 @@ const Cart = () => {
         };
       });
 
-      mutate({ userId, payloadReservation });
+      if (
+        cartItems.reduce((acc, currentItem) => Number(currentItem.quantity) * Number(currentItem.price) + acc, 0) > 0
+      ) {
+        mutate({ userId, payloadReservation });
+      } else {
+        reserveFree({ userId, payloadReservation });
+      }
     }
   };
 
@@ -140,7 +148,7 @@ const Cart = () => {
                       TICKET
                     </p>
                   </div>
-                  <p className="text-2xl font-bold">${item.price}</p>
+                  <p className="text-2xl font-bold">{Number(item.price) > 0 ? item.price : "free"}</p>
                   <div className="border-t-2 border-black border-dotted"></div>
                   <div className="rounded-md p-1 m-3 md:p-0.5 border-2 border-dotted border-black">
                     <p
@@ -196,7 +204,22 @@ const Cart = () => {
                       Category: <span className="text-2xl">{item.category}</span>
                     </p>
                     <p style={{ color: discoColors.navbarForeground }} className="text-start text-xl font-semibold">
-                      Price: ${item.price}
+                      {Number(item.price) > 0 ? (
+                        `Price: ${item.price}`
+                      ) : (
+                        <span
+                          className="text-xl font-bold"
+                          style={{
+                            border: `solid ${discoColors.buttonTicketForeground} 2px`,
+                            borderRadius: 100,
+                            color: `${discoColors.buttonTicketForeground}`,
+                            paddingRight: 10,
+                            paddingLeft: 10,
+                          }}
+                        >
+                          free
+                        </span>
+                      )}
                     </p>
                   </div>
                   <div
@@ -351,7 +374,7 @@ const Cart = () => {
             style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
             className="hover:opacity-90"
           >
-            Reserve {isLoading && <Loader2 className="animate-spin" />}
+            Reserve {isLoading || (isLoadingFreeReservation && <Loader2 className="animate-spin" />)}
           </Button>
           <p style={{ color: discoColors.navbarForeground }} className="text-xl my-4">
             Total: $

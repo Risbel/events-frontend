@@ -58,9 +58,9 @@ const MySales = () => {
   const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
 
   return (
-    <EventLayout>
+    <div>
       <NavbarEvent />
-      <div className="pt-16 px-4 md:px-8 bg-primary h-full">
+      <div className="pt-16 px-4 md:px-8 bg-primary h-full ">
         <Link
           className="absolute flex gap-2 text-white font-light border px-[1px] rounded-md hover:bg-white/10"
           href={`/event/${param?.slug}`}
@@ -224,7 +224,7 @@ const MySales = () => {
             }
           })}
       </div>
-    </EventLayout>
+    </div>
   );
 };
 

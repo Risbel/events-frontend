@@ -210,7 +210,24 @@ const DiscoTickets = ({
                   </p>
 
                   <div className="flex items-center gap-2 pb-4">
-                    <div className="text-5xl font-bold"> ${ticket.price}</div>
+                    <div className="text-5xl font-bold">
+                      {Number(ticket.price) > 0 ? (
+                        `${ticket.price}`
+                      ) : (
+                        <span
+                          className="text-2xl"
+                          style={{
+                            border: `solid ${discoDetail.discoColor.buttonTicketForeground} 2px`,
+                            borderRadius: 100,
+                            color: `${discoDetail.discoColor.buttonTicketForeground}`,
+                            paddingRight: 10,
+                            paddingLeft: 10,
+                          }}
+                        >
+                          free
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {(ticket.category === "VIP" || ticket.category === "economy") && (
