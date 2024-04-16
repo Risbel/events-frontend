@@ -4,7 +4,6 @@ import { Input, Label } from "@/components/ui/input";
 import { useSignup } from "@/hooks/useSignup";
 import Link from "next/link";
 import Spinner from "@/components/loaders/Spinner";
-import AuthLayout from "@/components/layouts/AuthLayout.tsx";
 import { ChevronLeft, EyeIcon, EyeOffIcon } from "lucide-react";
 import Image from "next/image";
 import { z } from "zod";

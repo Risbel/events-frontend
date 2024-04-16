@@ -25,6 +25,7 @@ const UserTarget = ({ imageUrl, name, lastName, phone, email, id }: IUserTarget)
             <span>Phone: {phone}</span>
             <span>Email: {email}</span>
           </div>
+          <p>Id: {id}</p>
         </div>
       </div>
     </Link>

@@ -21,8 +21,8 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/event/(.*)/cart/payment",
-    "/profile",
+    "/event/(.*)/cart",
+    "/event/(.*)/profile",
     "/admin-settings/permissions",
     "/dashboard/:path*",
     "/admin-settings/add-discos",

@@ -182,18 +182,21 @@ const DiscoTickets = ({
           if (new Date(ticket.expDate).toDateString() === day) {
             return (
               <div key={ticket.id} className="relative w-full md:w-1/3 lg:w-1/5 min-w-64">
-                {Number(ticket.countInStock) === 0 ? (
-                  <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-3xl flex items-center justify-center">
-                    <p className="text-slate-200 text-2xl">Sold out</p>
-                  </div>
-                ) : (
-                  ticket.ticketsReservations.length >= 1 &&
-                  ticket.category !== "common" && (
+                {
+                  Number(ticket.countInStock) === 0 && (
                     <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-3xl flex items-center justify-center">
-                      <p className="text-slate-200 text-2xl">Reserved</p>
+                      <p className="text-slate-200 text-2xl">Sold out</p>
                     </div>
                   )
-                )}
+                  // ) : (
+                  //   ticket.ticketsReservations.length >= 1 &&
+                  //   ticket.category !== "common" && (
+                  //     <div className="absolute z-20 w-full h-full bg-gray-800/80 border border-white rounded-3xl flex items-center justify-center">
+                  //       <p className="text-slate-200 text-2xl">Reserved</p>
+                  //     </div>
+                  //   )
+                  // )
+                }
                 <div
                   style={{
                     background: `${discoDetail.discoColor.buttonsTicketsColor}`,

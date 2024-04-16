@@ -17,6 +17,7 @@ export interface IReservationsByDiscoSlug {
   createdAt: string;
   User: {
     name: string;
+    lastName: string;
     phone: string;
     email: string;
   };

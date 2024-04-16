@@ -9,10 +9,6 @@ function Error() {
         <span className="text-white text-xl">
           <span>Page not found</span>
         </span>
-
-        <Link href={`/`}>
-          <Button>Go back</Button>
-        </Link>
       </div>
     </div>
   );

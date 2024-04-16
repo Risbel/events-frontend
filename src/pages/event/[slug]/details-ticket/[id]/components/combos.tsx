@@ -38,9 +38,14 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
           <div
             style={{ background: `${discoColors.bgNavbarColor}60` }}
             key={combo.id}
-            className="rounded-3xl overflow-hidden shadow-md flex flex-col justify-between items-center md:flex-row gap-8 p-8 relative"
+            className="rounded-3xl overflow-hidden shadow-md flex flex-col justify-between md:items-center md:flex-row gap-2 md:gap-8 relative"
           >
-            <div>
+            {!combo.countInStock ? (
+              <div className="h-full w-full bg-black/50 backdrop-blur-sm absolute z-20 flex justify-center items-center">
+                <p className="text-2xl text-white">unavailable</p>
+              </div>
+            ) : null}
+            <div className="p-4">
               <div className="flex flex-col gap-2">
                 <div style={{ background: discoColors.bgNavbarColor }} className="p-2 rounded-md rounded-t-xl">
                   <p style={{ color: discoColors.navbarForeground }} className="font-semibold text-3xl">
@@ -101,7 +106,7 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative p-4">
               <div
                 style={{ color: discoColors.navbarForeground, background: `${discoColors.bgNavbarColor}90` }}
                 className="absolute right-2 top-2 flex justify-center items-center h-8 w-8 rounded-full font-semibold"

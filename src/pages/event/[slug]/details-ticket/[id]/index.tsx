@@ -1,14 +1,13 @@
 import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useGetDiscoTicketById } from "@/hooks/useGetDiscoTicketById";
 import useCart from "@/store/useCart";
 import { ChevronLeft, ShoppingCart, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import Combos from "./components/combos";
 import { useListMonths } from "@/hooks/useListMonths";
 
@@ -16,12 +15,24 @@ import NavbarEvent from "@/components/navigation/NavbarEvent";
 import { useSession } from "next-auth/react";
 import useGetDisco from "@/hooks/useGetDisco";
 import { cn } from "@/lib/shadcnUtils";
+import { useEffect, useState } from "react";
 
 const DiscoTicketDetails = () => {
+  const [colaborator, setColaborator] = useState<string | null>(null);
   const months = useListMonths();
   const params = useParams();
   const slug = params && params.slug;
   const idTicket = params && params.id;
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const colaboratorParam = searchParams.get("colaborator");
+
+    //to save on localStorage
+    localStorage.setItem("colaborator", colaboratorParam ?? JSON.stringify(colaboratorParam));
+
+    setColaborator(localStorage.getItem("colaborator"));
+  }, [colaborator, setColaborator, searchParams]);
 
   const { data: session, status } = useSession();
   const userId = session?.user?.id;
@@ -31,6 +42,7 @@ const DiscoTicketDetails = () => {
   const { isLoading, data, isError, error: errorPage } = useGetDiscoTicketById(idTicket);
 
   const { cartItems, addToCart, removeFromCart } = useCart();
+  console.log(cartItems);
 
   const existItem = cartItems.find((item) => item.id === data?.id);
 
@@ -47,7 +59,7 @@ const DiscoTicketDetails = () => {
       return;
     }
 
-    return addToCart({ ...data, quantity });
+    return addToCart({ ...data, quantity, colaborator });
   };
   if (isError) {
     return (
@@ -217,7 +229,7 @@ const DiscoTicketDetails = () => {
                 className="flex p-4 rounded-xl text-xs font-medium shadow-md"
               >
                 <div>
-                  <p>Reserved quantity: {existItem ? existItem?.quantity : 0} </p>
+                  <p className="text-2xl">Reserved quantity: {existItem ? existItem?.quantity : 0} </p>
                   <p className="text-lg" style={{ color: discoColors.navbarForeground }}>
                     Total: <span>${existItem ? existItem.quantity * Number(data.price) : 0}</span>
                   </p>
@@ -243,12 +255,16 @@ const DiscoTicketDetails = () => {
 
                       <Button
                         style={{ color: discoColors.bgNavbarColor, background: discoColors.navbarForeground }}
-                        className="text-xs px-3 h-8"
+                        className={cn(
+                          "text-xs px-3 h-8",
+                          localStorage.getItem("colaborator") && !cartItems?.[0]?.colaborator && "animate-bounce"
+                        )}
                         type="submit"
                       >
                         Add <ShoppingCart height={15} />
                       </Button>
-                      {existItem && (
+
+                      {existItem && !existItem.colaborator && (
                         <button
                           style={{ color: discoColors.navbarForeground }}
                           type="button"

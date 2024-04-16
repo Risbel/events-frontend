@@ -24,6 +24,16 @@ interface ITicketsReservation {
   reservationId: string;
   discoTicketId: string;
   DiscoTicket: IDiscoTicket;
+  companions: [
+    {
+      id: string;
+      firstName: string;
+      lastName: string;
+      createdAt: string;
+      updatedAt: string;
+      ticketReservationId: string;
+    }
+  ];
 }
 
 interface IComboreservation {

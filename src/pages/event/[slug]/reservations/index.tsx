@@ -122,7 +122,7 @@ const Reservations = () => {
                         </div>
                       </div>
 
-                      <div className="flex flex-col flex-1">
+                      <div className="flex flex-col">
                         <p style={{ color: discoColors.navbarForeground }} className="mb-1 text-2xl">
                           Purchases:
                         </p>
@@ -164,6 +164,19 @@ const Reservations = () => {
                             ))}
                           </div>
                         </div>
+                      </div>
+
+                      <div>
+                        <p className="text-2xl">Companions</p>
+                        <ul>
+                          {reservation.ticketsReservations[0].companions.map((compa) => {
+                            return (
+                              <li key={compa.id}>
+                                {compa.firstName} {compa.lastName}
+                              </li>
+                            );
+                          })}
+                        </ul>
                       </div>
 
                       <div className="flex flex-col justify-between items-end font-light text-xl">

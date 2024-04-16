@@ -7,7 +7,7 @@ export const useCreateSubscription = () => {
   const { mutate: subscribe, isLoading } = useMutation({
     mutationFn: createSubscription,
     onSuccess: () => {
-      queryClient.invalidateQueries(["discoBySlug"]);
+      queryClient.invalidateQueries(["subscriptionsByUserId"]);
     },
   });
 

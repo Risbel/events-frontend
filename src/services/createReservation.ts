@@ -1,7 +1,11 @@
 import httpService from "@/config/axios.config";
 
-export const createReservation = async ({ userId, payloadReservation: cartItems }: IReservation) => {
-  const response = await httpService.post<IReservation>("/reservation", { userId, cartItems });
+export const createReservation = async ({
+  userId,
+  payloadReservation: cartItems,
+  inputList: companions,
+}: IReservation) => {
+  const response = await httpService.post<IReservation>("/reservation", { userId, cartItems, companions });
   return response.data;
 };
 
@@ -19,5 +23,9 @@ export interface IReservation {
     ticketDescription: string;
     price: string;
     discoSlug: string;
+  }[];
+  inputList: {
+    firstName: string;
+    lastName: string;
   }[];
 }

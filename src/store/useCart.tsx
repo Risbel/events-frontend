@@ -72,6 +72,7 @@ export interface ICart {
     discoTicketId: string;
   }[];
   quantity: number;
+  colaborator: string | null;
 }
 
 interface IComboDetail {

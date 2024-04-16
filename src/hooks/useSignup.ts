@@ -2,9 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import { signup } from "@/services/signup";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import useCart from "@/store/useCart";
 
 export const useSignup: any = (credentials: { password: string; email: string }, slug: string) => {
   const router = useRouter();
+  const cart = useCart();
 
   const { email, password } = credentials;
 
@@ -16,7 +18,8 @@ export const useSignup: any = (credentials: { password: string; email: string },
           redirect: false,
           email,
           password,
-          callbackUrl: slug ? `/event/${slug}` : `/dashboard/allevents`,
+          callbackUrl:
+            slug && cart.cartItems.length ? `/event/${slug}/cart` : slug ? `/event/${slug}` : `/dashboard/allevents`,
         });
 
         if (status?.url) {

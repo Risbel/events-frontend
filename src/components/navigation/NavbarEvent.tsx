@@ -132,7 +132,13 @@ const NavbarEvent = () => {
                 }}
                 className="absolute translate-x-1 h-4 w-4 top-0 right-0 rounded-full font-semibold text-center text-xs"
               >
-                {cartItems.length}
+                <div className="relative flex justify-center">
+                  <span
+                    style={{ background: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }}
+                    className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                  ></span>
+                  <div className="relative inline-flex">{cartItems.length}</div>
+                </div>
               </div>
             )}
           </Link>
@@ -152,7 +158,7 @@ const NavbarEvent = () => {
           <div className="flex justify-center">
             <DropdownNavbar />
           </div>
-          {<AdminSettings disco={discoData.disco} />}
+          {havePermission("read", "Admin settings on disco") && <AdminSettings disco={discoData.disco} />}
         </div>
       </div>
     </div>

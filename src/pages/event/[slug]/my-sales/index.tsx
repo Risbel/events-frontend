@@ -57,10 +57,12 @@ const MySales = () => {
 
   const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
 
+  console.log(sortedReservations);
+
   return (
     <div>
       <NavbarEvent />
-      <div className="pt-16 px-4 md:px-8 bg-primary h-full ">
+      <div className="pt-16 px-4 md:px-8 bg-primary h-full pb-16">
         <Link
           className="absolute flex gap-2 text-white font-light border px-[1px] rounded-md hover:bg-white/10"
           href={`/event/${param?.slug}`}
@@ -93,7 +95,9 @@ const MySales = () => {
                     </div>
 
                     <div className="flex justify-between">
-                      <p className="text-white">{reservation.User.name}</p>
+                      <p className="text-white">
+                        {reservation.User.name} {reservation.User.lastName}
+                      </p>
                       <p className="text-white font-light">{reservation.User.phone}</p>
                     </div>
                     <div>
@@ -141,7 +145,9 @@ const MySales = () => {
                       </p>
 
                       <div className="flex justify-between">
-                        <p className="text-white">{reservation.User.name}</p>
+                        <p className="text-white">
+                          {reservation.User.name} {reservation.User.lastName}
+                        </p>
                         <p className="text-white font-light">{reservation.User.phone}</p>
                       </div>
                       <div>
@@ -173,15 +179,15 @@ const MySales = () => {
         </div>
         <div className="border-b-[1px] border-dashed w-full my-8" />
         <h1 className="text-white text-xl mb-4 text-center md:text-start">Used yesterday</h1>
-        {sortedReservations &&
-          sortedReservations.map((reservation) => {
-            if (
-              yesterday.toLocaleDateString().slice(0, 10) ===
-              new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).toLocaleDateString().slice(0, 10)
-            ) {
-              return (
-                <div key={reservation.id} className="mb-16">
-                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+          {sortedReservations &&
+            sortedReservations.map((reservation) => {
+              if (
+                yesterday.toLocaleDateString().slice(0, 10) ===
+                new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).toLocaleDateString().slice(0, 10)
+              ) {
+                return (
+                  <div key={reservation.id}>
                     <div className="p-2 border rounded-md bg-white/10">
                       <div className="flex justify-around bg-black/30">
                         <p className="text-white text-xs font-light ">yesterday</p>
@@ -192,8 +198,10 @@ const MySales = () => {
                         </p>
                       </div>
 
-                      <div className="flex justify-between">
-                        <p className="text-white">{reservation.User.name}</p>
+                      <div className="flex flex-wrap gap-2 justify-between">
+                        <p className="text-white">
+                          {reservation.User.name} {reservation.User.lastName}
+                        </p>
                         <p className="text-white font-light">{reservation.User.phone}</p>
                       </div>
                       <div>
@@ -219,10 +227,10 @@ const MySales = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            }
-          })}
+                );
+              }
+            })}
+        </div>
       </div>
     </div>
   );
