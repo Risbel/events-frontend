@@ -36,7 +36,7 @@ const AddDiscos = () => {
     resolver: zodResolver(addDiscoSchema),
   });
 
-  const { submitDataDisco, isLoading } = useCreateDisco();
+  const { mutate: submitDataDisco, isLoading, isSuccess, status, isError } = useCreateDisco();
   const onSubmit: SubmitHandler<AddDiscoSchema> = (data) => {
     const formData = new FormData();
 
@@ -514,7 +514,13 @@ const AddDiscos = () => {
           </div>
 
           <div className="my-6 mb-12 text-center">
-            <ButtonSubmit isLoading={isLoading} text={"Create new Event"} />
+            <ButtonSubmit
+              isSuccess={isSuccess}
+              status={status}
+              isLoading={isLoading}
+              isError={isError}
+              text={"Create new Event"}
+            />
           </div>
         </form>
       </div>

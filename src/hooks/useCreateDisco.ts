@@ -1,17 +1,14 @@
 import { createDisco } from "@/services/createDisco";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const useCreateDisco = () => {
-  const {
-    mutate: submitDataDisco,
-    isLoading,
-    isSuccess,
-    status,
-  } = useMutation({
-    mutationFn: createDisco,
-  });
+  const router = useRouter();
 
-  return { submitDataDisco, isLoading, isSuccess, status };
+  return useMutation({
+    mutationFn: createDisco,
+    onSuccess: () => router.push("/dashboard/allevents"),
+  });
 };
 
 export default useCreateDisco;
