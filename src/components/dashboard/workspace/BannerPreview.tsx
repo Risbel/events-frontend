@@ -10,7 +10,7 @@ const BannerPreview = ({ values }: { values: any }) => {
           <Image
             className="h-screen w-full object-cover"
             src={
-              values?.bannerImage && values?.bannerImage?.[0]
+              values?.bannerImage && values?.bannerImage?.[0]?.name
                 ? URL.createObjectURL(values?.bannerImage?.[0])
                 : "/img-random.png"
             }

@@ -19,7 +19,9 @@ const NavbarPreview = ({ values }: { values: any }) => {
             <div className="group flex gap-2 items-center cursor-pointer">
               <Image
                 className="rounded-full group-hover:scale-105 object-cover"
-                src={values?.logo && values?.logo?.[0] ? URL.createObjectURL(values?.logo?.[0]) : "/img-random.png"}
+                src={
+                  values?.logo && values?.logo?.[0]?.name ? URL.createObjectURL(values?.logo?.[0]) : "/img-random.png"
+                }
                 alt="logo"
                 width={40}
                 height={40}

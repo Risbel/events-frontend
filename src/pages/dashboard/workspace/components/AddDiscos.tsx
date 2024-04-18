@@ -16,6 +16,7 @@ import Image from "next/image";
 import ColorPaletteGenerator from "@/components/dashboard/workspace/ColorPaletGenerator";
 import LabelColor from "@/components/dashboard/workspace/LabelColor";
 import { useSession } from "next-auth/react";
+import useFormPersist from "react-hook-form-persist";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
 
@@ -30,11 +31,14 @@ const AddDiscos = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
     getValues,
     setValue,
   } = useForm<AddDiscoSchema>({
     resolver: zodResolver(addDiscoSchema),
   });
+
+  useFormPersist("addDiscoForm", { watch, setValue });
 
   const { mutate: submitDataDisco, isLoading, isSuccess, status, isError } = useCreateDisco();
   const onSubmit: SubmitHandler<AddDiscoSchema> = (data) => {
@@ -76,6 +80,8 @@ const AddDiscos = () => {
   };
 
   const values = getValues();
+
+  console.log(values);
 
   if (!data) {
     return;
@@ -543,11 +549,11 @@ const addDiscoSchema = z.object({
   startDate: z.string().min(1, { message: "Start date required" }),
   endDate: z.string().min(1, { message: "End date required" }),
   //navbar
-  logo: z.any().refine((file) => file?.[0], `Image required`),
+  logo: z.any().refine((file) => file?.[0]?.name, `Image required`),
   bgNavbarColor: z.string().min(1, { message: "Background is required" }),
   navbarForeground: z.string().min(1, { message: "Text color required" }),
   //home
-  bannerImage: z.any().refine((file) => file?.[0], `Image required`),
+  bannerImage: z.any().refine((file) => file?.[0]?.name, `Image required`),
   h1Banner: z.string().min(2, "Invalid title").optional().or(z.literal("")),
   h1BannerColor: z.string().min(1, { message: "h1 color required" }),
   bannerGradientColor: z.string().min(1, { message: "h1 color required" }),
