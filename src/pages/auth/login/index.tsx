@@ -98,13 +98,12 @@ const Login = () => {
           </Link>
         </form>
       </div>
-      <div className="relative hidden md:flex flex-col items-center justify-center text-gray-700">
-        <div style={{ background: "rgba(0, 0, 0, 0.5)" }} className="absolute h-full w-full rounded-3xl"></div>
+      <div className="relative hidden md:flex flex-col items-center justify-center rounded-3xl overflow-hidden">
+        <div style={{ background: "rgba(0, 0, 0, 0.5)" }} className="absolute h-full w-full rounded-[30px]"></div>
         <Image className="absolute" src={"/MyEvents-logo.svg"} alt="MyEvents logo" width={350} height={350} />
 
         <Image
           priority
-          className="w-full"
           src={"/image-auth-hands-tickets.jpg"}
           height={500}
           width={500}

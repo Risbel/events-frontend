@@ -13,10 +13,10 @@ const ButtonSubmit = ({
   text,
 }: {
   className?: string;
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
-  status: number | string;
+  isLoading?: boolean;
+  isSuccess?: boolean;
+  isError?: boolean;
+  status?: number | string;
   text: string;
 }) => {
   return (
