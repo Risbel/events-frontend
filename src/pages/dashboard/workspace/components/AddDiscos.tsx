@@ -3,8 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import useCreateDisco from "@/hooks/useCreateDisco";
 import ButtonSubmit from "../../../../components/buttons/ButtonSubmit";
-import useGetMe from "@/hooks/useGetMe";
-import Spinner from "../../../../components/loaders/Spinner";
 import { useState } from "react";
 import { Input, Label } from "../../../../components/ui/input";
 import { Textarea } from "../../../../components/ui/textarea";
@@ -36,6 +34,29 @@ const AddDiscos = () => {
     setValue,
   } = useForm<AddDiscoSchema>({
     resolver: zodResolver(addDiscoSchema),
+    defaultValues: {
+      name: "Example Brand",
+      h1Banner: "Event Example",
+      bannerDescription: "This is the Banner Description example, description provided by default on mocked events.",
+      aboutDescription:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae?Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae?Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae?",
+      brandColor: "#0e0046",
+      bgNavbarColor: "#0e0046",
+      navbarForeground: "#a8d4fb",
+      h1BannerColor: "#ffffff",
+      bannerDescriptionColor: "#afc1f3",
+      bannerGradientColor: "#0e0046",
+      bgAboutColor: "#a8d4fb",
+      textAboutColor: "#0e0046",
+      buttonColor: "#0e0046",
+      buttonForeground: "#a8d4fb",
+      bgExperiencies: "#0e0046",
+      experienciesH1Color: "#a7d8f5",
+      bgTicketsSection: "#ffffff",
+      ticketH1Color: "#0b023d",
+      buttonsTicketsColor: "#0e0046",
+      buttonTicketForeground: "#ffffff",
+    },
   });
 
   useFormPersist("addDiscoForm", { watch, setValue });
@@ -81,8 +102,6 @@ const AddDiscos = () => {
 
   const values = getValues();
 
-  console.log(values);
-
   if (!data) {
     return;
   }
@@ -120,7 +139,7 @@ const AddDiscos = () => {
                   className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
                   id="discoName"
                   type="text"
-                  placeholder="e.g. Chocobar Caribe"
+                  placeholder="Type your brand name"
                   {...register("name")}
                 />
                 {errors.name && <p className="text-xs italic text-red-500">{errors.name?.message}</p>}
@@ -133,7 +152,7 @@ const AddDiscos = () => {
                   className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
                   id="slug"
                   type="text"
-                  placeholder="e.g. chocobar-caribe"
+                  placeholder="Type in lower case your link name"
                   {...register("slug")}
                 />
                 {errors.slug && <p className="text-xs italic text-red-500">{errors.slug?.message}</p>}
@@ -152,7 +171,6 @@ const AddDiscos = () => {
                     className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
                     id="startDate"
                     type="date"
-                    placeholder="e.g. chocobar-caribe"
                   />
                   {errors.startDate && <p className="text-xs italic text-red-500">{errors.startDate?.message}</p>}
                 </div>
@@ -169,7 +187,6 @@ const AddDiscos = () => {
                     className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
                     id="endDate"
                     type="date"
-                    placeholder="e.g. chocobar-caribe"
                   />
                   {errors.endDate && <p className="text-xs italic text-red-500">{errors.endDate?.message}</p>}
                 </div>
@@ -177,12 +194,12 @@ const AddDiscos = () => {
               <div className="relative pb-2 ">
                 <LabelColor htmlFor="brandColor" text="Color brand" />
 
-                <ColorPicker register={register} id={"brandColor"} defaultColor={"#512f03"} />
+                <ColorPicker register={register} id={"brandColor"} defaultColor={values.brandColor} reset={reset} />
                 {errors.brandColor && <p className="text-xs italic text-red-500">{errors.brandColor?.message}</p>}
               </div>
             </div>
 
-            <ColorPaletteGenerator setValues={setValue} />
+            <ColorPaletteGenerator brandColor={values.brandColor} reset={reset} />
             <div className="flex justify-center col-start-9 col-span-4 bg-primary-foreground rounded-xl shadow-md overflow-hidden p-6">
               <Image
                 src={"/progress-to-addDiscos.png"}
@@ -212,13 +229,13 @@ const AddDiscos = () => {
               </div>
               <div className="relative">
                 <LabelColor htmlFor="bgNavbarColor" text="Background color" />
-                <ColorPicker defaultColor={"#000000"} register={register} id="bgNavbarColor" />
+                <ColorPicker defaultColor={values.bgNavbarColor} register={register} id="bgNavbarColor" />
 
                 {errors.bgNavbarColor && <p className="text-xs italic text-red-500">{errors.bgNavbarColor?.message}</p>}
               </div>
               <div className="relative">
                 <LabelColor text="Text color" htmlFor="navbarForeground" />
-                <ColorPicker defaultColor={"#ffffff"} register={register} id={"navbarForeground"} />
+                <ColorPicker defaultColor={values.navbarForeground} register={register} id={"navbarForeground"} />
 
                 {errors.navbarForeground && (
                   <p className="text-xs italic text-red-500">{errors.navbarForeground?.message}</p>
@@ -242,14 +259,14 @@ const AddDiscos = () => {
                       className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
                       id="h1Banner"
                       type="text"
-                      placeholder="e.g. Chocolate event or whatever you want to highlight"
+                      placeholder="Type the event title"
                       {...register("h1Banner")}
                     />
                     {errors.h1Banner && <p className="text-xs italic text-red-500">{errors.h1Banner?.message}</p>}
                   </div>
                   <div className="relative">
                     <LabelColor text="Title color" htmlFor="h1BannerColor" />
-                    <ColorPicker id={"h1BannerColor"} register={register} defaultColor={"#ffffff"} />
+                    <ColorPicker id={"h1BannerColor"} register={register} defaultColor={values.h1BannerColor} />
 
                     {errors.h1BannerColor && (
                       <p className="text-xs italic text-red-500">{errors.h1BannerColor?.message}</p>
@@ -278,7 +295,11 @@ const AddDiscos = () => {
                   </div>
                   <div className="relative">
                     <LabelColor htmlFor="bannerGradientColor" text="Gradient color" />
-                    <ColorPicker register={register} id={"bannerGradientColor"} defaultColor={"#301c00"} />
+                    <ColorPicker
+                      register={register}
+                      id={"bannerGradientColor"}
+                      defaultColor={values.bannerGradientColor}
+                    />
 
                     {errors.bannerGradientColor && (
                       <p className="text-xs italic text-red-500">{errors.bannerGradientColor?.message}</p>
@@ -310,7 +331,11 @@ const AddDiscos = () => {
                 <div className="relative w-1/2">
                   <LabelColor text="Text color" htmlFor="bannerDescriptionColor" />
 
-                  <ColorPicker id={"bannerDescriptionColor"} register={register} defaultColor={"#ffffff"} />
+                  <ColorPicker
+                    id={"bannerDescriptionColor"}
+                    register={register}
+                    defaultColor={values.bannerDescriptionColor}
+                  />
 
                   {errors.bannerDescriptionColor && (
                     <p className="text-xs italic text-red-500">{errors.bannerDescriptionColor?.message}</p>
@@ -360,13 +385,13 @@ const AddDiscos = () => {
               <div className="flex gap-4 pb-4">
                 <div className="relative pb-2">
                   <LabelColor htmlFor="bgAboutColor" text="Background color" />
-                  <ColorPicker id={"bgAboutColor"} register={register} defaultColor={"#fad29a"} />
+                  <ColorPicker id={"bgAboutColor"} register={register} defaultColor={values.bgAboutColor} />
                   {errors.bgAboutColor && <p className="text-xs italic text-red-500">{errors.bgAboutColor?.message}</p>}
                 </div>
 
                 <div className="relative pb-2">
                   <LabelColor htmlFor="textAboutColor" text="Text about color" />
-                  <ColorPicker register={register} id={"textAboutColor"} defaultColor={"#3d1900"} />
+                  <ColorPicker register={register} id={"textAboutColor"} defaultColor={values.textAboutColor} />
                   {errors.textAboutColor && (
                     <p className="text-xs italic text-red-500">{errors.textAboutColor?.message}</p>
                   )}
@@ -376,12 +401,12 @@ const AddDiscos = () => {
 
                 <div className="relative pb-2">
                   <LabelColor text="Button color" htmlFor="buttonColor" />
-                  <ColorPicker register={register} id={"buttonColor"} defaultColor={"#321d00"} />
+                  <ColorPicker register={register} id={"buttonColor"} defaultColor={values.buttonColor} />
                   {errors.buttonColor && <p className="text-xs italic text-red-500">{errors.buttonColor?.message}</p>}
                 </div>
                 <div className="relative pb-2">
                   <LabelColor htmlFor="buttonForeground" text="Button foreground" />
-                  <ColorPicker register={register} id={"buttonForeground"} defaultColor={"#ffffff"} />
+                  <ColorPicker register={register} id={"buttonForeground"} defaultColor={values.buttonForeground} />
                   {errors.buttonForeground && (
                     <p className="text-xs italic text-red-500">{errors.buttonForeground?.message}</p>
                   )}
@@ -410,7 +435,7 @@ const AddDiscos = () => {
                 </div>
                 <div className="relative pb-2">
                   <LabelColor htmlFor="bgExperiencies" text="Background color" />
-                  <ColorPicker register={register} id={"bgExperiencies"} defaultColor={"#ffffff"} />
+                  <ColorPicker register={register} id={"bgExperiencies"} defaultColor={values.bgExperiencies} />
 
                   {errors.bgExperiencies && (
                     <p className="text-xs italic text-red-500">{errors.bgExperiencies?.message}</p>
@@ -418,7 +443,11 @@ const AddDiscos = () => {
                 </div>
                 <div className="relative pb-2">
                   <LabelColor htmlFor="experienciesH1Color" text="Title color" />
-                  <ColorPicker register={register} id={"experienciesH1Color"} defaultColor={"#321d00"} />
+                  <ColorPicker
+                    register={register}
+                    id={"experienciesH1Color"}
+                    defaultColor={values.experienciesH1Color}
+                  />
                   {errors.experienciesH1Color && (
                     <p className="text-xs italic text-red-500">{errors.experienciesH1Color?.message}</p>
                   )}
@@ -434,14 +463,14 @@ const AddDiscos = () => {
                 <div className="w-1/2">
                   <div className="relative">
                     <LabelColor htmlFor="bgTicketsSection" text="Background color" />
-                    <ColorPicker id={"bgTicketsSection"} register={register} defaultColor={"#ffffff"} />
+                    <ColorPicker id={"bgTicketsSection"} register={register} defaultColor={values.bgTicketsSection} />
                     {errors.bgTicketsSection && (
                       <p className="text-xs italic text-red-500">{errors.bgTicketsSection?.message}</p>
                     )}
                   </div>
                   <div className="relative">
                     <LabelColor htmlFor="ticketH1Color" text="Title section color" />
-                    <ColorPicker register={register} id="ticketH1Color" defaultColor="#321d00" />
+                    <ColorPicker register={register} id="ticketH1Color" defaultColor={values.ticketH1Color} />
                     {errors.ticketH1Color && (
                       <p className="text-xs italic text-red-500">{errors.ticketH1Color?.message}</p>
                     )}
@@ -451,7 +480,11 @@ const AddDiscos = () => {
                 <div className="w-1/2">
                   <div className="relative">
                     <LabelColor htmlFor="buttonsTicketsColor" text="Buttons color" />
-                    <ColorPicker register={register} id={"buttonsTicketsColor"} defaultColor={"#291800"} />
+                    <ColorPicker
+                      register={register}
+                      id={"buttonsTicketsColor"}
+                      defaultColor={values.buttonsTicketsColor}
+                    />
 
                     {errors.buttonsTicketsColor && (
                       <p className="text-xs italic text-red-500">{errors.buttonsTicketsColor?.message}</p>
@@ -459,7 +492,11 @@ const AddDiscos = () => {
                   </div>
                   <div className="relative">
                     <LabelColor htmlFor="buttonTicketForeground" text="Buttons foreground" />
-                    <ColorPicker register={register} id={"buttonTicketForeground"} defaultColor={"#edc58d"} />
+                    <ColorPicker
+                      register={register}
+                      id={"buttonTicketForeground"}
+                      defaultColor={values.buttonTicketForeground}
+                    />
                     {errors.buttonTicketForeground && (
                       <p className="text-xs italic text-red-500">{errors.buttonTicketForeground?.message}</p>
                     )}
@@ -483,7 +520,7 @@ const AddDiscos = () => {
                     className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
                     id="phone"
                     type="text"
-                    placeholder="e.g. +53 54353930"
+                    placeholder="Type your phone here"
                     {...register("phone")}
                   />
                   {errors.phone && <p className="text-xs italic text-red-500">{errors.phone?.message}</p>}

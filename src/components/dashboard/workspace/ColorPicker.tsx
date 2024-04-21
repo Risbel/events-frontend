@@ -1,6 +1,18 @@
+import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
 import React, { ChangeEvent, useEffect, useState } from "react";
+import { UseFormReset } from "react-hook-form";
 
-const ColorPicker = ({ register, defaultColor, id }: { register: any; defaultColor?: string; id: string }) => {
+const ColorPicker = ({
+  register,
+  defaultColor,
+  id,
+  reset,
+}: {
+  register: any;
+  defaultColor?: string;
+  id: string;
+  reset?: UseFormReset<AddDiscoSchema>;
+}) => {
   const [color, setColor] = useState<any>(defaultColor);
   useEffect(() => {
     setColor(defaultColor);
@@ -8,6 +20,11 @@ const ColorPicker = ({ register, defaultColor, id }: { register: any; defaultCol
 
   const handleColorChange = (e: ChangeEvent<HTMLInputElement>) => {
     setColor(e.target.value);
+    reset &&
+      reset((prev) => ({
+        ...prev,
+        brandColor: e.target.value,
+      }));
   };
 
   return (
