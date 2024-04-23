@@ -203,7 +203,6 @@ const Cart = () => {
                     </p>
                     <div className="flex-1 flex gap-4 justify-end">
                       <Button
-                        disabled={localStorage.getItem("colaborator") ? true : false}
                         type="button"
                         size={"sm"}
                         className="bg-red-800 hover:bg-red-700 text-xs rounded-lg"

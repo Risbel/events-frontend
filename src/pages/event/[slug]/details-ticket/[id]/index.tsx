@@ -18,7 +18,6 @@ import { cn } from "@/lib/shadcnUtils";
 import { useEffect, useState } from "react";
 
 const DiscoTicketDetails = () => {
-  const [colaborator, setColaborator] = useState<string | null>(null);
   const months = useListMonths();
   const params = useParams();
   const slug = params && params.slug;
@@ -29,10 +28,8 @@ const DiscoTicketDetails = () => {
     const colaboratorParam = searchParams.get("colaborator");
 
     //to save on localStorage
-    localStorage.setItem("colaborator", colaboratorParam ?? JSON.stringify(colaboratorParam));
-
-    setColaborator(localStorage.getItem("colaborator"));
-  }, [colaborator, setColaborator, searchParams]);
+    colaboratorParam && localStorage.setItem("colaborator", colaboratorParam);
+  }, [searchParams]);
 
   const { data: session, status } = useSession();
   const userId = session?.user?.id;
@@ -59,7 +56,7 @@ const DiscoTicketDetails = () => {
       return;
     }
 
-    return addToCart({ ...data, quantity, colaborator });
+    return addToCart({ ...data, quantity, colaborator: localStorage.getItem("colaborator") });
   };
   if (isError) {
     return (
