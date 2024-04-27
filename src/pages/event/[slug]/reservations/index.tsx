@@ -146,7 +146,7 @@ const Reservations = () => {
                             </div>
                           ))}
                           <div>
-                            {reservation.comboReservations.map((combo) => (
+                            {reservation.ticketsReservations[0].ticketReservationCombos.map((combo) => (
                               <div
                                 style={{ border: `solid 2px ${discoColors.navbarForeground}` }}
                                 className="relative overflow-hidden flex flex-col rounded-md px-2 py-1"
@@ -168,15 +168,19 @@ const Reservations = () => {
 
                       <div>
                         <p className="text-2xl">Companions</p>
-                        <ul>
-                          {reservation.ticketsReservations[0].companions.map((compa) => {
-                            return (
-                              <li key={compa.id}>
-                                {compa.firstName} {compa.lastName}
-                              </li>
-                            );
-                          })}
-                        </ul>
+                        {reservation.ticketsReservations[0].companions.length ? (
+                          <ul>
+                            {reservation.ticketsReservations[0].companions.map((compa) => {
+                              return (
+                                <li key={compa.id}>
+                                  {compa.firstName} {compa.lastName}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        ) : (
+                          <p>No companions</p>
+                        )}
                       </div>
 
                       <div className="flex flex-col justify-between items-end font-light text-xl">
@@ -211,7 +215,7 @@ const Reservations = () => {
                                 return Number(tiket.quantity) * Number(tiket.DiscoTicket.price);
                               })
                               .reduce((acc, curr) => acc + Number(curr), 0) +
-                              reservation.comboReservations
+                              reservation.ticketsReservations[0].ticketReservationCombos
                                 .map((combo) => {
                                   return Number(combo.quantity) * Number(combo.Combo.price);
                                 })

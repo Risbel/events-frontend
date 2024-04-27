@@ -66,17 +66,17 @@ const Cart = () => {
     if (userId && cartItems) {
       const payloadReservation = cartItems.map((item) => {
         return {
-          discoTicketId: !item?.comboDetail?.id ? item.id : null,
-          comboId: item?.comboDetail?.id ? item.id : null,
+          discoTicketId: item?.discoTicketId ? item.id : null,
+          comboId: item?.comboId ? item.id : null,
           quantity: item.quantity,
           discoId: item.discoId,
           category: item.category,
           imagesTicket: item?.ticketImages?.[0]?.image ? item?.ticketImages?.[0]?.image : null,
-          imagesCombo: item?.comboDetail?.image ? item?.comboDetail?.image : null,
-          comboDescription: item?.comboDetail?.description ? item?.comboDetail?.description : null,
-          ticketDescription: item.shortDescription,
+          comboImage: item?.comboImage ? item?.comboImage : null,
+          comboDescription: item?.comboDescription ? item?.comboDescription : null,
+          ticketDescription: item?.ticketDescription ?? null,
           price: item.price,
-          discoSlug: item.Disco.slug,
+          discoSlug: item.discoSlug ?? null,
           colaborator: item.colaborator ?? item.colaborator,
         };
       });
@@ -84,7 +84,7 @@ const Cart = () => {
       if (
         cartItems.reduce((acc, currentItem) => Number(currentItem.quantity) * Number(currentItem.price) + acc, 0) > 0
       ) {
-        mutate({ userId, payloadReservation });
+        mutate({ userId, payloadReservation, inputList });
       } else {
         reserveFree({ userId, payloadReservation, inputList });
       }
@@ -137,7 +137,7 @@ const Cart = () => {
             </h1>
           )}
           {cartItems.map((item) =>
-            item.ticketImages ? (
+            item.discoTicketId ? (
               <div
                 style={{ background: `${discoColors.bgNavbarColor}90` }}
                 className="flex gap-6 rounded-3xl w-full shadow-md md:w-11/12 lg:w-9/12 p-6"
@@ -145,7 +145,7 @@ const Cart = () => {
               >
                 <div
                   style={{ background: `${discoColors.bgNavbarColor}` }}
-                  className="flex flex-col justify-between rounded-2xl relative p-6"
+                  className="flex flex-col justify-center rounded-2xl relative p-6"
                 >
                   <div className="flex flex-col gap-2 bg-white border-2 border-t-black border-b-black border-dashed">
                     <div
@@ -169,7 +169,7 @@ const Cart = () => {
                         style={{ background: `${discoColors.bgNavbarColor}`, color: discoColors.navbarForeground }}
                         className="text-xs p-1 rounded-md"
                       >
-                        {item.id.slice(0, 8)}
+                        {item?.id && item.id.slice(0, 8)}
                       </p>
                     </div>
                   </div>
@@ -188,18 +188,8 @@ const Cart = () => {
                     style={{ background: discoColors.bgNavbarColor }}
                     className="flex items-center gap-4 p-4 rounded-xl"
                   >
-                    <Image
-                      className="rounded-full"
-                      src={item.Disco.logo}
-                      alt={`logo of ${item.Disco.name}`}
-                      width={50}
-                      height={50}
-                    />
-                    <p style={{ color: discoColors.navbarForeground }} className="font-extrabold text-start text-4xl">
-                      {item.Disco.name} -
-                    </p>
-                    <p style={{ color: discoColors.navbarForeground }} className="font-extrabold text-start text-4xl">
-                      {item.Disco.discoDetail.h1Banner}
+                    <p style={{ color: discoColors.navbarForeground }} className="font-bold text-start text-xl">
+                      {item.ticketDescription}
                     </p>
                     <div className="flex-1 flex gap-4 justify-end">
                       <Button
@@ -274,7 +264,7 @@ const Cart = () => {
                       <Link
                         style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
                         className="flex items-center text-white font-semibold p-1 pr-4 rounded-md hover:opacity-90"
-                        href={`/event/${item.Disco.slug}/details-ticket/${item.id}`}
+                        href={`/event/${item.discoSlug}/details-ticket/${item.id}`}
                       >
                         <ChevronLeftIcon height={15} width={15} /> Back
                       </Link>
@@ -307,7 +297,7 @@ const Cart = () => {
                       <Image
                         className="object-cover"
                         src={`${item.ticketImages[0]?.image}`}
-                        alt={item.shortDescription.slice(0, 12)}
+                        alt="ticket image"
                         width={300}
                         height={300}
                       />
@@ -322,13 +312,15 @@ const Cart = () => {
                 key={item.id}
               >
                 <div style={{ background: `${discoColors.bgNavbarColor}` }} className="p-4 rounded-xl">
-                  <Image
-                    className="object-cover rounded-2xl"
-                    src={item.comboDetail.image}
-                    width={150}
-                    height={150}
-                    alt="combo image"
-                  />
+                  {item.comboImage && (
+                    <Image
+                      className="object-cover rounded-2xl"
+                      src={item.comboImage}
+                      width={150}
+                      height={150}
+                      alt="combo image"
+                    />
+                  )}
                 </div>
                 <div className="flex flex-col justify-between gap-4 w-full">
                   <div className="flex gap-4 w-full justify-between">

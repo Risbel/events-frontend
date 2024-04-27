@@ -11,26 +11,26 @@ interface State {
 const useCart = create<State>((set, get) => ({
   cartItems: [],
 
-  addToCart: (ticket) => {
-    const newTicket = [ticket];
-    const existNewItem = get().cartItems.find((item) => item.id === ticket.id);
+  addToCart: (payload) => {
+    const newTicket = [payload];
+    const existNewItem = get().cartItems.find((item) => item.id === payload.id);
 
-    const hasDuplicateExpDate = ticket?.expDate
-      ? get().cartItems.some((item) => item.expDate === ticket.expDate)
+    const hasDuplicateExpDate = payload?.expDate
+      ? get().cartItems.some((item) => item.expDate === payload.expDate)
       : true;
 
     //una condicion para actualizar si existe el item o guardar si no existe
     const cartItems = existNewItem
-      ? get().cartItems.map((item) => (item.id === existNewItem.id ? ticket : item))
-      : [...get().cartItems, ticket]; //de lo contrario si no existe entonces guardamos el primero
+      ? get().cartItems.map((item) => (item.id === existNewItem.id ? payload : item))
+      : [...get().cartItems, payload]; //de lo contrario si no existe entonces guardamos el primero
 
     const finalCartItems = hasDuplicateExpDate ? cartItems : newTicket;
 
     return set({ cartItems: finalCartItems });
   },
 
-  removeFromCart: (ticket) => {
-    const cartItems = get().cartItems.filter((item) => item.id !== ticket.id);
+  removeFromCart: (payload) => {
+    const cartItems = get().cartItems.filter((item) => item.id !== payload.id);
 
     return set({ cartItems });
   },
@@ -42,45 +42,19 @@ const useCart = create<State>((set, get) => ({
 export default useCart;
 
 export interface ICart {
-  id: string;
+  id?: string;
+  discoSlug?: string;
+  discoId?: string;
+  comboId?: string | null;
+  discoTicketId?: string | null;
   price: string;
-  shortDescription: string;
-  largeDescription: string;
+  comboDescription?: string | null;
+  ticketDescription?: string | null;
+  comboImage?: string | null;
+  ticketImages?: any[];
   category: string;
-  countInStock: string;
-  createdAt: string;
-  updatedAt: string;
-  discoId: string;
-  expDate: string;
-  comboDetail: IComboDetail;
-  Disco: {
-    id: string;
-    name: string;
-    logo: string;
-    slug: string;
-    createdAt: string;
-    updatedAt: string;
-    discoDetail: DiscoDetail;
-  };
-  comboReservations: [];
-  ticketImages: {
-    id: string;
-    image: string;
-    imageText: string | null;
-    createdAt: string;
-    updatedAt: string;
-    discoTicketId: string;
-  }[];
-  quantity: number;
   colaborator: string | null;
-}
-
-interface IComboDetail {
-  id: string;
-  description: string;
-  image: string;
-  imageCloudId: string;
-  createdAt: string;
-  updatedAt: string;
-  comboId: string;
+  expDate: string;
+  quantity: number;
+  countInStock: number;
 }

@@ -5,42 +5,63 @@ import { Button } from "@/components/ui/button";
 import useCart from "@/store/useCart";
 import { DataDisco } from "@/services/getDisco";
 import { ShoppingCart, X } from "lucide-react";
+import { IComboData } from "@/services/getDiscoTicketById";
 
-const Combos = ({ discoData }: { discoData: DataDisco }) => {
+const CombosInTicket = ({
+  discoData,
+  comboData,
+  expDate,
+}: {
+  discoData: DataDisco;
+  comboData: IComboData[];
+  expDate: string;
+}) => {
   const discoId = discoData?.id;
   const discoColors = discoData?.discoDetail?.discoColor;
-  const { data, isLoading } = useGetCombosByDiscoId(discoId);
 
   const { addToCart, cartItems, removeFromCart } = useCart();
 
-  const addToCartHandler = (combo: any) => {
+  const addToCartHandler = (combo: IComboData) => {
     if (!combo) {
       return;
     }
-    const existItem = cartItems.find((item) => item.id === combo?.id);
+
+    const existItem = cartItems.find((item) => item.id === combo?.comboId);
     const quantity = existItem ? Number(existItem.quantity) + 1 : 1;
 
-    if (Number(combo.countInStock) < quantity) {
+    if (Number(combo.Combo.countInStock) < quantity) {
       return;
     }
 
-    return addToCart({ ...combo, quantity });
+    return addToCart({
+      id: combo.comboId,
+      discoId: discoId,
+      comboId: combo.comboId,
+      category: combo.Combo.category,
+      price: combo.Combo.price,
+      quantity,
+      countInStock: combo.Combo.countInStock,
+      comboDescription: combo.Combo.comboDetail.description,
+      comboImage: combo.Combo.comboDetail.image,
+      colaborator: localStorage.getItem("colaborator"),
+      expDate,
+    });
   };
 
-  if (!discoColors || !data) {
+  if (!discoColors || !comboData) {
     return;
   }
 
   return (
     <div className="flex gap-4 justify-center flex-wrap md:justify-between pb-24">
-      {data &&
-        data.map((combo) => (
+      {comboData &&
+        comboData.map((combo) => (
           <div
             style={{ background: `${discoColors.bgNavbarColor}60` }}
             key={combo.id}
             className="rounded-3xl overflow-hidden shadow-md flex flex-col justify-between md:items-center md:flex-row gap-2 md:gap-8 relative"
           >
-            {!combo.countInStock ? (
+            {!combo.Combo.countInStock ? (
               <div className="h-full w-full bg-black/50 backdrop-blur-sm absolute z-20 flex justify-center items-center">
                 <p className="text-2xl text-white">unavailable</p>
               </div>
@@ -49,13 +70,13 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
               <div className="flex flex-col gap-2">
                 <div style={{ background: discoColors.bgNavbarColor }} className="p-2 rounded-md rounded-t-xl">
                   <p style={{ color: discoColors.navbarForeground }} className="font-semibold text-3xl">
-                    <span className="text-base">Price:</span> <span className="font-bold">${combo.price}</span>
+                    <span className="text-base">Price:</span> <span className="font-bold">${combo.Combo.price}</span>
                   </p>
                   <p style={{ color: discoColors.navbarForeground }}>
                     <span>Quantity available: </span>
                     {Number(cartItems.find((com) => com.id == combo.id)?.quantity)
-                      ? Number(combo.countInStock) - Number(cartItems.find((com) => com.id == combo.id)?.quantity)
-                      : Number(combo.countInStock)}
+                      ? Number(combo.Combo.countInStock) - Number(cartItems.find((com) => com.id == combo.id)?.quantity)
+                      : Number(combo.Combo.countInStock)}
                   </p>
                 </div>
 
@@ -63,7 +84,7 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
                   style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
                   className="p-2 rounded-md leading-3"
                 >
-                  {combo.comboDetail.description}
+                  {combo.Combo.comboDetail.description}
                 </p>
 
                 <div
@@ -72,11 +93,13 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
                 >
                   <div>
                     <p className="text-xs md:text-base" style={{ color: discoColors.navbarForeground }}>
-                      Reserved quantity: {cartItems.find((com) => com.id == combo.id)?.quantity ?? 0}
+                      Reserved quantity: {cartItems.find((com) => com.id == combo.comboId)?.quantity ?? 0}
                     </p>
                     <p className="text-xs md:text-lg font-semibold" style={{ color: discoColors.navbarForeground }}>
                       Total:{" "}
-                      <span>${(cartItems.find((com) => com.id == combo.id)?.quantity ?? 0) * Number(combo.price)}</span>
+                      <span>
+                        ${(cartItems.find((com) => com.id == combo.comboId)?.quantity ?? 0) * Number(combo.Combo.price)}
+                      </span>
                     </p>
                   </div>
                   <div className="flex-1 flex flex-col gap-1">
@@ -92,10 +115,10 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
                         Add <ShoppingCart height={15} />
                       </Button>
 
-                      {cartItems.find((com) => com.id == combo.id) && (
+                      {cartItems.find((com) => com.id == combo.comboId) && (
                         <button
                           type="button"
-                          onClick={() => removeFromCart(combo)}
+                          onClick={() => removeFromCart(combo.Combo)}
                           style={{ color: discoColors.navbarForeground }}
                         >
                           <X />
@@ -116,7 +139,7 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
               <Image
                 style={{ border: `solid 2px ${discoColors.bgNavbarColor}` }}
                 className="object-cover rounded-2xl shadow-md"
-                src={encodeURI(combo.comboDetail.image)}
+                src={combo.Combo.comboDetail.image}
                 alt="combo image"
                 height={200}
                 width={200}
@@ -130,7 +153,7 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
                   }}
                   className="px-4 rounded-full text-xl"
                 >
-                  {combo.category}
+                  {combo.Combo.category}
                 </p>
               </div>
             </div>
@@ -140,4 +163,4 @@ const Combos = ({ discoData }: { discoData: DataDisco }) => {
   );
 };
 
-export default Combos;
+export default CombosInTicket;

@@ -15,7 +15,8 @@ import NavbarEvent from "@/components/navigation/NavbarEvent";
 import { useSession } from "next-auth/react";
 import useGetDisco from "@/hooks/useGetDisco";
 import { cn } from "@/lib/shadcnUtils";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import CombosInTicket from "./components/CombosInTickets";
 
 const DiscoTicketDetails = () => {
   const months = useListMonths();
@@ -39,25 +40,43 @@ const DiscoTicketDetails = () => {
   const { isLoading, data, isError, error: errorPage } = useGetDiscoTicketById(idTicket);
 
   const { cartItems, addToCart, removeFromCart } = useCart();
-  console.log(cartItems);
 
   const existItem = cartItems.find((item) => item.id === data?.id);
 
-  const addToCartHandler = (e: any) => {
+  const addToCartHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!data) {
       return;
     }
-    const amount = Number(e.target.amount.value);
+    const formData = new FormData(e.currentTarget);
+    const amount = Number(formData.get("amount"));
+
+    if (!amount || isNaN(amount)) {
+      return; // Handle invalid amount
+    }
     const quantity = existItem ? Number(existItem.quantity) + amount : amount;
 
     if (data && Number(data.countInStock) < quantity) {
       return;
     }
 
-    return addToCart({ ...data, quantity, colaborator: localStorage.getItem("colaborator") });
+    return addToCart({
+      id: data.id,
+      discoTicketId: data.id,
+      discoSlug: data.Disco.slug,
+      price: data.price,
+      ticketDescription: data.shortDescription,
+      ticketImages: data.ticketImages?.[0]?.image ?? null,
+      category: data.category,
+      discoId: data.Disco.id,
+      quantity,
+      countInStock: data.countInStock,
+      colaborator: localStorage.getItem("colaborator"),
+      expDate: data.expDate,
+    });
   };
+
   if (isError) {
     return (
       <div className="flex gap-4 w-full h-screen justify-center items-center bg-black">
@@ -295,9 +314,10 @@ const DiscoTicketDetails = () => {
               </div>
             </div>
           </div>
-          {new Date(data.expDate).toLocaleString().slice(0, 9) === new Date().toLocaleString().slice(0, 9) && (
+          {/* {new Date(data.expDate).toLocaleString().slice(0, 9) === new Date().toLocaleString().slice(0, 9) && (
             <Combos discoData={discoData.disco} />
-          )}
+          )}  //to show combos just in the actual day  */}
+          <CombosInTicket discoData={discoData.disco} comboData={data.ticketCombos} expDate={data.expDate} />
         </div>
       </EventLayout>
     );

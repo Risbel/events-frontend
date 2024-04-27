@@ -5,26 +5,27 @@ export const createReservation = async ({
   payloadReservation: cartItems,
   inputList: companions,
 }: IReservation) => {
-  const response = await httpService.post<IReservation>("/reservation", { userId, cartItems, companions });
+  const response = await httpService.post<any>("/reservation", { userId, cartItems, companions });
   return response.data;
 };
 
 export interface IReservation {
   userId: string;
   payloadReservation: {
-    discoId: string;
-    discoTicketId: string | null;
-    comboId: string | null;
+    discoTicketId: string | null | undefined;
+    comboId: string | null | undefined;
     quantity: number;
+    discoId: string | undefined;
+    colaborator: string | null;
     category: string;
     imagesTicket: string | null;
-    imagesCombo: string | null;
+    comboImage: string | null;
     comboDescription: string | null;
-    ticketDescription: string;
+    ticketDescription: string | null;
     price: string;
-    discoSlug: string;
+    discoSlug: string | null;
   }[];
-  inputList: {
+  inputList?: {
     firstName: string;
     lastName: string;
   }[];
