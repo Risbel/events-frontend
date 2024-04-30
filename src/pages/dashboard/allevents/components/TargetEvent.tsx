@@ -3,13 +3,15 @@ import Image from "next/image";
 import React from "react";
 
 const TargetEvent = ({ event }: { event: DataDisco }) => {
-  if (!event) {
+  if (!event || !event?.logo) {
     return;
   }
 
+  console.log(event);
+
   return (
     <div className="flex items-center rounded-2xl bg-primary/95 p-2 md:p-3">
-      <Image
+      <img
         className="rounded-full h-25 w-25 md:h-24 md:w-24"
         src={event.logo}
         alt="image-next-auth"

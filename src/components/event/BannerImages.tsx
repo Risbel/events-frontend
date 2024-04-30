@@ -22,22 +22,31 @@ const BannerImages = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
     setCurrentImage(index);
   };
 
+  if (!data) {
+    return;
+  }
+
+  console.log(data);
+
   return (
     <div>
       <div className="absolute items-center overflow-hidden z-10">
         {data &&
-          data?.map((img, index) => (
-            <Image
-              className={`h-screen w-screen object-cover ${
-                index === currentImage ? "opacity-100" : "opacity-0 absolute"
-              } transition-opacity duration-1000`}
-              src={img.image}
-              alt="Banner image"
-              key={img.id}
-              width={1000}
-              height={300}
-            />
-          ))}
+          data?.map(
+            (img, index) =>
+              img?.image && (
+                <img
+                  className={`h-screen w-screen object-cover ${
+                    index === currentImage ? "opacity-100" : "opacity-0 absolute"
+                  } transition-opacity duration-1000`}
+                  src={img.image}
+                  alt="Banner image"
+                  key={img.id}
+                  width={1000}
+                  height={300}
+                />
+              )
+          )}
         <div
           style={{
             background: `linear-gradient(to top, ${discoDetails.discoColor.bannerGradientColor}, ${discoDetails.discoColor.bannerGradientColor}80 , transparent, transparent)`,
