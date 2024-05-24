@@ -1,9 +1,6 @@
-import { AddBannerImagesSchema } from "@/components/event/AddBannerImages";
 import httpService from "@/config/axios.config";
 
-export const addBannerImages = async (data: AddBannerImagesSchema) => {
-  const response = await httpService.post(`/discoBannerImage/${data.discoDetailsId}`, {
-    bannerImages: data.bannerImages,
-  });
+export const addBannerImages = async (formData: any) => {
+  const response = await httpService.post(`/discoBannerImage`, formData);
   return response.data;
 };

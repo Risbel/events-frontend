@@ -26,8 +26,6 @@ const BannerImages = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
     return;
   }
 
-  console.log(data);
-
   return (
     <div>
       <div className="absolute items-center overflow-hidden z-10">
