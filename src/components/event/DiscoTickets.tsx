@@ -278,8 +278,6 @@ const DiscoTickets = ({
         )}
       >
         <AddTicketsForm discoId={discoId} />
-
-        <AddCombosForm discoId={discoId} />
       </div>
     </div>
   );

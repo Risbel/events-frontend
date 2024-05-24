@@ -1,6 +1,3 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-
 function Error() {
   return (
     <div className="flex gap-4 w-full h-screen justify-center items-center bg-black">

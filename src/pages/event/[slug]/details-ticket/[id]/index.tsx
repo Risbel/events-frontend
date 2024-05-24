@@ -8,7 +8,6 @@ import { ChevronLeft, ShoppingCart, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
-import Combos from "./components/combos";
 import { useListMonths } from "@/hooks/useListMonths";
 
 import NavbarEvent from "@/components/navigation/NavbarEvent";
@@ -17,6 +16,7 @@ import useGetDisco from "@/hooks/useGetDisco";
 import { cn } from "@/lib/shadcnUtils";
 import React, { useEffect, useState } from "react";
 import CombosInTicket from "./components/CombosInTickets";
+import AddCombosForm from "./components/AddCombosForm";
 
 const DiscoTicketDetails = () => {
   const months = useListMonths();
@@ -303,7 +303,7 @@ const DiscoTicketDetails = () => {
             >
               <div className="lg:h-72 w-full flex justify-center items-center overflow-hidden rounded-3xl">
                 {data?.ticketImages?.[0]?.image && (
-                  <Image
+                  <img
                     className="object-cover rounded-2xl shadow-md"
                     src={`${data.ticketImages[0]?.image}`}
                     alt={data.shortDescription.slice(0, 12)}

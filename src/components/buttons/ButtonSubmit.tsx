@@ -7,6 +7,7 @@ import { CheckCircleIcon } from "lucide-react";
 const ButtonSubmit = ({
   className,
   isLoading,
+  loadingText,
   isSuccess,
   isError,
   status,
@@ -14,6 +15,7 @@ const ButtonSubmit = ({
 }: {
   className?: string;
   isLoading?: boolean;
+  loadingText?: string;
   isSuccess?: boolean;
   isError?: boolean;
   status?: number | string;
@@ -36,7 +38,7 @@ const ButtonSubmit = ({
       <Button className={cn(className, "w-full")} type="submit">
         {isLoading ? (
           <span>
-            Please wait a minute while we deploy your site <Spinner diameter={4} stroke={"white"} />
+            {loadingText} <Spinner diameter={4} stroke={"white"} />
           </span>
         ) : (
           `${text}`

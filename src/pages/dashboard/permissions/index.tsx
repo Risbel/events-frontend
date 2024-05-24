@@ -1,8 +1,6 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
-import EventLayout from "@/components/layouts/EventLayout";
 import Spinner from "@/components/loaders/Spinner";
 import { useGetDiscos } from "@/hooks/useGetDiscos";
-import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import Link from "next/link";
 
 const Permissions = () => {
@@ -20,19 +18,16 @@ const Permissions = () => {
         {discos && isFetched && (
           <>
             <h1 className="text-2xl text-primary font-semibold pb-4">Permissions:</h1>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3">
               {discos?.map((disco) => (
                 <Link
                   href={`/dashboard/permissions/${disco.slug}`}
-                  className="flex gap-2 items-center hover:bg  hover:bg-secondary rounded-l-full"
+                  className="flex gap-2 items-center hover:bg-secondary group p-2 rounded-md"
                   key={disco.id}
                 >
-                  <Avatar className="rounded-full overflow-hidden">
-                    <AvatarImage height={50} width={50} src={disco.logo} />
-                  </Avatar>
-                  <div>
-                    <h1 className="text-primary text-xl">{disco.name}</h1>
-                  </div>
+                  <p className="text-primary text-xl group-hover:translate-x-3 transition-transform duration-300">
+                    ▪️ {disco.name}
+                  </p>
                 </Link>
               ))}
             </div>
