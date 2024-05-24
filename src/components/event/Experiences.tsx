@@ -57,7 +57,7 @@ const Experiences = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail;
                       <p className="bg-gradient-to-t from-black via-black/60 to-transparent  absolute text-center w-full text-white text-xs md:text-md font-light bottom-0">
                         {discoImage?.imageText}
                       </p>
-                      <Image
+                      <img
                         className="object-cover max-h-72 rounded-2xl"
                         src={discoImage.image}
                         width={400}

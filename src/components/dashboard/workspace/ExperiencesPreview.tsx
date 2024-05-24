@@ -74,7 +74,7 @@ const ExperiencesPreview = ({ values }: { values: AddDiscoSchema }) => {
                       <p className="bg-gradient-to-t from-black via-black/60 to-transparent  absolute text-center w-full text-white text-xs md:text-md font-light bottom-0">
                         {discoImage?.imageText}
                       </p>
-                      <Image
+                      <img
                         className="object-cover rounded-2xl w-full h-full"
                         src={discoImage.image}
                         width={350}

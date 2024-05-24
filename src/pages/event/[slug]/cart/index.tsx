@@ -294,7 +294,7 @@ const Cart = () => {
                 {item?.ticketImages?.[0]?.image && (
                   <div className="hidden md:flex items-center lg:items-start col-span-3 py-4">
                     <div className="w-full flex justify-center items-center overflow-hidden rounded-3xl">
-                      <Image
+                      <img
                         className="object-cover"
                         src={`${item.ticketImages[0]?.image}`}
                         alt="ticket image"
@@ -313,7 +313,7 @@ const Cart = () => {
               >
                 <div style={{ background: `${discoColors.bgNavbarColor}` }} className="p-4 rounded-xl">
                   {item.comboImage && (
-                    <Image
+                    <img
                       className="object-cover rounded-2xl"
                       src={item.comboImage}
                       width={150}

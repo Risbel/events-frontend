@@ -2,7 +2,6 @@ import Link from "next/link";
 import DropdownNavbar from "./DropdownNavbar";
 
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import useCart from "@/store/useCart";
 import { cn } from "@/lib/shadcnUtils";
 import useHavePermissions from "@/utils/useHavePermissions";
@@ -14,7 +13,6 @@ import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import AdminSettings from "../event/AdminSettings";
 import useHandleScroll from "@/hooks/useHandlerScroll";
 import { usePathname } from "next/navigation";
-import SubscribeButton from "../buttons/SubscribeButton";
 import SubscribeNow from "../event/SubscribeNow";
 
 const NavbarEvent = () => {
@@ -50,7 +48,7 @@ const NavbarEvent = () => {
       />
       <div className="flex justify-between items-center w-screen absolute z-40 px-2 md:pl-6 md:pr-8 py-2">
         <Link href={`/event/${discoData.disco.slug}`} className="group flex gap-2 items-center cursor-pointer">
-          <Image
+          <img
             className="rounded-full  group-hover:scale-105"
             src={`${discoData.disco.logo}`}
             alt="tickets logo"
