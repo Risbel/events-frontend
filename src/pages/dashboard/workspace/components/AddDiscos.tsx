@@ -34,29 +34,6 @@ const AddDiscos = () => {
     setValue,
   } = useForm<AddDiscoSchema>({
     resolver: zodResolver(addDiscoSchema),
-    defaultValues: {
-      name: "Example Brand",
-      h1Banner: "Event Example",
-      bannerDescription: "This is the Banner Description example, description provided by default on mocked events.",
-      aboutDescription:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae?Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae? Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae?Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores amet obcaecati repellendus ratione nisi modi error consectetur quidem adipisci a sequi, nostrum unde quia repellat doloremque repudiandae sapiente dolorem quae?",
-      brandColor: "#0e0046",
-      bgNavbarColor: "#0e0046",
-      navbarForeground: "#a8d4fb",
-      h1BannerColor: "#ffffff",
-      bannerDescriptionColor: "#afc1f3",
-      bannerGradientColor: "#0e0046",
-      bgAboutColor: "#a8d4fb",
-      textAboutColor: "#0e0046",
-      buttonColor: "#0e0046",
-      buttonForeground: "#a8d4fb",
-      bgExperiencies: "#0e0046",
-      experienciesH1Color: "#a7d8f5",
-      bgTicketsSection: "#ffffff",
-      ticketH1Color: "#0b023d",
-      buttonsTicketsColor: "#0e0046",
-      buttonTicketForeground: "#ffffff",
-    },
   });
 
   useFormPersist("addDiscoForm", { watch, setValue });
@@ -95,6 +72,8 @@ const AddDiscos = () => {
     formData.append("phone", data.phone);
     formData.append("email", data.email);
     formData.append("address", data.address);
+    formData.append("bgFooterColor", data.bgFooterColor);
+    formData.append("foregroundFooterColor", data.foregroundFooterColor);
     formData.append("administrator", data.administrator);
 
     submitDataDisco(formData);
@@ -194,12 +173,18 @@ const AddDiscos = () => {
               <div className="relative pb-2 ">
                 <LabelColor htmlFor="brandColor" text="Color brand" />
 
-                <ColorPicker register={register} id={"brandColor"} defaultColor={values.brandColor} reset={reset} />
+                <ColorPicker
+                  register={register}
+                  id={"brandColor"}
+                  defaultValue="#0e0046"
+                  defaultColor={values.brandColor}
+                  reset={reset}
+                />
                 {errors.brandColor && <p className="text-xs italic text-red-500">{errors.brandColor?.message}</p>}
               </div>
             </div>
 
-            <ColorPaletteGenerator brandColor={values.brandColor} reset={reset} />
+            <ColorPaletteGenerator values={values} brandColor={values.brandColor} reset={reset} />
             <div className="flex justify-center col-start-9 col-span-4 bg-primary-foreground rounded-xl shadow-md overflow-hidden p-6">
               <Image
                 src={"/progress-to-addDiscos.png"}
@@ -229,13 +214,23 @@ const AddDiscos = () => {
               </div>
               <div className="relative">
                 <LabelColor htmlFor="bgNavbarColor" text="Background color" />
-                <ColorPicker defaultColor={values.bgNavbarColor} register={register} id="bgNavbarColor" />
+                <ColorPicker
+                  defaultValue="#010e32"
+                  defaultColor={values.bgNavbarColor}
+                  register={register}
+                  id="bgNavbarColor"
+                />
 
                 {errors.bgNavbarColor && <p className="text-xs italic text-red-500">{errors.bgNavbarColor?.message}</p>}
               </div>
               <div className="relative">
                 <LabelColor text="Text color" htmlFor="navbarForeground" />
-                <ColorPicker defaultColor={values.navbarForeground} register={register} id={"navbarForeground"} />
+                <ColorPicker
+                  defaultValue="#a8d4fb"
+                  defaultColor={values.navbarForeground}
+                  register={register}
+                  id={"navbarForeground"}
+                />
 
                 {errors.navbarForeground && (
                   <p className="text-xs italic text-red-500">{errors.navbarForeground?.message}</p>
@@ -266,7 +261,12 @@ const AddDiscos = () => {
                   </div>
                   <div className="relative">
                     <LabelColor text="Title color" htmlFor="h1BannerColor" />
-                    <ColorPicker id={"h1BannerColor"} register={register} defaultColor={values.h1BannerColor} />
+                    <ColorPicker
+                      defaultValue="#afc1f3"
+                      id={"h1BannerColor"}
+                      register={register}
+                      defaultColor={values.h1BannerColor}
+                    />
 
                     {errors.h1BannerColor && (
                       <p className="text-xs italic text-red-500">{errors.h1BannerColor?.message}</p>
@@ -296,6 +296,7 @@ const AddDiscos = () => {
                   <div className="relative">
                     <LabelColor htmlFor="bannerGradientColor" text="Gradient color" />
                     <ColorPicker
+                      defaultValue="#0e0046"
                       register={register}
                       id={"bannerGradientColor"}
                       defaultColor={values.bannerGradientColor}
@@ -332,6 +333,7 @@ const AddDiscos = () => {
                   <LabelColor text="Text color" htmlFor="bannerDescriptionColor" />
 
                   <ColorPicker
+                    defaultValue="#a8d4fb"
                     id={"bannerDescriptionColor"}
                     register={register}
                     defaultColor={values.bannerDescriptionColor}
@@ -385,13 +387,23 @@ const AddDiscos = () => {
               <div className="flex gap-4 pb-4">
                 <div className="relative pb-2">
                   <LabelColor htmlFor="bgAboutColor" text="Background color" />
-                  <ColorPicker id={"bgAboutColor"} register={register} defaultColor={values.bgAboutColor} />
+                  <ColorPicker
+                    defaultValue="#0e0046"
+                    id={"bgAboutColor"}
+                    register={register}
+                    defaultColor={values.bgAboutColor}
+                  />
                   {errors.bgAboutColor && <p className="text-xs italic text-red-500">{errors.bgAboutColor?.message}</p>}
                 </div>
 
                 <div className="relative pb-2">
                   <LabelColor htmlFor="textAboutColor" text="Text about color" />
-                  <ColorPicker register={register} id={"textAboutColor"} defaultColor={values.textAboutColor} />
+                  <ColorPicker
+                    defaultValue="#0e0046"
+                    register={register}
+                    id={"textAboutColor"}
+                    defaultColor={values.textAboutColor}
+                  />
                   {errors.textAboutColor && (
                     <p className="text-xs italic text-red-500">{errors.textAboutColor?.message}</p>
                   )}
@@ -401,12 +413,22 @@ const AddDiscos = () => {
 
                 <div className="relative pb-2">
                   <LabelColor text="Button color" htmlFor="buttonColor" />
-                  <ColorPicker register={register} id={"buttonColor"} defaultColor={values.buttonColor} />
+                  <ColorPicker
+                    defaultValue="#a8d4fb"
+                    register={register}
+                    id={"buttonColor"}
+                    defaultColor={values.buttonColor}
+                  />
                   {errors.buttonColor && <p className="text-xs italic text-red-500">{errors.buttonColor?.message}</p>}
                 </div>
                 <div className="relative pb-2">
                   <LabelColor htmlFor="buttonForeground" text="Button foreground" />
-                  <ColorPicker register={register} id={"buttonForeground"} defaultColor={values.buttonForeground} />
+                  <ColorPicker
+                    defaultValue="#0e0046"
+                    register={register}
+                    id={"buttonForeground"}
+                    defaultColor={values.buttonForeground}
+                  />
                   {errors.buttonForeground && (
                     <p className="text-xs italic text-red-500">{errors.buttonForeground?.message}</p>
                   )}
@@ -435,7 +457,12 @@ const AddDiscos = () => {
                 </div>
                 <div className="relative pb-2">
                   <LabelColor htmlFor="bgExperiencies" text="Background color" />
-                  <ColorPicker register={register} id={"bgExperiencies"} defaultColor={values.bgExperiencies} />
+                  <ColorPicker
+                    defaultValue="#a7d8f5"
+                    register={register}
+                    id={"bgExperiencies"}
+                    defaultColor={values.bgExperiencies}
+                  />
 
                   {errors.bgExperiencies && (
                     <p className="text-xs italic text-red-500">{errors.bgExperiencies?.message}</p>
@@ -444,6 +471,7 @@ const AddDiscos = () => {
                 <div className="relative pb-2">
                   <LabelColor htmlFor="experienciesH1Color" text="Title color" />
                   <ColorPicker
+                    defaultValue="#a7d8f5"
                     register={register}
                     id={"experienciesH1Color"}
                     defaultColor={values.experienciesH1Color}
@@ -463,14 +491,24 @@ const AddDiscos = () => {
                 <div className="w-1/2">
                   <div className="relative">
                     <LabelColor htmlFor="bgTicketsSection" text="Background color" />
-                    <ColorPicker id={"bgTicketsSection"} register={register} defaultColor={values.bgTicketsSection} />
+                    <ColorPicker
+                      defaultValue="#ffffff"
+                      id={"bgTicketsSection"}
+                      register={register}
+                      defaultColor={values.bgTicketsSection}
+                    />
                     {errors.bgTicketsSection && (
                       <p className="text-xs italic text-red-500">{errors.bgTicketsSection?.message}</p>
                     )}
                   </div>
                   <div className="relative">
                     <LabelColor htmlFor="ticketH1Color" text="Title section color" />
-                    <ColorPicker register={register} id="ticketH1Color" defaultColor={values.ticketH1Color} />
+                    <ColorPicker
+                      defaultValue="#0b023d"
+                      register={register}
+                      id="ticketH1Color"
+                      defaultColor={values.ticketH1Color}
+                    />
                     {errors.ticketH1Color && (
                       <p className="text-xs italic text-red-500">{errors.ticketH1Color?.message}</p>
                     )}
@@ -481,6 +519,7 @@ const AddDiscos = () => {
                   <div className="relative">
                     <LabelColor htmlFor="buttonsTicketsColor" text="Buttons color" />
                     <ColorPicker
+                      defaultValue="#0e0046"
                       register={register}
                       id={"buttonsTicketsColor"}
                       defaultColor={values.buttonsTicketsColor}
@@ -493,6 +532,7 @@ const AddDiscos = () => {
                   <div className="relative">
                     <LabelColor htmlFor="buttonTicketForeground" text="Buttons foreground" />
                     <ColorPicker
+                      defaultValue="#ffffff"
                       register={register}
                       id={"buttonTicketForeground"}
                       defaultColor={values.buttonTicketForeground}
@@ -552,6 +592,36 @@ const AddDiscos = () => {
                   {...register("address")}
                 />
                 {errors.address && <p className="text-xs italic text-red-500">{errors.address?.message}</p>}
+              </div>
+              <div className="flex gap-2">
+                <div className="relative w-1/2">
+                  <LabelColor text="Background color" htmlFor="bgFooterColor" />
+
+                  <ColorPicker
+                    defaultValue="#07011e"
+                    id={"bgFooterColor"}
+                    register={register}
+                    defaultColor={values.bgFooterColor}
+                  />
+
+                  {errors.bgFooterColor && (
+                    <p className="text-xs italic text-red-500">{errors.bgFooterColor?.message}</p>
+                  )}
+                </div>
+                <div className="relative w-1/2">
+                  <LabelColor text="Text color" htmlFor="foregroundFooterColor" />
+
+                  <ColorPicker
+                    defaultValue="#ffffff"
+                    id={"foregroundFooterColor"}
+                    register={register}
+                    defaultColor={values.foregroundFooterColor}
+                  />
+
+                  {errors.foregroundFooterColor && (
+                    <p className="text-xs italic text-red-500">{errors.foregroundFooterColor?.message}</p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -616,5 +686,7 @@ const addDiscoSchema = z.object({
   phone: z.string().min(1, { message: "Phone number required" }),
   email: z.string().email().min(1, { message: "Email required" }),
   address: z.string().min(1, { message: "Address is required" }),
+  bgFooterColor: z.string().min(1, { message: "Background footer color required" }),
+  foregroundFooterColor: z.string().min(1, { message: "Foreground footer color required" }),
   administrator: z.string().min(1, { message: "Field must be atleast 8 characters" }),
 });

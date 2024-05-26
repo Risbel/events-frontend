@@ -5,11 +5,13 @@ import { UseFormReset } from "react-hook-form";
 const ColorPicker = ({
   register,
   defaultColor,
+  defaultValue,
   id,
   reset,
 }: {
   register: any;
   defaultColor?: string;
+  defaultValue?: string;
   id: string;
   reset?: UseFormReset<AddDiscoSchema>;
 }) => {
@@ -34,6 +36,7 @@ const ColorPicker = ({
           id={id}
           {...register(id)}
           value={color}
+          defaultValue={defaultValue}
           onChange={handleColorChange}
           type="color"
           className="opacity-0 absolute z-10 h-full w-full cursor-pointer"

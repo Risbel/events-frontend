@@ -1,12 +1,19 @@
-import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
 import { useGenerateColors } from "@/hooks/useGenerateColors";
 import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
 import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { UseFormReset } from "react-hook-form";
 
-const ColorPaletteGenerator = ({ reset, brandColor }: { reset: UseFormReset<AddDiscoSchema>; brandColor: string }) => {
+const ColorPaletteGenerator = ({
+  reset,
+  brandColor,
+  values,
+}: {
+  reset: UseFormReset<AddDiscoSchema>;
+  brandColor: string;
+  values: AddDiscoSchema;
+}) => {
   const [colorPalette, setColorPalette] = useState([
     "#0e0046",
     "#7b9eff",
@@ -19,12 +26,38 @@ const ColorPaletteGenerator = ({ reset, brandColor }: { reset: UseFormReset<AddD
     "#a8d4fb",
     "#0e0046",
     "#a7d8f5",
+    "#a7d8f5",
     "#ffffff",
     "#0b023d",
     "#0e0046",
     "#ffffff",
+    "#07011e",
+    "#ffffff",
   ]);
   const { mutate, data, isLoading } = useGenerateColors(colorPalette, setColorPalette, reset);
+
+  useEffect(() => {
+    setColorPalette([
+      values.brandColor ?? "#0e0046",
+      values.bgNavbarColor ?? "#7b9eff",
+      values.navbarForeground ?? "#a8d4fb",
+      values.h1BannerColor ?? "#afc1f3",
+      values.bannerDescriptionColor ?? "#0e0046",
+      values.bannerGradientColor ?? "#a8d4fb",
+      values.bgAboutColor ?? "#0e0046",
+      values.textAboutColor ?? "#0e0046",
+      values.buttonColor ?? "#a8d4fb",
+      values.buttonForeground ?? "#0e0046",
+      values.bgExperiencies ?? "#a7d8f5",
+      values.experienciesH1Color ?? "#a7d8f5",
+      values.bgTicketsSection ?? "#ffffff",
+      values.ticketH1Color ?? "#0b023d",
+      values.buttonsTicketsColor ?? "#0e0046",
+      values.buttonTicketForeground ?? "#ffffff",
+      values.bgFooterColor ?? "#07011e",
+      values.foregroundFooterColor ?? "#ffffff",
+    ]);
+  }, [values]);
 
   const generatePalette = () => {
     mutate(brandColor);
@@ -56,4 +89,7 @@ const ColorPaletteGenerator = ({ reset, brandColor }: { reset: UseFormReset<AddD
   );
 };
 
-export default ColorPaletteGenerator;
+const MemoizedColorPaletteGenerator = memo(ColorPaletteGenerator);
+MemoizedColorPaletteGenerator.displayName = "ColorPaletteGenerator";
+
+export default MemoizedColorPaletteGenerator;
