@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { string, z } from "zod";
 import useCreateDisco from "@/hooks/useCreateDisco";
 import ButtonSubmit from "../../../../components/buttons/ButtonSubmit";
 import { useState } from "react";
@@ -15,6 +15,9 @@ import ColorPaletteGenerator from "@/components/dashboard/workspace/ColorPaletGe
 import LabelColor from "@/components/dashboard/workspace/LabelColor";
 import { useSession } from "next-auth/react";
 import useFormPersist from "react-hook-form-persist";
+import { Dialog } from "@/components/ui/dialog";
+import SocialSelector from "../../../../components/dashboard/workspace/SocialSelector";
+import QuickLinks from "../../../../components/dashboard/workspace/QuickLinks";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
 
@@ -32,6 +35,7 @@ const AddDiscos = () => {
     watch,
     getValues,
     setValue,
+    control,
   } = useForm<AddDiscoSchema>({
     resolver: zodResolver(addDiscoSchema),
   });
@@ -72,6 +76,8 @@ const AddDiscos = () => {
     formData.append("phone", data.phone);
     formData.append("email", data.email);
     formData.append("address", data.address);
+    formData.append("socials", JSON.stringify(data.socials));
+    formData.append("quickLinks", JSON.stringify(data.quickLinks));
     formData.append("bgFooterColor", data.bgFooterColor);
     formData.append("foregroundFooterColor", data.foregroundFooterColor);
     formData.append("administrator", data.administrator);
@@ -593,7 +599,19 @@ const AddDiscos = () => {
                 />
                 {errors.address && <p className="text-xs italic text-red-500">{errors.address?.message}</p>}
               </div>
+
               <div className="flex gap-2">
+                <div className="w-1/2">
+                  <SocialSelector register={register} values={values} />
+                  {errors.socials && <p className="text-xs italic text-red-500">Error link</p>}
+                </div>
+                <div className="w-1/2">
+                  <QuickLinks register={register} values={values} control={control} />
+                  {errors.quickLinks && <p className="text-xs italic text-red-500">Error link</p>}
+                </div>
+              </div>
+
+              <div className="flex gap-2 mt-4">
                 <div className="relative w-1/2">
                   <LabelColor text="Background color" htmlFor="bgFooterColor" />
 
@@ -686,6 +704,17 @@ const addDiscoSchema = z.object({
   phone: z.string().min(1, { message: "Phone number required" }),
   email: z.string().email().min(1, { message: "Email required" }),
   address: z.string().min(1, { message: "Address is required" }),
+  socials: z.array(
+    z.object({
+      url: z.string().optional(),
+    })
+  ),
+  quickLinks: z.array(
+    z.object({
+      url: z.string().min(1, { message: "Url required" }),
+      name: z.string().min(1, { message: "Name required" }),
+    })
+  ),
   bgFooterColor: z.string().min(1, { message: "Background footer color required" }),
   foregroundFooterColor: z.string().min(1, { message: "Foreground footer color required" }),
   administrator: z.string().min(1, { message: "Field must be atleast 8 characters" }),

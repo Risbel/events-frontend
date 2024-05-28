@@ -60,7 +60,7 @@ const TicketsPreview = ({ values }: { values: any }) => {
   const months = useListMonths();
 
   return (
-    <div style={{ background: `${values.bgTicketsSection}` }} className="pb-20">
+    <div id="4" style={{ background: `${values.bgTicketsSection}` }} className="pb-20">
       <h1
         style={{ color: `${values.ticketH1Color}` }}
         className="font-extrabold text-4xl md:text-5xl lg:text-7xl text-center mb-8 pt-20"

@@ -3,7 +3,7 @@ import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos
 
 const AboutPreview = ({ values }: { values: AddDiscoSchema }) => {
   return (
-    <div style={{ background: values.bgAboutColor }} className="relative">
+    <div id="2" style={{ background: values.bgAboutColor }} className="relative">
       <div style={{ background: "white" }} className="absolute z-30 h-20 w-20 rounded-full blur-3xl top-28" />
 
       <div className="absoulute z-20 ">

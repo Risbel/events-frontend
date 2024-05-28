@@ -16,7 +16,7 @@ const NavbarPreview = ({ values }: { values: any }) => {
             style={{ color: values.navbarForeground }}
             className="flex justify-between items-center w-full absolute z-40 px-2 md:pl-6 md:pr-8 py-3"
           >
-            <div className="group flex gap-2 items-center cursor-pointer">
+            <a href="#1" className="group flex gap-2 items-center cursor-pointer">
               <img
                 className="rounded-full group-hover:scale-105 object-cover"
                 src={
@@ -27,18 +27,29 @@ const NavbarPreview = ({ values }: { values: any }) => {
                 height={40}
               />
               <p className="font-semibold">{values.name}</p>
-            </div>
+            </a>
 
-            <div className="hidden md:flex gap-4">
-              <Home className="cursor-pointer hover:-translate-y-0.5 transition-transform" height={22} />
-              <p className="cursor-pointer hover:-translate-y-0.5 transition-transform">About</p>
+            <nav className="hidden md:flex gap-4">
+              <a href="#1">
+                <Home className="cursor-pointer hover:-translate-y-0.5 transition-transform" height={22} />
+              </a>
 
-              <p className="cursor-pointer hover:-translate-y-0.5 transition-transform">Experiencies</p>
+              <a href="#2" className="cursor-pointer hover:-translate-y-0.5 transition-transform">
+                About
+              </a>
 
-              <p className="cursor-pointer hover:-translate-y-0.5 transition-transform">Contact</p>
+              <a href="#3" className="cursor-pointer hover:-translate-y-0.5 transition-transform">
+                Experiencies
+              </a>
 
-              <p className="cursor-pointer hover:-translate-y-0.5 transition-transform">FAQ</p>
-            </div>
+              <a href="#4" className="cursor-pointer hover:-translate-y-0.5 transition-transform">
+                Tickets
+              </a>
+
+              <a href="#5" className="cursor-pointer hover:-translate-y-0.5 transition-transform">
+                Contact
+              </a>
+            </nav>
 
             <div className="flex gap-2 md:gap-4 items-center">
               <BellIcon className="cursor-pointer hover:scale-110 transition-transform" />

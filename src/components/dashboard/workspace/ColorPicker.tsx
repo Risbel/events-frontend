@@ -35,7 +35,6 @@ const ColorPicker = ({
         <input
           id={id}
           {...register(id)}
-          value={color}
           defaultValue={defaultValue}
           onChange={handleColorChange}
           type="color"

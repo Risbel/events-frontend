@@ -38,6 +38,7 @@ const experiencies = [
 const ExperiencesPreview = ({ values }: { values: AddDiscoSchema }) => {
   return (
     <div
+      id="3"
       style={{
         background: `${values.bgExperiencies}`,
       }}

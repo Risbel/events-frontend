@@ -7,8 +7,6 @@ const TargetEvent = ({ event }: { event: DataDisco }) => {
     return;
   }
 
-  console.log(event);
-
   return (
     <div className="flex items-center rounded-2xl bg-primary/95 p-2 md:p-3">
       <img

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const BannerPreview = ({ values }: { values: any }) => {
   return (
-    <div className="relative h-screen w-full">
+    <div id="1" className="relative h-screen w-full">
       <div className="absolute flex justify-center items-center overflow-hidden -z-20 w-full">
         {values && (
           <img
@@ -54,7 +54,8 @@ const BannerPreview = ({ values }: { values: any }) => {
               {values.bannerDescription}
             </p>
 
-            <div
+            <a
+              href="#4"
               style={{
                 background: values.bgNavbarColor,
                 color: values.navbarForeground,
@@ -63,7 +64,7 @@ const BannerPreview = ({ values }: { values: any }) => {
               className="px-6 py-2 hover:opacity-95 rounded-lg font-semibold text-lg md:text-xl hover:-translate-y-1  shadow-2xl hover:shadow-white transition-transform cursor-pointer"
             >
               RESERVE NOW
-            </div>
+            </a>
           </div>
         </div>
       </div>

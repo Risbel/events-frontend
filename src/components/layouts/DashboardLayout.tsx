@@ -7,7 +7,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <NavbarDashboard />
       <div className="h-screen flex">
         <Sidebar />
-        <div className="w-full h-full z-20 overflow-y-scroll">{children}</div>
+        <div className="w-full h-full z-20 overflow-y-scroll scroll-smooth">{children}</div>
       </div>
     </div>
   );

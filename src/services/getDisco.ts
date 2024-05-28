@@ -32,8 +32,44 @@ export interface DiscoDetail {
   administrator: string;
   discoId: string;
   discoImages: DiscoImages[];
-  discoNetworks: [];
-  discoPhones: [];
+  discoNetwork: {
+    id: string;
+    facebook: string;
+    instagram: string;
+    youtube: string;
+    X: string;
+    createdAt: string;
+    updatedAt: string;
+    discoDetailId: string;
+  };
+  quickLinks: [
+    {
+      id: string;
+      url: string;
+      name: string;
+      createdAt: string;
+      updatedAt: string;
+      discoDetailId: string;
+    }
+  ];
+  discoPhones: [
+    {
+      id: string;
+      number: string;
+      createdAt: string;
+      updatedAt: string;
+      discoDetailId: string;
+    }
+  ];
+  discoEmails: [
+    {
+      id: string;
+      name: string;
+      createdAt: string;
+      updatedAt: string;
+      discoDetailId: string;
+    }
+  ];
   discoColor: IDiscoColors;
 }
 
@@ -85,4 +121,6 @@ export interface IDiscoColors {
   createdAt: string;
   updatedAt: string;
   discoDetailId: string;
+  foregroundFooterColor: string;
+  bgFooterColor: string;
 }
