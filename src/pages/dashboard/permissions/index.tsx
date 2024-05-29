@@ -1,10 +1,12 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Spinner from "@/components/loaders/Spinner";
-import { useGetDiscos } from "@/hooks/useGetDiscos";
+import { useGetMyEvents } from "@/hooks/useGetMyEvents";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Permissions = () => {
-  const { data: discos, isLoading, isFetched } = useGetDiscos();
+  const { data } = useSession();
+  const { data: dataEvents, isFetched, isLoading } = useGetMyEvents(data?.user?.id);
 
   return (
     <DashboardLayout>
@@ -15,11 +17,11 @@ const Permissions = () => {
           </div>
         )}
 
-        {discos && isFetched && (
+        {dataEvents && isFetched && (
           <>
             <h1 className="text-2xl text-primary font-semibold pb-4">Permissions:</h1>
             <div className="grid md:grid-cols-2 lg:grid-cols-3">
-              {discos?.map((disco) => (
+              {dataEvents?.map((disco) => (
                 <Link
                   href={`/dashboard/permissions/${disco.slug}`}
                   className="flex gap-2 items-center hover:bg-secondary group p-2 rounded-md"

@@ -29,17 +29,6 @@ const DiscoPerssions = () => {
     );
   }
 
-  if (user) {
-    if (user.email !== "risbel961019@gmail.com") {
-      return (
-        <div className="flex flex-col justify-center items-center gap-8 pt-24">
-          <Resource405 text={"This resource is just reserved for admins"} />
-          <BackToHome />
-        </div>
-      );
-    }
-  }
-
   return (
     <DashboardLayout>
       <div className="pt-24 px-6">
