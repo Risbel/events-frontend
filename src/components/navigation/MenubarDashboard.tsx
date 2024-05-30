@@ -10,8 +10,9 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import { ArrowRight, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import Link from "next/link";
+import ListEvents from "./ListEvents";
 
 const MenubarDashboard = () => {
   return (
@@ -30,20 +31,9 @@ const MenubarDashboard = () => {
             <div className="flex justify-center">
               <p className="font-semibold">List of events</p>
             </div>
-            <div className="px-2">
+            <div className="px-2 h-32 overflow-hidden overflow-y-scroll">
               <ul>
-                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
-                  <span className="hover:translate-x-1  transition-transform duration-300">Fiesta Lunar</span>
-                </li>
-                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
-                  <span className="hover:translate-x-1  transition-transform duration-300">Encuentro Estelar</span>
-                </li>
-                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
-                  <span className="hover:translate-x-1  transition-transform duration-300">Festival de Innovación</span>
-                </li>
-                <li className="flex gap-4 hover:gap-6 hover:bg-secondary  pl-1 rounded cursor-pointer">
-                  <span className="hover:translate-x-1  transition-transform duration-300">Noche de Gala Cultural</span>
-                </li>
+                <ListEvents />
               </ul>
             </div>
           </div>
@@ -55,12 +45,13 @@ const MenubarDashboard = () => {
               <MenubarItem className="focus:bg-red-400">Email</MenubarItem>
               <MenubarItem className="focus:bg-blue-500">Telegram</MenubarItem>
               <MenubarItem className="focus:bg-green-600">WhatsApp</MenubarItem>
-              <MenubarItem>SMS</MenubarItem>
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSeparator />
           <MenubarItem className="md:text-base">
-            View all events <MenubarShortcut>⌘AE</MenubarShortcut>
+            <Link href={"/dashboard/allevents"} className="flex w-full items-center">
+              View all events <MenubarShortcut>⌘AE</MenubarShortcut>
+            </Link>
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
@@ -109,7 +100,9 @@ const MenubarDashboard = () => {
           </div>
           <MenubarSeparator />
           <MenubarItem className="md:text-base">
-            View all users <MenubarShortcut>⌘AU</MenubarShortcut>
+            <Link href={"/dashboard/users"} className="flex w-full items-center justify-between">
+              View all users <MenubarShortcut>⌘AU</MenubarShortcut>
+            </Link>
           </MenubarItem>
         </MenubarContent>
       </MenubarMenu>
