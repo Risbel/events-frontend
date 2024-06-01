@@ -88,17 +88,17 @@ const NavbarEvent = () => {
             </a>
             <a
               className="font-semibold hover:opacity-80"
+              onClick={(event) => handleClickScroll(event, "#tickets")}
+              href={"#tickets"}
+            >
+              Tickets
+            </a>
+            <a
+              className="font-semibold hover:opacity-80"
               onClick={(event) => handleClickScroll(event, "#contact")}
               href={"#contact"}
             >
               Contact
-            </a>
-            <a
-              className="font-semibold hover:opacity-80"
-              onClick={(event) => handleClickScroll(event, "#FAQ")}
-              href={"#FAQ"}
-            >
-              FAQ
             </a>
           </div>
         )}

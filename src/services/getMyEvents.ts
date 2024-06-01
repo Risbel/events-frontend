@@ -5,7 +5,7 @@ export const getMyEvents = async (userId: string | undefined) => {
   return response.data;
 };
 
-interface IMyEvents {
+export interface IMyEvents {
   id: string;
   name: string;
   logo: string;

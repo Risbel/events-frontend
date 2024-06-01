@@ -13,11 +13,9 @@ import { useGetDiscoTicketsByIdDisco } from "@/hooks/useGetDiscoTicketsByIdDisco
 import DiscoTickets from "./DiscoTickets";
 import Link from "next/link";
 
-import FormContact from "@/pages/components/FormContact";
 import { Button } from "@/components/ui/button";
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 import NavSidebarEventMobile from "../navigation/NavSidebarMobile";
-import useHandleScroll from "@/hooks/useHandlerScroll";
 
 const DiscoEnviroment = ({ slug }: { slug: any }) => {
   const { data: session } = useSession();
@@ -36,10 +34,6 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
         <span className="text-white text-5xl md:text-8xl font-semibold">{error?.response?.status}</span>
         <div className="flex flex-col gap-2">
           <span className="text-white text-md md:text-xl">{error?.response?.data?.message}</span>
-
-          <Link href={"/"}>
-            <Button>Back to home</Button>
-          </Link>
         </div>
       </div>
     );

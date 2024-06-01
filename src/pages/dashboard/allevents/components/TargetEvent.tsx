@@ -1,8 +1,9 @@
 import { DataDisco } from "@/services/getDisco";
+import { IMyEvents } from "@/services/getMyEvents";
 import Image from "next/image";
 import React from "react";
 
-const TargetEvent = ({ event }: { event: DataDisco }) => {
+const TargetEvent = ({ event }: { event: IMyEvents }) => {
   if (!event || !event?.logo) {
     return;
   }

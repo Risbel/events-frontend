@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Settings2 } from "lucide-react";
 import AddBannerImages from "./AddBannerImages";
+import AddCombos from "./AddCombos";
 
 const AdminSettings = ({ disco }: { disco: DataDisco }) => {
   const { slug } = useParams();
@@ -39,6 +40,7 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
             <Link href={`/event/${slug}/my-sales`}>My sales</Link>
           </DropdownMenuItem>
           <AddBannerImages discoDetail={disco.discoDetail} />
+          <AddCombos disco={disco} />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

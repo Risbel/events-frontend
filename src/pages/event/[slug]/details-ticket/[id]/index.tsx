@@ -3,7 +3,7 @@ import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
 import { useGetDiscoTicketById } from "@/hooks/useGetDiscoTicketById";
 import useCart from "@/store/useCart";
-import { ChevronLeft, ShoppingCart, X } from "lucide-react";
+import { ChevronLeft, ShoppingBag, ShoppingCart, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -14,9 +14,11 @@ import NavbarEvent from "@/components/navigation/NavbarEvent";
 import { useSession } from "next-auth/react";
 import useGetDisco from "@/hooks/useGetDisco";
 import { cn } from "@/lib/shadcnUtils";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CombosInTicket from "./components/CombosInTickets";
-import AddCombosForm from "./components/AddCombosForm";
+import AsociateCombo from "./components/AsociateCombo";
+import useHavePermissions from "@/utils/useHavePermissions";
+import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 
 const DiscoTicketDetails = () => {
   const months = useListMonths();
@@ -42,6 +44,9 @@ const DiscoTicketDetails = () => {
   const { cartItems, addToCart, removeFromCart } = useCart();
 
   const existItem = cartItems.find((item) => item.id === data?.id);
+
+  const { data: myPermissions } = useGetMyPermissions(userId, data?.Disco.id);
+  const { havePermission } = useHavePermissions(myPermissions);
 
   const addToCartHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -119,7 +124,7 @@ const DiscoTicketDetails = () => {
           <ChevronLeft width={20} /> Go back
         </Link>
 
-        <div className="flex flex-col gap-12 pt-32 px-4 lg:px-32">
+        <div className="flex flex-col gap-12 pt-32 px-4 lg:px-32 pb-12">
           <div
             style={{ background: `${discoColors.bgNavbarColor}60` }}
             className="grid grid-cols-12 p-6 rounded-3xl w-full shadow-md"
@@ -293,6 +298,18 @@ const DiscoTicketDetails = () => {
                   </div>
                 </form>
               </div>
+              <div className="flex justify-center mt-4">
+                <Link
+                  href={`/event/${slug}/cart`}
+                  style={{ color: discoColors.bgNavbarColor, background: discoColors.navbarForeground }}
+                  className={cn("flex items-center px-8 py-2 rounded-xl ", cartItems.length > 0 ? "block" : "hidden")}
+                >
+                  <div className="flex gap-4 group">
+                    <span className="font-semibold text-md">Buy</span>{" "}
+                    <ShoppingCart className="group-hover:translate-x-2 transition-transform duration-300" />
+                  </div>
+                </Link>
+              </div>
             </div>
 
             <div
@@ -314,10 +331,24 @@ const DiscoTicketDetails = () => {
               </div>
             </div>
           </div>
-          {/* {new Date(data.expDate).toLocaleString().slice(0, 9) === new Date().toLocaleString().slice(0, 9) && (
-            <Combos discoData={discoData.disco} />
-          )}  //to show combos just in the actual day  */}
+
           <CombosInTicket discoData={discoData.disco} comboData={data.ticketCombos} expDate={data.expDate} />
+
+          <div className="flex justify-center mt-4">
+            <Link
+              href={`/event/${slug}/cart`}
+              style={{ color: discoColors.bgNavbarColor, background: discoColors.navbarForeground }}
+              className={cn("flex items-center px-8 py-2 rounded-xl ", cartItems.length > 0 ? "block" : "hidden")}
+            >
+              <div className="flex gap-4 group">
+                <span className="font-semibold text-md">Buy</span>{" "}
+                <ShoppingCart className="group-hover:translate-x-2 transition-transform duration-300" />{" "}
+              </div>
+            </Link>
+          </div>
+          {havePermission("read", "Admin settings on disco") && (
+            <AsociateCombo discoId={discoData.disco.id} discoTicketId={idTicket} />
+          )}
         </div>
       </EventLayout>
     );

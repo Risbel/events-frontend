@@ -5,7 +5,7 @@ export const useGetDiscoTicketById = (idTicket: string | any) => {
   const isIdTicket = idTicket ? true : false;
 
   return useQuery({
-    queryKey: ["discoById", idTicket],
+    queryKey: ["discoTicketById", idTicket],
     queryFn: () => getDiscoTicketById(idTicket),
     enabled: isIdTicket,
     onError: (err: IApiError) => err,

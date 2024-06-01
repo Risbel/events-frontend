@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useCreateCombo } from "@/hooks/useCreateCombo";
 import { cn } from "@/lib/shadcnUtils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { PlusCircle, X } from "lucide-react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -55,10 +56,18 @@ const AddCombosForm = ({ discoId }: { discoId: string }) => {
     <>
       <Button
         variant={isActive ? "outline" : "default"}
-        className={cn(isActive && "bg-secondary", "text-xs h-8 mb-2")}
+        className={cn(isActive && "bg-secondary", "text-xs h-8 px-0 mb-2")}
         onClick={() => setIsActive((prev) => !prev)}
       >
-        {isActive ? "Discard" : "Add Combo"}
+        {isActive ? (
+          <div className="flex gap-2 items-center pl-3 pr-2">
+            <span>Descart</span> <X />
+          </div>
+        ) : (
+          <div className="flex gap-2 items-center pl-3 pr-2">
+            <span>Add combo</span> <PlusCircle />
+          </div>
+        )}
       </Button>
       <form
         encType="multipart/form-data"
@@ -136,7 +145,9 @@ const AddCombosForm = ({ discoId }: { discoId: string }) => {
           <Input id="image" type="file" accept=".png, .img, .jpg, .jpeg" {...register("image")} />
           {errors.image && <p className="text-xs italic text-red-500">Invalid image</p>}
         </div>
-        <Button>Add {isLoading && <Spinner diameter={8} stroke={"white"} />}</Button>
+        <div className="flex justify-center">
+          <Button variant={"outline"}>Add {isLoading && <Spinner diameter={8} stroke={"white"} />}</Button>
+        </div>
       </form>
     </>
   );

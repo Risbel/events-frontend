@@ -59,6 +59,7 @@ export interface IComboData {
     createdAt: string;
     updatedAt: string;
     discoId: string;
+    isDeleted: boolean;
     comboDetail: {
       id: string;
       description: string;

@@ -13,6 +13,7 @@ export interface ICombo {
   createdAt: string;
   updatedAt: string;
   discoId: string;
+  isDeleted: boolean;
   comboDetail: {
     id: string;
     description: string;
@@ -22,26 +23,25 @@ export interface ICombo {
     updatedAt: string;
     comboId: string;
   };
-  comboReservations: [];
-  Disco: IDisco;
-}
-
-interface IDisco {
-  id: string;
-  name: string;
-  logo: string;
-  slug: string;
-  createdAt: string;
-  updatedAt: string;
-  discoDetail: {
-    id: string;
-    description: string;
-    largeDescription: string;
-    bgImage: string;
-    address: string;
-    createdAt: string;
-    updatedAt: string;
-    administrator: string;
-    discoId: string;
-  };
+  ticketCombos: [
+    {
+      id: string;
+      createdAt: string;
+      updatedAt: string;
+      discoTicketId: string;
+      comboId: string;
+      DiscoTicket: {
+        id: string;
+        price: number;
+        shortDescription: string;
+        largeDescription: string;
+        category: string;
+        countInStock: number;
+        expDate: string;
+        createdAt: string;
+        updatedAt: string;
+        discoId: string;
+      };
+    }
+  ];
 }
