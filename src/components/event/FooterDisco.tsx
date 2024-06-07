@@ -8,133 +8,131 @@ import { Textarea } from "../ui/textarea";
 const FooterDisco = ({ discoData }: { discoData: DataDisco }) => {
   return (
     <section id="contact" style={{ background: discoData.discoDetail.discoColor.bgFooterColor }}>
-      <div className="flex flex-col-reverse md:flex-row">
-        <div className="flex flex-wrap px-6 md:p-12 gap-8 md:w-1/2 lg:w-3/4">
-          <div>
-            <h3
+      <div className="flex flex-col md:flex-row flex-wrap items-center md:items-start justify-center px-6 p-8 md:p-12 gap-8 mg:gap-16 w-full">
+        <div className="flex flex-col items-center">
+          <h3
+            style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
+            className="text-2xl font-semibold"
+          >
+            Company Info:
+          </h3>
+          <ol>
+            <li style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }} className="flex">
+              <p className="text-xl text-center">- {discoData.name} -</p>
+            </li>
+            <li
               style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
-              className="text-2xl font-semibold"
+              className="flex gap-2 items-center"
             >
-              Company Info:
-            </h3>
-            <ol>
-              <li style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }} className="flex">
-                <p className="text-xl">- {discoData.name} -</p>
-              </li>
-              <li
-                style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
-                className="flex gap-2 items-center"
+              <MapPin height={20} width={20} /> {discoData.discoDetail.address}
+            </li>
+          </ol>
+        </div>
+        <div className="flex flex-col items-center">
+          <h3
+            style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
+            className="text-2xl font-semibold"
+          >
+            Contacts:
+          </h3>
+          <ol>
+            <li style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-2 hover:opacity-60"
+                href={`mailto:${discoData.discoDetail.discoEmails[0].name}`}
               >
-                <MapPin height={20} width={20} /> {discoData.discoDetail.address}
-              </li>
-            </ol>
-
-            <div>
-              <h3
-                style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
-                className="text-2xl font-semibold mt-6"
+                <Mail /> <span>{discoData.discoDetail.discoEmails[0].name}</span>
+              </a>
+            </li>
+            <li style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex gap-2 hover:opacity-60"
+                href={`tel:${discoData.discoDetail.discoPhones[0].number}`}
               >
-                Social:
-              </h3>
-              <div className="flex gap-4 items-center py-2">
-                {discoData?.discoDetail?.discoNetwork?.facebook && (
-                  <a
-                    className="hover:scale-110 transition-transform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`${discoData.discoDetail.discoNetwork.facebook}`}
-                  >
-                    <Facebook height={30} width={30} stroke={discoData.discoDetail.discoColor.foregroundFooterColor} />
-                  </a>
-                )}
-                {discoData?.discoDetail?.discoNetwork?.instagram && (
-                  <a
-                    className="hover:scale-110 transition-transform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`${discoData.discoDetail.discoNetwork.instagram}`}
-                  >
-                    <Instagram stroke={discoData.discoDetail.discoColor.foregroundFooterColor} />
-                  </a>
-                )}
-                {discoData?.discoDetail?.discoNetwork?.youtube && (
-                  <a
-                    className="hover:scale-110 transition-transform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`${discoData.discoDetail.discoNetwork.youtube}`}
-                  >
-                    <Youtube height={30} width={30} stroke={discoData.discoDetail.discoColor.foregroundFooterColor} />
-                  </a>
-                )}
-                {discoData?.discoDetail?.discoNetwork?.X && (
-                  <a
-                    className="hover:scale-110 transition-transform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`${discoData.discoDetail.discoNetwork.X}`}
-                  >
-                    <IconX fill={discoData.discoDetail.discoColor.foregroundFooterColor} />
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
+                <Phone /> <span>{discoData.discoDetail.discoPhones[0].number}</span>
+              </a>
+            </li>
+          </ol>
+        </div>
 
-          {discoData.discoDetail.quickLinks.length > 0 && (
-            <div>
-              <h3
-                style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
-                className="text-2xl font-semibold"
+        <div>
+          <h3
+            style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
+            className="text-2xl font-semibold"
+          >
+            Social:
+          </h3>
+          <div className="flex gap-4 items-center py-2">
+            {discoData?.discoDetail?.discoNetwork?.facebook && (
+              <a
+                className="hover:scale-110 transition-transform"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`${discoData.discoDetail.discoNetwork.facebook}`}
               >
-                Quick Links:
-              </h3>
-              <ul>
-                {discoData.discoDetail.quickLinks.map((link) => {
-                  return (
-                    <li style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }} key={link.id}>
-                      <a className="hover:opacity-60" target="_blank" rel="noopener noreferrer" href={link.url}>
-                        {link.name}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
-
-          <div>
-            <h3
-              style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
-              className="text-2xl font-semibold"
-            >
-              Contacts:
-            </h3>
-            <ol>
-              <li style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex gap-2 hover:opacity-60"
-                  href={`mailto:${discoData.discoDetail.discoEmails[0].name}`}
-                >
-                  <Mail /> <span>{discoData.discoDetail.discoEmails[0].name}</span>
-                </a>
-              </li>
-              <li style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex gap-2 hover:opacity-60"
-                  href={`tel:${discoData.discoDetail.discoPhones[0].number}`}
-                >
-                  <Phone /> <span>{discoData.discoDetail.discoPhones[0].number}</span>
-                </a>
-              </li>
-            </ol>
+                <Facebook height={30} width={30} stroke={discoData.discoDetail.discoColor.foregroundFooterColor} />
+              </a>
+            )}
+            {discoData?.discoDetail?.discoNetwork?.instagram && (
+              <a
+                className="hover:scale-110 transition-transform"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`${discoData.discoDetail.discoNetwork.instagram}`}
+              >
+                <Instagram stroke={discoData.discoDetail.discoColor.foregroundFooterColor} />
+              </a>
+            )}
+            {discoData?.discoDetail?.discoNetwork?.youtube && (
+              <a
+                className="hover:scale-110 transition-transform"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`${discoData.discoDetail.discoNetwork.youtube}`}
+              >
+                <Youtube height={30} width={30} stroke={discoData.discoDetail.discoColor.foregroundFooterColor} />
+              </a>
+            )}
+            {discoData?.discoDetail?.discoNetwork?.X && (
+              <a
+                className="hover:scale-110 transition-transform"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`${discoData.discoDetail.discoNetwork.X}`}
+              >
+                <IconX fill={discoData.discoDetail.discoColor.foregroundFooterColor} />
+              </a>
+            )}
           </div>
         </div>
-        <div
+
+        {discoData.discoDetail.quickLinks.length > 0 && (
+          <div className="flex flex-col items-center">
+            <h3
+              style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
+              className="text-2xl font-semibold"
+            >
+              Quick Links:
+            </h3>
+            <ul>
+              {discoData.discoDetail.quickLinks.map((link) => {
+                return (
+                  <li style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }} key={link.id}>
+                    <a className="hover:opacity-60" target="_blank" rel="noopener noreferrer" href={link.url}>
+                      {link?.name}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+      {/* <div
           style={{ background: discoData.discoDetail.discoColor.bgFooterColor }}
           className="relative p-8 w-full md:w-1/2"
         >
@@ -158,8 +156,7 @@ const FooterDisco = ({ discoData }: { discoData: DataDisco }) => {
               SUBMIT
             </Button>
           </form>
-        </div>
-      </div>
+        </div> */}
     </section>
   );
 };
