@@ -8,11 +8,8 @@ import useCart, { ICart } from "@/store/useCart";
 import clsx from "clsx";
 import { ChevronLeftIcon, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import GuestsInput from "./components/GuestsInput";
-import { useState } from "react";
 
 const Cart = () => {
   const router = useRouter();
@@ -32,10 +29,6 @@ const Cart = () => {
       return Number(item.quantity);
     } else return 0;
   });
-
-  const [inputList, setInputList] = useState(
-    Array.from({ length: ticketQuantity[0] }, (_, index) => ({ firstName: "", lastName: "" }))
-  );
 
   const increment = (item: ICart) => {
     const quantity = item.quantity + 1;
@@ -84,9 +77,9 @@ const Cart = () => {
       if (
         cartItems.reduce((acc, currentItem) => Number(currentItem.quantity) * Number(currentItem.price) + acc, 0) > 0
       ) {
-        mutate({ userId, payloadReservation, inputList });
+        mutate({ userId, payloadReservation });
       } else {
-        reserveFree({ userId, payloadReservation, inputList });
+        reserveFree({ userId, payloadReservation });
       }
     }
   };
@@ -278,15 +271,6 @@ const Cart = () => {
                       <p style={{ color: discoColors.navbarForeground }} className="font-semibold">
                         Subtotal: ${item.quantity * Number(item.price)}
                       </p>
-                    </div>
-                  )}
-                  {item.quantity > 1 && (
-                    <div style={{ background: discoColors.bgNavbarColor }} className="p-2 rounded-2xl">
-                      <p className="text-start" style={{ color: discoColors.navbarForeground }}>
-                        Companions
-                      </p>
-
-                      <GuestsInput quantity={item.quantity} inputList={inputList} setInputList={setInputList} />
                     </div>
                   )}
                 </div>

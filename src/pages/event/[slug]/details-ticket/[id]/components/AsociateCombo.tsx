@@ -15,13 +15,13 @@ const AsociateCombo = ({ discoId, discoTicketId }: { discoId: string; discoTicke
       <DialogTrigger asChild>
         <div>
           <Button variant="default" className="flex gap-2 items-center pr-3">
-            <span>Asociate combo</span> <PlusCircle />
+            <span>Asociate pack</span> <PlusCircle />
           </Button>
         </div>
       </DialogTrigger>
       <DialogContent className="w-2/3 h-2/3 overflow-hidden">
         <DialogHeader>
-          <DialogTitle className="flex justify-center py-4 text-white bg-primary">Asociate combo</DialogTitle>
+          <DialogTitle className="flex justify-center py-4 text-white bg-primary">Asociate pack</DialogTitle>
         </DialogHeader>
         <DialogClose className="absolute right-4 top-4">
           <X className="stroke-white" />

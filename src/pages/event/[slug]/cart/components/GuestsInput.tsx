@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 const GuestsInput = ({
+  //not used for now
   quantity,
   inputList,
   setInputList,

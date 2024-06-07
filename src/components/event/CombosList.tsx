@@ -21,7 +21,7 @@ const CombosList = ({ discoId }: { discoId: string }) => {
           <div className="flex gap-4 items-end" key={combo.id}>
             <div>
               <p className="font-semibold text-2xl py-2 pl-2">
-                Combo <span className="border-2 border-black px-2 rounded-full">{combo.category}</span>
+                Pack <span className="border-2 border-black px-2 rounded-full">{combo.category}</span>
               </p>
 
               {combo?.comboDetail?.image && (

@@ -18,11 +18,11 @@ const AddCombos = ({ disco }: { disco: DataDisco }) => {
   return (
     <Dialog>
       <DialogTrigger className="text-start text-sm px-2 py-1 hover:bg-black hover:text-white rounded-sm w-full transition-colors">
-        Combos
+        Packs
       </DialogTrigger>
       <DialogContent className="w-11/12 h-3/4 p-8">
         <DialogHeader>
-          <DialogTitle>Combos</DialogTitle>
+          <DialogTitle>Packs</DialogTitle>
         </DialogHeader>
         <DialogClose className="absolute right-4 top-4">
           <X />

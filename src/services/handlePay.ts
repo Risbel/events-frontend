@@ -1,10 +1,9 @@
 import httpService from "@/config/axios.config";
 import { ICart } from "@/store/useCart";
 
-export const handlePay = async ({ userId, payloadReservation: cartItems, inputList: companions }: IReservation) => {
+export const handlePay = async ({ userId, payloadReservation: cartItems }: IReservation) => {
   const response = await httpService.post<ICheckoutSession>(`/stripe/checkout/${userId}`, {
     cartItems,
-    companions,
   });
   return response.data;
 };

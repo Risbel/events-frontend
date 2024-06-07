@@ -65,7 +65,7 @@ const AddCombosForm = ({ discoId }: { discoId: string }) => {
           </div>
         ) : (
           <div className="flex gap-2 items-center pl-3 pr-2">
-            <span>Add combo</span> <PlusCircle />
+            <span>Add pack</span> <PlusCircle />
           </div>
         )}
       </Button>
