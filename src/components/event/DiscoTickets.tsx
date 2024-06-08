@@ -12,10 +12,12 @@ import AddCombosForm from "@/pages/event/[slug]/details-ticket/[id]/components/A
 
 import { compareAsc } from "date-fns";
 import { DiscoDetail, IDiscoColors } from "@/services/getDisco";
-import { CalendarDays, CreditCard, RockingChair } from "lucide-react";
+import { CalendarDays, CreditCard, Edit, RockingChair, Trash2 } from "lucide-react";
 import EditTicketsForm from "@/components/forms/EditTicketsForm";
 import DeleteTicketButton from "@/components/buttons/DeleteTicketButton";
 import AddTicketsForm from "@/components/forms/AddTicketsForm";
+import EditTicket from "./EditTicket";
+import DeleteTicket from "./DeleteTicket";
 
 export const LogoCategory = ({ ticket, discoColors }: { ticket: IDiscoTicket; discoColors: IDiscoColors }) => {
   return (
@@ -263,6 +265,10 @@ const DiscoTickets = ({
                         {new Date(ticket.expDate).getDate()}
                       </p>
                     </div>
+                  </div>
+                  <div className="flex w-full justify-end pr-4">
+                    {havePermission("update", "Tickets") && <EditTicket ticket={ticket} />}
+                    {havePermission("delete", "Tickets") && <DeleteTicket idTicket={ticket.id} />}
                   </div>
                 </div>
               </div>

@@ -10,7 +10,7 @@ import { Calendar } from "../ui/calendar";
 import { useState } from "react";
 import { cn } from "@/lib/shadcnUtils";
 import { endOfDay, format, startOfDay } from "date-fns";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Loader2 } from "lucide-react";
 
 const MAX_FILE_SIZE = 1048576;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -208,7 +208,7 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
           id="largeDescription"
           {...register("largeDescription")}
         />
-        <div>
+        <div className="mb-2">
           <label className="block text-xs font-medium text-gray-200" htmlFor="picture">
             Picture
           </label>
@@ -218,7 +218,9 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
 
         <input {...register("discoId")} id="discoId" type="text" hidden defaultValue={discoId} />
 
-        <ButtomSubmit className="mt-2" text="Add" isLoading={isLoading} />
+        <div className="flex justify-center">
+          <Button variant="secondary">{isLoading ? <Loader2 className="animate-spin" /> : <span>Submit</span>} </Button>
+        </div>
       </form>
     </>
   );

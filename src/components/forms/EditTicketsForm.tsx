@@ -7,6 +7,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdateDiscoTicket } from "@/hooks/useUpdateDiscoTicket";
 import Spinner from "../loaders/Spinner";
+import { Loader2 } from "lucide-react";
 
 const editTicketSchema = z.object({
   id: z.string().optional(),
@@ -28,8 +29,6 @@ const EditTicketsForm = ({
   countInStock: string;
   shortDescription: string;
 }) => {
-  const [isActiveForm, setIsActiveForm] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -38,8 +37,7 @@ const EditTicketsForm = ({
     resolver: zodResolver(editTicketSchema),
   });
 
-  const { isLoading, mutate } = useUpdateDiscoTicket(setIsActiveForm);
-
+  const { isLoading, mutate } = useUpdateDiscoTicket();
   const onSubmit: SubmitHandler<EditTicketSchema> = (data) => {
     if (id) {
       data.id = id;
@@ -51,62 +49,47 @@ const EditTicketsForm = ({
   };
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className={clsx(
-          !isActiveForm && "hidden",
-          "absolute translate-y-12 z-50  bg-black/50 backdrop-blur-md p-2 rounded-md"
-        )}
-      >
+    <form onSubmit={handleSubmit(onSubmit)} className={clsx("z-50 bg-primary p-2 rounded-md w-full")}>
+      <div>
+        <label htmlFor="price" className="block mb-1 text-xs font-medium text-gray-200">
+          price
+        </label>
+        <Input defaultValue={price} type="number" placeholder="$" min={1} id="price" {...register("price")} />
+        {errors.price && <p className="text-xs italic text-red-500 mt-2">{errors.price.message}</p>}
+      </div>
+      <div>
+        <label htmlFor="countInStock" className="block mb-1 text-xs font-medium text-gray-200">
+          seats / quantity
+        </label>
+        <Input
+          defaultValue={countInStock}
+          type="number"
+          placeholder="seats / quantity"
+          min={0}
+          id="countInStock"
+          {...register("countInStock")}
+        />
+        {errors.countInStock && <p className="text-xs italic text-red-500 mt-2">{errors.countInStock.message}</p>}
+      </div>
+      {
         <div>
-          <label htmlFor="price" className="block mb-1 text-xs font-medium text-gray-200">
-            price
+          <label htmlFor="shortDescription" className="w-full block mb-1 text-xs font-medium text-gray-200">
+            optional short description
           </label>
-          <Input defaultValue={price} type="number" placeholder="$" min={1} id="price" {...register("price")} />
-          {errors.price && <p className="text-xs italic text-red-500 mt-2">{errors.price.message}</p>}
-        </div>
-        <div>
-          <label htmlFor="countInStock" className="block mb-1 text-xs font-medium text-gray-200">
-            seats / quantity
-          </label>
-          <Input
-            defaultValue={countInStock}
-            type="number"
-            placeholder="seats / quantity"
-            min={0}
-            id="countInStock"
-            {...register("countInStock")}
+          <textarea
+            className="w-full py-2 pl-1 text-xs leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+            defaultValue={shortDescription}
+            id="shortDescription"
+            {...register("shortDescription")}
           />
-          {errors.countInStock && <p className="text-xs italic text-red-500 mt-2">{errors.countInStock.message}</p>}
         </div>
-        {shortDescription !== "" && (
-          <div>
-            <label htmlFor="shortDescription" className="w-full block mb-1 text-xs font-medium text-gray-200">
-              optional short description
-            </label>
-            <textarea
-              className="w-full py-2 pl-1 text-xs leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-              defaultValue={shortDescription}
-              id="shortDescription"
-              {...register("shortDescription")}
-            />
-          </div>
-        )}
-        <div className="pt-2">
-          <Button className="flex items-center gap-2">
-            Send
-            {isLoading && <Spinner diameter={4} stroke={"primary"} />}
-          </Button>
-        </div>
-      </form>
-      {!isActiveForm && <Button onClick={() => setIsActiveForm(true)}> edit</Button>}
-      {isActiveForm && (
-        <Button className="bg-yellow-600 hover:bg-yellow-500/80" onClick={() => setIsActiveForm(false)}>
-          descart
+      }
+      <div className="pt-2">
+        <Button variant="secondary" className="flex items-center gap-2">
+          {isLoading ? <Loader2 className="animate-spin" /> : <span>Send</span>}
         </Button>
-      )}
-    </div>
+      </div>
+    </form>
   );
 };
 
