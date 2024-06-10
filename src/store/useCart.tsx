@@ -53,7 +53,7 @@ export interface ICart {
   comboImage?: string | null;
   ticketImages?: any[];
   category: string;
-  colaborator: string | null;
+  collaborator: string | null;
   expDate: string;
   quantity: number;
   countInStock: number;

@@ -11,6 +11,7 @@ import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useAddBannerImages } from "@/hooks/useAddBannerImages";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import BannerImageItem from "./BannerImageItem";
 
 const MAX_FILE_SIZE = 1048576;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -44,7 +45,6 @@ export type AddBannerImagesSchema = z.infer<typeof addBannerImagesSchema>;
 const AddBannerImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
   const { data } = useGetBannerImages(discoDetail.id);
 
-  const { mutate: deleteBannerImage, isLoading } = useDeleteBannerImage();
   const { mutate: addBannerImages, isLoading: isLoadingAddImages, isSuccess } = useAddBannerImages();
 
   const {
@@ -87,57 +87,21 @@ const AddBannerImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
       <DialogTrigger className="text-start text-sm px-2 py-1 hover:bg-black hover:text-white rounded-sm w-full transition-colors">
         Banner images
       </DialogTrigger>
-      <DialogContent
-        style={{
-          background: `${discoDetail.discoColor.bgNavbarColor}`,
-          border: `2px solid ${discoDetail.discoColor.navbarForeground}`,
-        }}
-        className="h-5/6 w-full md:w-3/5 lg:w-3/5 text-left backdrop-blur-xl"
-      >
+      <DialogContent className="h-5/6 w-full md:w-3/5 lg:w-3/5 text-left backdrop-blur-xl">
         <div className="flex h-full p-2 flex-col gap-4">
           <div>
-            <h2 style={{ color: `${discoDetail.discoColor.navbarForeground}` }} className="text-2xl pb-4 text-center">
-              Banner images
-            </h2>
+            <h2 className="text-2xl pb-4 text-center">Banner images</h2>
           </div>
           <div className="flex flex-col gap-6 overflow-y-auto px-4 pb-4">
             {data.map((image) => {
-              return (
-                <div key={image.id} className="flex justify-between place-items-start bg-white/20 rounded-xl p-2">
-                  <div className="flex">
-                    <img className="rounded-xl" width={300} height={200} src={image.image} alt="banner image" />
-                    <p>{image?.alt}</p>
-                  </div>
-
-                  <div className="flex gap-2 p-8 rounded-md">
-                    <button className="hover:scale-110">
-                      <PenSquareIcon height={40} width={40} stroke={`${discoDetail.discoColor.navbarForeground}`} />
-                    </button>
-
-                    <button onClick={() => deleteBannerImage(image.id)} className="hover:scale-110">
-                      {isLoading ? (
-                        <Loader2 stroke={`${discoDetail.discoColor.navbarForeground}`} />
-                      ) : (
-                        <Trash2Icon
-                          height={40}
-                          width={40}
-                          className="hover:stroke-red-700"
-                          stroke={`${discoDetail.discoColor.navbarForeground}`}
-                        />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              );
+              return <BannerImageItem image={image} key={image.id} />;
             })}
 
             <form encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col justify-center">
                 {fields.length > 0 && (
                   <div className="mb-6">
-                    <p style={{ color: discoDetail.discoColor.navbarForeground }} className="text-xl font-semibold">
-                      List of images
-                    </p>
+                    <p className="text-xl font-semibold">List of images</p>
                   </div>
                 )}
 
@@ -156,7 +120,6 @@ const AddBannerImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
 
                           <Input
                             id="bannerImages"
-                            style={{ border: `2px solid ${discoDetail.discoColor.navbarForeground}` }}
                             type="file"
                             {...register(`bannerImages.${index}.name`)}
                             autoComplete="none"
@@ -180,10 +143,6 @@ const AddBannerImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
                 </div>
                 <div className="flex justify-end">
                   <Button
-                    style={{
-                      background: `${discoDetail.discoColor.navbarForeground}`,
-                      color: `${discoDetail.discoColor.bgNavbarColor}`,
-                    }}
                     variant={"secondary"}
                     className="flex gap-2 justify-between rounded-lg pr-2 my-4 w-1/2 md:w-1/3 hover:opacity-90"
                     type="button"
@@ -197,10 +156,6 @@ const AddBannerImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
                 {fields.length > 0 && (
                   <Button
                     type="submit"
-                    style={{
-                      background: `${discoDetail.discoColor.navbarForeground}`,
-                      color: `${discoDetail.discoColor.bgNavbarColor}`,
-                    }}
                     variant={"secondary"}
                     className="flex gap-2 justify-center rounded-lg pr-2 my-4 w-1/2 hover:opacity-90"
                   >

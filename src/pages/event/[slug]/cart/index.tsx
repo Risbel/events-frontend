@@ -70,7 +70,7 @@ const Cart = () => {
           ticketDescription: item?.ticketDescription ?? null,
           price: item.price,
           discoSlug: item.discoSlug ?? null,
-          colaborator: item.colaborator ?? item.colaborator,
+          collaborator: item.collaborator ?? item.collaborator,
         };
       });
 
