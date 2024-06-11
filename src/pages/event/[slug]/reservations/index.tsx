@@ -1,12 +1,11 @@
 import EventLayout from "@/components/layouts/EventLayout";
-import Spinner from "@/components/loaders/Spinner";
 import NavbarEvent from "@/components/navigation/NavbarEvent";
 import useGetDisco from "@/hooks/useGetDisco";
 import { useGetMyReservations } from "@/hooks/useGetMyReservations";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
 import { IReservationByUserId } from "@/services/getMyReservations";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,8 +33,8 @@ const Reservations = () => {
     return (
       <EventLayout>
         <NavbarEvent />
-        <div className="flex justify-center pt-20 bg-primary h-screen">
-          <Spinner diameter={8} stroke={"white"} />
+        <div className="flex justify-center pt-20 h-screen">
+          <Loader2 className="animate-spin" />
         </div>
       </EventLayout>
     );
@@ -164,23 +163,6 @@ const Reservations = () => {
                             ))}
                           </div>
                         </div>
-                      </div>
-
-                      <div>
-                        <p className="text-2xl">Companions</p>
-                        {reservation.ticketsReservations[0].companions.length ? (
-                          <ul>
-                            {reservation.ticketsReservations[0].companions.map((compa) => {
-                              return (
-                                <li key={compa.id}>
-                                  {compa.firstName} {compa.lastName}
-                                </li>
-                              );
-                            })}
-                          </ul>
-                        ) : (
-                          <p>No companions</p>
-                        )}
                       </div>
 
                       <div className="flex flex-col justify-between items-end font-light text-xl">
