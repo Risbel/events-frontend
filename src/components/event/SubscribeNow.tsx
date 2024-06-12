@@ -46,6 +46,3 @@ const SubscribeNow = ({
 };
 
 export default SubscribeNow;
-{
-  /*  */
-}

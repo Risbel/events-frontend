@@ -1,6 +1,5 @@
 import { useGetBannerImages } from "@/hooks/useGetBannerImages";
 import { DiscoDetail } from "@/services/getDisco";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const BannerImages = ({ discoDetails }: { discoDetails: DiscoDetail }) => {

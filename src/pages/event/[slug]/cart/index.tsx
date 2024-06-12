@@ -1,4 +1,4 @@
-import NavbarEvent from "@/components/navigation/NavbarEvent";
+import NavbarEvent from "@/components/event/navbar/NavbarEvent";
 import { Button } from "@/components/ui/button";
 import { useCreateReservation } from "@/hooks/useCreateReservation";
 import useGetDisco from "@/hooks/useGetDisco";

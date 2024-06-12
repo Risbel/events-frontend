@@ -1,9 +1,4 @@
-import React from "react";
-
-import Image from "next/image";
-
 import { DiscoDetail } from "@/services/getDisco";
-
 import useHavePermissions from "@/utils/useHavePermissions";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";

@@ -5,7 +5,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "../../../ui/dropdown-menu";
 import { DataDisco } from "@/services/getDisco";
 import Link from "next/link";
 import { useParams } from "next/navigation";

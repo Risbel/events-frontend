@@ -1,9 +1,9 @@
-import ButtonStart from "./components/ButtonStart";
+import ButtonStart from "../components/buttons/ButtonStart";
 
 import Link from "next/link";
 import Image from "next/image";
-import FormContact from "./components/FormContact";
-import CarouselAdvantages from "./components/Carousel";
+import FormContact from "../components/home/FormContact";
+import CarouselAdvantages from "../components/home/Carousel";
 
 import LandingLayout from "@/components/layouts/LandingLayouts";
 

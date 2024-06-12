@@ -1,5 +1,3 @@
-import { useGetCombosByDiscoId } from "@/hooks/useGetCombosByDiscoId";
-import AddCombosForm from "./AddCombosForm";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import useCart from "@/store/useCart";
@@ -43,7 +41,7 @@ const CombosInTicket = ({
       countInStock: combo.Combo.countInStock,
       comboDescription: combo.Combo.comboDetail.description,
       comboImage: combo.Combo.comboDetail.image,
-      colaborator: localStorage.getItem("colaborator"),
+      collaborator: localStorage.getItem("collaborator"),
       expDate,
     });
   };

@@ -9,7 +9,6 @@ const menuItems = [
   { id: 3, label: "Tutorials", icon: VideoIcon, link: "/dashboard/tutorials" },
   { id: 4, label: "Manage Users", icon: UsersIcon, link: "/dashboard/users" },
   { id: 5, label: "Permissions", icon: LockKeyhole, link: "/dashboard/permissions" },
-
   { id: 6, label: "Home", icon: HomeIcon, link: "/dashboard" },
 ];
 

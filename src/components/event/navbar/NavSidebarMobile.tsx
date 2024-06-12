@@ -81,19 +81,19 @@ const NavSidebarEventMobile = ({ disco }: any) => {
               <DropdownMenuItem asChild>
                 <Link
                   className="font-semibold hover:opacity-80"
-                  onClick={(event) => handleClickScroll(event, "#contact")}
-                  href={"#contact"}
+                  onClick={(event) => handleClickScroll(event, "#tickets")}
+                  href={"#tickets"}
                 >
-                  Contact
+                  Tickets
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link
                   className="font-semibold hover:opacity-80"
-                  onClick={(event) => handleClickScroll(event, "#FAQ")}
-                  href={"#FAQ"}
+                  onClick={(event) => handleClickScroll(event, "#contact")}
+                  href={"#contact"}
                 >
-                  FAQ
+                  Contact
                 </Link>
               </DropdownMenuItem>
             </>

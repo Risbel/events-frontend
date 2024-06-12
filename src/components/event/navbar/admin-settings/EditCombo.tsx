@@ -1,14 +1,7 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import EditComboForm from "@/components/forms/EditComboForm";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ICombo } from "@/services/getCombosByDiscoId";
 import { Edit } from "lucide-react";
-import EditComboForm from "../forms/EditComboForm";
 
 const EditCombo = ({ combo }: { combo: ICombo }) => {
   return (

@@ -1,14 +1,12 @@
-import Resource405 from "@/components/alerts/Resource405";
 import AddPermissionButton from "@/components/buttons/AddPermissionButton";
 import AddRoleButton from "@/components/buttons/AddRoleButton";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
-import BackToHome from "@/components/links/BackToHome";
-import Spinner from "@/components/loaders/Spinner";
-import PermissionsByDiscoRole from "@/components/permissions/PermissionsByDiscoRole";
+import PermissionsByDiscoRole from "@/components/dashboard/permissions/PermissionsByDiscoRole";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useGetDiscoBySlug } from "@/hooks/useGetDiscoBySlug";
 import useGetMe from "@/hooks/useGetMe";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/router";
 
 const DiscoPerssions = () => {
@@ -23,7 +21,7 @@ const DiscoPerssions = () => {
     return (
       <DashboardLayout>
         <div className="flex pt-24 justify-center">
-          <Spinner diameter={10} stroke="black" />
+          <Loader2 className="animate-spin" />
         </div>
       </DashboardLayout>
     );

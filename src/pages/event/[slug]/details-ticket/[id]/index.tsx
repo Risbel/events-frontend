@@ -3,22 +3,22 @@ import Spinner from "@/components/loaders/Spinner";
 import { Button } from "@/components/ui/button";
 import { useGetDiscoTicketById } from "@/hooks/useGetDiscoTicketById";
 import useCart from "@/store/useCart";
-import { ChevronLeft, ShoppingBag, ShoppingCart, X } from "lucide-react";
+import { ChevronLeft, ShoppingCart, X } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { useListMonths } from "@/hooks/useListMonths";
 
-import NavbarEvent from "@/components/navigation/NavbarEvent";
 import { useSession } from "next-auth/react";
 import useGetDisco from "@/hooks/useGetDisco";
 import { cn } from "@/lib/shadcnUtils";
 import React, { useEffect } from "react";
-import CombosInTicket from "./components/CombosInTickets";
-import AsociateCombo from "./components/AsociateCombo";
 import useHavePermissions from "@/utils/useHavePermissions";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
+import NavbarEvent from "@/components/event/navbar/NavbarEvent";
+import CombosInTicket from "@/components/details-ticket/CombosInTickets";
+import AsociateCombo from "@/components/details-ticket/AsociateCombo";
 
 const DiscoTicketDetails = () => {
   const months = useListMonths();
@@ -77,7 +77,7 @@ const DiscoTicketDetails = () => {
       discoId: data.Disco.id,
       quantity,
       countInStock: data.countInStock,
-      colaborator: localStorage.getItem("colaborator"),
+      collaborator: localStorage.getItem("collaborator"),
       expDate: data.expDate,
     });
   };
@@ -278,14 +278,14 @@ const DiscoTicketDetails = () => {
                         style={{ color: discoColors.bgNavbarColor, background: discoColors.navbarForeground }}
                         className={cn(
                           "text-xs px-3 h-8",
-                          localStorage.getItem("colaborator") && !cartItems?.[0]?.colaborator && "animate-bounce"
+                          localStorage.getItem("colaborator") && !cartItems?.[0]?.collaborator && "animate-bounce"
                         )}
                         type="submit"
                       >
                         Add <ShoppingCart height={15} />
                       </Button>
 
-                      {existItem && !existItem.colaborator && (
+                      {existItem && !existItem.collaborator && (
                         <button
                           style={{ color: discoColors.navbarForeground }}
                           type="button"

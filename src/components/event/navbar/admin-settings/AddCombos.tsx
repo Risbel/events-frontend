@@ -1,18 +1,9 @@
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import AddCombosForm from "@/pages/event/[slug]/details-ticket/[id]/components/AddCombosForm";
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import AddCombosForm from "@/components/details-ticket/AddCombosForm";
 import { DataDisco } from "@/services/getDisco";
-import CombosList from "./CombosList";
+
 import { X } from "lucide-react";
+import CombosList from "./CombosList";
 
 const AddCombos = ({ disco }: { disco: DataDisco }) => {
   return (

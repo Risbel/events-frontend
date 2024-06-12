@@ -6,11 +6,11 @@ import Link from "next/link";
 import { ChevronLeftIcon } from "lucide-react";
 import { useRouter } from "next/router";
 
-import NavbarEvent from "@/components/navigation/NavbarEvent";
 import Subscriptions from "./components/Subscriptions";
 import useGetDisco from "@/hooks/useGetDisco";
 import useGetMe from "@/hooks/useGetMe";
 import { useListMonths } from "@/hooks/useListMonths";
+import NavbarEvent from "@/components/event/navbar/NavbarEvent";
 
 const SkeletonAvatar = () => {
   return (
@@ -52,12 +52,12 @@ const Profile = () => {
       <Link
         style={{ background: discoColors.bgNavbarColor }}
         href={`/event/${slug}`}
-        className="absolute z-20 flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-2 md:pr-4 py-1 mt-8"
+        className="absolute z-20 flex items-center left-0 top-8 bg-secondary rounded-xl px-2 py-1 mt-8 ml-2 group"
       >
-        <ChevronLeftIcon stroke={discoColors.navbarForeground} />
-        <span className="hidden md:block" style={{ color: discoColors.navbarForeground }}>
-          Go back
-        </span>
+        <ChevronLeftIcon
+          className="group-hover:-translate-x-1 transition-transform"
+          stroke={discoColors.navbarForeground}
+        />
       </Link>
       <div className="flex flex-col gap-8 pt-24">
         <div

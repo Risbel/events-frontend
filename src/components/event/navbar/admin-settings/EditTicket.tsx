@@ -1,7 +1,7 @@
+import EditTicketsForm from "@/components/forms/EditTicketsForm";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { IDiscoTicket } from "@/services/getDiscoTicketsByIdDisco";
 import { Edit } from "lucide-react";
-import EditTicketsForm from "../forms/EditTicketsForm";
 
 const EditTicket = ({ ticket }: { ticket: IDiscoTicket }) => {
   return (

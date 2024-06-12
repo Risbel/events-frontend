@@ -1,5 +1,5 @@
 import { useGetCombosByDiscoId } from "@/hooks/useGetCombosByDiscoId";
-import { Edit, Loader2, Trash2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import EditCombo from "./EditCombo";
 import DeleteCombo from "./DeleteCombo";
 

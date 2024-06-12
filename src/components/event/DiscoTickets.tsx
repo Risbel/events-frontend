@@ -1,5 +1,4 @@
 import { IDiscoTicket } from "@/services/getDiscoTicketsByIdDisco";
-import Image from "next/image";
 import clsx from "clsx";
 import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 import useHavePermissions from "@/utils/useHavePermissions";
@@ -8,16 +7,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
-import AddCombosForm from "@/pages/event/[slug]/details-ticket/[id]/components/AddCombosForm";
+import AddCombosForm from "@/components/details-ticket/AddCombosForm";
 
 import { compareAsc } from "date-fns";
 import { DiscoDetail, IDiscoColors } from "@/services/getDisco";
-import { CalendarDays, CreditCard, Edit, RockingChair, Trash2 } from "lucide-react";
-import EditTicketsForm from "@/components/forms/EditTicketsForm";
-import DeleteTicketButton from "@/components/buttons/DeleteTicketButton";
 import AddTicketsForm from "@/components/forms/AddTicketsForm";
-import EditTicket from "./EditTicket";
-import DeleteTicket from "./DeleteTicket";
+import EditTicket from "./navbar/admin-settings/EditTicket";
+import DeleteTicket from "./navbar/admin-settings/DeleteTicket";
 
 export const LogoCategory = ({ ticket, discoColors }: { ticket: IDiscoTicket; discoColors: IDiscoColors }) => {
   return (
@@ -290,21 +286,3 @@ const DiscoTickets = ({
 };
 
 export default DiscoTickets;
-
-{
-  /* {havePermission("update", "Tickets") &&
-                      (ticket.ticketsReservations.length < 1 || ticket.category === "common") && (
-                        <div>
-                          <EditTicketsForm
-                            id={ticket.id}
-                            price={ticket.price}
-                            countInStock={ticket.countInStock}
-                            shortDescription={ticket.shortDescription}
-                          />
-                        </div>
-                      )}
-
-                    {ticket.ticketsReservations.length < 1 && havePermission("delete", "Tickets") && (
-                      <DeleteTicketButton id={ticket.id} />
-                    )} */
-}

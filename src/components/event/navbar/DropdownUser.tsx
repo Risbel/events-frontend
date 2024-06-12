@@ -6,16 +6,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Link from "next/link";
 
-import Logout from "../buttons/Logout";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import useGetDisco from "@/hooks/useGetDisco";
 import { UserCircle2 } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Logout from "@/components/buttons/Logout";
 
-const DropdownNavbar = () => {
+const DropdownUser = () => {
   const router = useRouter();
   const { query } = router;
   const { slug } = query;
@@ -78,4 +78,4 @@ const DropdownNavbar = () => {
   );
 };
 
-export default DropdownNavbar;
+export default DropdownUser;

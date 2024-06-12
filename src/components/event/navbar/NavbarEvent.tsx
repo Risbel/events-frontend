@@ -1,5 +1,4 @@
 import Link from "next/link";
-import DropdownNavbar from "./DropdownNavbar";
 
 import { useSession } from "next-auth/react";
 import useCart from "@/store/useCart";
@@ -10,10 +9,11 @@ import { useRouter } from "next/router";
 import { BellIcon, Home, ShoppingCart } from "lucide-react";
 import useGetDisco from "@/hooks/useGetDisco";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
-import AdminSettings from "../event/AdminSettings";
+import AdminSettings from "./admin-settings";
 import useHandleScroll from "@/hooks/useHandlerScroll";
 import { usePathname } from "next/navigation";
-import SubscribeNow from "../event/SubscribeNow";
+import SubscribeNow from "../SubscribeNow";
+import DropdownUser from "./DropdownUser";
 
 const NavbarEvent = () => {
   const router = useRouter();
@@ -154,7 +154,7 @@ const NavbarEvent = () => {
           )}
 
           <div className="flex justify-center">
-            <DropdownNavbar />
+            <DropdownUser />
           </div>
           {havePermission("read", "Admin settings on disco") && <AdminSettings disco={discoData.disco} />}
         </div>

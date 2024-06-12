@@ -1,17 +1,15 @@
 import { DiscoDetail } from "@/services/getDisco";
 
-import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
-import Image from "next/image";
 import { useGetBannerImages } from "@/hooks/useGetBannerImages";
-import { Loader2, PenSquareIcon, PlusCircleIcon, PlusIcon, Trash2Icon, X } from "lucide-react";
-import { useDeleteBannerImage } from "@/hooks/useDeleteBannerImage";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
+import { Loader2, PlusCircleIcon, X } from "lucide-react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { useAddBannerImages } from "@/hooks/useAddBannerImages";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import BannerImageItem from "./BannerImageItem";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const MAX_FILE_SIZE = 1048576;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];

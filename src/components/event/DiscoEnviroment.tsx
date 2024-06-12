@@ -1,5 +1,4 @@
 import useGetDisco from "@/hooks/useGetDisco";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
 
 import FooterDisco from "./FooterDisco";
@@ -11,11 +10,9 @@ import { SkeletonAboutUs, SkeletonExperiences, SkeletonHead } from "./Skeleton";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import { useGetDiscoTicketsByIdDisco } from "@/hooks/useGetDiscoTicketsByIdDisco";
 import DiscoTickets from "./DiscoTickets";
-import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
-import NavbarEvent from "@/components/navigation/NavbarEvent";
-import NavSidebarEventMobile from "../navigation/NavSidebarMobile";
+import NavSidebarEventMobile from "./navbar/NavSidebarMobile";
+import NavbarEvent from "./navbar/NavbarEvent";
 
 const DiscoEnviroment = ({ slug }: { slug: any }) => {
   const { data: session } = useSession();

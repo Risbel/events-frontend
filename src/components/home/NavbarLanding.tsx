@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/shadcnUtils";
-import ButtonStart from "@/pages/components/ButtonStart";
+import ButtonStart from "../buttons/ButtonStart";
 
 const NavbarLanding = () => {
   return (

@@ -1,6 +1,4 @@
-import useGetPermissionsByDiscoRole from "@/hooks/useGetPermissionsByDiscoRole";
-import AddPermissionButton from "../buttons/AddPermissionButton";
-import { Table, TableBody, TableCell, TableRow } from "../ui/table";
+import { Table, TableBody, TableCell, TableRow } from "../../ui/table";
 import Resources from "./Resources";
 import { IrolePermissionResouces } from "@/services/getDiscoBySlug";
 

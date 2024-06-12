@@ -1,5 +1,5 @@
+import NavbarEvent from "@/components/event/navbar/NavbarEvent";
 import EventLayout from "@/components/layouts/EventLayout";
-import NavbarEvent from "@/components/navigation/NavbarEvent";
 import useGetDisco from "@/hooks/useGetDisco";
 import { useGetMyReservations } from "@/hooks/useGetMyReservations";
 import { useListDays } from "@/hooks/useListDays";
@@ -54,10 +54,10 @@ const Reservations = () => {
         <div className="pt-16 h-full">
           <Link
             style={{ color: discoColors.navbarForeground, background: `${discoColors.bgNavbarColor}` }}
-            className="fixed z-20 flex items-center left-0 top-8 bg-secondary rounded-r-3xl pr-2 md:pr-4 py-1 mt-8"
+            className="fixed z-20 flex items-center left-0 top-8 shadow-md rounded-lg px-2 py-1 mt-8 ml-2 group"
             href={`/event/${slug}`}
           >
-            <ChevronLeft width={20} /> Go back
+            <ChevronLeft className="group-hover:-translate-x-0.5 transition-transform" width={20} />
           </Link>
           <div className="flex justify-center">
             <h1

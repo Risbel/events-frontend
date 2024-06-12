@@ -8,9 +8,8 @@ import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import SearchReservationsForm from "./components/SearchReservationsBar";
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
-
-import NavbarEvent from "@/components/navigation/NavbarEvent";
+import { ChevronLeft, Loader2, Timer } from "lucide-react";
+import NavbarEvent from "@/components/event/navbar/NavbarEvent";
 
 const MySales = () => {
   const days = useListDays();
@@ -25,8 +24,8 @@ const MySales = () => {
     return (
       <EventLayout>
         <NavbarEvent />
-        <div className="pt-20 flex justify-center bg-primary h-full">
-          <Spinner diameter={8} stroke="white" />
+        <div className="pt-20 flex justify-center h-full">
+          <Loader2 className="animate-spin" />
         </div>
       </EventLayout>
     );
@@ -60,20 +59,20 @@ const MySales = () => {
   return (
     <div>
       <NavbarEvent />
-      <div className="pt-16 px-4 md:px-8 bg-primary h-full pb-16">
+      <div className="pt-16 px-4 md:px-8 h-full pb-16">
         <Link
-          className="absolute flex gap-2 text-white font-light border px-[1px] rounded-md hover:bg-white/10"
+          className="absolute flex gap-2 font-light border shadow-md px-[1px] rounded-md hover:bg-white/10"
           href={`/event/${param?.slug}`}
         >
           <ChevronLeft width={20} />
         </Link>
-        <h1 className="text-white text-2xl mb-2 text-center font-semibold">My Sales</h1>
+        <h1 className=" text-2xl mb-2 text-center font-semibold">My Sales</h1>
 
         <SearchReservationsForm setSearchParams={setSearchParams} />
 
         <div className="flex justify-center">{isLoading && <Spinner diameter={8} stroke="white" />}</div>
 
-        <h1 className="text-white text-xl mb-4 text-center md:text-start">Sold to use today</h1>
+        <h1 className=" text-xl mb-4 text-center md:text-start">Sold to use today</h1>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {sortedReservations &&
             sortedReservations.map((reservation) => {
@@ -82,10 +81,13 @@ const MySales = () => {
                 new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).toLocaleDateString().slice(0, 10)
               ) {
                 return (
-                  <div key={reservation.id} className="p-2 border rounded-md bg-white/10">
-                    <div className="flex justify-around bg-black/30">
-                      <p className="text-white text-xs font-light ">Today</p>
-                      <p className="text-white text-xs font-light ">
+                  <div
+                    key={reservation.id}
+                    className="flex flex-col gap-2 p-2 border shadow-md shadow-green-700 rounded-md"
+                  >
+                    <div className="flex justify-around py-2 bg-secondary rounded-md">
+                      <p className="text-xs">Today</p>
+                      <p className="text-xs">
                         {days[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
                         {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
                         {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}
@@ -93,28 +95,28 @@ const MySales = () => {
                     </div>
 
                     <div className="flex justify-between">
-                      <p className="text-white">
+                      <p className="font-semibold">
                         {reservation.User.name} {reservation.User.lastName}
                       </p>
-                      <p className="text-white font-light">{reservation.User.phone}</p>
+                      <p className="font-light">{reservation.User.phone}</p>
                     </div>
                     <div>
-                      <p className="text-white">
-                        <span className="font-semibold bg-black/20">Invoice:</span> {reservation.id.slice(0, 13)}
+                      <p>
+                        <span className="bg-secondary p-1 rounded-md">Invoice:</span> {reservation.id.slice(0, 13)}
                       </p>
                     </div>
                     <div className="grid flex-col gap-2">
                       {reservation.ticketsReservations.map((ticket) => (
                         <div key={ticket.id}>
-                          <div className="bg-black/20 p-2 rounded-md">
+                          <div className="bg-secondary p-2 rounded-md">
                             <div className="flex justify-between items-center">
-                              <p className="text-white text-sm">
+                              <p className=" text-sm">
                                 {ticket.quantity} {ticket.DiscoTicket.category}{" "}
                                 {Number(ticket.quantity) > 1 ? "tickets" : "ticket"}
                               </p>
-                              <p className="text-white text-sm">{ticket.DiscoTicket.price} c/u</p>
+                              <p className=" text-sm">{ticket.DiscoTicket.price} c/u</p>
                             </div>
-                            <p className="text-white text-xs font-light">{ticket.DiscoTicket.shortDescription}</p>
+                            <p className=" text-xs font-light">{ticket.DiscoTicket.shortDescription}</p>
                           </div>
                         </div>
                       ))}
@@ -125,7 +127,9 @@ const MySales = () => {
             })}
         </div>
         <div className="border-b-[1px] border-dashed w-full my-8" />
-        <h1 className="text-white text-xl mb-4 text-center md:text-start">Pending</h1>
+        <h1 className="flex gap-2 items-center text-xl mb-4 text-center md:text-start">
+          Pending <Timer />
+        </h1>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           {sortedReservations &&
             sortedReservations.map((reservation) => {
@@ -135,36 +139,36 @@ const MySales = () => {
               ) {
                 return (
                   <div key={reservation.id}>
-                    <div className="p-2 border rounded-md bg-white/10">
-                      <p className="text-white text-center text-xs font-light bg-black/30">
+                    <div className="flex flex-col gap-2 p-2 border rounded-md shadow-md shadow-blue-900">
+                      <p className=" text-center text-xs bg-secondary p-2 rounded-md">
                         {days[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
                         {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
                         {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}
                       </p>
 
                       <div className="flex justify-between">
-                        <p className="text-white">
+                        <p className="font-semibold">
                           {reservation.User.name} {reservation.User.lastName}
                         </p>
-                        <p className="text-white font-light">{reservation.User.phone}</p>
+                        <p>{reservation.User.phone}</p>
                       </div>
                       <div>
-                        <p className="text-white">
-                          <span className="font-semibold bg-black/20">Invoice:</span> {reservation.id.slice(0, 13)}
+                        <p>
+                          <span className="bg-secondary p-1 rounded-md">Invoice:</span> {reservation.id.slice(0, 13)}
                         </p>
                       </div>
                       <div className="flex flex-col gap-2">
                         {reservation.ticketsReservations.map((ticket) => (
                           <div key={ticket.id}>
-                            <div className="bg-black/20 p-2 rounded-md">
+                            <div className="bg-secondary p-2 rounded-md">
                               <div className="flex justify-between items-center">
-                                <p className="text-white text-sm">
+                                <p className=" text-sm">
                                   {ticket.quantity} {ticket.DiscoTicket.category}{" "}
                                   {Number(ticket.quantity) > 1 ? "tickets" : "ticket"}
                                 </p>
-                                <p className="text-white text-sm">{ticket.DiscoTicket.price} c/u</p>
+                                <p className=" text-sm">{ticket.DiscoTicket.price} c/u</p>
                               </div>
-                              <p className="text-white text-xs font-light">{ticket.DiscoTicket.shortDescription}</p>
+                              <p className=" text-xs font-light">{ticket.DiscoTicket.shortDescription}</p>
                             </div>
                           </div>
                         ))}
@@ -176,7 +180,7 @@ const MySales = () => {
             })}
         </div>
         <div className="border-b-[1px] border-dashed w-full my-8" />
-        <h1 className="text-white text-xl mb-4 text-center md:text-start">Used yesterday</h1>
+        <h1 className="text-xl mb-4 text-center md:text-start">Used yesterday</h1>
         <div className="flex flex-wrap gap-4 justify-center md:justify-start">
           {sortedReservations &&
             sortedReservations.map((reservation) => {
@@ -186,10 +190,10 @@ const MySales = () => {
               ) {
                 return (
                   <div key={reservation.id}>
-                    <div className="p-2 border rounded-md bg-white/10">
-                      <div className="flex justify-around bg-black/30">
-                        <p className="text-white text-xs font-light ">yesterday</p>
-                        <p className="text-white text-center text-xs font-light">
+                    <div className="flex flex-col gap-2 p-2 border rounded-md shadow-md">
+                      <div className="flex justify-around bg-secondary p-2 rounded-md">
+                        <p className="text-xs">yesterday -</p>
+                        <p className="text-xs">
                           {days[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
                           {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
                           {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}
@@ -197,28 +201,28 @@ const MySales = () => {
                       </div>
 
                       <div className="flex flex-wrap gap-2 justify-between">
-                        <p className="text-white">
+                        <p className="font-semibold">
                           {reservation.User.name} {reservation.User.lastName}
                         </p>
-                        <p className="text-white font-light">{reservation.User.phone}</p>
+                        <p className="font-light">{reservation.User.phone}</p>
                       </div>
                       <div>
-                        <p className="text-white">
-                          <span className="font-semibold bg-black/20">Invoice:</span> {reservation.id.slice(0, 13)}
+                        <p>
+                          <span className="rounded-md bg-secondary p-1">Invoice:</span> {reservation.id.slice(0, 13)}
                         </p>
                       </div>
                       <div className="flex flex-col gap-2">
                         {reservation.ticketsReservations.map((ticket) => (
                           <div key={ticket.id}>
-                            <div className="bg-black/20 p-2 rounded-md">
+                            <div className="bg-secondary p-2 rounded-md">
                               <div className="flex justify-between items-center">
-                                <p className="text-white text-sm">
+                                <p className=" text-sm">
                                   {ticket.quantity} {ticket.DiscoTicket.category}{" "}
                                   {Number(ticket.quantity) > 1 ? "tickets" : "ticket"}
                                 </p>
-                                <p className="text-white text-sm">{ticket.DiscoTicket.price} c/u</p>
+                                <p className=" text-sm">{ticket.DiscoTicket.price} c/u</p>
                               </div>
-                              <p className="text-white text-xs font-light">{ticket.DiscoTicket.shortDescription}</p>
+                              <p className=" text-xs font-light">{ticket.DiscoTicket.shortDescription}</p>
                             </div>
                           </div>
                         ))}

@@ -1,6 +1,6 @@
 import { useDeleteRolePermissionResource } from "@/hooks/useDeleteRolePermissionResource";
 import useGetResourcesByPermissionId from "@/hooks/useGetResourcesByPermissionId";
-import Spinner from "../loaders/Spinner";
+import Spinner from "../../loaders/Spinner";
 import { XCircle } from "lucide-react";
 
 const Resources = ({ discoRoleId, permissionId }: { discoRoleId: string; permissionId: string }) => {
