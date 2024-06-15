@@ -91,9 +91,11 @@ const AddBannerImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
             <h2 className="text-2xl pb-4 text-center">Banner images</h2>
           </div>
           <div className="flex flex-col gap-6 overflow-y-auto px-4 pb-4">
-            {data.map((image) => {
-              return <BannerImageItem image={image} key={image.id} />;
-            })}
+            <div className="grid md:grid-cols-2 gap-8">
+              {data.map((image) => {
+                return <BannerImageItem image={image} key={image.id} />;
+              })}
+            </div>
 
             <form encType="multipart/form-data" onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col justify-center">
@@ -139,7 +141,7 @@ const AddBannerImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
                     );
                   })}
                 </div>
-                <div className="flex justify-end">
+                <div className="flex justify-center">
                   <Button
                     variant={"secondary"}
                     className="flex gap-2 justify-between rounded-lg pr-2 my-4 w-1/2 md:w-1/3 hover:opacity-90"
@@ -154,8 +156,8 @@ const AddBannerImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
                 {fields.length > 0 && (
                   <Button
                     type="submit"
-                    variant={"secondary"}
-                    className="flex gap-2 justify-center rounded-lg pr-2 my-4 w-1/2 hover:opacity-90"
+                    variant={"default"}
+                    className="flex gap-2 justify-center rounded-lg pr-2 my-4 w-1/2"
                   >
                     Save {isLoadingAddImages && <Loader2 height={15} className="animate-spin" />}
                   </Button>
