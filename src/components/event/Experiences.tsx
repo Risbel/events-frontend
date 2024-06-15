@@ -1,13 +1,7 @@
 import { DiscoDetail } from "@/services/getDisco";
-import useHavePermissions from "@/utils/useHavePermissions";
-import { ImyPermissions } from "@/services/getMyPermissionsOnDisco";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import DeleteExperienceButton from "@/components/buttons/DeleteExperienceButton";
-import AddExperienceButton from "@/components/buttons/AddExperienceButton";
 
-const Experiences = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail; myPermissions: ImyPermissions }) => {
-  const { havePermission } = useHavePermissions(myPermissions);
-
+const Experiences = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
   return (
     <div
       style={{
@@ -53,15 +47,13 @@ const Experiences = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail;
                         {discoImage?.imageText}
                       </p>
                       <img
-                        className="object-cover max-h-72 rounded-2xl"
+                        className="object-cover h-72 w-full rounded-2xl"
                         src={discoImage.image}
                         width={400}
                         height={400}
                         alt={`experiencie${discoImage.id}`}
                       />
                     </div>
-
-                    {havePermission("delete", "Disco Images") && <DeleteExperienceButton id={discoImage.id} />}
                   </CarouselItem>
                 )
             )}
@@ -69,9 +61,6 @@ const Experiences = ({ discoDetail, myPermissions }: { discoDetail: DiscoDetail;
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
-      </div>
-      <div className="flex justify-center">
-        {havePermission("create", "Disco Images") && <AddExperienceButton discoDetailId={discoDetail.id} />}
       </div>
 
       <div className="absolute rounded-full z-10 h-80 w-80 blur-3xl opacity-70 right-32 bottom-0 -translate-y-1/3 bg-white/50"></div>

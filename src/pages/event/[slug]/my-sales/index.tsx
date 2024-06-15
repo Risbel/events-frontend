@@ -85,9 +85,9 @@ const MySales = () => {
                     key={reservation.id}
                     className="flex flex-col gap-2 p-2 border shadow-md shadow-green-700 rounded-md"
                   >
-                    <div className="flex justify-around py-2 bg-secondary rounded-md">
-                      <p className="text-xs">Today</p>
-                      <p className="text-xs">
+                    <div className="flex justify-between px-4 py-2 bg-green-400 rounded-md">
+                      <p className="text-xs font-bold">Today</p>
+                      <p className="text-xs font-bold">
                         {days[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
                         {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
                         {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}
@@ -140,7 +140,7 @@ const MySales = () => {
                 return (
                   <div key={reservation.id}>
                     <div className="flex flex-col gap-2 p-2 border rounded-md shadow-md shadow-blue-900">
-                      <p className=" text-center text-xs bg-secondary p-2 rounded-md">
+                      <p className=" text-center text-xs font-bold bg-blue-400 p-2 rounded-md">
                         {days[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
                         {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
                         {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}
@@ -180,7 +180,7 @@ const MySales = () => {
             })}
         </div>
         <div className="border-b-[1px] border-dashed w-full my-8" />
-        <h1 className="text-xl mb-4 text-center md:text-start">Used yesterday</h1>
+        <h1 className="text-xl mb-4 text-center md:text-start text-red-500">Used yesterday</h1>
         <div className="flex flex-wrap gap-4 justify-center md:justify-start">
           {sortedReservations &&
             sortedReservations.map((reservation) => {
@@ -190,10 +190,10 @@ const MySales = () => {
               ) {
                 return (
                   <div key={reservation.id}>
-                    <div className="flex flex-col gap-2 p-2 border rounded-md shadow-md">
-                      <div className="flex justify-around bg-secondary p-2 rounded-md">
-                        <p className="text-xs">yesterday -</p>
-                        <p className="text-xs">
+                    <div className="flex flex-col gap-2 p-2 border rounded-md shadow-md shadow-red-400">
+                      <div className="flex justify-around bg-red-400 p-2 rounded-md">
+                        <p className="text-xs font-bold">yesterday -</p>
+                        <p className="text-xs font-bold">
                           {days[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDay()]}-
                           {new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getDate()}-
                           {months[new Date(reservation.ticketsReservations[0].DiscoTicket.expDate).getMonth()]}

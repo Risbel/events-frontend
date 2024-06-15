@@ -47,24 +47,27 @@ const Login = () => {
   }
 
   return (
-    <div
-      style={{ background: data?.disco.discoDetail.discoColor.bgTicketsSection }}
-      className="flex justify-center items-center h-screen"
-    >
-      <div className="flex gap-4 p-8 rounded-xl bg-white shadow-xl">
+    <div className="relative flex justify-center items-center h-screen overflow-hidden">
+      <div className="absolute inset-0 -z-30 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
+
+      <div className="flex justify-center min-w-[300px] md:min-w-[500px] gap-4 p-8 rounded-xl bg-white border shadow-xl w-1/3">
         <div
           style={{ background: data?.disco.discoDetail.discoColor.buttonTicketForeground }}
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-4 w-full"
         >
-          <h1 className="text-3xl font-semibold text-center">{slug.toUpperCase()}</h1>
+          <div className="flex justify-center gap-4">
+            <img src={data?.disco.logo} alt="logo" height={40} width={40} className="rounded-full" />
+            <h1 className="text-3xl font-semibold text-center">{slug.toUpperCase()}</h1>
+          </div>
+
           <div className="pb-2">
-            <p className="text-start font-light text-md leading-4">
-              <span className="text-destructive/80 font-semibold">Login</span> to access to{" "}
-              <span className="font-semibold">{slug ? slug.toUpperCase() : "MyEvents"}</span> or{" "}
+            <p className="text-center font-light text-md leading-4">
+              <span className="text-destructive/80 font-semibold">Login</span> to access
               <Link href={slug ? `/auth/signup/event/${slug}` : "/auth/signup"}>
+                {" "}
+                {"or "}
                 <span className="text-destructive/80 font-semibold hover:underline">Sign Up</span>
               </Link>
-              if you don&apos;t have an acount.
             </p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} name="login form" className="flex flex-col gap-4">
@@ -93,14 +96,7 @@ const Login = () => {
             </div>
             {status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
 
-            <Button
-              style={{
-                background: data?.disco.discoDetail.discoColor.bgNavbarColor,
-                color: data?.disco.discoDetail.discoColor.navbarForeground,
-              }}
-              className="flex gap-2 shadow-md hover:opacity-90"
-              type="submit"
-            >
+            <Button className="flex gap-2 shadow-md hover:opacity-90 bg-primary" type="submit">
               {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
             </Button>
 

@@ -66,9 +66,7 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
         {loadingDisco ? null : discoData && <AboutUs discoDetails={discoData?.disco?.discoDetail} />}
       </section>
       <section id="experiences">
-        {loadingDisco
-          ? null
-          : discoData && <Experiences myPermissions={myPermissions} discoDetail={discoData?.disco.discoDetail} />}
+        {loadingDisco ? null : discoData && <Experiences discoDetail={discoData?.disco.discoDetail} />}
       </section>
       <section id="tickets">
         <div style={{ background: `${discoData.disco.discoDetail.discoColor.bgTicketsSection}` }} className="pb-12">

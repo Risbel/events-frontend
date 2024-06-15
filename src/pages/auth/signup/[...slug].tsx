@@ -53,23 +53,15 @@ const Signup = () => {
     mutate(data);
   };
 
-  if (!slug) {
+  if (!slug || !data?.disco?.discoDetail?.discoImages) {
     return;
   }
 
   return (
-    <div
-      style={{ background: data?.disco.discoDetail.discoColor.bgTicketsSection }}
-      className="relative flex justify-center items-center h-screen"
-    >
-      <div
-        style={{
-          border: `solid 2px ${data?.disco.discoDetail.discoColor.buttonTicketForeground}`,
-          background: data?.disco.discoDetail.discoColor.buttonsTicketsColor,
-        }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 justify-between text-center md:justify-around absolute rounded-xl md:rounded-3xl shadow-md shadow-black/10 px-4 py-4 md:py-12 w-full md:w-5/6 lg:w-8/12"
-      >
-        <div className=" overflow-y-hidden">
+    <div className="relative flex justify-center items-center h-screen overflow-hidden">
+      <div className="absolute inset-0 -z-30 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
+      <div className="flex items-center gap-8 m-32 p-8 shadow-lg shadow-gray-400 bg-secondary rounded-xl">
+        <div className="w-full min-w-[300px] md:min-w-[500px] shadow-md shadow-gray-400 rounded-xl bg-white p-4">
           <Link
             style={{
               color: data?.disco.discoDetail.discoColor.buttonTicketForeground,
@@ -81,12 +73,7 @@ const Signup = () => {
           >
             <ChevronLeft />
           </Link>
-          <p
-            style={{ color: data?.disco.discoDetail.discoColor.buttonTicketForeground }}
-            className="text-2xl font-bold text-center py-4"
-          >
-            SIGN UP
-          </p>
+          <p className="text-2xl font-bold text-center py-4">SIGN UP</p>
           <form onSubmit={handleSubmit(onSubmit)} name="signup form" className="flex flex-col gap-6">
             <div className="relative">
               <Label className={"text-xs md:text-xs border border-b-0"} name={"Name"} htmlfor={"name"} />
@@ -151,14 +138,7 @@ const Signup = () => {
               )}
             </div>
             {isError && <p className="text-center text-xs italic text-red-500">{error?.response?.data?.message}</p>}
-            <Button
-              style={{
-                background: data?.disco.discoDetail.discoColor.buttonTicketForeground,
-                color: data?.disco.discoDetail.discoColor.buttonsTicketsColor,
-              }}
-              className="flex gap-2 hover:opacity-85"
-              type="submit"
-            >
+            <Button className="flex gap-2 hover:opacity-85" type="submit">
               Sign up
               {isLoading && (
                 <Spinner diameter={4} stroke={`${data?.disco.discoDetail.discoColor.buttonsTicketsColor}`} />
@@ -166,40 +146,44 @@ const Signup = () => {
             </Button>
           </form>
         </div>
-        <div className="relative hidden md:flex flex-col items-center justify-center">
-          <Carousel>
-            <CarouselContent>
-              {data?.disco.discoDetail?.discoImages?.map(
-                (discoImage, index) =>
-                  discoImage && (
-                    <CarouselItem key={index}>
-                      <div
-                        style={{
-                          borderRadius: "20px",
-                          border: `solid 3px`,
-                          borderColor: `${data.disco.discoDetail.discoColor.textAboutColor}`,
-                        }}
-                        className="relative overflow-hidden"
-                      >
-                        <p className="bg-gradient-to-t from-black via-black/60 to-transparent  absolute text-center w-full text-white text-xs md:text-md font-light bottom-0">
-                          {discoImage?.imageText}
-                        </p>
-                        <img
-                          className="object-cover w-full max-h-[400px] rounded-2xl"
-                          src={discoImage.image}
-                          width={400}
-                          height={400}
-                          alt={`experiencie${discoImage.id}`}
-                        />
-                      </div>
-                    </CarouselItem>
-                  )
-              )}
-            </CarouselContent>
-            <CarouselPrevious className="flex translate-x-4" />
-            <CarouselNext className="flex -translate-x-4" />
-          </Carousel>
-        </div>
+        {data?.disco?.discoDetail?.discoImages?.length > 0 && (
+          <div className="w-full hidden lg:block">
+            <Carousel>
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <img src={data?.disco.logo} alt="logo" height={40} width={40} className="rounded-full" />
+                <p className="text-center text-2xl font-bold">{data?.disco.name}</p>
+              </div>
+
+              <CarouselContent>
+                {data?.disco.discoDetail?.discoImages?.map(
+                  (discoImage, index) =>
+                    discoImage && (
+                      <CarouselItem key={index}>
+                        <div
+                          style={{
+                            borderRadius: "20px",
+                            border: `solid 3px`,
+                            borderColor: `${data.disco.discoDetail.discoColor.textAboutColor}`,
+                          }}
+                          className="relative overflow-hidden"
+                        >
+                          <img
+                            className="object-cover w-full h-[400px] rounded-2xl"
+                            src={discoImage.image}
+                            width={400}
+                            height={400}
+                            alt={`experiencie${discoImage.id}`}
+                          />
+                        </div>
+                      </CarouselItem>
+                    )
+                )}
+              </CarouselContent>
+              <CarouselPrevious className="flex translate-x-4" />
+              <CarouselNext className="flex -translate-x-4" />
+            </Carousel>
+          </div>
+        )}
       </div>
     </div>
   );

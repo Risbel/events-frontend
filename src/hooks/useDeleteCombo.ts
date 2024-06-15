@@ -1,5 +1,4 @@
 import { deleteCombo } from "@/services/deleteCombo";
-import { deleteExperience } from "@/services/deleteExperience";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const useDeleteCombo = () => {
