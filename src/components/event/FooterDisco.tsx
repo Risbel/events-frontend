@@ -1,9 +1,6 @@
 import { DataDisco } from "@/services/getDisco";
 import { Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
 import { IconX } from "../dashboard/workspace/IconX";
-import { Input, Label } from "../ui/input";
-import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
 
 const FooterDisco = ({ discoData }: { discoData: DataDisco }) => {
   return (
@@ -16,7 +13,7 @@ const FooterDisco = ({ discoData }: { discoData: DataDisco }) => {
           >
             Company Info:
           </h3>
-          <ol>
+          <ol className="flex flex-col items-center">
             <li style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }} className="flex">
               <p className="text-xl text-center">- {discoData.name} -</p>
             </li>
@@ -24,7 +21,7 @@ const FooterDisco = ({ discoData }: { discoData: DataDisco }) => {
               style={{ color: discoData.discoDetail.discoColor.foregroundFooterColor }}
               className="flex gap-2 items-center"
             >
-              <MapPin height={20} width={20} /> {discoData.discoDetail.address}
+              <MapPin height={15} width={15} /> {discoData.discoDetail.address}
             </li>
           </ol>
         </div>

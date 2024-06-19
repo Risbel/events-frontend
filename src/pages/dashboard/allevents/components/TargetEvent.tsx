@@ -22,7 +22,7 @@ const TargetEvent = ({ event }: { event: IMyEvents }) => {
         <div className="px-2 md:px-4">
           <h1 className="font-bold text-base md:text-2xl text-white">{event?.name?.toUpperCase()}</h1>
           <p className="text-gray-100 font-extralight text-xs md:text-sm -translate-y-2 line-clamp-1">
-            {event?.discoDetail?.aboutDescription?.toUpperCase()}
+            About description
           </p>
         </div>
         <div className="border border-white w-2/3 md:w-1/2" />

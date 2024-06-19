@@ -24,7 +24,6 @@ export interface DiscoDetail {
   bannerDescription: string;
   titleTextAbout: string;
   titleTextCarousel: string;
-  aboutDescription: string;
   bgImage: string;
   address: string;
   createdAt: string;
@@ -32,6 +31,22 @@ export interface DiscoDetail {
   administrator: string;
   discoId: string;
   discoImages: DiscoImages[];
+  eventAbouts: [
+    {
+      id: string;
+      title: string;
+      titleColor: string;
+      titleAlign: "center" | "left" | "right" | "justify";
+      text: string;
+      textAlign: "center" | "left" | "right" | "justify";
+      textColor: string;
+      textWeight: string;
+      createdAt: string;
+      updatedAt: string;
+      discoDetailId: string;
+    }
+  ];
+  layoutTextAbout: "variantA" | "variantB" | "variantC" | "variantD" | "variantE";
   discoNetwork: {
     id: string;
     facebook: string;
@@ -108,6 +123,7 @@ export interface IDiscoColors {
   h1BannerColor: string;
   bannerGradientColor: string;
   bannerDescriptionColor: string;
+  titleAboutColor: string;
   bgAboutColor: string;
   textAboutColor: string;
   buttonColor: string;

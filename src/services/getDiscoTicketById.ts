@@ -29,7 +29,6 @@ export interface IDiscoTicketByIdDisco {
       id: string;
       h1Banner: string;
       bannerDescription: string;
-      aboutDescription: string;
       titleTextCarousel: string;
       titleTextAbout: string;
       bgImage: string;

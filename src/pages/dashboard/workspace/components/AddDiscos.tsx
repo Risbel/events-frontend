@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Input, Label } from "../../../../components/ui/input";
 import { Textarea } from "../../../../components/ui/textarea";
 import { cn } from "@/lib/shadcnUtils";
-import { Eye, X } from "lucide-react";
+import { AlignJustifyIcon, Eye, X } from "lucide-react";
 import Preview from "@/components/dashboard/workspace/preview";
 import ColorPicker from "@/components/dashboard/workspace/ColorPicker";
 import Image from "next/image";
@@ -15,15 +15,14 @@ import ColorPaletteGenerator from "@/components/dashboard/workspace/ColorPaletGe
 import LabelColor from "@/components/dashboard/workspace/LabelColor";
 import { useSession } from "next-auth/react";
 import useFormPersist from "react-hook-form-persist";
-import { Dialog } from "@/components/ui/dialog";
-import SocialSelector from "../../../../components/dashboard/workspace/SocialSelector";
-import QuickLinks from "../../../../components/dashboard/workspace/QuickLinks";
+import AddAboutTexts from "@/components/dashboard/workspace/AddAboutTexts";
+import SocialSelector from "@/components/dashboard/workspace/SocialSelector";
+import QuickLinks from "@/components/dashboard/workspace/QuickLinks";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
 
 const AddDiscos = () => {
   const [isActive, setIsActive] = useState(false);
-
   const { data } = useSession();
   const userId = data?.user.id;
 
@@ -38,6 +37,9 @@ const AddDiscos = () => {
     control,
   } = useForm<AddDiscoSchema>({
     resolver: zodResolver(addDiscoSchema),
+    defaultValues: {
+      layoutTextAbout: "variantA",
+    },
   });
 
   useFormPersist("addDiscoForm", { watch, setValue });
@@ -61,9 +63,8 @@ const AddDiscos = () => {
     data.bannerDescription && formData.append("bannerDescription", data.bannerDescription);
     formData.append("bannerDescriptionColor", data.bannerDescriptionColor);
     data.titleTextAbout && formData.append("titleTextAbout", data.titleTextAbout);
+    formData.append("titleAboutColor", data.titleAboutColor);
     formData.append("bgAboutColor", data.bgAboutColor);
-    formData.append("aboutDescription", data.aboutDescription);
-    formData.append("textAboutColor", data.textAboutColor);
     formData.append("buttonColor", data.buttonColor);
     formData.append("buttonForeground", data.buttonForeground);
     data.titleTextCarousel && formData.append("titleTextCarousel", data.titleTextCarousel);
@@ -76,6 +77,8 @@ const AddDiscos = () => {
     formData.append("phone", data.phone);
     formData.append("email", data.email);
     formData.append("address", data.address);
+    formData.append("layoutTextAbout", data.layoutTextAbout);
+    formData.append("aboutTexts", JSON.stringify(data.aboutTexts));
     formData.append("socials", JSON.stringify(data.socials));
     formData.append("quickLinks", JSON.stringify(data.quickLinks));
     formData.append("bgFooterColor", data.bgFooterColor);
@@ -352,44 +355,182 @@ const AddDiscos = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-8">
-            <div className="flex flex-col justify-between col-span-2 bg-primary-foreground rounded-md p-6 shadow-md">
-              <p className="text-xl text-center font-bold text-primary mb-4">About</p>
-              <div className="relative mb-4 pb-2">
-                <Label
-                  name={"Title text"}
-                  htmlfor={"titleTextAbout"}
-                  className="block mb-1 text-sm font-medium text-primary"
-                />
+          <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col justify-around col-span-2 bg-primary-foreground rounded-md p-6 shadow-md">
+              <p className="text-xl text-center font-bold text-primary">About</p>
 
-                <Input
-                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                  id="titleTextAbout"
-                  placeholder="Title text"
-                  {...register("titleTextAbout")}
-                />
-                {errors.titleTextAbout && (
-                  <p className="text-xs italic text-red-500">{errors.titleTextAbout?.message}</p>
-                )}
-              </div>
-              <div className="relative mb-4 pb-2">
-                <Label
-                  name={"About description"}
-                  htmlfor={"aboutDescription"}
-                  className="block mb-1 text-sm font-medium text-primary"
-                />
+              <div className="flex gap-4 justify-center">
+                <button
+                  type="button"
+                  onClick={() => setValue("layoutTextAbout", "variantA")}
+                  className={cn(
+                    "w-10 p-1",
+                    values.layoutTextAbout === "variantA" && "border-2 border-blue-300 rounded"
+                  )}
+                >
+                  <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-[3px]">
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                    </div>
+                    <div className="flex flex-col gap-[3px]">
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                    </div>
+                  </div>
+                </button>
 
-                <Textarea
-                  className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                  id="aboutDescription"
-                  placeholder="About Description"
-                  rows={4}
-                  {...register("aboutDescription")}
-                />
-                {errors.aboutDescription && (
-                  <p className="text-xs italic text-red-500">{errors.aboutDescription?.message}</p>
-                )}
+                <button
+                  type="button"
+                  onClick={() => setValue("layoutTextAbout", "variantB")}
+                  className={cn(
+                    "w-10 p-1",
+                    values.layoutTextAbout === "variantB" && "border-2 border-blue-300 rounded"
+                  )}
+                >
+                  <div className="flex flex-col gap-1">
+                    <div className="flex justify-between">
+                      <div className="flex flex-col gap-[3px] pr-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                      <div className="flex flex-col gap-[3px] pl-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-[3px]">
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                    </div>
+                  </div>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setValue("layoutTextAbout", "variantC")}
+                  className={cn(
+                    "w-10 p-1",
+                    values.layoutTextAbout === "variantC" && "border-2 border-blue-300 rounded"
+                  )}
+                >
+                  <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-[3px]">
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div className="flex flex-col gap-[3px] pr-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                      <div className="flex flex-col gap-[3px] pl-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setValue("layoutTextAbout", "variantD")}
+                  className={cn(
+                    "w-10 p-1",
+                    values.layoutTextAbout === "variantD" && "border-2 border-blue-300 rounded"
+                  )}
+                >
+                  <div className="flex flex-col gap-1">
+                    <div className="flex justify-between">
+                      <div className="flex flex-col gap-[3px] pr-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                      <div className="flex flex-col gap-[3px] pl-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div className="flex flex-col gap-[3px] pr-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                      <div className="flex flex-col gap-[3px] pl-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                    </div>
+                  </div>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setValue("layoutTextAbout", "variantE")}
+                  className={cn(
+                    "w-10 p-1",
+                    values.layoutTextAbout === "variantE" && "border-2 border-blue-300 rounded"
+                  )}
+                >
+                  <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-[3px]">
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                      <div className="border border-black"></div>
+                    </div>
+                    <div className="flex justify-between">
+                      <div className="flex flex-col gap-[3px] pr-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                      <div className="flex flex-col gap-[3px] px-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                      <div className="flex flex-col gap-[3px] pl-[2px] w-full">
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                        <div className="border border-black"></div>
+                      </div>
+                    </div>
+                  </div>
+                </button>
               </div>
+              <div className="flex gap-4 w-full">
+                <div className="relative w-full">
+                  <Label
+                    name={"Title text"}
+                    htmlfor={"titleTextAbout"}
+                    className="block mb-1 text-sm font-medium text-primary"
+                  />
+
+                  <Input
+                    className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                    id="titleTextAbout"
+                    placeholder="Title text"
+                    {...register("titleTextAbout")}
+                  />
+                  {errors.titleTextAbout && (
+                    <p className="text-xs italic text-red-500">{errors.titleTextAbout?.message}</p>
+                  )}
+                </div>
+
+                <AddAboutTexts register={register} values={values} control={control} setValue={setValue} />
+              </div>
+
               <div className="flex gap-4 pb-4">
                 <div className="relative pb-2">
                   <LabelColor htmlFor="bgAboutColor" text="Background color" />
@@ -403,15 +544,15 @@ const AddDiscos = () => {
                 </div>
 
                 <div className="relative pb-2">
-                  <LabelColor htmlFor="textAboutColor" text="Text about color" />
+                  <LabelColor htmlFor="titleAboutColor" text="Title about color" />
                   <ColorPicker
                     defaultValue="#0e0046"
                     register={register}
-                    id={"textAboutColor"}
-                    defaultColor={values.textAboutColor}
+                    id={"titleAboutColor"}
+                    defaultColor={values.titleAboutColor}
                   />
-                  {errors.textAboutColor && (
-                    <p className="text-xs italic text-red-500">{errors.textAboutColor?.message}</p>
+                  {errors.titleAboutColor && (
+                    <p className="text-xs italic text-red-500">{errors.titleAboutColor?.message}</p>
                   )}
                 </div>
 
@@ -661,6 +802,16 @@ const AddDiscos = () => {
 
 export default AddDiscos;
 
+const aboutTextSchema = z.object({
+  title: z.string().optional(),
+  titleColor: z.string(),
+  titleAlign: z.enum(["center", "left", "right", "justify"]),
+  text: z.string(),
+  textAlign: z.enum(["center", "left", "right", "justify"]),
+  textColor: z.string(),
+  textWeight: z.string(),
+});
+
 const addDiscoSchema = z.object({
   //general
   name: z.string().min(1, { message: "The name is required" }),
@@ -685,14 +836,15 @@ const addDiscoSchema = z.object({
   bannerDescription: z.string().min(2, "Invalid description").optional().or(z.literal("")),
   bannerDescriptionColor: z.string().min(1, { message: "Description color required" }),
   //about
-  titleTextAbout: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")), //new
+  layoutTextAbout: z.enum(["variantA", "variantB", "variantC", "variantD", "variantE"]), //new
+  titleAboutColor: z.string().min(1, { message: "Title about color required" }), //new
+  titleTextAbout: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")),
   bgAboutColor: z.string().min(1, { message: "Background color required" }),
-  aboutDescription: z.string().min(1, { message: "About description required" }),
-  textAboutColor: z.string().min(1, { message: "About description required" }),
+  aboutTexts: z.array(aboutTextSchema), //new
   buttonColor: z.string().min(1, { message: "Button color required" }),
   buttonForeground: z.string().min(1, { message: "ButtonForeground color required" }),
   //experiencies
-  titleTextCarousel: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")), //new
+  titleTextCarousel: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")),
   bgExperiencies: z.string().min(1, { message: "Background Experiencies required" }),
   experienciesH1Color: z.string().min(1, { message: "Experiencies title color required" }),
   //tickes

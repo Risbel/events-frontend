@@ -45,7 +45,6 @@ const ColorPaletteGenerator = ({
       values.bannerDescriptionColor ?? "#0e0046",
       values.bannerGradientColor ?? "#a8d4fb",
       values.bgAboutColor ?? "#0e0046",
-      values.textAboutColor ?? "#0e0046",
       values.buttonColor ?? "#a8d4fb",
       values.buttonForeground ?? "#0e0046",
       values.bgExperiencies ?? "#a7d8f5",

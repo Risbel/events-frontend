@@ -11,12 +11,12 @@ const Experiences = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
     >
       <h1
         style={{ color: `${discoDetail.discoColor.experienciesH1Color}` }}
-        className="font-extrabold text-4xl md:text-5xl lg:text-7xl py-8 text-center"
+        className="font-extrabold text-4xl md:text-5xl lg:text-7xl py-8 text-center relative z-20"
       >
         {discoDetail.titleTextCarousel ? discoDetail.titleTextCarousel : "Experiencies"}
       </h1>
 
-      <div className="flex justify-between w-full">
+      <div className="flex justify-between w-full relative z-20">
         <div
           style={{ borderColor: `${discoDetail.discoColor.experienciesH1Color}` }}
           className="border-4 w-3/5 rounded-r-full"
@@ -65,7 +65,7 @@ const Experiences = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
 
       <div className="absolute rounded-full z-10 h-80 w-80 blur-3xl opacity-70 right-32 bottom-0 -translate-y-1/3 bg-white/50"></div>
 
-      <div className="flex justify-between w-full mb-12">
+      <div className="flex justify-between w-full mb-12 relative z-20">
         <div
           style={{ borderColor: `${discoDetail.discoColor.experienciesH1Color}` }}
           className="border-4 w-1/4 rounded-r-full"
