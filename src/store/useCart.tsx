@@ -1,4 +1,3 @@
-import { DiscoDetail } from "@/services/getDisco";
 import { create } from "zustand";
 
 interface State {

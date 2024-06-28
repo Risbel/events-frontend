@@ -1,4 +1,3 @@
-import { AddTicketSchema } from "@/components/forms/AddTicketsForm";
 import httpService from "@/config/axios.config";
 
 export const createDiscoTickets = async ({ formData, discoId }: { formData: any; discoId: string }) => {

@@ -1,5 +1,4 @@
 import httpService from "@/config/axios.config";
-import { ICart } from "@/store/useCart";
 
 export const handlePay = async ({ userId, payloadReservation: cartItems }: IReservation) => {
   const response = await httpService.post<ICheckoutSession>(`/stripe/checkout/${userId}`, {
@@ -106,5 +105,6 @@ export interface IReservation {
     ticketDescription: string | null;
     price: string;
     discoSlug: string | null;
+    expDate: string | null;
   }[];
 }

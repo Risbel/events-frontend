@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
-import AddCombosForm from "@/components/details-ticket/AddCombosForm";
 
 import { compareAsc } from "date-fns";
 import { DiscoDetail, IDiscoColors } from "@/services/getDisco";
@@ -262,7 +261,7 @@ const DiscoTickets = ({
                       </p>
                     </div>
                   </div>
-                  <div className="flex w-full justify-end pr-4">
+                  <div className="flex w-full justify-end pr-4 relative z-50">
                     {havePermission("update", "Tickets") && <EditTicket ticket={ticket} />}
                     {havePermission("delete", "Tickets") && <DeleteTicket idTicket={ticket.id} />}
                   </div>

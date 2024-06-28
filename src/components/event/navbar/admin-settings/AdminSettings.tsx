@@ -38,7 +38,7 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
           <DropdownMenuSeparator style={{ border: `0.5px solid ${disco.discoDetail.discoColor.navbarForeground}` }} />
 
           <DropdownMenuItem className="transition-colors">
-            <Link href={`/event/${slug}/my-sales`}>My sales</Link>
+            <Link href={`/event/${slug}/my-sales/today`}>My sales</Link>
           </DropdownMenuItem>
           <AddBannerImages discoDetail={disco.discoDetail} />
           <AddCarouselImages discoDetail={disco.discoDetail} />

@@ -20,5 +20,6 @@ export interface IReservation {
     ticketDescription: string | null;
     price: string;
     discoSlug: string | null;
+    expDate: string | null;
   }[];
 }

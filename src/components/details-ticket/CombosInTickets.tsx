@@ -19,8 +19,11 @@ const CombosInTicket = ({
 
   const { addToCart, cartItems, removeFromCart } = useCart();
 
+  // Check if the ticket is in the cart
+  const ticketInCart = cartItems.some((item) => item.discoTicketId);
+
   const addToCartHandler = (combo: IComboData) => {
-    if (!combo) {
+    if (!combo || !ticketInCart) {
       return;
     }
 

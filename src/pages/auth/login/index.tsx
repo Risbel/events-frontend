@@ -43,12 +43,10 @@ const Login = () => {
         <h1 className="text-3xl font-semibold text-center md:text-start">My Events</h1>
         <div className="pb-2">
           <p className="text-start font-light text-md leading-4">
-            <span className="text-destructive/80 font-semibold">Login</span> to access to{" "}
-            <span className="font-semibold">MyEvents</span> or{" "}
+            <span className="text-destructive/80 font-semibold">Login</span> to access or{" "}
             <Link href={"/auth/signup"}>
               <span className="text-destructive/80 font-semibold hover:underline">Sign Up</span>
-            </Link>{" "}
-            if you don&apos;t have an acount.
+            </Link>
           </p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} name="login form" className="flex flex-col gap-4">

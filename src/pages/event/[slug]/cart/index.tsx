@@ -22,7 +22,7 @@ const Cart = () => {
   const { data: discoData, isLoading: loadingDisco, isError: isErrordisco, error } = useGetDisco({ slug, userId });
 
   const months = useListMonths();
-  const { cartItems, removeFromCart, addToCart } = useCart();
+  const { cartItems, removeFromCart, addToCart, resetCart } = useCart();
 
   const ticketQuantity = cartItems.map((item) => {
     if (item.ticketImages) {
@@ -50,6 +50,12 @@ const Cart = () => {
     return addToCart({ ...item, quantity });
   };
 
+  const removeItemAndCombos = (item: ICart) => {
+    if (item.discoId) {
+      resetCart();
+    }
+  };
+
   const { mutate, isLoading } = useHandlePay();
   const { mutate: reserveFree, isLoading: isLoadingFreeReservation } = useCreateReservation();
 
@@ -71,6 +77,7 @@ const Cart = () => {
           price: item.price,
           discoSlug: item.discoSlug ?? null,
           collaborator: item.collaborator ?? item.collaborator,
+          expDate: item.expDate ?? null,
         };
       });
 
@@ -189,7 +196,7 @@ const Cart = () => {
                         type="button"
                         size={"sm"}
                         className="bg-red-800 hover:bg-red-700 text-xs rounded-lg"
-                        onClick={() => removeFromCart(item)}
+                        onClick={() => removeItemAndCombos(item)}
                       >
                         Discart
                       </Button>

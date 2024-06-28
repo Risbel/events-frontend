@@ -83,10 +83,10 @@ const Profile = () => {
           </div>
           <div>
             <p className="text-xl" style={{ color: `${discoColors.navbarForeground}` }}>
-              {user.name} {user.lastName}
+              {user?.name} {user?.lastName}
             </p>
             <p className="text-lg" style={{ color: `${discoColors.navbarForeground}` }}>
-              {user.email}
+              {user?.email}
             </p>
 
             <p style={{ color: `${discoColors.navbarForeground}` }}>{user.phone}</p>
