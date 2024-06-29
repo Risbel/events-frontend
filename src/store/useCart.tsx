@@ -18,10 +18,10 @@ const useCart = create<State>((set, get) => ({
       ? get().cartItems.some((item) => item.expDate === payload.expDate)
       : true;
 
-    //una condicion para actualizar si existe el item o guardar si no existe
+    //conditional to update if the item exist or to save it if noy exist
     const cartItems = existNewItem
       ? get().cartItems.map((item) => (item.id === existNewItem.id ? payload : item))
-      : [...get().cartItems, payload]; //de lo contrario si no existe entonces guardamos el primero
+      : [...get().cartItems, payload]; //othetwise if not exist so we save the fist
 
     const finalCartItems = hasDuplicateExpDate ? cartItems : newTicket;
 

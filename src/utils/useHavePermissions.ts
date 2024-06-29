@@ -1,5 +1,5 @@
 import { ImyPermissions, IrolePermissionResouce } from "@/services/getMyPermissionsOnDisco";
-
+//hook to check if any user has certain permissions for certain resources
 export const useHavePermissions = (myPermissions: ImyPermissions) => {
   const havePermission = (permission: Ipermission, resource: Iresource) => {
     const isPermission =
