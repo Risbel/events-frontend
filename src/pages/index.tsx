@@ -1,5 +1,4 @@
 import ButtonStart from "../components/buttons/ButtonStart";
-
 import Link from "next/link";
 import Image from "next/image";
 import FormContact from "../components/home/FormContact";
@@ -10,7 +9,7 @@ import LandingLayout from "@/components/layouts/LandingLayouts";
 const Home = () => {
   return (
     <LandingLayout>
-      <div className="relative h-screen flex justify-center items-center">
+      <div id="home" className="relative h-screen flex justify-center items-center">
         <div className="z-10 absolute h-80 w-80 bg-primary-foreground blur-3xl right-32"></div>
         <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
         <div className="relative z-20 flex flex-col items-center gap-6">
@@ -27,7 +26,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="relative">
+      <div id="services" className="relative">
         <div className="z-10 absolute h-full w-screen bg-secondary blur-3xl"></div>
         <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
         <div className="relative z-20 flex flex-col items-center bg-white shadow-xl m-4 md:m-8 lg:m-16 p-4 rounded-2xl h-full">
@@ -137,7 +136,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="relative bg-primary">
+      <div id="advantages" className="relative bg-primary">
         <div className="absolute inset-0 z-10 h-full w-full bg-primary bg-[linear-gradient(to_right,#bdbdbd1e_1px,transparent_1px),linear-gradient(to_bottom,#bdbdbd3c_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
         <div className="relative z-20 p-4 md:p-8 lg:p-16 pt-8 h-full w-full">
           <h1 className="text-primary-foreground text-center text-4xl md:text-6xl lg:text-7xl font-bold">
@@ -151,7 +150,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="relative bg-foreground">
+      <div id="contact" className="relative bg-foreground">
         <div className="flex flex-col-reverse md:flex-row">
           <div className="flex flex-wrap px-6 md:p-12 gap-8 md:w-1/2 lg:w-3/4">
             <div>
@@ -164,11 +163,11 @@ const Home = () => {
               <div>
                 <h3 className="text-white text-2xl font-semibold mt-6">Social:</h3>
                 <div className="flex gap-4 items-center py-2">
-                  <Link href={"/#"} className="hover:scale-105">
+                  <Link href={"/https://www.facebook.com/theartgomagallery"} className="hover:scale-105">
                     <Image src={"/facebook-icon.svg"} height={30} width={30} alt="facebook icon" />
                   </Link>
 
-                  <Link href={"/#"} className="hover:scale-105">
+                  <Link href={"/https://www.instagram.com/theartgomagallery"} className="hover:scale-105">
                     <Image src={"/instagram-icon.svg"} height={30} width={30} alt="instagram icon" />
                   </Link>
 
@@ -176,7 +175,7 @@ const Home = () => {
                     <Image src={"/twitter-icon.svg"} height={30} width={30} alt="twitter icon" />
                   </Link>
 
-                  <Link href={"/#"} className="hover:scale-105">
+                  <Link href={"/https://www.youtube.com/@ArtGoMA"} className="hover:scale-105">
                     <Image src={"/youtube-icon.svg"} height={30} width={30} alt="youtube icon" />
                   </Link>
                 </div>
@@ -196,7 +195,12 @@ const Home = () => {
             <div>
               <h3 className="text-white text-2xl font-semibold">Contacts:</h3>
               <ol>
-                <li className="text-primary-foreground/60">Email: info@example.com</li>
+                <li className="text-primary-foreground/60">
+                  {" "}
+                  <a target="_blank" rel="noopener noreferrer" href="mailto:info@artgoma.com">
+                    Email: info@example.com
+                  </a>
+                </li>
                 <li className="text-primary-foreground/60">Phone: +1 (555) 123-4567</li>
               </ol>
             </div>
