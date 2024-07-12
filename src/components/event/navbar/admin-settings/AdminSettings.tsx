@@ -13,6 +13,7 @@ import { Settings2 } from "lucide-react";
 import AddBannerImages from "./AddBannerImages";
 import AddCombos from "./AddCombos";
 import AddCarouselImages from "./AddCarouselImages";
+import Notifications from "./Notifications";
 
 const AdminSettings = ({ disco }: { disco: DataDisco }) => {
   const { slug } = useParams();
@@ -43,6 +44,7 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
           <AddBannerImages discoDetail={disco.discoDetail} />
           <AddCarouselImages discoDetail={disco.discoDetail} />
           <AddCombos disco={disco} />
+          <Notifications disco={disco} />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

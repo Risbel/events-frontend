@@ -11,7 +11,9 @@ const useLogin = (disco?: string) => {
     onSuccess: (status) => {
       if (status === 200 && disco) {
         cart.cartItems.length ? router.push(`/event/${disco}/cart`) : router.push(`/event/${disco}`);
-      } else if (status === 200) {
+      } else {
+        console.log(status);
+
         router.push("/dashboard/allevents");
       }
     },

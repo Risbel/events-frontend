@@ -6,11 +6,11 @@ import Link from "next/link";
 import { ChevronLeftIcon } from "lucide-react";
 import { useRouter } from "next/router";
 
-import Subscriptions from "./components/Subscriptions";
 import useGetDisco from "@/hooks/useGetDisco";
 import useGetMe from "@/hooks/useGetMe";
 import { useListMonths } from "@/hooks/useListMonths";
 import NavbarEvent from "@/components/event/navbar/NavbarEvent";
+import Subscriptions from "@/components/event/profile/Subscriptions";
 
 const SkeletonAvatar = () => {
   return (

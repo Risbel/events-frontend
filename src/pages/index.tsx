@@ -163,11 +163,11 @@ const Home = () => {
               <div>
                 <h3 className="text-white text-2xl font-semibold mt-6">Social:</h3>
                 <div className="flex gap-4 items-center py-2">
-                  <Link href={"/https://www.facebook.com/theartgomagallery"} className="hover:scale-105">
+                  <Link href={"https://www.facebook.com/theartgomagallery"} className="hover:scale-105">
                     <Image src={"/facebook-icon.svg"} height={30} width={30} alt="facebook icon" />
                   </Link>
 
-                  <Link href={"/https://www.instagram.com/theartgomagallery"} className="hover:scale-105">
+                  <Link href={"https://www.instagram.com/theartgomagallery"} className="hover:scale-105">
                     <Image src={"/instagram-icon.svg"} height={30} width={30} alt="instagram icon" />
                   </Link>
 
@@ -175,7 +175,7 @@ const Home = () => {
                     <Image src={"/twitter-icon.svg"} height={30} width={30} alt="twitter icon" />
                   </Link>
 
-                  <Link href={"/https://www.youtube.com/@ArtGoMA"} className="hover:scale-105">
+                  <Link href={"https://www.youtube.com/@ArtGoMA"} className="hover:scale-105">
                     <Image src={"/youtube-icon.svg"} height={30} width={30} alt="youtube icon" />
                   </Link>
                 </div>
