@@ -150,7 +150,7 @@ const Signup = () => {
           <div className="w-full hidden lg:block">
             <Carousel>
               <div className="flex items-center justify-center gap-4 mb-4">
-                <img src={data?.disco.logo} alt="logo" height={40} width={40} className="rounded-full" />
+                <Image src={data?.disco.logo} alt="logo" height={40} width={40} className="rounded-full" />
                 <p className="text-center text-2xl font-bold">{data?.disco.name}</p>
               </div>
 
@@ -167,7 +167,7 @@ const Signup = () => {
                           }}
                           className="relative overflow-hidden"
                         >
-                          <img
+                          <Image
                             className="object-cover w-full h-[400px] rounded-2xl"
                             src={discoImage.image}
                             width={400}

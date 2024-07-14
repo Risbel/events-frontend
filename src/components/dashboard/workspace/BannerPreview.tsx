@@ -7,7 +7,7 @@ const BannerPreview = ({ values }: { values: any }) => {
     <div id="1" className="relative h-screen w-full">
       <div className="absolute flex justify-center items-center overflow-hidden -z-20 w-full">
         {values && (
-          <img
+          <Image
             className="h-screen w-full object-cover"
             src={
               values?.bannerImage && values?.bannerImage?.[0]?.name

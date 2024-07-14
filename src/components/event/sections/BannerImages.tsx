@@ -1,5 +1,6 @@
 import { useGetBannerImages } from "@/hooks/useGetBannerImages";
 import { DiscoDetail } from "@/services/getDisco";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const BannerImages = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
@@ -32,7 +33,7 @@ const BannerImages = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
           data?.map(
             (img, index) =>
               img?.image && (
-                <img
+                <Image
                   className={`h-screen w-screen object-cover ${
                     index === currentImage ? "opacity-100" : "opacity-0 absolute"
                   } transition-opacity duration-1000`}

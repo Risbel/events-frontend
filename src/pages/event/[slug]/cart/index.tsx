@@ -8,6 +8,7 @@ import useCart, { ICart } from "@/store/useCart";
 import clsx from "clsx";
 import { ChevronLeftIcon, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -285,7 +286,7 @@ const Cart = () => {
                 {item?.ticketImages?.[0]?.image && (
                   <div className="hidden md:flex items-center lg:items-start col-span-3 py-4">
                     <div className="w-full flex justify-center items-center overflow-hidden rounded-3xl">
-                      <img
+                      <Image
                         className="object-cover"
                         src={`${item.ticketImages[0]?.image}`}
                         alt="ticket image"
@@ -304,7 +305,7 @@ const Cart = () => {
               >
                 <div style={{ background: `${discoColors.bgNavbarColor}` }} className="p-4 rounded-xl">
                   {item.comboImage && (
-                    <img
+                    <Image
                       className="object-cover rounded-2xl"
                       src={item.comboImage}
                       width={150}

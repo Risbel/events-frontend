@@ -1,5 +1,3 @@
-import AuthLayout from "@/components/layouts/AuthLayout.tsx";
-import Spinner from "@/components/loaders/Spinner";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -42,7 +40,7 @@ const Login = () => {
     mutate(data);
   };
 
-  if (!slug) {
+  if (!slug || !data) {
     return;
   }
 
@@ -56,7 +54,7 @@ const Login = () => {
           className="flex flex-col gap-4 w-full"
         >
           <div className="flex justify-center gap-4">
-            <img src={data?.disco.logo} alt="logo" height={40} width={40} className="rounded-full" />
+            <Image src={data?.disco?.logo} alt="logo" height={40} width={40} className="rounded-full" />
             <h1 className="text-3xl font-semibold text-center">{slug.toUpperCase()}</h1>
           </div>
 

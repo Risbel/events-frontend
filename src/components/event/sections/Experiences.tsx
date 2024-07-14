@@ -1,5 +1,6 @@
 import { DiscoDetail } from "@/services/getDisco";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import Image from "next/image";
 
 const Experiences = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
   return (
@@ -46,7 +47,7 @@ const Experiences = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
                       <p className="bg-gradient-to-t from-black via-black/60 to-transparent  absolute text-center w-full text-white text-xs md:text-md font-light bottom-0">
                         {discoImage?.imageText}
                       </p>
-                      <img
+                      <Image
                         className="object-cover h-72 w-full rounded-2xl"
                         src={discoImage.image}
                         width={400}

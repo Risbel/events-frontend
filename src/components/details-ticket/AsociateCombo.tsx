@@ -4,6 +4,7 @@ import { useCreateAsociationComboTicket } from "@/hooks/useCreateAsociationCombo
 import { useGetCombosByDiscoId } from "@/hooks/useGetCombosByDiscoId";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { CheckSquareIcon, Loader, Loader2, PlusCircle, X } from "lucide-react";
+import Image from "next/image";
 
 const AsociateCombo = ({ discoId, discoTicketId }: { discoId: string; discoTicketId: any }) => {
   const { data } = useGetCombosByDiscoId(discoId);
@@ -34,7 +35,13 @@ const AsociateCombo = ({ discoId, discoTicketId }: { discoId: string; discoTicke
                 <div key={combo.id} className="flex items-end gap-4">
                   <div>
                     <p className="text-xl font-bold text-primary">Pack {combo.category}</p>
-                    <img className="h-44 w-44 rounded-xl object-cover" src={combo.comboDetail.image} />
+                    <Image
+                      width={200}
+                      height={200}
+                      className="h-44 w-44 rounded-xl object-cover"
+                      src={combo.comboDetail.image}
+                      alt="combo image"
+                    />
                   </div>
                   <div>
                     <p className="text-xl font-semibold text-primary">Details:</p>

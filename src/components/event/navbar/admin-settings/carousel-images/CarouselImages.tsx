@@ -1,6 +1,6 @@
-import React from "react";
 import DeleteCArouselImage from "./DeleteCarouselImage";
 import { DiscoDetail } from "@/services/getDisco";
+import Image from "next/image";
 
 const CarouselImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
   return (
@@ -8,7 +8,7 @@ const CarouselImages = ({ discoDetail }: { discoDetail: DiscoDetail }) => {
       {discoDetail.discoImages.map((image) => {
         return (
           <div className="relative bg-secondary rounded-xl" key={image.id}>
-            <img
+            <Image
               src={image.image}
               alt={image.imageText}
               width={150}

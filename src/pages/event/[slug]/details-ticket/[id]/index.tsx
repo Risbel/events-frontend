@@ -337,7 +337,7 @@ const DiscoTicketDetails = () => {
           >
             <div className="lg:h-72 w-full flex justify-center items-center overflow-hidden rounded-3xl">
               {data?.ticketImages?.[0]?.image && (
-                <img
+                <Image
                   className="object-cover rounded-2xl shadow-md"
                   src={`${data.ticketImages[0]?.image}`}
                   alt={data.shortDescription.slice(0, 12)}

@@ -2,6 +2,7 @@ import { useGetCombosByDiscoId } from "@/hooks/useGetCombosByDiscoId";
 import { Loader2 } from "lucide-react";
 import EditCombo from "./EditCombo";
 import DeleteCombo from "./DeleteCombo";
+import Image from "next/image";
 
 const CombosList = ({ discoId }: { discoId: string }) => {
   const { data: combos, isLoading } = useGetCombosByDiscoId(discoId);
@@ -26,7 +27,7 @@ const CombosList = ({ discoId }: { discoId: string }) => {
 
               {combo?.comboDetail?.image && (
                 <div className="h-64 w-64">
-                  <img
+                  <Image
                     className="rounded-2xl object-cover h-full"
                     loading="lazy"
                     src={combo.comboDetail.image}
