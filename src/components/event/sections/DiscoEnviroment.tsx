@@ -1,7 +1,6 @@
 import useGetDisco from "@/hooks/useGetDisco";
 import { useSession } from "next-auth/react";
 
-import FooterDisco from "./FooterDisco";
 import Head from "./Head";
 import AboutUs from "./AboutUs";
 import Experiences from "./Experiences";
@@ -9,10 +8,11 @@ import { SkeletonAboutUs, SkeletonExperiences, SkeletonHead } from "./Skeleton";
 
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import { useGetDiscoTicketsByIdDisco } from "@/hooks/useGetDiscoTicketsByIdDisco";
-import DiscoTickets from "./DiscoTickets";
+import DiscoTickets from "./disco-tickets/DiscoTickets";
 
-import NavSidebarEventMobile from "./navbar/NavSidebarMobile";
-import NavbarEvent from "./navbar/NavbarEvent";
+import NavSidebarEventMobile from "../navbar/NavSidebarMobile";
+import NavbarEvent from "../navbar/NavbarEvent";
+import FooterDisco from "./FooterDisco";
 
 const DiscoEnviroment = ({ slug }: { slug: any }) => {
   const { data: session } = useSession();
@@ -36,7 +36,7 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
     );
   }
 
-  if (!discoData) {
+  if (!discoData || !discoId || !discotickets) {
     return (
       <div className="flex flex-col gap-4 md:gap-8 h-full w-full bg-black overscroll-none pt-20 px-4">
         <SkeletonHead />
@@ -52,15 +52,6 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
       <div className="fixed z-50 top-[60px] left-1 md:hidden">
         <NavSidebarEventMobile disco={discoData.disco} />
       </div>
-
-      {loadingDisco ||
-        (!discoData && (
-          <div className="flex flex-col gap-4 md:gap-8 h-full w-full bg-black overscroll-none pt-20 px-4">
-            <SkeletonHead />
-            <SkeletonAboutUs />
-            <SkeletonExperiences />
-          </div>
-        ))}
       <section id="hero">{loadingDisco ? null : <Head discoData={discoData} />}</section>
       <section id="about">
         {loadingDisco ? null : discoData && <AboutUs discoDetails={discoData?.disco?.discoDetail} />}
@@ -70,22 +61,16 @@ const DiscoEnviroment = ({ slug }: { slug: any }) => {
       </section>
       <section id="tickets">
         <div style={{ background: `${discoData.disco.discoDetail.discoColor.bgTicketsSection}` }} className="pb-12">
-          {loadingDisco
-            ? null
-            : discoId &&
-              discotickets && (
-                <DiscoTickets
-                  name={slug}
-                  myPermissions={myPermissions}
-                  discoDetail={discoData?.disco.discoDetail}
-                  discoId={discoId}
-                  discoTickets={discotickets}
-                />
-              )}
+          <DiscoTickets
+            name={slug}
+            myPermissions={myPermissions}
+            discoDetail={discoData?.disco.discoDetail}
+            discoId={discoId}
+            discoTickets={discotickets}
+          />
         </div>
       </section>
-
-      {loadingDisco ? null : discoData && <FooterDisco discoData={discoData.disco} />}
+      <FooterDisco discoData={discoData.disco} />
     </div>
   );
 };

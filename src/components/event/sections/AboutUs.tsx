@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/shadcnUtils";
 import { DiscoDetail } from "@/services/getDisco";
-import { ArrowBigUpDash } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
@@ -32,23 +30,23 @@ const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
           {discoDetails.titleTextAbout ? discoDetails.titleTextAbout : "About us"}
         </h1>
 
-        <div className="relative overflow-hidden overflow-y-auto max-h-[400px] flex flex-wrap w-full">
+        <div className="overflow-hidden overflow-y-auto max-h-[400px] flex flex-wrap w-full">
           {discoDetails.eventAbouts.map((text, index) => {
             return (
               <div
                 className={cn(
-                  isWideScreen && discoDetails.layoutTextAbout == "variantA" && variantA[index],
-                  isWideScreen && discoDetails.layoutTextAbout == "variantB" && variantB[index],
-                  isWideScreen && discoDetails.layoutTextAbout == "variantC" && variantC[index],
-                  isWideScreen && discoDetails.layoutTextAbout == "variantD" && variantD[index],
-                  isWideScreen && discoDetails.layoutTextAbout == "variantE" && variantE[index],
+                  isWideScreen && discoDetails.layoutTextAbout === "variantA" && variantA[index],
+                  isWideScreen && discoDetails.layoutTextAbout === "variantB" && variantB[index],
+                  isWideScreen && discoDetails.layoutTextAbout === "variantC" && variantC[index],
+                  isWideScreen && discoDetails.layoutTextAbout === "variantD" && variantD[index],
+                  isWideScreen && discoDetails.layoutTextAbout === "variantE" && variantE[index],
                   "p-4"
                 )}
                 key={index}
               >
                 {text?.title && (
                   <h2
-                    className="text-2xl md:text-3xl"
+                    className="text-2xl md:text-3xl relative z-20"
                     style={{
                       textAlign: text?.titleAlign,
                       color: text?.titleColor,
@@ -59,7 +57,7 @@ const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
                   </h2>
                 )}
                 <p
-                  className="text-lg md:text-2xl "
+                  className="text-lg md:text-2xl relative z-20"
                   style={{
                     fontWeight: text.textWeight,
                     textAlign: text.textAlign,
@@ -68,16 +66,15 @@ const AboutUs = ({ discoDetails }: { discoDetails: DiscoDetail }) => {
                 >
                   {text.text}
                 </p>
+                <div
+                  style={{ background: "white" }}
+                  className="absolute h-32 w-32 rounded-full blur-3xl opacity-95 right-0 bottom-0"
+                />
               </div>
             );
           })}
         </div>
       </div>
-
-      <div
-        style={{ background: "white" }}
-        className="absolute h-20 w-20 rounded-full blur-3xl right-0 -translate-y-20"
-      />
     </div>
   );
 };

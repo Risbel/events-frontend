@@ -1,10 +1,8 @@
 import Link from "next/link";
-
 import { useSession } from "next-auth/react";
 import useCart from "@/store/useCart";
 import { cn } from "@/lib/shadcnUtils";
 import useHavePermissions from "@/utils/useHavePermissions";
-
 import { useRouter } from "next/router";
 import { BellIcon, Home, ShoppingCart } from "lucide-react";
 import useGetDisco from "@/hooks/useGetDisco";
@@ -12,7 +10,7 @@ import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import AdminSettings from "./admin-settings";
 import useHandleScroll from "@/hooks/useHandlerScroll";
 import { usePathname } from "next/navigation";
-import SubscribeNow from "../SubscribeNow";
+import SubscribeNow from "../sections/SubscribeNow";
 import DropdownUser from "./DropdownUser";
 
 const NavbarEvent = () => {

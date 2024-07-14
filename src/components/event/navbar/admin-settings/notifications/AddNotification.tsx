@@ -36,7 +36,7 @@ const addNotificationsSchema = z.object({
 
 export type AddNotificationsSchema = z.infer<typeof addNotificationsSchema>;
 
-const AddNotification = ({ event }: { event: DataDisco }) => {
+const AddNotification = ({ eventId }: { eventId: string }) => {
   const [isOpenForm, setIsOpenForm] = useState(false);
   const { mutate, isSuccess, isLoading } = useCreateEventReservation();
 
@@ -91,7 +91,7 @@ const AddNotification = ({ event }: { event: DataDisco }) => {
           </button>
         </div>
 
-        <input type="text" hidden value={event.id} {...register("eventId")} />
+        <input type="text" hidden value={eventId} {...register("eventId")} />
         <div className="flex gap-4 py-2">
           {["info", "promo", "alert"].map((type) => (
             <label key={type} className="flex items-center cursor-pointer">

@@ -1,9 +1,9 @@
-import { IconX } from "@/components/dashboard/workspace/IconX";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Check, Facebook, Instagram, X, Youtube } from "lucide-react";
 import { AddDiscoSchema } from "../../../pages/dashboard/workspace/components/AddDiscos";
 import { cn } from "@/lib/shadcnUtils";
+import { IconX } from "@/components/event/sections/IconX";
 
 const SocialSelector = ({ register, values }: { register: any; values: AddDiscoSchema }) => {
   return (

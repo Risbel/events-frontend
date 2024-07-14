@@ -1,16 +1,15 @@
 import { z } from "zod";
-import ButtomSubmit from "../buttons/ButtonSubmit";
-import { Input } from "../ui/input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useCreateDiscoTickets } from "@/hooks/useCreateDiscoTickets";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Button } from "../ui/button";
-import { Calendar } from "../ui/calendar";
-import { useState } from "react";
 import { cn } from "@/lib/shadcnUtils";
 import { endOfDay, format, startOfDay } from "date-fns";
 import { ChevronDown, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
 
 const MAX_FILE_SIZE = 1048576;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];

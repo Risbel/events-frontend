@@ -1,17 +1,8 @@
-import { DataDisco } from "@/services/getDisco";
-
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useGetNotificationsByEventId } from "@/hooks/useGetNotificationsByEventId";
 import AddNotification from "./AddNotification";
-import NotificationCard from "./NotificationCard";
+import Notifications from "./Notifications";
 
-const Notifications = ({ disco }: { disco: DataDisco }) => {
-  const { data, isLoading } = useGetNotificationsByEventId(disco.id, 1, 20);
-
-  if (!data) {
-    return;
-  }
-
+const DialogPanel = ({ discoId }: { discoId: string }) => {
   return (
     <Dialog>
       <DialogTrigger className="text-start text-sm px-2 py-1 hover:bg-black hover:text-white rounded-sm w-full transition-colors">
@@ -24,12 +15,8 @@ const Notifications = ({ disco }: { disco: DataDisco }) => {
           </div>
 
           <div className="flex flex-col gap-6 overflow-y-auto px-4 pb-4">
-            <AddNotification event={disco} />
-            <div className="flex flex-col gap-4">
-              {data.map((notification) => {
-                return <NotificationCard key={notification.id} notification={notification} />;
-              })}
-            </div>
+            <AddNotification eventId={discoId} />
+            <Notifications discoId={discoId} />
           </div>
         </div>
       </DialogContent>
@@ -37,4 +24,4 @@ const Notifications = ({ disco }: { disco: DataDisco }) => {
   );
 };
 
-export default Notifications;
+export default DialogPanel;

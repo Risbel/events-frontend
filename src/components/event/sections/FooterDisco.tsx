@@ -1,6 +1,6 @@
 import { DataDisco } from "@/services/getDisco";
 import { Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react";
-import { IconX } from "../dashboard/workspace/IconX";
+import { IconX } from "./IconX";
 
 const FooterDisco = ({ discoData }: { discoData: DataDisco }) => {
   return (

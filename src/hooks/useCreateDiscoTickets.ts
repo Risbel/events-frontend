@@ -1,4 +1,3 @@
-import { AddTicketSchema } from "@/components/forms/AddTicketsForm";
 import { createDiscoTickets } from "@/services/createDiscoTickets";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 

@@ -1,4 +1,4 @@
-import { EditTicketSchema } from "@/components/forms/EditTicketsForm";
+import { EditTicketSchema } from "@/components/event/sections/disco-tickets/EditTicketsForm";
 import httpService from "@/config/axios.config";
 
 export const updateDiscoTicket = async (data: EditTicketSchema) => {

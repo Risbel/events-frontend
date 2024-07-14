@@ -1,4 +1,4 @@
-import { LogoCategory } from "@/components/event/DiscoTickets";
+import LogoCategory from "@/components/event/sections/disco-tickets/LogoCategory";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
 import { CalendarDays, CreditCard, RockingChair } from "lucide-react";

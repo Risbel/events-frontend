@@ -3,8 +3,8 @@ import { INotifications } from "@/services/getNotificationsByEventId";
 import { format } from "date-fns";
 import Image from "next/image";
 import React from "react";
-import EditNotification from "./EditNotification";
 import DeleteNotification from "./DeleteNotification";
+import EditNotification from "./EditNotification";
 
 const NotificationCard = ({ notification }: { notification: INotifications }) => {
   return (

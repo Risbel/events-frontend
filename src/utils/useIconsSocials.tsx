@@ -1,4 +1,4 @@
-import { IconX } from "@/components/dashboard/workspace/IconX";
+import { IconX } from "@/components/event/sections/IconX";
 import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 

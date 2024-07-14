@@ -1,13 +1,11 @@
 import clsx from "clsx";
-import { Button } from "../ui/button";
-import { useState } from "react";
-import { Input } from "../ui/input";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUpdateDiscoTicket } from "@/hooks/useUpdateDiscoTicket";
-import Spinner from "../loaders/Spinner";
 import { Loader2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const editTicketSchema = z.object({
   id: z.string().optional(),
