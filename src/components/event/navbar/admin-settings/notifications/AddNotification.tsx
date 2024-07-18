@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useCreateEventReservation } from "@/hooks/useCreateEventNotification";
+import { useCreateEventNotification } from "@/hooks/useCreateEventNotification";
 import { cn } from "@/lib/shadcnUtils";
 import { DataDisco } from "@/services/getDisco";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { endOfDay, format } from "date-fns";
 import { CheckCircle2, Loader2, PlusCircle, X } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -16,6 +17,7 @@ const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/web
 
 const addNotificationsSchema = z.object({
   eventId: z.string().min(1),
+  userId: z.string().min(1),
   type: z.enum(["promo", "alert", "info"], {
     required_error: "You need to select a notification type.",
   }),
@@ -38,7 +40,8 @@ export type AddNotificationsSchema = z.infer<typeof addNotificationsSchema>;
 
 const AddNotification = ({ eventId }: { eventId: string }) => {
   const [isOpenForm, setIsOpenForm] = useState(false);
-  const { mutate, isSuccess, isLoading } = useCreateEventReservation();
+  const { data: session } = useSession();
+  const { mutate, isSuccess, isLoading } = useCreateEventNotification();
 
   const {
     register,
@@ -59,6 +62,7 @@ const AddNotification = ({ eventId }: { eventId: string }) => {
     formData.append("description", data.description);
     formData.append("expDate", data.expDate.toISOString());
     formData.append("image", data?.image?.[0]);
+    formData.append("userId", data.userId);
 
     mutate(
       { formData: formData, eventId: data.eventId },
@@ -92,6 +96,7 @@ const AddNotification = ({ eventId }: { eventId: string }) => {
         </div>
 
         <input type="text" hidden value={eventId} {...register("eventId")} />
+        <input type="text" hidden value={session?.user.id} {...register("userId")} />
         <div className="flex gap-4 py-2">
           {["info", "promo", "alert"].map((type) => (
             <label key={type} className="flex items-center cursor-pointer">

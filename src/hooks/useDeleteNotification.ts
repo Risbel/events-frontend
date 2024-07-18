@@ -8,6 +8,7 @@ export const useDeleteNotification = () => {
     mutationFn: deleteNotification,
     onSuccess: () => {
       queryClient.invalidateQueries(["notificationsByEventId"]);
+      queryClient.invalidateQueries(["notificationsByUserEvent"]);
     },
   });
 };

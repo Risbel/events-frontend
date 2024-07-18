@@ -4,7 +4,7 @@ import useCart from "@/store/useCart";
 import { cn } from "@/lib/shadcnUtils";
 import useHavePermissions from "@/utils/useHavePermissions";
 import { useRouter } from "next/router";
-import { BellIcon, Home, ShoppingCart } from "lucide-react";
+import { Home, ShoppingCart } from "lucide-react";
 import useGetDisco from "@/hooks/useGetDisco";
 import useGetMyPermissions from "@/hooks/useGetMyPermissions";
 import AdminSettings from "./admin-settings";
@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 import SubscribeNow from "../sections/SubscribeNow";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
+import BellNotifications from "./bell-notifications/Dropdown";
 
 const NavbarEvent = () => {
   const router = useRouter();
@@ -110,10 +111,7 @@ const NavbarEvent = () => {
               discoId={discoData.disco.id}
             />
           ) : (
-            <BellIcon
-              style={{ stroke: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }}
-              className="cursor-pointer hover:scale-110 transition-transform"
-            />
+            <BellNotifications />
           )}
 
           <Link href={`/event/${slug}/cart`} className="relative rounded-full">

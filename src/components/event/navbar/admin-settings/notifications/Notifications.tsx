@@ -10,6 +10,11 @@ const Notifications = ({ discoId }: { discoId: string }) => {
   }
   return (
     <div className="flex flex-col gap-4">
+      {!data?.length && (
+        <div className="bg-white p-4 rounded-xl shadow-xl">
+          <p className="text-black text-center">Nothing to show</p>
+        </div>
+      )}
       {data.map((notification) => {
         return <NotificationCard key={notification.id} notification={notification} />;
       })}

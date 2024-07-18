@@ -1,12 +1,12 @@
-import { editNotification } from "@/services/editNotification";
+import { deleteNotificationSoft } from "@/services/deleteNotificationSoft";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const useEditNotification = () => {
+export const useDeleteNotificationSoft = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: editNotification,
+    mutationFn: deleteNotificationSoft,
     onSuccess: () => {
-      queryClient.invalidateQueries(["notificationsByEventId"]);
       queryClient.invalidateQueries(["notificationsByUserEvent"]);
     },
   });

@@ -32,6 +32,8 @@ const CombosList = ({ discoId }: { discoId: string }) => {
                     loading="lazy"
                     src={combo.comboDetail.image}
                     alt="combo image"
+                    width={200}
+                    height={150}
                   />
                 </div>
               )}
