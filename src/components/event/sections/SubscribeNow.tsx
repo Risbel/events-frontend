@@ -16,33 +16,43 @@ const SubscribeNow = ({
   discoId: string;
   discoColors: IDiscoColors;
 }) => {
-  const { toast } = useToast();
-  return (
-    <Button
-      className="p-0"
-      onClick={() => {
-        toast({
-          action: (
-            <ToastAction
-              className="pt-8 pb-4 rounded-2xl"
-              style={{ background: discoColors.bgNavbarColor, border: `solid 2px ${discoColors.navbarForeground}` }}
-              altText="Goto schedule to undo"
-            >
-              <ToastClose className="flex absolute right-2 top-2" />
-
-              <SubscribeButton discoColors={discoColors} userId={userId} discoId={discoId} />
-            </ToastAction>
-          ),
-        });
-      }}
-      style={{ background: discoColors.bgNavbarColor }}
-    >
-      <BellIcon
-        style={{ stroke: `${discoColors.navbarForeground}` }}
-        className="cursor-pointer hover:scale-110 transition-transform"
-      />
-    </Button>
-  );
+  return <SubscribeButton discoColors={discoColors} userId={userId} discoId={discoId} />;
 };
+
+// const SubscribeNow = ({
+//   userId,
+//   discoId,
+//   discoColors,
+// }: {
+//   userId: string;
+//   discoId: string;
+//   discoColors: IDiscoColors;
+// }) => {
+//   const { toast } = useToast();
+//   return (
+//     <Button
+//       className="p-0"
+//       onClick={() => {
+//         toast({
+//           action: (
+//             <ToastAction
+//               className="pt-8 pb-4 rounded-2xl"
+//               style={{ background: discoColors.bgNavbarColor, border: `solid 2px ${discoColors.navbarForeground}` }}
+//               altText="Goto schedule to undo"
+//             >
+//
+//             </ToastAction>
+//           ),
+//         });
+//       }}
+//       style={{ background: discoColors.bgNavbarColor }}
+//     >
+//       <BellIcon
+//         style={{ stroke: `${discoColors.navbarForeground}` }}
+//         className="cursor-pointer hover:scale-110 transition-transform"
+//       />
+//     </Button>
+//   );
+// };
 
 export default SubscribeNow;

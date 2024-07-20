@@ -40,13 +40,13 @@ const Dropdown = () => {
           color: `${discoData.disco.discoDetail.discoColor.navbarForeground}`,
           border: `2px solid ${discoData.disco.discoDetail.discoColor.navbarForeground}`,
         }}
-        className="relative backdrop-blur-xl w-screen md:w-[500px] max-h-[88vh] pb-4 translate-y-4 md:translate-y-6 md:-translate-x-44 rounded-2xl md:rounded-tr-none"
+        className="relative backdrop-blur-xl w-screen md:w-[500px] max-h-[88vh] pb-4 translate-y-4 md:translate-y-6 md:-translate-x-36 rounded-2xl md:rounded-tr-none"
       >
         <DropdownMenuLabel>Notifications</DropdownMenuLabel>
         <DropdownMenuSeparator
           style={{ border: `0.5px solid ${discoData.disco.discoDetail.discoColor.navbarForeground}` }}
         />
-        <div className="h-[80vh] overflow-y-scroll">
+        <div className="max-h-[80vh] overflow-y-scroll">
           <Notifications eventId={eventId} userId={userId} />
         </div>
       </DropdownMenuContent>

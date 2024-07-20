@@ -2,6 +2,7 @@ import { useCreateSubscription } from "@/hooks/useCreateSubscription";
 import { Button } from "../ui/button";
 import Spinner from "../loaders/Spinner";
 import { IDiscoColors } from "@/services/getDisco";
+import { CheckCircle2 } from "lucide-react";
 
 const SubscribeButton = ({
   userId,
@@ -12,23 +13,33 @@ const SubscribeButton = ({
   discoId: string;
   discoColors: IDiscoColors;
 }) => {
-  const { subscribe, isLoading } = useCreateSubscription();
+  const { mutate, isLoading, isSuccess } = useCreateSubscription();
 
   return (
-    <div className="flex flex-col gap-3">
-      <p className="text-lg" style={{ color: discoColors.navbarForeground }}>
-        Subscribe you here
-      </p>
-      <Button
-        style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
-        onClick={() => subscribe({ userId, discoId })}
-        className="flex items-center gap-2 shadow-xl hover:opacity-90 rounded-xl"
-        size={"lg"}
-      >
-        <span className="text-md md:text-xl">Subscribe</span>
-        {isLoading && <Spinner diameter={4} stroke={discoColors.bgNavbarColor} />}
-      </Button>
-    </div>
+    <>
+      {isLoading ? (
+        <div
+          style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+          className="rounded-xl p-2"
+        >
+          <p className="text-md">Loading...</p>
+        </div>
+      ) : isSuccess ? (
+        <CheckCircle2
+          className="rounded-full"
+          style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+        />
+      ) : (
+        <Button
+          style={{ background: discoColors.navbarForeground, color: discoColors.bgNavbarColor }}
+          onClick={() => mutate({ userId, discoId })}
+          className="flex items-center gap-2 shadow-xl hover:opacity-90 rounded-xl"
+          size={"default"}
+        >
+          <span className="text-md">Subscribe</span>
+        </Button>
+      )}
+    </>
   );
 };
 

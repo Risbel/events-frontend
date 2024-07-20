@@ -53,7 +53,7 @@ const DropdownUser = () => {
           color: `${discoData.disco.discoDetail.discoColor.navbarForeground}`,
           border: `2px solid ${discoData.disco.discoDetail.discoColor.navbarForeground}`,
         }}
-        className="backdrop-blur-xl w-80 pb-4 translate-y-3 -translate-x-6 rounded-r-none"
+        className="backdrop-blur-xl w-80 pb-4 translate-y-6 -translate-x-12 rounded-r-none"
       >
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator

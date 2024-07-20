@@ -4,12 +4,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export const useCreateSubscription = () => {
   const queryClient = useQueryClient();
 
-  const { mutate: subscribe, isLoading } = useMutation({
+  return useMutation({
     mutationFn: createSubscription,
     onSuccess: () => {
       queryClient.invalidateQueries(["subscriptionsByUserId"]);
+      queryClient.invalidateQueries(["discoBySlug"]);
     },
   });
-
-  return { subscribe, isLoading };
 };

@@ -7,6 +7,7 @@ export const useDeleteSubscription = () => {
     mutationFn: deleteSubscription,
     onSuccess: () => {
       queryClient.invalidateQueries(["subscriptionsByUserId"]);
+      queryClient.invalidateQueries(["discoBySlug"]);
     },
   });
 };
