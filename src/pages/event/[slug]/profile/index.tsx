@@ -64,23 +64,22 @@ const Profile = () => {
           style={{ background: `${discoColors.bgNavbarColor}90` }}
           className="py-4 md:py-10 px-4 md:px-12 mx-2 md:mx-8 rounded-3xl shadow-md flex flex-col md:flex-row gap-4"
         >
-          <div className="rounded-full overflow-hidden md:float-left">
-            {session?.user.image ? (
-              <Image
-                className="rounded-full"
-                src={session?.user.image}
-                alt="image-next-auth"
-                width={100}
-                height={100}
-                placeholder="blur"
-                blurDataURL={session?.user.image}
-              />
-            ) : (
-              <div className="flex items-center justify-center bg-violet-800 h-16 w-16 md:w-24 md:h-24 text-2xl md:text-5xl text-white font-semibold">
-                {session?.user?.name[0]}
-              </div>
-            )}
-          </div>
+          {session?.user.image ? (
+            <Image
+              className="rounded-full"
+              src={session?.user.image}
+              alt="image-next-auth"
+              width={100}
+              height={100}
+              placeholder="blur"
+              blurDataURL={session?.user.image}
+            />
+          ) : (
+            <div className="flex items-center rounded-full justify-center bg-violet-800 h-16 w-16 md:w-24 md:h-24 text-2xl md:text-5xl text-white font-semibold">
+              {session?.user?.name[0]}
+            </div>
+          )}
+
           <div>
             <p className="text-xl" style={{ color: `${discoColors.navbarForeground}` }}>
               {user?.name} {user?.lastName}

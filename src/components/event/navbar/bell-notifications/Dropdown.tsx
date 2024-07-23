@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import useGetDisco from "@/hooks/useGetDisco";
 import { BellIcon } from "lucide-react";
 import Notifications from "./Notifications";
+import NotificationsCount from "./NotificationsCount";
 
 const Dropdown = () => {
   const router = useRouter();
@@ -28,7 +29,8 @@ const Dropdown = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="outline-none">
+      <DropdownMenuTrigger className="outline-none relative">
+        <NotificationsCount eventId={eventId} userId={userId} />
         <BellIcon
           style={{ stroke: `${discoData.disco.discoDetail.discoColor.navbarForeground}` }}
           className="cursor-pointer hover:scale-110 transition-transform"

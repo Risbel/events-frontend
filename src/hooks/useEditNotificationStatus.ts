@@ -7,6 +7,7 @@ export const useEditNotificationStatus = () => {
     mutationFn: editNotificationStatus,
     onSuccess: () => {
       queryClient.invalidateQueries(["notificationsByUserEvent"]);
+      queryClient.invalidateQueries(["notificationsCount"]);
     },
   });
 };
