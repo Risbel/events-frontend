@@ -1,13 +1,13 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { string, z } from "zod";
+import { z } from "zod";
 import useCreateDisco from "@/hooks/useCreateDisco";
 import ButtonSubmit from "../../../../components/buttons/ButtonSubmit";
 import { useState } from "react";
 import { Input, Label } from "../../../../components/ui/input";
 import { Textarea } from "../../../../components/ui/textarea";
 import { cn } from "@/lib/shadcnUtils";
-import { AlignJustifyIcon, Eye, X } from "lucide-react";
+import { Eye, X } from "lucide-react";
 import Preview from "@/components/dashboard/workspace/preview";
 import ColorPicker from "@/components/dashboard/workspace/ColorPicker";
 import Image from "next/image";
@@ -70,6 +70,7 @@ const AddDiscos = () => {
     data.titleTextCarousel && formData.append("titleTextCarousel", data.titleTextCarousel);
     formData.append("bgExperiencies", data.bgExperiencies);
     formData.append("experienciesH1Color", data.experienciesH1Color);
+    data.titleTextTickets && formData.append("titleTextTickets", data.titleTextTickets);
     formData.append("bgTicketsSection", data.bgTicketsSection);
     formData.append("ticketH1Color", data.ticketH1Color);
     formData.append("buttonsTicketsColor", data.buttonsTicketsColor);
@@ -634,59 +635,78 @@ const AddDiscos = () => {
           <div className="grid grid-cols-2 gap-8">
             <div className="p-6 bg-primary-foreground rounded-md shadow-md">
               <p className="text-xl text-center font-bold text-primary mb-4">Tickets</p>
-              <div className="flex gap-2 pb-4">
-                <div className="w-1/2">
-                  <div className="relative">
-                    <LabelColor htmlFor="bgTicketsSection" text="Background color" />
-                    <ColorPicker
-                      defaultValue="#ffffff"
-                      id={"bgTicketsSection"}
-                      register={register}
-                      defaultColor={values.bgTicketsSection}
-                    />
-                    {errors.bgTicketsSection && (
-                      <p className="text-xs italic text-red-500">{errors.bgTicketsSection?.message}</p>
-                    )}
-                  </div>
-                  <div className="relative">
-                    <LabelColor htmlFor="ticketH1Color" text="Title section color" />
-                    <ColorPicker
-                      defaultValue="#0b023d"
-                      register={register}
-                      id="ticketH1Color"
-                      defaultColor={values.ticketH1Color}
-                    />
-                    {errors.ticketH1Color && (
-                      <p className="text-xs italic text-red-500">{errors.ticketH1Color?.message}</p>
-                    )}
-                  </div>
+              <div className="flex flex-col gap-2 pb-4">
+                <div className="relative">
+                  <Label
+                    name={"Title text"}
+                    htmlfor={"titleTextTickets"}
+                    className="block mb-1 text-sm font-medium text-primary"
+                  />
+
+                  <Input
+                    className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                    id="titleTextTickets"
+                    placeholder="Title text"
+                    {...register("titleTextTickets")}
+                  />
+                  {errors.titleTextTickets && (
+                    <p className="text-xs italic text-red-500">{errors.titleTextTickets?.message}</p>
+                  )}
                 </div>
-
-                <div className="w-1/2">
-                  <div className="relative">
-                    <LabelColor htmlFor="buttonsTicketsColor" text="Buttons color" />
-                    <ColorPicker
-                      defaultValue="#0e0046"
-                      register={register}
-                      id={"buttonsTicketsColor"}
-                      defaultColor={values.buttonsTicketsColor}
-                    />
-
-                    {errors.buttonsTicketsColor && (
-                      <p className="text-xs italic text-red-500">{errors.buttonsTicketsColor?.message}</p>
-                    )}
+                <div className="flex gap-4">
+                  <div className="w-1/2">
+                    <div className="relative">
+                      <LabelColor htmlFor="bgTicketsSection" text="Background color" />
+                      <ColorPicker
+                        defaultValue="#ffffff"
+                        id={"bgTicketsSection"}
+                        register={register}
+                        defaultColor={values.bgTicketsSection}
+                      />
+                      {errors.bgTicketsSection && (
+                        <p className="text-xs italic text-red-500">{errors.bgTicketsSection?.message}</p>
+                      )}
+                    </div>
+                    <div className="relative">
+                      <LabelColor htmlFor="ticketH1Color" text="Title section color" />
+                      <ColorPicker
+                        defaultValue="#0b023d"
+                        register={register}
+                        id="ticketH1Color"
+                        defaultColor={values.ticketH1Color}
+                      />
+                      {errors.ticketH1Color && (
+                        <p className="text-xs italic text-red-500">{errors.ticketH1Color?.message}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className="relative">
-                    <LabelColor htmlFor="buttonTicketForeground" text="Buttons foreground" />
-                    <ColorPicker
-                      defaultValue="#ffffff"
-                      register={register}
-                      id={"buttonTicketForeground"}
-                      defaultColor={values.buttonTicketForeground}
-                    />
-                    {errors.buttonTicketForeground && (
-                      <p className="text-xs italic text-red-500">{errors.buttonTicketForeground?.message}</p>
-                    )}
+
+                  <div className="w-1/2">
+                    <div className="relative">
+                      <LabelColor htmlFor="buttonsTicketsColor" text="Buttons color" />
+                      <ColorPicker
+                        defaultValue="#0e0046"
+                        register={register}
+                        id={"buttonsTicketsColor"}
+                        defaultColor={values.buttonsTicketsColor}
+                      />
+
+                      {errors.buttonsTicketsColor && (
+                        <p className="text-xs italic text-red-500">{errors.buttonsTicketsColor?.message}</p>
+                      )}
+                    </div>
+                    <div className="relative">
+                      <LabelColor htmlFor="buttonTicketForeground" text="Buttons foreground" />
+                      <ColorPicker
+                        defaultValue="#ffffff"
+                        register={register}
+                        id={"buttonTicketForeground"}
+                        defaultColor={values.buttonTicketForeground}
+                      />
+                      {errors.buttonTicketForeground && (
+                        <p className="text-xs italic text-red-500">{errors.buttonTicketForeground?.message}</p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -848,6 +868,7 @@ const addDiscoSchema = z.object({
   bgExperiencies: z.string().min(1, { message: "Background Experiencies required" }),
   experienciesH1Color: z.string().min(1, { message: "Experiencies title color required" }),
   //tickes
+  titleTextTickets: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")),
   bgTicketsSection: z.string().min(1, { message: "Secondary color required" }),
   ticketH1Color: z.string().min(1, { message: "Ticket title color required" }),
   buttonsTicketsColor: z.string().min(1, { message: "Button color required" }),

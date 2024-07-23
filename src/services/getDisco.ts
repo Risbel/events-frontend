@@ -24,6 +24,7 @@ export interface DiscoDetail {
   bannerDescription: string;
   titleTextAbout: string;
   titleTextCarousel: string;
+  titleTextTickets: string;
   bgImage: string;
   address: string;
   createdAt: string;
