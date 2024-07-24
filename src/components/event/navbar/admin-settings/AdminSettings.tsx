@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import AddCombos from "./combos";
 import Notifications from "./notifications";
+import Share from "./share";
 
 const AdminSettings = ({ disco }: { disco: DataDisco }) => {
   const { slug } = useParams();
@@ -45,6 +46,7 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
         <AddCarouselImages discoDetail={disco.discoDetail} />
         <AddCombos discoId={disco.id} />
         <Notifications discoId={disco.id} />
+        <Share disco={disco} />
       </DropdownMenuContent>
     </DropdownMenu>
   );
