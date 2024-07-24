@@ -160,7 +160,7 @@ const Cart = () => {
                         {item.category}
                       </p>
                       <p style={{ color: discoColors.navbarForeground }} className="text-lg font-semibold">
-                        TICKET
+                        {Number(item.price) > 0 ? "TICKET" : "ENTRIES"}
                       </p>
                     </div>
                     <p className="text-2xl font-bold">{Number(item.price) > 0 ? item.price : "free"}</p>

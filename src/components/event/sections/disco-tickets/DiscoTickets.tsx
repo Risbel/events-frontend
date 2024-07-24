@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
-
 import { compareAsc } from "date-fns";
 import { DiscoDetail } from "@/services/getDisco";
 import EditTicket from "./EditTicket";
@@ -168,7 +167,7 @@ const DiscoTickets = ({
                     }}
                     href={`/event/${name}/details-ticket/${ticket.id}`}
                   >
-                    Get tickets
+                    {Number(ticket.price) > 0 ? "Get tickets" : "Get entries"}
                   </Link>
 
                   <div style={{ color: `${discoDetail.discoColor.buttonTicketForeground}` }}>

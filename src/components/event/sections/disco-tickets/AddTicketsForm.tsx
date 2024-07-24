@@ -18,7 +18,7 @@ const addTicketsSchema = z
   .object({
     discoId: z.string().min(1),
     category: z.enum(["VIP", "economy", "common"]),
-    price: z.string().min(1, { message: "This field is required" }),
+    price: z.number().optional(),
     expDate: z.string().optional(),
     shortDescription: z.string(),
     largeDescription: z.string().optional(),
@@ -55,6 +55,7 @@ const addTicketsSchema = z
 export type AddTicketSchema = z.infer<typeof addTicketsSchema>;
 
 const AddTicketsForm = ({ discoId }: { discoId: string }) => {
+  const [isFree, setIsFree] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [date, setDate] = useState<Date>();
   const [isOpenPopover, setIsOpenPopover] = useState(false);
@@ -64,11 +65,22 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
+    getValues,
   } = useForm<AddTicketSchema>({
     resolver: zodResolver(addTicketsSchema),
   });
 
   const { mutate, isLoading } = useCreateDiscoTickets(discoId);
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    setIsFree(checked);
+    if (checked) {
+      setValue("price", 0);
+    }
+  };
+
   const onSubmit: SubmitHandler<AddTicketSchema> = (data) => {
     if (date) {
       const expDate = (data.expDate = endOfDay(new Date(date)).toISOString());
@@ -76,7 +88,7 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
       const formData = new FormData();
       formData.append("image", data?.image?.[0]);
       formData.append("expDate", expDate);
-      formData.append("price", data.price);
+      formData.append("price", data.price?.toString() ?? "0");
       formData.append("countInStock", data.countInStock);
       formData.append("category", data.category);
       formData.append("shortDescription", data.shortDescription);
@@ -160,14 +172,31 @@ const AddTicketsForm = ({ discoId }: { discoId: string }) => {
             <label className="block mb-1 text-xs font-medium text-gray-200" htmlFor="price">
               price
             </label>
-            <Input
-              className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
-              placeholder="$"
-              type="number"
-              min={0}
-              id="price"
-              {...register("price")}
-            />
+            <div className="flex relative items-center">
+              <div
+                hidden
+                className={cn(
+                  "absolute left-1 flex items-center justify-center rounded-sm h-8 w-1/2 bg-green-500",
+                  !isFree && "hidden"
+                )}
+              >
+                <p className="text-center text-white font-semibold">Free</p>
+              </div>
+              <Input
+                className="w-full py-2 pl-2 text-sm leading-tight text-gray-800 border rounded appearance-none focus:outline-none focus:shadow-outline"
+                placeholder="$"
+                type="number"
+                min={0}
+                id="price"
+                {...register("price")}
+              />
+
+              <label className="flex items-center gap-1 absolute right-2 h-full" htmlFor="isFree">
+                <span className="text-xs">free ticket</span>
+                <input type="checkbox" checked={isFree} onChange={handleCheckboxChange} id="isFree" />
+              </label>
+            </div>
+
             {errors.price && <p className="text-xs italic text-red-500 mt-2">{errors.price.message}</p>}
           </div>
           <div>

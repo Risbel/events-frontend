@@ -170,7 +170,7 @@ const DiscoTicketDetails = () => {
                     {data.category}
                   </p>
                   <p style={{ color: discoColors.navbarForeground }} className="text-xl lg:text-2xl font-semibold">
-                    TICKET
+                    {Number(data.price) > 0 ? "TICKET" : "ENTRIES"}
                   </p>
                 </div>
                 <p className="text-center text-4xl md:text-2xl lg:text-5xl font-semibold">
@@ -322,8 +322,7 @@ const DiscoTicketDetails = () => {
                 className={cn("flex items-center px-8 py-2 rounded-xl ", cartItems.length > 0 ? "block" : "hidden")}
               >
                 <div className="flex gap-4 group">
-                  <span className="font-semibold text-md">Buy</span>{" "}
-                  <ShoppingCart className="group-hover:translate-x-2 transition-transform duration-300" />
+                  <span className="font-semibold text-md"> {Number(data.price) > 0 ? "Buy" : "Reserve"}</span>
                 </div>
               </Link>
             </div>
@@ -358,8 +357,8 @@ const DiscoTicketDetails = () => {
             className={cn("flex items-center px-8 py-2 rounded-xl ", cartItems.length > 0 ? "block" : "hidden")}
           >
             <div className="flex gap-4 group">
-              <span className="font-semibold text-md">Buy</span>{" "}
-              <ShoppingCart className="group-hover:translate-x-2 transition-transform duration-300" />{" "}
+              <span className="font-semibold text-md"> {Number(data.price) > 0 ? "Buy" : "Reserve"}</span>
+              <ShoppingCart className="group-hover:translate-x-2 transition-transform duration-300" />
             </div>
           </Link>
         </div>

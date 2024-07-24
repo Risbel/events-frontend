@@ -52,7 +52,7 @@ const EditTicketsForm = ({
         <label htmlFor="price" className="block mb-1 text-xs font-medium text-gray-200">
           price
         </label>
-        <Input defaultValue={price} type="number" placeholder="$" min={1} id="price" {...register("price")} />
+        <Input defaultValue={price} type="number" placeholder="$" min={0} id="price" {...register("price")} />
         {errors.price && <p className="text-xs italic text-red-500 mt-2">{errors.price.message}</p>}
       </div>
       <div>
