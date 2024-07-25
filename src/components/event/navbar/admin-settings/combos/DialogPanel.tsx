@@ -1,5 +1,5 @@
 import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { X } from "lucide-react";
+import { ShoppingBag, X } from "lucide-react";
 import React from "react";
 import CombosList from "./CombosList";
 import AddCombosForm from "@/components/details-ticket/AddCombosForm";
@@ -7,8 +7,8 @@ import AddCombosForm from "@/components/details-ticket/AddCombosForm";
 const DialogPanel = ({ discoId }: { discoId: string }) => {
   return (
     <Dialog>
-      <DialogTrigger className="text-start text-sm px-2 py-1 hover:bg-black hover:text-white rounded-sm w-full transition-colors">
-        Packs
+      <DialogTrigger className="flex gap-2 px-2 py-1 hover:bg-black rounded-sm w-full transition-colors">
+        <ShoppingBag height={20} width={20} /> <span className="text-start text-sm hover:text-white">Packs</span>
       </DialogTrigger>
       <DialogContent className="w-11/12 h-3/4 p-8">
         <DialogHeader>

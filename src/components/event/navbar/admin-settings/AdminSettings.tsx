@@ -1,7 +1,7 @@
 import { DataDisco } from "@/services/getDisco";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { Settings2 } from "lucide-react";
+import { BarChartBig, Settings2, WalletCards } from "lucide-react";
 
 import AddBannerImages from "./banner-images";
 import AddCarouselImages from "./carousel-images";
@@ -40,7 +40,9 @@ const AdminSettings = ({ disco }: { disco: DataDisco }) => {
         <DropdownMenuSeparator style={{ border: `0.5px solid ${disco.discoDetail.discoColor.navbarForeground}` }} />
 
         <DropdownMenuItem className="transition-colors">
-          <Link href={`/event/${slug}/my-sales/today`}>My sales</Link>
+          <Link className="flex gap-2" href={`/event/${slug}/my-sales/today`}>
+            <WalletCards width={20} hanging={20} /> My sales
+          </Link>
         </DropdownMenuItem>
         <AddBannerImages discoDetail={disco.discoDetail} />
         <AddCarouselImages discoDetail={disco.discoDetail} />
