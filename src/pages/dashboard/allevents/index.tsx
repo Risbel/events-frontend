@@ -1,5 +1,5 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
-import MyEventsList from "./components/MyEventsList";
+import MyEventsList from "../../../components/dashboard/allevents/MyEventsList";
 import Link from "next/link";
 import { PlusCircleIcon } from "lucide-react";
 

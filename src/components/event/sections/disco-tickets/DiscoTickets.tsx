@@ -44,7 +44,7 @@ const DiscoTickets = ({
         style={{ color: `${discoDetail.discoColor.ticketH1Color}` }}
         className="font-extrabold text-4xl md:text-5xl lg:text-7xl text-center mb-8 pt-20"
       >
-        {discoDetail.titleTextTickets || "Tickets"}
+        {discoDetail?.titleTextTickets || "Tickets"}
       </h1>
       <div className="flex justify-center mb-4">
         <div

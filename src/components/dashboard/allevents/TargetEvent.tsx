@@ -2,6 +2,7 @@ import { DataDisco } from "@/services/getDisco";
 import { IMyEvents } from "@/services/getMyEvents";
 import Image from "next/image";
 import React from "react";
+import DeleteEvent from "./DeleteEvent";
 
 const TargetEvent = ({ event }: { event: IMyEvents }) => {
   if (!event || !event?.logo) {
@@ -9,7 +10,7 @@ const TargetEvent = ({ event }: { event: IMyEvents }) => {
   }
 
   return (
-    <div className="flex items-center rounded-2xl bg-primary/95 p-2 md:p-3">
+    <div className="flex items-center rounded-2xl bg-primary/95 p-2 md:p-3 hover:-translate-y-1 hover:shadow-md hover:shadow-slate-500 duration-300">
       <Image
         className="rounded-full h-25 w-25 md:h-24 md:w-24"
         src={event.logo}
@@ -32,7 +33,8 @@ const TargetEvent = ({ event }: { event: IMyEvents }) => {
           <p className="text-xs font-light text-gray-100 md:text-md line-clamp-1">{event.discoDetail?.address}</p>
         </div>
 
-        <div className="flex px-2 md:px-4 justify-end">
+        <div className="flex px-2 md:px-4 gap-2 justify-end">
+          <DeleteEvent id={event.id} />
           <a
             href={`https://event.myaipeople.com/event/${event?.slug}`}
             target="_blank"
