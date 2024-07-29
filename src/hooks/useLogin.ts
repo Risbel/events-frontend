@@ -10,9 +10,9 @@ const useLogin = (disco?: string) => {
     mutationFn: loginCredentials,
     onSuccess: (status) => {
       if (status === 200 && disco) {
-        cart.cartItems.length ? router.push(`/event/${disco}/cart`) : router.push(`/event/${disco}`);
+        cart.cartItems.length ? router.replace(`/event/${disco}/cart`) : router.replace(`/event/${disco}`);
       } else {
-        router.push("/dashboard/allevents");
+        router.replace("/dashboard/allevents");
       }
     },
   });

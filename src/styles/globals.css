@@ -84,3 +84,9 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+#circle {
+  transition: stroke-dashoffset 0.55s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}

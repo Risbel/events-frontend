@@ -1,5 +1,5 @@
 import { cn } from "@/lib/shadcnUtils";
-import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
+import { AddDiscoSchema } from "./AddDiscos";
 import { BellIcon, Home, ShoppingCart, UserCircle2 } from "lucide-react";
 import Image from "next/image";
 

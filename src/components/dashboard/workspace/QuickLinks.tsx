@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { AddDiscoSchema } from "../../../pages/dashboard/workspace/components/AddDiscos";
+import { AddDiscoSchema } from "./AddDiscos";
 import { useFieldArray } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { PlusCircleIcon, X } from "lucide-react";

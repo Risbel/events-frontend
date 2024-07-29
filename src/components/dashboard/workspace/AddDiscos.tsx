@@ -2,10 +2,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import useCreateDisco from "@/hooks/useCreateDisco";
-import ButtonSubmit from "../../../../components/buttons/ButtonSubmit";
+import ButtonSubmit from "../../buttons/ButtonSubmit";
 import { useState } from "react";
-import { Input, Label } from "../../../../components/ui/input";
-import { Textarea } from "../../../../components/ui/textarea";
+import { Input, Label } from "../../ui/input";
+import { Textarea } from "../../ui/textarea";
 import { cn } from "@/lib/shadcnUtils";
 import { Eye, X } from "lucide-react";
 import Preview from "@/components/dashboard/workspace/preview";
@@ -18,6 +18,8 @@ import useFormPersist from "react-hook-form-persist";
 import AddAboutTexts from "@/components/dashboard/workspace/AddAboutTexts";
 import SocialSelector from "@/components/dashboard/workspace/SocialSelector";
 import QuickLinks from "@/components/dashboard/workspace/QuickLinks";
+import CircularProgress from "@/components/dashboard/workspace/progress/CircularProgress";
+import Progress from "./progress";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
 
@@ -112,8 +114,8 @@ const AddDiscos = () => {
         <Preview values={values} />
       </div>
       <div className="pt-20 px-8 bg-secondary">
-        <h1 className="text-xl md:text-2xl text-primary font-bold mb-8 p-2 bg-primary-foreground rounded-md">
-          Let&apos;s create your webpage:{" "}
+        <h1 className="text-xl md:text-2xl text-primary font-bold mb-8 p-2 pl-4 bg-primary-foreground rounded-md">
+          Let&apos;s create your webpage:
         </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="flex flex-col gap-8">
@@ -195,14 +197,8 @@ const AddDiscos = () => {
             </div>
 
             <ColorPaletteGenerator values={values} brandColor={values.brandColor} reset={reset} />
-            <div className="flex justify-center col-start-9 col-span-4 bg-primary-foreground rounded-xl shadow-md overflow-hidden p-6">
-              <Image
-                src={"/progress-to-addDiscos.png"}
-                width={250}
-                height={250}
-                alt="progress to addDiscos"
-                className="object-cover w-full"
-              />
+            <div className="flex justify-center items-center col-start-9 col-span-4 bg-primary-foreground rounded-xl shadow-md p-6">
+              <Progress />
             </div>
           </div>
           <div className="grid grid-cols-3 gap-8">

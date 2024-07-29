@@ -1,4 +1,4 @@
-import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
+import { AddDiscoSchema } from "./AddDiscos";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { UseFormReset } from "react-hook-form";
 

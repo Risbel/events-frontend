@@ -1,5 +1,5 @@
+import { AddDiscoSchema } from "@/components/dashboard/workspace/AddDiscos";
 import { IconX } from "@/components/event/sections/IconX";
-import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 
 //this hook is used on the /event/(*) page to display the social networks used in the event

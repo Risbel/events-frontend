@@ -3,7 +3,7 @@ import BannerPreview from "./BannerPreview";
 import ExperiencesPreview from "./ExperiencesPreview";
 import NavbarPreview from "./NavbarPreview";
 import TicketsPreview from "./TicketsPreview";
-import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
+import { AddDiscoSchema } from "./AddDiscos";
 import FooterPreview from "./FooterPreview";
 
 const Preview = ({ values }: { values: AddDiscoSchema }) => {

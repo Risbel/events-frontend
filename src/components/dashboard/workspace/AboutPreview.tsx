@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/shadcnUtils";
-import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
-import { ArrowBigUpDash } from "lucide-react";
+import { AddDiscoSchema } from "./AddDiscos";
 import { useEffect, useState } from "react";
 
 const AboutPreview = ({ values }: { values: AddDiscoSchema }) => {

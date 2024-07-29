@@ -1,5 +1,5 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
+import { AddDiscoSchema } from "./AddDiscos";
 import Image from "next/image";
 
 const experiencies = [

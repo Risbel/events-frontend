@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useGenerateColors } from "@/hooks/useGenerateColors";
-import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
+import { AddDiscoSchema } from "./AddDiscos";
 import { Loader2 } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { UseFormReset } from "react-hook-form";

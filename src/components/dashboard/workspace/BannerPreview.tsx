@@ -1,4 +1,4 @@
-import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
+import { AddDiscoSchema } from "./AddDiscos";
 import { format, addDays } from "date-fns";
 import Image from "next/image";
 

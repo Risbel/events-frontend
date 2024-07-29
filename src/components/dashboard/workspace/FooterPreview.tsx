@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { AddDiscoSchema } from "@/pages/dashboard/workspace/components/AddDiscos";
+import { AddDiscoSchema } from "./AddDiscos";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 import { useIconsSocials } from "@/utils/useIconsSocials";
