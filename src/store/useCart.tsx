@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface State {
+export interface State {
   cartItems: ICart[];
   addToCart: ({}: ICart) => void;
   removeFromCart: ({}: any) => void;

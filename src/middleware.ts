@@ -7,12 +7,7 @@ export async function middleware(req: NextRequest) {
   if (!session) {
     const url = req.nextUrl.clone();
 
-    if (url.pathname.startsWith("/dashboard")) {
-      url.pathname = `/auth/login`;
-    } else {
-      url.pathname = `auth/login${url.pathname}`;
-    }
-
+    url.pathname = url.pathname.startsWith("/dashboard") ? "/auth/login" : `/auth/login${url.pathname}`;
     return NextResponse.redirect(url);
   }
 

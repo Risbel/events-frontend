@@ -1,14 +1,18 @@
+import Spinner from "@/components/loaders/Spinner";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import useGetDisco from "@/hooks/useGetDisco";
 import useLogin from "@/hooks/useLogin";
+import useCart from "@/store/useCart";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
+import { ArrowBigRight, CheckCircle2, EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -21,12 +25,16 @@ const loginSchema = z.object({
 export type ILoginSchema = z.infer<typeof loginSchema>;
 
 const Login = () => {
+  const hasNavigated = useRef(false);
+  const router = useRouter();
   const [isPassword, setIsPassword] = useState(false);
   const params = useParams();
   const slug = params?.slug?.[1];
+  const cart = useCart();
+  const { status } = useSession();
 
-  const { mutate, isLoading, data: status } = useLogin(slug);
-  const { data } = useGetDisco({ slug });
+  const { mutate, isLoading, data, isSuccess } = useLogin();
+  const { data: dataDisco } = useGetDisco({ slug });
 
   const {
     register,
@@ -40,7 +48,18 @@ const Login = () => {
     mutate(data);
   };
 
-  if (!slug || !data) {
+  useEffect(() => {
+    if (isSuccess && data?.ok && dataDisco?.disco && !hasNavigated.current && status === "authenticated") {
+      hasNavigated.current = true;
+      if (cart?.cartItems?.length) {
+        router.push(`/event/${slug}/cart`);
+      } else {
+        router.push(`/event/${slug}`);
+      }
+    }
+  }, [isSuccess, data?.ok, dataDisco?.disco, cart?.cartItems?.length, slug, router, status]);
+
+  if (!slug || !dataDisco) {
     return;
   }
 
@@ -50,11 +69,13 @@ const Login = () => {
 
       <div className="flex justify-center min-w-[300px] md:min-w-[500px] gap-4 p-8 rounded-xl bg-white border shadow-xl w-1/3">
         <div
-          style={{ background: data?.disco.discoDetail.discoColor.buttonTicketForeground }}
+          style={{ background: dataDisco?.disco.discoDetail.discoColor.buttonTicketForeground }}
           className="flex flex-col gap-4 w-full"
         >
           <div className="flex justify-center gap-4">
-            <Image src={data?.disco?.logo} alt="logo" height={40} width={40} className="rounded-full" />
+            {dataDisco?.disco.logo && (
+              <Image src={dataDisco?.disco.logo} alt="logo" height={40} width={40} className="rounded-full" />
+            )}
             <h1 className="text-3xl font-semibold text-center">{slug.toUpperCase()}</h1>
           </div>
 
@@ -69,6 +90,7 @@ const Login = () => {
             </p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} name="login form" className="flex flex-col gap-4">
+            <input type="text" hidden {...register("disco")} defaultValue={slug} />
             <div className="relative">
               <Label name={"Email"} htmlfor={"email"} />
               <Input {...register("email")} autoComplete="none" id="email" type="email" placeholder="Email" />
@@ -92,11 +114,20 @@ const Login = () => {
               </button>
               {errors.password && <p className="text-start text-xs italic text-red-500">{errors.password.message}</p>}
             </div>
-            {status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
+            {data?.status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
 
-            <Button className="flex gap-2 shadow-md hover:opacity-90 bg-primary" type="submit">
-              {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
-            </Button>
+            {isSuccess ? (
+              <Link
+                className="flex gap-2 justify-center bg-primary p-2 rounded-lg hover:opacity-90"
+                href={cart?.cartItems?.length ? `/event/${slug}/cart` : `/event/${slug}`}
+              >
+                <span className="text-white">Get started</span> <ArrowBigRight className="stroke-white" />
+              </Link>
+            ) : (
+              <Button className="flex items-center gap-2" type="submit" disabled={isLoading}>
+                {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
+              </Button>
+            )}
 
             <div className="flex justify-center items-center gap-2 w-full overflow-hidden text-black">
               <Separator className="w-full" />

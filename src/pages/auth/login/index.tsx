@@ -1,14 +1,15 @@
 import AuthLayout from "@/components/layouts/AuthLayout.tsx";
-import Spinner from "@/components/loaders/Spinner";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import useLogin from "@/hooks/useLogin";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { ArrowBigRight, EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -21,9 +22,12 @@ const loginSchema = z.object({
 export type ILoginSchema = z.infer<typeof loginSchema>;
 
 const Login = () => {
+  const hasNavigated = useRef(false);
+  const router = useRouter();
   const [isPassword, setIsPassword] = useState(false);
 
-  const { mutate, isLoading, data: status } = useLogin();
+  const { mutate, isLoading, data, isSuccess } = useLogin();
+  const { status } = useSession();
 
   const {
     register,
@@ -36,6 +40,13 @@ const Login = () => {
   const onSubmit: SubmitHandler<ILoginSchema> = (data) => {
     mutate(data);
   };
+
+  useEffect(() => {
+    if (isSuccess && data?.ok && !hasNavigated.current && status === "authenticated") {
+      hasNavigated.current = true;
+      router.push("/dashboard/allevents");
+    }
+  }, [isSuccess, data, router, status]);
 
   return (
     <AuthLayout>
@@ -73,17 +84,17 @@ const Login = () => {
             </button>
             {errors.password && <p className="text-start text-xs italic text-red-500">{errors.password.message}</p>}
           </div>
-          {status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
+          {data?.status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
 
-          <Button className="flex items-center gap-2" type="submit">
-            <span>Login</span>
-
-            {isLoading && (
-              <div>
-                <Spinner diameter={4} stroke={"white"} />
-              </div>
-            )}
-          </Button>
+          {isSuccess ? (
+            <Link className="flex gap-2 justify-center bg-primary p-2 rounded-lg" href={"/dashboard/allevents"}>
+              <span className="text-white">Get started</span> <ArrowBigRight className="stroke-white" />
+            </Link>
+          ) : (
+            <Button className="flex items-center gap-2" type="submit" disabled={isLoading}>
+              {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
+            </Button>
+          )}
 
           <div className="flex justify-center items-center gap-2 w-full overflow-hidden text-black">
             <Separator className="w-full" />

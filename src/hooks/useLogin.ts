@@ -1,20 +1,9 @@
 import { loginCredentials } from "@/services/loginCredentials";
-import useCart from "@/store/useCart";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
 
-const useLogin = (disco?: string) => {
-  const cart = useCart();
-  const router = useRouter();
+const useLogin = () => {
   return useMutation({
-    mutationFn: loginCredentials,
-    onSuccess: (status) => {
-      if (status === 200 && disco) {
-        cart.cartItems.length ? router.replace(`/event/${disco}/cart`) : router.replace(`/event/${disco}`);
-      } else {
-        router.replace("/dashboard/allevents");
-      }
-    },
+    mutationFn: (data: { email: string; password: string; disco?: string }) => loginCredentials(data),
   });
 };
 
