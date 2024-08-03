@@ -14,11 +14,11 @@ const QuickLinks = ({ register, values, control }: { register: any; values: AddD
   return (
     <Dialog>
       <DialogTrigger className="w-full py-2 bg-gray-700 rounded-md text-white">Quick links</DialogTrigger>
-      <DialogContent className="h-3/4 w-6/12">
+      <DialogContent className="h-3/4 w-full md:w-6/12">
         <DialogHeader>
           <DialogTitle className="text-center py-2">Quick links</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-4 p-8">
+        <div className="flex flex-col gap-4 p-2 md:p-8">
           {fields.map((field, index) => {
             return (
               <div key={field.id} className="w-full">

@@ -9,11 +9,11 @@ const SocialSelector = ({ register, values }: { register: any; values: AddDiscoS
   return (
     <Dialog>
       <DialogTrigger className="w-full py-2 bg-gray-700 rounded-md text-white">Social</DialogTrigger>
-      <DialogContent className="h-3/4 w-6/12">
+      <DialogContent className="h-3/4 w-full md:w-6/12">
         <DialogHeader>
           <DialogTitle className="text-center py-2">Social networks</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-4 p-8">
+        <div className="flex flex-col gap-4 p-2 md:p-8">
           <div className="flex gap-2 items-center">
             <Facebook height={30} width={30} />
             <Input {...register("socials.0.url")} placeholder="type a valid facebook url and test it on the preview" />

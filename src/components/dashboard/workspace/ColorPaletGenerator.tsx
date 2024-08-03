@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useGenerateColors } from "@/hooks/useGenerateColors";
 import { AddDiscoSchema } from "./AddDiscos";
-import { Loader2 } from "lucide-react";
+import { Loader2, SparkleIcon, Sparkles } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { UseFormReset } from "react-hook-form";
 
@@ -63,7 +63,7 @@ const ColorPaletteGenerator = ({
   };
 
   return (
-    <div className="flex flex-col col-span-4 justify-between px-6 pt-6 pb-10 bg-white rounded-md shadow-md">
+    <div className="flex flex-col col-span-12 lg:col-span-4 justify-between px-6 pt-6 pb-10 bg-white rounded-md shadow-md">
       <h2 className="text-xl text-primary text-center font-bold mb-4">Color Palette Generator</h2>
 
       <div className="grid grid-cols-2 gap-3 items-center justify-between mb-6">
@@ -80,8 +80,8 @@ const ColorPaletteGenerator = ({
           })}
       </div>
       <div className="flex w-full justify-center items-center">
-        <Button type="button" onClick={generatePalette}>
-          {isLoading ? <Loader2 stroke="white" className="animate-spin" /> : "Generate palette"}
+        <Button type="button" onClick={generatePalette} className="gap-2">
+          {isLoading ? <Loader2 stroke="white" className="animate-spin" /> : "Generate palette"} <Sparkles />
         </Button>
       </div>
     </div>

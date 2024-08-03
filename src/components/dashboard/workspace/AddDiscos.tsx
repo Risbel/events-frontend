@@ -10,7 +10,6 @@ import { cn } from "@/lib/shadcnUtils";
 import { Eye, X } from "lucide-react";
 import Preview from "@/components/dashboard/workspace/preview";
 import ColorPicker from "@/components/dashboard/workspace/ColorPicker";
-import Image from "next/image";
 import ColorPaletteGenerator from "@/components/dashboard/workspace/ColorPaletGenerator";
 import LabelColor from "@/components/dashboard/workspace/LabelColor";
 import { useSession } from "next-auth/react";
@@ -18,7 +17,6 @@ import useFormPersist from "react-hook-form-persist";
 import AddAboutTexts from "@/components/dashboard/workspace/AddAboutTexts";
 import SocialSelector from "@/components/dashboard/workspace/SocialSelector";
 import QuickLinks from "@/components/dashboard/workspace/QuickLinks";
-import CircularProgress from "@/components/dashboard/workspace/progress/CircularProgress";
 import Progress from "./progress";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
@@ -99,7 +97,7 @@ const AddDiscos = () => {
 
   return (
     <>
-      <div className="fixed group cursor-pointer -translate-y-4 hover:-translate-y-2 transition-transform duration-300 z-30 right-12 top-8 bg-primary/80 backdrop-blur-sm hover:bg-primary rounded-b-3xl px-4 pt-10">
+      <div className="fixed group cursor-pointer -translate-y-4 hover:-translate-y-2 transition-transform duration-300 z-30 right-4 md:right-12 top-8 bg-primary/80 backdrop-blur-sm hover:bg-primary rounded-b-3xl px-4 pt-10">
         <button onClick={() => setIsActive(true)} className="group-hover:scale-125 transition-transform">
           <Eye stroke="white" />
         </button>
@@ -113,17 +111,17 @@ const AddDiscos = () => {
         </button>
         <Preview values={values} />
       </div>
-      <div className="pt-20 px-8 bg-secondary">
-        <h1 className="text-xl md:text-2xl text-primary font-bold mb-8 p-2 pl-4 bg-primary-foreground rounded-md">
-          Let&apos;s create your webpage:
+      <div className="pt-20 px-2 md:px-8 bg-secondary">
+        <h1 className="text-md md:text-2xl text-primary font-bold mb-8 p-2 pl-4 bg-primary-foreground rounded-md">
+          Let&apos;s create your virtual space:
         </h1>
 
         <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="flex flex-col gap-8">
-          <div className="grid grid-cols-12 gap-8">
-            <div className="flex flex-col col-span-4 bg-primary-foreground p-6 rounded-md shadow-md">
+          <div className="grid grid-cols-12 gap-4 md:gap-8">
+            <div className="flex flex-col col-span-12 lg:col-span-4 bg-primary-foreground p-4 md:p-6 rounded-md shadow-md">
               <p className="pb-4 text-xl text-center font-bold text-primary">General info</p>
               <div className="relative mb-4">
-                <Label name={"Brand"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
+                <Label name={"Brand"} htmlfor={"discoName"} className="block mb-1 font-medium text-primary" />
 
                 <Input
                   autoComplete="off"
@@ -136,7 +134,7 @@ const AddDiscos = () => {
                 {errors.name && <p className="text-xs italic text-red-500">{errors.name?.message}</p>}
               </div>
               <div className="relative mb-4">
-                <Label name={"Link name"} htmlfor={"slug"} className="block mb-1 text-sm font-medium text-primary" />
+                <Label name={"Link name"} htmlfor={"slug"} className="block mb-1 font-medium text-primary" />
 
                 <Input
                   autoComplete="off"
@@ -150,11 +148,7 @@ const AddDiscos = () => {
               </div>
               <div className="flex gap-2 w-full">
                 <div className="relative mb-4 w-1/2">
-                  <Label
-                    name={"Start date"}
-                    htmlfor={"startDate"}
-                    className="block mb-1 text-sm font-medium text-primary"
-                  />
+                  <Label name={"Start date"} htmlfor={"startDate"} className="block mb-1 font-medium text-primary" />
 
                   <Input
                     {...register("startDate")}
@@ -166,11 +160,7 @@ const AddDiscos = () => {
                   {errors.startDate && <p className="text-xs italic text-red-500">{errors.startDate?.message}</p>}
                 </div>
                 <div className="relative mb-4 w-1/2">
-                  <Label
-                    name={"End date"}
-                    htmlfor={"endDate"}
-                    className="block mb-1 text-sm font-medium text-primary"
-                  />
+                  <Label name={"End date"} htmlfor={"endDate"} className="block mb-1 font-medium text-primary" />
 
                   <Input
                     {...register("endDate")}
@@ -197,15 +187,15 @@ const AddDiscos = () => {
             </div>
 
             <ColorPaletteGenerator values={values} brandColor={values.brandColor} reset={reset} />
-            <div className="flex justify-center items-center col-start-9 col-span-4 bg-primary-foreground rounded-xl shadow-md p-6">
+            <div className="flex justify-center items-center lg:col-start-9 col-span-12 lg:col-span-4 bg-primary-foreground rounded-xl shadow-md p-4 md:p-6">
               <Progress />
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-8">
-            <div className="flex flex-col justify-between gap-2 col-span-1 bg-primary-foreground p-6 rounded-md shadow-md">
+          <div className="grid grid-cols-12 gap-4 md:gap-8">
+            <div className="flex flex-col justify-between gap-2 col-span-12 lg:col-span-4 bg-primary-foreground p-4 md:p-6 rounded-md shadow-md">
               <p className="pb-4 text-xl text-center font-bold text-primary">Navbar</p>
               <div className="relative">
-                <Label htmlfor={"logo"} name={"Logo"} className="block mb-1 text-sm font-medium text-primary" />
+                <Label htmlfor={"logo"} name={"Logo"} className="block mb-1 font-medium text-primary" />
 
                 <Input
                   autoComplete="off"
@@ -244,16 +234,12 @@ const AddDiscos = () => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 col-span-2 p-6 bg-primary-foreground rounded-md shadow-md">
-              <p className="text-xl text-center font-bold text-primary mb-4">Banner</p>
-              <div className="flex gap-4">
-                <div className="flex flex-col gap-2 w-1/2">
+            <div className="flex flex-col gap-2 col-span-12 lg:col-span-8 p-4 md:p-6 bg-primary-foreground rounded-md shadow-md">
+              <p className="text-xl text-center font-bold text-primary md:mb-4">Banner</p>
+              <div className="flex flex-col md:flex-row gap-8 md:gap-4">
+                <div className="flex flex-col gap-2 md:w-1/2">
                   <div className="relative">
-                    <Label
-                      name={"Event title"}
-                      htmlfor={"h1Banner"}
-                      className="block mb-1 text-sm font-medium text-primary"
-                    />
+                    <Label name={"Event title"} htmlfor={"h1Banner"} className="block mb-1 font-medium text-primary" />
 
                     <Input
                       autoComplete="off"
@@ -280,12 +266,12 @@ const AddDiscos = () => {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-2 w-1/2">
+                <div className="flex flex-col gap-2 md:w-1/2">
                   <div className="relative">
                     <Label
                       htmlfor={"bannerImage"}
                       name="Banner Image"
-                      className="block mb-1 text-sm font-medium text-primary"
+                      className="block mb-1 font-medium text-primary"
                     />
 
                     <Input
@@ -316,12 +302,12 @@ const AddDiscos = () => {
               </div>
 
               <input autoComplete="off" hidden type="text" value={userId} {...register("administrator")} />
-              <div className="flex items-center gap-4 border-t pt-4 mt-4">
-                <div className="relative w-1/2 mt-6">
+              <div className="flex flex-col md:flex-row items-center gap-4 border-t pt-4 mt-4">
+                <div className="relative w-full md:w-1/2 mt-6">
                   <Label
                     name={"Banner description"}
                     htmlfor={"bannerDescription"}
-                    className="block mb-1 text-sm font-medium text-primary"
+                    className="block mb-1 font-medium text-primary"
                   />
 
                   <Textarea
@@ -335,7 +321,7 @@ const AddDiscos = () => {
                     <p className="text-xs italic text-red-500">{errors.bannerDescription?.message}</p>
                   )}
                 </div>
-                <div className="relative w-1/2">
+                <div className="relative w-full md:w-1/2">
                   <LabelColor text="Text color" htmlFor="bannerDescriptionColor" />
 
                   <ColorPicker
@@ -352,11 +338,11 @@ const AddDiscos = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="flex flex-col justify-around col-span-2 bg-primary-foreground rounded-md p-6 shadow-md">
-              <p className="text-xl text-center font-bold text-primary">About</p>
+          <div className="grid grid-cols-12 gap-4">
+            <div className="flex flex-col justify-around col-span-12 lg:col-span-8 bg-primary-foreground rounded-md p-4 md:p-6 shadow-md">
+              <p className="text-xl text-center font-bold text-primary mb-4 md:mb-0">About</p>
 
-              <div className="flex gap-4 justify-center">
+              <div className="flex gap-4 pb-6 justify-center">
                 <button
                   type="button"
                   onClick={() => setValue("layoutTextAbout", "variantA")}
@@ -506,56 +492,57 @@ const AddDiscos = () => {
                   </div>
                 </button>
               </div>
-              <div className="flex gap-4 w-full">
-                <div className="relative w-full">
-                  <Label
-                    name={"Title text"}
-                    htmlfor={"titleTextAbout"}
-                    className="block mb-1 text-sm font-medium text-primary"
-                  />
+              <div className="flex flex-col md:flex-row md:gap-4">
+                <div className="flex flex-col gap-4 w-full md:w-1/2  mb-4 md:mb-0">
+                  <div className="relative w-full">
+                    <Label
+                      name={"Title text"}
+                      htmlfor={"titleTextAbout"}
+                      className="block mb-1 font-medium text-primary"
+                    />
 
-                  <Input
-                    className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
-                    id="titleTextAbout"
-                    placeholder="Title text"
-                    {...register("titleTextAbout")}
-                  />
-                  {errors.titleTextAbout && (
-                    <p className="text-xs italic text-red-500">{errors.titleTextAbout?.message}</p>
-                  )}
+                    <Input
+                      className="w-full py-2 pl-2 text-sm leading-tight text-primary rounded appearance-none focus:outline-none focus:shadow-outline"
+                      id="titleTextAbout"
+                      placeholder="Title text"
+                      {...register("titleTextAbout")}
+                    />
+                    {errors.titleTextAbout && (
+                      <p className="text-xs italic text-red-500">{errors.titleTextAbout?.message}</p>
+                    )}
+                  </div>
+                  <div className="relative pb-2 w-full">
+                    <LabelColor htmlFor="titleAboutColor" text="Title about color" />
+                    <ColorPicker
+                      defaultValue="#0e0046"
+                      register={register}
+                      id={"titleAboutColor"}
+                      defaultColor={values.titleAboutColor}
+                    />
+                    {errors.titleAboutColor && (
+                      <p className="text-xs italic text-red-500">{errors.titleAboutColor?.message}</p>
+                    )}
+                  </div>
                 </div>
 
-                <AddAboutTexts register={register} values={values} control={control} setValue={setValue} />
-              </div>
+                <div className="flex flex-col gap-4 pb-4 w-full md:w-1/2 ">
+                  <AddAboutTexts register={register} values={values} control={control} setValue={setValue} />
+                  <div className="relative pb-2">
+                    <LabelColor htmlFor="bgAboutColor" text="Background color" />
+                    <ColorPicker
+                      defaultValue="#0e0046"
+                      id={"bgAboutColor"}
+                      register={register}
+                      defaultColor={values.bgAboutColor}
+                    />
+                    {errors.bgAboutColor && (
+                      <p className="text-xs italic text-red-500">{errors.bgAboutColor?.message}</p>
+                    )}
+                  </div>
 
-              <div className="flex gap-4 pb-4">
-                <div className="relative pb-2">
-                  <LabelColor htmlFor="bgAboutColor" text="Background color" />
-                  <ColorPicker
-                    defaultValue="#0e0046"
-                    id={"bgAboutColor"}
-                    register={register}
-                    defaultColor={values.bgAboutColor}
-                  />
-                  {errors.bgAboutColor && <p className="text-xs italic text-red-500">{errors.bgAboutColor?.message}</p>}
-                </div>
+                  {/* <div className="h-28 w-0 border-l" /> */}
 
-                <div className="relative pb-2">
-                  <LabelColor htmlFor="titleAboutColor" text="Title about color" />
-                  <ColorPicker
-                    defaultValue="#0e0046"
-                    register={register}
-                    id={"titleAboutColor"}
-                    defaultColor={values.titleAboutColor}
-                  />
-                  {errors.titleAboutColor && (
-                    <p className="text-xs italic text-red-500">{errors.titleAboutColor?.message}</p>
-                  )}
-                </div>
-
-                <div className="h-28 w-0 border-l" />
-
-                <div className="relative pb-2">
+                  {/* <div className="relative pb-2">
                   <LabelColor text="Button color" htmlFor="buttonColor" />
                   <ColorPicker
                     defaultValue="#a8d4fb"
@@ -576,17 +563,18 @@ const AddDiscos = () => {
                   {errors.buttonForeground && (
                     <p className="text-xs italic text-red-500">{errors.buttonForeground?.message}</p>
                   )}
+                </div> */}
                 </div>
               </div>
             </div>
-            <div className="col-span-1 bg-primary-foreground rounded-md p-6 shadow-md">
+            <div className="col-span-12 lg:col-span-4 bg-primary-foreground rounded-md p-4 md:p-6 shadow-md">
               <div className="flex flex-col gap-2 pb-4">
                 <p className="text-xl text-center font-bold text-primary mb-4">Carousel</p>
                 <div className="relative">
                   <Label
                     name={"Title text"}
                     htmlfor={"titleTextCarousel"}
-                    className="block mb-1 text-sm font-medium text-primary"
+                    className="block mb-1 font-medium text-primary"
                   />
 
                   <Input
@@ -599,44 +587,46 @@ const AddDiscos = () => {
                     <p className="text-xs italic text-red-500">{errors.titleTextCarousel?.message}</p>
                   )}
                 </div>
-                <div className="relative pb-2">
-                  <LabelColor htmlFor="bgExperiencies" text="Background color" />
-                  <ColorPicker
-                    defaultValue="#a7d8f5"
-                    register={register}
-                    id={"bgExperiencies"}
-                    defaultColor={values.bgExperiencies}
-                  />
+                <div className="flex flex-col md:flex-row lg:flex-col gap-4 w-full">
+                  <div className="relative pb-2 md:w-1/2 lg:w-full">
+                    <LabelColor htmlFor="experienciesH1Color" text="Title color" />
+                    <ColorPicker
+                      defaultValue="#a7d8f5"
+                      register={register}
+                      id={"experienciesH1Color"}
+                      defaultColor={values.experienciesH1Color}
+                    />
+                    {errors.experienciesH1Color && (
+                      <p className="text-xs italic text-red-500">{errors.experienciesH1Color?.message}</p>
+                    )}
+                  </div>
+                  <div className="relative pb-2 md:w-1/2 lg:w-full">
+                    <LabelColor htmlFor="bgExperiencies" text="Background color" />
+                    <ColorPicker
+                      defaultValue="#a7d8f5"
+                      register={register}
+                      id={"bgExperiencies"}
+                      defaultColor={values.bgExperiencies}
+                    />
 
-                  {errors.bgExperiencies && (
-                    <p className="text-xs italic text-red-500">{errors.bgExperiencies?.message}</p>
-                  )}
-                </div>
-                <div className="relative pb-2">
-                  <LabelColor htmlFor="experienciesH1Color" text="Title color" />
-                  <ColorPicker
-                    defaultValue="#a7d8f5"
-                    register={register}
-                    id={"experienciesH1Color"}
-                    defaultColor={values.experienciesH1Color}
-                  />
-                  {errors.experienciesH1Color && (
-                    <p className="text-xs italic text-red-500">{errors.experienciesH1Color?.message}</p>
-                  )}
+                    {errors.bgExperiencies && (
+                      <p className="text-xs italic text-red-500">{errors.bgExperiencies?.message}</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8">
-            <div className="p-6 bg-primary-foreground rounded-md shadow-md">
+          <div className="flex flex-col lg:flex-row gap-8">
+            <div className="w-full p-4 md:p-6 bg-primary-foreground rounded-md shadow-md">
               <p className="text-xl text-center font-bold text-primary mb-4">Tickets</p>
               <div className="flex flex-col gap-2 pb-4">
                 <div className="relative">
                   <Label
                     name={"Title text"}
                     htmlfor={"titleTextTickets"}
-                    className="block mb-1 text-sm font-medium text-primary"
+                    className="block mb-1 font-medium text-primary"
                   />
 
                   <Input
@@ -708,15 +698,11 @@ const AddDiscos = () => {
               </div>
             </div>
 
-            <div className="col-span-1 bg-primary-foreground p-6 rounded-md shadow-md">
+            <div className="w-full col-span-1 bg-primary-foreground p-4 md:p-6 rounded-md shadow-md">
               <p className="text-xl text-center font-bold text-primary mb-4">Footer</p>
               <div className="flex gap-2">
                 <div className="relative mb-4 md:mr-2 w-1/2">
-                  <Label
-                    name={"phone number"}
-                    htmlfor={"phone"}
-                    className="block mb-1 text-sm font-medium text-primary"
-                  />
+                  <Label name={"phone number"} htmlfor={"phone"} className="block mb-1 font-medium text-primary" />
 
                   <Input
                     autoComplete="off"
@@ -729,7 +715,7 @@ const AddDiscos = () => {
                   {errors.phone && <p className="text-xs italic text-red-500">{errors.phone?.message}</p>}
                 </div>
                 <div className="relative mb-4 md:mr-2  w-1/2">
-                  <Label name={"email"} htmlfor={"discoName"} className="block mb-1 text-sm font-medium text-primary" />
+                  <Label name={"email"} htmlfor={"discoName"} className="block mb-1 font-medium text-primary" />
 
                   <Input
                     autoComplete="off"
@@ -744,7 +730,7 @@ const AddDiscos = () => {
               </div>
 
               <div className="relative mb-4 pb-2">
-                <Label name={"Address"} htmlfor={"address"} className="block mb-1 text-sm font-medium text-primary" />
+                <Label name={"Address"} htmlfor={"address"} className="block mb-1 font-medium text-primary" />
 
                 <Input
                   autoComplete="off"
