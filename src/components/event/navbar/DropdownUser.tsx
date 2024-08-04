@@ -11,7 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import useGetDisco from "@/hooks/useGetDisco";
-import { UserCircle2 } from "lucide-react";
+import { Ticket, UserCircle, UserCircle2 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Logout from "@/components/buttons/Logout";
 
@@ -61,18 +61,18 @@ const DropdownUser = () => {
         />
 
         <DropdownMenuItem>
-          <Link href={`/event/${slug}/profile`} className="w-full">
-            Profile
+          <Link href={`/event/${slug}/profile`} className="w-full flex gap-2">
+            <UserCircle /> Profile
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Link href={`/event/${slug}/reservations`} className="w-full">
-            Reservations
+          <Link href={`/event/${slug}/reservations`} className="w-full flex gap-2">
+            <Ticket /> Reservations
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        {/* <DropdownMenuItem>
           <Logout />
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
   );
