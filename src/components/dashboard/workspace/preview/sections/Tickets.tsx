@@ -1,7 +1,6 @@
 import LogoCategory from "@/components/event/sections/disco-tickets/LogoCategory";
 import { useListDays } from "@/hooks/useListDays";
 import { useListMonths } from "@/hooks/useListMonths";
-import { CalendarDays, CreditCard, RockingChair } from "lucide-react";
 
 const discoTickets: any = [
   {
@@ -55,7 +54,7 @@ const discoTickets: any = [
   },
 ];
 
-const TicketsPreview = ({ values }: { values: any }) => {
+const Tickets = ({ values }: { values: any }) => {
   const weekdays = useListDays();
   const months = useListMonths();
 
@@ -183,4 +182,4 @@ const TicketsPreview = ({ values }: { values: any }) => {
   );
 };
 
-export default TicketsPreview;
+export default Tickets;

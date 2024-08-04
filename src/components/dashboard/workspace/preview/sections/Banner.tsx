@@ -1,8 +1,7 @@
-import { AddDiscoSchema } from "./AddDiscos";
 import { format, addDays } from "date-fns";
 import Image from "next/image";
 
-const BannerPreview = ({ values }: { values: any }) => {
+const Banner = ({ values }: { values: any }) => {
   return (
     <div id="1" className="relative h-screen w-full">
       <div className="absolute flex justify-center items-center overflow-hidden -z-20 w-full">
@@ -72,4 +71,4 @@ const BannerPreview = ({ values }: { values: any }) => {
   );
 };
 
-export default BannerPreview;
+export default Banner;

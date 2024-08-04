@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { AddDiscoSchema } from "./AddDiscos";
 import { Mail, MapPin, Phone } from "lucide-react";
-
 import { useIconsSocials } from "@/utils/useIconsSocials";
+import { AddDiscoSchema } from "../../AddDiscos";
 
-const FooterPreview = ({ values }: { values: AddDiscoSchema }) => {
+const Footer = ({ values }: { values: AddDiscoSchema }) => {
   const isSocial = values?.socials?.some((item) => item.url !== "");
   const isQuickLinks = values?.quickLinks?.some((item) => item.url !== "" && item.name !== "");
 
@@ -122,4 +121,4 @@ const FooterPreview = ({ values }: { values: AddDiscoSchema }) => {
   );
 };
 
-export default FooterPreview;
+export default Footer;

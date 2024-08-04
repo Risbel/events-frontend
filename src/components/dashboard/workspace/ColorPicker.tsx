@@ -25,7 +25,7 @@ const ColorPicker = ({
     reset &&
       reset((prev) => ({
         ...prev,
-        brandColor: e.target.value,
+        [id]: e.target.value,
       }));
   };
 

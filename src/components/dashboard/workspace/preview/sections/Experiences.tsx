@@ -1,6 +1,6 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { AddDiscoSchema } from "./AddDiscos";
 import Image from "next/image";
+import { AddDiscoSchema } from "../../AddDiscos";
 
 const experiencies = [
   {
@@ -35,7 +35,7 @@ const experiencies = [
   },
 ];
 
-const ExperiencesPreview = ({ values }: { values: AddDiscoSchema }) => {
+const Experiences = ({ values }: { values: AddDiscoSchema }) => {
   return (
     <div
       id="3"
@@ -102,4 +102,4 @@ const ExperiencesPreview = ({ values }: { values: AddDiscoSchema }) => {
   );
 };
 
-export default ExperiencesPreview;
+export default Experiences;

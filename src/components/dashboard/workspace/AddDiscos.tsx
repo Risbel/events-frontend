@@ -3,12 +3,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import useCreateDisco from "@/hooks/useCreateDisco";
 import ButtonSubmit from "../../buttons/ButtonSubmit";
-import { useState } from "react";
 import { Input, Label } from "../../ui/input";
 import { Textarea } from "../../ui/textarea";
 import { cn } from "@/lib/shadcnUtils";
-import { Eye, X } from "lucide-react";
-import Preview from "@/components/dashboard/workspace/preview";
 import ColorPicker from "@/components/dashboard/workspace/ColorPicker";
 import ColorPaletteGenerator from "@/components/dashboard/workspace/ColorPaletGenerator";
 import LabelColor from "@/components/dashboard/workspace/LabelColor";
@@ -18,11 +15,12 @@ import AddAboutTexts from "@/components/dashboard/workspace/AddAboutTexts";
 import SocialSelector from "@/components/dashboard/workspace/SocialSelector";
 import QuickLinks from "@/components/dashboard/workspace/QuickLinks";
 import Progress from "./progress";
+import Preview from "./preview";
+import { useEffect } from "react";
 
 export type AddDiscoSchema = z.infer<typeof addDiscoSchema>;
 
 const AddDiscos = () => {
-  const [isActive, setIsActive] = useState(false);
   const { data } = useSession();
   const userId = data?.user.id;
 
@@ -97,20 +95,7 @@ const AddDiscos = () => {
 
   return (
     <>
-      <div className="fixed group cursor-pointer -translate-y-4 hover:-translate-y-2 transition-transform duration-300 z-30 right-4 md:right-12 top-8 bg-primary/80 backdrop-blur-sm hover:bg-primary rounded-b-3xl px-4 pt-10">
-        <button onClick={() => setIsActive(true)} className="group-hover:scale-125 transition-transform">
-          <Eye stroke="white" />
-        </button>
-      </div>
-      <div className={cn("absolute z-40 h-full w-full bg-white", !isActive && "hidden")}>
-        <button
-          onClick={() => setIsActive(false)}
-          className="fixed z-[60] right-2 top-16 p-2 cursor-pointer hover:scale-125 transition-transform bg-black/40  rounded-full "
-        >
-          <X stroke="white" height={25} width={25} />
-        </button>
-        <Preview values={values} />
-      </div>
+      <Preview values={values} />
       <div className="pt-20 px-2 md:px-8 bg-secondary">
         <h1 className="text-md md:text-2xl text-primary font-bold mb-8 p-2 pl-4 bg-primary-foreground rounded-md">
           Let&apos;s create your virtual space:
@@ -176,11 +161,11 @@ const AddDiscos = () => {
                 <LabelColor htmlFor="brandColor" text="Color brand" />
 
                 <ColorPicker
+                  reset={reset}
                   register={register}
                   id={"brandColor"}
                   defaultValue="#0e0046"
                   defaultColor={values.brandColor}
-                  reset={reset}
                 />
                 {errors.brandColor && <p className="text-xs italic text-red-500">{errors.brandColor?.message}</p>}
               </div>
@@ -211,10 +196,11 @@ const AddDiscos = () => {
               <div className="relative">
                 <LabelColor htmlFor="bgNavbarColor" text="Background color" />
                 <ColorPicker
+                  reset={reset}
                   defaultValue="#010e32"
                   defaultColor={values.bgNavbarColor}
                   register={register}
-                  id="bgNavbarColor"
+                  id={"bgNavbarColor"}
                 />
 
                 {errors.bgNavbarColor && <p className="text-xs italic text-red-500">{errors.bgNavbarColor?.message}</p>}
@@ -222,6 +208,7 @@ const AddDiscos = () => {
               <div className="relative">
                 <LabelColor text="Text color" htmlFor="navbarForeground" />
                 <ColorPicker
+                  reset={reset}
                   defaultValue="#a8d4fb"
                   defaultColor={values.navbarForeground}
                   register={register}
@@ -254,6 +241,7 @@ const AddDiscos = () => {
                   <div className="relative">
                     <LabelColor text="Title color" htmlFor="h1BannerColor" />
                     <ColorPicker
+                      reset={reset}
                       defaultValue="#afc1f3"
                       id={"h1BannerColor"}
                       register={register}
@@ -288,6 +276,7 @@ const AddDiscos = () => {
                   <div className="relative">
                     <LabelColor htmlFor="bannerGradientColor" text="Gradient color" />
                     <ColorPicker
+                      reset={reset}
                       defaultValue="#0e0046"
                       register={register}
                       id={"bannerGradientColor"}
@@ -325,6 +314,7 @@ const AddDiscos = () => {
                   <LabelColor text="Text color" htmlFor="bannerDescriptionColor" />
 
                   <ColorPicker
+                    reset={reset}
                     defaultValue="#a8d4fb"
                     id={"bannerDescriptionColor"}
                     register={register}
@@ -514,6 +504,7 @@ const AddDiscos = () => {
                   <div className="relative pb-2 w-full">
                     <LabelColor htmlFor="titleAboutColor" text="Title about color" />
                     <ColorPicker
+                      reset={reset}
                       defaultValue="#0e0046"
                       register={register}
                       id={"titleAboutColor"}
@@ -530,6 +521,7 @@ const AddDiscos = () => {
                   <div className="relative pb-2">
                     <LabelColor htmlFor="bgAboutColor" text="Background color" />
                     <ColorPicker
+                      reset={reset}
                       defaultValue="#0e0046"
                       id={"bgAboutColor"}
                       register={register}
@@ -545,6 +537,7 @@ const AddDiscos = () => {
                   {/* <div className="relative pb-2">
                   <LabelColor text="Button color" htmlFor="buttonColor" />
                   <ColorPicker
+                  reset={reset}
                     defaultValue="#a8d4fb"
                     register={register}
                     id={"buttonColor"}
@@ -555,6 +548,7 @@ const AddDiscos = () => {
                 <div className="relative pb-2">
                   <LabelColor htmlFor="buttonForeground" text="Button foreground" />
                   <ColorPicker
+                  reset={reset}
                     defaultValue="#0e0046"
                     register={register}
                     id={"buttonForeground"}
@@ -591,6 +585,7 @@ const AddDiscos = () => {
                   <div className="relative pb-2 md:w-1/2 lg:w-full">
                     <LabelColor htmlFor="experienciesH1Color" text="Title color" />
                     <ColorPicker
+                      reset={reset}
                       defaultValue="#a7d8f5"
                       register={register}
                       id={"experienciesH1Color"}
@@ -603,6 +598,7 @@ const AddDiscos = () => {
                   <div className="relative pb-2 md:w-1/2 lg:w-full">
                     <LabelColor htmlFor="bgExperiencies" text="Background color" />
                     <ColorPicker
+                      reset={reset}
                       defaultValue="#a7d8f5"
                       register={register}
                       id={"bgExperiencies"}
@@ -644,6 +640,7 @@ const AddDiscos = () => {
                     <div className="relative">
                       <LabelColor htmlFor="bgTicketsSection" text="Background color" />
                       <ColorPicker
+                        reset={reset}
                         defaultValue="#ffffff"
                         id={"bgTicketsSection"}
                         register={register}
@@ -656,6 +653,7 @@ const AddDiscos = () => {
                     <div className="relative">
                       <LabelColor htmlFor="ticketH1Color" text="Title section color" />
                       <ColorPicker
+                        reset={reset}
                         defaultValue="#0b023d"
                         register={register}
                         id="ticketH1Color"
@@ -671,6 +669,7 @@ const AddDiscos = () => {
                     <div className="relative">
                       <LabelColor htmlFor="buttonsTicketsColor" text="Buttons color" />
                       <ColorPicker
+                        reset={reset}
                         defaultValue="#0e0046"
                         register={register}
                         id={"buttonsTicketsColor"}
@@ -684,6 +683,7 @@ const AddDiscos = () => {
                     <div className="relative">
                       <LabelColor htmlFor="buttonTicketForeground" text="Buttons foreground" />
                       <ColorPicker
+                        reset={reset}
                         defaultValue="#ffffff"
                         register={register}
                         id={"buttonTicketForeground"}
@@ -759,6 +759,7 @@ const AddDiscos = () => {
                   <LabelColor text="Background color" htmlFor="bgFooterColor" />
 
                   <ColorPicker
+                    reset={reset}
                     defaultValue="#07011e"
                     id={"bgFooterColor"}
                     register={register}
@@ -773,6 +774,7 @@ const AddDiscos = () => {
                   <LabelColor text="Text color" htmlFor="foregroundFooterColor" />
 
                   <ColorPicker
+                    reset={reset}
                     defaultValue="#ffffff"
                     id={"foregroundFooterColor"}
                     register={register}

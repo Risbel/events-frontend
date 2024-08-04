@@ -1,8 +1,8 @@
 import { cn } from "@/lib/shadcnUtils";
-import { AddDiscoSchema } from "./AddDiscos";
 import { useEffect, useState } from "react";
+import { AddDiscoSchema } from "../../AddDiscos";
 
-const AboutPreview = ({ values }: { values: AddDiscoSchema }) => {
+const About = ({ values }: { values: AddDiscoSchema }) => {
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 768);
 
   const updateMedia = () => {
@@ -77,4 +77,4 @@ const AboutPreview = ({ values }: { values: AddDiscoSchema }) => {
   );
 };
 
-export default AboutPreview;
+export default About;

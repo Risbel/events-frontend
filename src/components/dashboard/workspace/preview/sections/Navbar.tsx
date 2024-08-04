@@ -1,13 +1,12 @@
 import { cn } from "@/lib/shadcnUtils";
-import { AddDiscoSchema } from "./AddDiscos";
 import { BellIcon, Home, ShoppingCart, UserCircle2 } from "lucide-react";
 import Image from "next/image";
 
-const NavbarPreview = ({ values }: { values: any }) => {
+const Navbar = ({ values }: { values: any }) => {
   return (
-    <div className="fixed w-full md:w-3/4 lg:w-5/6 z-50">
+    <div className="fixed w-full z-50">
       {values && (
-        <div className="relative pt-14 w-full z-50">
+        <div className="relative w-full z-50">
           <div
             style={{ background: values.bgNavbarColor, borderBottom: `1px solid ${values.navbarForeground}` }}
             className={cn("w-full h-16 absolute z-30 backdrop-blur-2xl")}
@@ -64,4 +63,4 @@ const NavbarPreview = ({ values }: { values: any }) => {
   );
 };
 
-export default NavbarPreview;
+export default Navbar;
