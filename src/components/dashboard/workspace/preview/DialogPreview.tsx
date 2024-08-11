@@ -1,7 +1,7 @@
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Eye, X } from "lucide-react";
 
-import { AddDiscoSchema } from "../AddDiscos";
+import { AddDiscoSchema } from "../schemas/addDiscoSchema";
 import Preview from "./Preview";
 
 const DialogPreview = ({ values }: { values: AddDiscoSchema }) => {

@@ -1,4 +1,4 @@
-import { AddDiscoSchema } from "../AddDiscos";
+import { AddDiscoSchema } from "../schemas/addDiscoSchema";
 import About from "./sections/About";
 import Banner from "./sections/Banner";
 import Experiences from "./sections/Experiences";

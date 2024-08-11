@@ -1,6 +1,6 @@
-import { AddDiscoSchema } from "./AddDiscos";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { UseFormReset } from "react-hook-form";
+import { ChangeEvent, useEffect, useState } from "react";
+import { UseFormRegister, UseFormReset } from "react-hook-form";
+import { AddDiscoSchema } from "./schemas/addDiscoSchema";
 
 const ColorPicker = ({
   register,
@@ -9,7 +9,7 @@ const ColorPicker = ({
   id,
   reset,
 }: {
-  register: any;
+  register: UseFormRegister<any>;
   defaultColor?: string;
   defaultValue?: string;
   id: string;

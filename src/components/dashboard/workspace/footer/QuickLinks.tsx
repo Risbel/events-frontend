@@ -1,9 +1,9 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { AddDiscoSchema } from "./AddDiscos";
 import { useFieldArray } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { PlusCircleIcon, X } from "lucide-react";
+import { AddDiscoSchema } from "../schemas/addDiscoSchema";
 
 const QuickLinks = ({ register, values, control }: { register: any; values: AddDiscoSchema; control: any }) => {
   const { fields, append, remove } = useFieldArray({

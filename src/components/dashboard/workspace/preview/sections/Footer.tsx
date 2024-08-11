@@ -3,7 +3,7 @@ import { Input, Label } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useIconsSocials } from "@/utils/useIconsSocials";
-import { AddDiscoSchema } from "../../AddDiscos";
+import { AddDiscoSchema } from "../../schemas/addDiscoSchema";
 
 const Footer = ({ values }: { values: AddDiscoSchema }) => {
   const isSocial = values?.socials?.some((item) => item.url !== "");

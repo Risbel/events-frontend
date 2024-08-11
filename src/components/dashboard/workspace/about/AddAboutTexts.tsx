@@ -3,7 +3,7 @@ import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTr
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/shadcnUtils";
-import { AddDiscoSchema } from "./AddDiscos";
+import { AddDiscoSchema } from "../schemas/addDiscoSchema";
 
 import { AlignCenter, AlignJustifyIcon, AlignLeft, AlignRight, PlusCircleIcon, X } from "lucide-react";
 import { Control, UseFormRegister, UseFormSetValue, useFieldArray } from "react-hook-form";

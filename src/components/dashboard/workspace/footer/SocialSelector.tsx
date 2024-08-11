@@ -1,9 +1,9 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Check, Facebook, Instagram, X, Youtube } from "lucide-react";
-import { AddDiscoSchema } from "./AddDiscos";
 import { cn } from "@/lib/shadcnUtils";
 import { IconX } from "@/components/event/sections/IconX";
+import { AddDiscoSchema } from "../schemas/addDiscoSchema";
 
 const SocialSelector = ({ register, values }: { register: any; values: AddDiscoSchema }) => {
   return (

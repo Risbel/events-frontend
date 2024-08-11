@@ -1,6 +1,6 @@
 import { cn } from "@/lib/shadcnUtils";
 import { useEffect, useState } from "react";
-import { AddDiscoSchema } from "../../AddDiscos";
+import { AddDiscoSchema } from "../../schemas/addDiscoSchema";
 
 const About = ({ values }: { values: AddDiscoSchema }) => {
   const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 768);

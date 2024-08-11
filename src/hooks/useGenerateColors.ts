@@ -1,4 +1,4 @@
-import { AddDiscoSchema } from "@/components/dashboard/workspace/AddDiscos";
+import { AddDiscoSchema } from "@/components/dashboard/workspace/schemas/addDiscoSchema";
 import { generateColors } from "@/services/generateColors";
 import { useMutation } from "@tanstack/react-query";
 import { SetStateAction } from "react";

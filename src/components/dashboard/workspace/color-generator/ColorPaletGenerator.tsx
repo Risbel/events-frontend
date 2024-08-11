@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { useGenerateColors } from "@/hooks/useGenerateColors";
-import { AddDiscoSchema } from "./AddDiscos";
-import { Loader2, SparkleIcon, Sparkles } from "lucide-react";
+import { Loader2, Sparkles } from "lucide-react";
 import { memo, useEffect, useState } from "react";
 import { UseFormReset } from "react-hook-form";
+import { AddDiscoSchema } from "../schemas/addDiscoSchema";
 
 const ColorPaletteGenerator = ({
   reset,
