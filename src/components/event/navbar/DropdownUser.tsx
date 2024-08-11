@@ -70,9 +70,9 @@ const DropdownUser = () => {
             <Ticket /> Reservations
           </Link>
         </DropdownMenuItem>
-        {/* <DropdownMenuItem>
+        <DropdownMenuItem>
           <Logout />
-        </DropdownMenuItem> */}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -22,7 +22,6 @@ const loginSchema = z.object({
 export type ILoginSchema = z.infer<typeof loginSchema>;
 
 const Login = () => {
-  const hasNavigated = useRef(false);
   const router = useRouter();
   const [isPassword, setIsPassword] = useState(false);
 
@@ -42,9 +41,8 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isSuccess && data?.ok && !hasNavigated.current && status === "authenticated") {
-      hasNavigated.current = true;
-      router.push("/dashboard/allevents");
+    if (isSuccess && data?.ok && status === "authenticated") {
+      router.replace("/dashboard/allevents");
     }
   }, [isSuccess, data, router, status]);
 
@@ -54,7 +52,7 @@ const Login = () => {
         <h1 className="text-3xl font-semibold text-center md:text-start">My Events</h1>
         <div className="pb-2">
           <p className="text-start font-light text-md leading-4">
-            <span className="text-destructive/80 font-semibold">Login</span> to access or{" "}
+            <span className="text-destructive/80 font-semibold">Login</span> to access or
             <Link href={"/auth/signup"}>
               <span className="text-destructive/80 font-semibold hover:underline">Sign Up</span>
             </Link>
@@ -87,9 +85,12 @@ const Login = () => {
           {data?.status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
 
           {isSuccess ? (
-            <Link className="flex gap-2 justify-center bg-primary p-2 rounded-lg" href={"/dashboard/allevents"}>
+            <Button
+              onClick={() => router.replace("/dashboard/allevents")}
+              className="flex gap-2 items-center justify-center bg-primary"
+            >
               <span className="text-white">Get started</span> <ArrowBigRight className="stroke-white" />
-            </Link>
+            </Button>
           ) : (
             <Button className="flex items-center gap-2" type="submit" disabled={isLoading}>
               {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
@@ -107,16 +108,21 @@ const Login = () => {
           </Link>
         </form>
       </div>
-      <div className="relative hidden md:flex flex-col items-center justify-center rounded-3xl overflow-hidden">
-        <div style={{ background: "rgba(0, 0, 0, 0.5)" }} className="absolute h-full w-full rounded-[30px]"></div>
-        <Image className="absolute" src={"/MyEvents-logo.svg"} alt="MyEvents logo" width={350} height={350} />
-
+      <div className="relative hidden md:flex flex-col items-center justify-center overflow-hidden">
         <Image
+          className="absolute z-50 backdrop-blur-[2px] rounded-full"
+          src={"/MyEvents-logo.svg"}
+          alt="MyEvents logo"
+          width={350}
+          height={350}
+        />
+        <Image
+          className="rounded-[30px] h-full object-cover brightness-75"
           priority
           src={"/image-auth-hands-tickets.jpg"}
           height={500}
           width={500}
-          alt=" image auth hands tickets"
+          alt="image auth hands tickets"
         />
       </div>
     </AuthLayout>

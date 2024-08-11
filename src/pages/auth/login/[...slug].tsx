@@ -5,13 +5,13 @@ import useGetDisco from "@/hooks/useGetDisco";
 import useLogin from "@/hooks/useLogin";
 import useCart from "@/store/useCart";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowBigRight, CheckCircle2, EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
+import { ArrowBigRight, EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -24,7 +24,6 @@ const loginSchema = z.object({
 export type ILoginSchema = z.infer<typeof loginSchema>;
 
 const Login = () => {
-  const hasNavigated = useRef(false);
   const router = useRouter();
   const [isPassword, setIsPassword] = useState(false);
   const params = useParams();
@@ -48,12 +47,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (isSuccess && data?.ok && dataDisco?.disco && !hasNavigated.current && status === "authenticated") {
-      hasNavigated.current = true;
+    if (isSuccess && data?.ok && dataDisco?.disco && status === "authenticated") {
       if (cart?.cartItems?.length) {
-        router.push(`/event/${slug}/cart`);
+        router.replace(`/event/${slug}/cart`);
       } else {
-        router.push(`/event/${slug}`);
+        router.replace(`/event/${slug}`);
       }
     }
   }, [isSuccess, data?.ok, dataDisco?.disco, cart?.cartItems?.length, slug, router, status]);
@@ -72,9 +70,7 @@ const Login = () => {
           className="flex flex-col gap-4 w-full"
         >
           <div className="flex justify-center gap-4">
-            {dataDisco?.disco.logo && (
-              <Image src={dataDisco?.disco.logo} alt="logo" height={40} width={40} className="rounded-full" />
-            )}
+            {dataDisco?.disco.logo && <Image src={dataDisco?.disco.logo} alt="logo" height={40} width={40} />}
             <h1 className="text-3xl font-semibold text-center">{slug.toUpperCase()}</h1>
           </div>
 
@@ -116,12 +112,18 @@ const Login = () => {
             {data?.status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
 
             {isSuccess ? (
-              <Link
-                className="flex gap-2 justify-center bg-primary p-2 rounded-lg hover:opacity-90"
-                href={cart?.cartItems?.length ? `/event/${slug}/cart` : `/event/${slug}`}
+              <Button
+                onClick={() => {
+                  if (cart?.cartItems?.length) {
+                    return router.replace(`/event/${slug}/cart`);
+                  } else {
+                    return router.replace(`/event/${slug}`);
+                  }
+                }}
+                className="flex gap-2 items-center justify-center bg-primary"
               >
                 <span className="text-white">Get started</span> <ArrowBigRight className="stroke-white" />
-              </Link>
+              </Button>
             ) : (
               <Button className="flex items-center gap-2" type="submit" disabled={isLoading}>
                 {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
