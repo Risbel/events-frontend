@@ -177,7 +177,7 @@ const About = ({
             <LabelColor htmlFor="titleAboutColor" text="Title about color" />
             <ColorPicker
               reset={reset}
-              defaultValue="#0e0046"
+              defaultValue="#ffffff"
               register={register}
               id={"titleAboutColor"}
               defaultColor={values.titleAboutColor}

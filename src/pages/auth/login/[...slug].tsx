@@ -65,12 +65,15 @@ const Login = () => {
       <div className="absolute inset-0 -z-30 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div>
 
       <div className="flex justify-center min-w-[300px] md:min-w-[500px] gap-4 p-8 rounded-xl bg-white border shadow-xl w-1/3">
-        <div
-          style={{ background: dataDisco?.disco.discoDetail.discoColor.buttonTicketForeground }}
-          className="flex flex-col gap-4 w-full"
-        >
-          <div className="flex justify-center gap-4">
-            {dataDisco?.disco.logo && <Image src={dataDisco?.disco.logo} alt="logo" height={40} width={40} />}
+        <div className="flex flex-col gap-4 w-full">
+          <div className="flex justify-center items-center gap-4">
+            <div
+              className="rounded-full p-1 border-4 border-black"
+              style={{ background: dataDisco?.disco.discoDetail.discoColor.buttonTicketForeground }}
+            >
+              {dataDisco?.disco.logo && <Image src={dataDisco?.disco.logo} alt="logo" height={40} width={40} />}
+            </div>
+
             <h1 className="text-3xl font-semibold text-center">{slug.toUpperCase()}</h1>
           </div>
 

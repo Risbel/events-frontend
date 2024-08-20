@@ -37,7 +37,7 @@ const Carousel = ({
             <LabelColor htmlFor="experienciesH1Color" text="Title color" />
             <ColorPicker
               reset={reset}
-              defaultValue="#a7d8f5"
+              defaultValue="#0e0046"
               register={register}
               id={"experienciesH1Color"}
               defaultColor={values.experienciesH1Color}

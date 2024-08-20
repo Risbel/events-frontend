@@ -5,6 +5,7 @@ import FormContact from "../components/home/FormContact";
 import CarouselAdvantages from "../components/home/Carousel";
 
 import LandingLayout from "@/components/layouts/LandingLayouts";
+import Test from "@/components/dashboard/workspace/preview/sections/test";
 
 const Home = () => {
   return (

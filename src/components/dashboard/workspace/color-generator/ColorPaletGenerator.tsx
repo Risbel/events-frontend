@@ -16,7 +16,7 @@ const ColorPaletteGenerator = ({
 }) => {
   const [colorPalette, setColorPalette] = useState([
     "#0e0046",
-    "#7b9eff",
+    "#f8f8f8",
     "#a8d4fb",
     "#afc1f3",
     "#0e0046",
@@ -40,7 +40,7 @@ const ColorPaletteGenerator = ({
     setColorPalette([
       values.brandColor ?? "#0e0046",
       values.bgNavbarColor ?? "#7b9eff",
-      values.navbarForeground ?? "#a8d4fb",
+      values.navbarForeground ?? "#ffffff",
       values.h1BannerColor ?? "#afc1f3",
       values.bannerDescriptionColor ?? "#0e0046",
       values.bannerGradientColor ?? "#a8d4fb",

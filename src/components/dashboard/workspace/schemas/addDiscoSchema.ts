@@ -26,16 +26,43 @@ export const addDiscoSchema = z.object({
   logo: z.any().refine((file) => file?.[0]?.name, `Image required`),
   bgNavbarColor: z.string().min(1, { message: "Background is required" }),
   navbarForeground: z.string().min(1, { message: "Text color required" }),
-  //home
+  //banner
   bannerImage: z.any().refine((file) => file?.[0]?.name, `Image required`),
   h1Banner: z.string().min(2, "Invalid title").optional().or(z.literal("")),
+  h1BannerHeight: z.enum([
+    "text-2xl md:text-4xl",
+    "text-3xl md:text-5xl",
+    "text-4xl md:text-6xl",
+    "text-5xl md:text-7xl",
+    "text-6xl md:text-8xl",
+  ]), //new
+  h1Weight: z.enum(["font-semibold", "font-bold", "font-extrabold"]), //new
   h1BannerColor: z.string().min(1, { message: "h1 color required" }),
+  dateDescription: z.string().optional().or(z.literal("")), //new
+  dateDescriptionHeight: z.enum([
+    "text-md md:text-lg",
+    "text-lg md:text-xl",
+    "text-xl md:text-2xl",
+    "text-2xl md:text-3xl",
+    "text-3xl md:text-4xl",
+  ]), //new
+  dateDescriptionWeight: z.enum(["font-normal", "font-semibold", "font-bold", "font-extrabold"]), //new
+  dateDescriptionColor: z.string().min(1, { message: "date color required" }), //new
   bannerGradientColor: z.string().min(1, { message: "h1 color required" }),
   bannerDescription: z.string().min(2, "Invalid description").optional().or(z.literal("")),
+  bannerDescriptionHeight: z.enum([
+    "text-md md:text-lg",
+    "text-lg md:text-xl",
+    "text-xl md:text-2xl",
+    "text-2xl md:text-3xl",
+    "text-3xl md:text-4xl",
+  ]), //new
+  bannerDescriptionWeight: z.enum(["font-normal", "font-semibold", "font-bold", "font-extrabold"]), //new
   bannerDescriptionColor: z.string().min(1, { message: "Description color required" }),
+  layoutTextBanner: z.enum(["variantA", "variantB", "variantC", "variantD", "variantE", "variantF"]), //new
   //about
-  layoutTextAbout: z.enum(["variantA", "variantB", "variantC", "variantD", "variantE"]), //new
-  titleAboutColor: z.string().min(1, { message: "Title about color required" }), //new
+  layoutTextAbout: z.enum(["variantA", "variantB", "variantC", "variantD", "variantE"]),
+  titleAboutColor: z.string().min(1, { message: "Title about color required" }),
   titleTextAbout: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")),
   bgAboutColor: z.string().min(1, { message: "Background color required" }),
   aboutTexts: z.array(aboutTextSchema), //new

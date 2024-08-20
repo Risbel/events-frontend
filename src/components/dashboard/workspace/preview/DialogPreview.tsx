@@ -7,7 +7,7 @@ import Preview from "./Preview";
 const DialogPreview = ({ values }: { values: AddDiscoSchema }) => {
   return (
     <Dialog>
-      <DialogTrigger className="fixed top-16 right-8 p-2 bg-primary/90 rounded-full hover:scale-105 transition-transform">
+      <DialogTrigger className="fixed z-[200] top-16 right-8 p-2 bg-primary/90 rounded-full hover:scale-105 transition-transform">
         <Eye stroke="#ffffff" />
       </DialogTrigger>
       <DialogContent className="h-screen w-screen overflow-hidden">

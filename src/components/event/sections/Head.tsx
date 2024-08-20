@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import { addDays, format } from "date-fns";
 import Link from "next/link";
 import useHandleScroll from "@/hooks/useHandlerScroll";
+import { cn } from "@/lib/shadcnUtils";
 
 const Head = ({ discoData }: { discoData: { disco: DataDisco; subscription: Subscription } }) => {
   const { data: session } = useSession();
@@ -14,35 +15,73 @@ const Head = ({ discoData }: { discoData: { disco: DataDisco; subscription: Subs
 
   const handleClickScroll = useHandleScroll();
 
+  const variants = {
+    variantA: [
+      "items-center md:items-start col-span-full md:col-span-10 lg:col-span-12 lg:col-span-8",
+      "",
+      "",
+      "text-center md:text-start",
+    ],
+    variantB: [
+      "items-center md:items-start justify-center col-span-full md:col-span-10 lg:col-span-8",
+      "",
+      "",
+      "text-center md:text-start",
+    ],
+    variantC: [
+      "items-center md:items-start justify-end col-span-full md:col-span-10 lg:col-span-8",
+      "",
+      "",
+      "text-center md:text-start",
+    ],
+    variantD: ["col-start-2 items-center col-span-10", "", "", "text-center"],
+    variantE: ["col-start-2 items-center justify-center col-span-10", "", "", "text-center"],
+    variantF: ["col-start-2 items-center justify-end col-span-10", "", "", "text-center"],
+  };
+
   return (
     <div className="relative h-screen">
       <BannerImages discoDetails={discoData.disco.discoDetail} />
-      <div className="relative flex items-end z-10 h-screen">
-        <div className="flex flex-col items-center md:items-start w-full mb-12 md:ml-8">
+      <div className="relative grid grid-cols-12 z-10 h-screen bottom-6 lg:bottom-0 pt-16">
+        <div
+          className={cn(
+            "flex flex-col mb-4 lg:mb-16 px-2 md:px-6 lg:px-10 w-full pt-24 gap-2",
+            variants[discoData.disco.discoDetail.layoutTextBanner][0]
+          )}
+        >
           <h1
-            className="font-bold text-4xl md:text-5xl lg:text-7xl text-center md:text-start"
+            className={cn(
+              `${discoData.disco.discoDetail.h1Weight}`,
+              `${discoData.disco.discoDetail.h1BannerHeight}`,
+              `${variants[discoData.disco.discoDetail.layoutTextBanner][3]}`
+            )}
             style={{ color: `${discoData.disco.discoDetail.discoColor.h1BannerColor}` }}
           >
             {discoData?.disco.discoDetail.h1Banner}
           </h1>
           <p
-            className="text-center"
+            className={cn(
+              "pl-1",
+              variants[discoData.disco.discoDetail.layoutTextBanner][3],
+              discoData.disco.discoDetail.dateDescriptionHeight,
+              discoData.disco.discoDetail.dateDescriptionWeight
+            )}
             style={{
-              color: discoData.disco.discoDetail.discoColor.h1BannerColor,
-              borderTopColor: discoData.disco.discoDetail.discoColor.h1BannerColor,
+              color: discoData.disco.discoDetail.discoColor.dateDescriptionColor,
             }}
           >
             {discoData.disco.startDate && discoData.disco.endDate && (
-              <span className="font-thin">
-                From {format(addDays(new Date(discoData.disco.startDate), 1), "MMMM-d/yy")}
-                {" to "}
-                {format(addDays(new Date(discoData.disco.endDate), 1), "MMMM-d/yy")}
-              </span>
+              <span>{discoData.disco.discoDetail.dateDescription}</span>
             )}
           </p>
           <p
             style={{ color: `${discoData.disco.discoDetail.discoColor.bannerDescriptionColor}` }}
-            className="text-xl md:text-3xl text-center md:text-left py-4 md:pb-8"
+            className={cn(
+              "mb-4 pl-1",
+              variants[discoData.disco.discoDetail.layoutTextBanner][3],
+              discoData.disco.discoDetail.bannerDescriptionHeight,
+              discoData.disco.discoDetail.bannerDescriptionWeight
+            )}
           >
             {discoData?.disco.discoDetail.bannerDescription}
           </p>

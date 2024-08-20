@@ -1,7 +1,6 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useCreateDisco from "@/hooks/useCreateDisco";
-import ButtonSubmit from "../../buttons/ButtonSubmit";
 import { useSession } from "next-auth/react";
 import useFormPersist from "react-hook-form-persist";
 import Progress from "./progress";
@@ -15,6 +14,8 @@ import Carousel from "./carousel";
 import Tickets from "./tickets";
 import Footer from "./footer";
 import { addDiscoSchema, AddDiscoSchema } from "./schemas/addDiscoSchema";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 const AddDiscos = () => {
   const { data } = useSession();
@@ -33,6 +34,13 @@ const AddDiscos = () => {
     resolver: zodResolver(addDiscoSchema),
     defaultValues: {
       layoutTextAbout: "variantA",
+      layoutTextBanner: "variantA",
+      h1BannerHeight: "text-4xl md:text-6xl",
+      h1Weight: "font-extrabold",
+      bannerDescriptionHeight: "text-2xl md:text-3xl",
+      bannerDescriptionWeight: "font-semibold",
+      dateDescriptionHeight: "text-md md:text-lg",
+      dateDescriptionWeight: "font-normal",
     },
   });
 
@@ -52,10 +60,19 @@ const AddDiscos = () => {
     formData.append("bgNavbarColor", data.bgNavbarColor);
     formData.append("navbarForeground", data.navbarForeground);
     data.h1Banner && formData.append("h1Banner", data.h1Banner);
+    formData.append("h1BannerHeight", data.h1BannerHeight); //new
+    formData.append("h1Weight", data.h1Weight); //new
     formData.append("h1BannerColor", data.h1BannerColor);
+    data.dateDescription && formData.append("dateDescription", data.dateDescription); //new
+    formData.append("dateDescriptionHeight", data.dateDescriptionHeight); //new
+    formData.append("dateDescriptionWeight", data.dateDescriptionWeight); //new
+    formData.append("dateDescriptionColor", data.dateDescriptionColor); //new
     formData.append("bannerGradientColor", data.bannerGradientColor);
     data.bannerDescription && formData.append("bannerDescription", data.bannerDescription);
+    formData.append("bannerDescriptionHeight", data.bannerDescriptionHeight); //new
+    formData.append("bannerDescriptionWeight", data.bannerDescriptionWeight); //new
     formData.append("bannerDescriptionColor", data.bannerDescriptionColor);
+    formData.append("layoutTextBanner", data.layoutTextBanner); //new
     data.titleTextAbout && formData.append("titleTextAbout", data.titleTextAbout);
     formData.append("titleAboutColor", data.titleAboutColor);
     formData.append("bgAboutColor", data.bgAboutColor);
@@ -108,7 +125,7 @@ const AddDiscos = () => {
 
           <div className="grid grid-cols-12 gap-4 md:gap-8">
             <Navbar register={register} errors={errors} reset={reset} values={values} />
-            <Banner register={register} errors={errors} reset={reset} values={values} />
+            <Banner register={register} errors={errors} reset={reset} values={values} setValue={setValue} />
           </div>
 
           <div className="grid grid-cols-12 gap-4">
@@ -130,13 +147,10 @@ const AddDiscos = () => {
           </div>
 
           <div className="my-6 mb-12 text-center">
-            <ButtonSubmit
-              isSuccess={isSuccess}
-              status={status}
-              isLoading={isLoading}
-              isError={isError}
-              text={"Create new Event"}
-            />
+            <Button disabled={isLoading} type="submit" className="w-full">
+              {isLoading ? <Loader2 /> : "Create new event"}
+              {isError && <span className="text-red-600 text-sm">Error request 😔, please try leater 🫤...</span>}
+            </Button>
           </div>
         </form>
       </div>

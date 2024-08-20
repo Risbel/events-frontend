@@ -21,7 +21,30 @@ export interface DataDisco {
 export interface DiscoDetail {
   id: string;
   h1Banner: string;
+  h1BannerHeight:
+    | "text-2xl md:text-4xl"
+    | "text-3xl md:text-5xl"
+    | "text-4xl md:text-6xl"
+    | "text-5xl md:text-7xl"
+    | "text-6xl md:text-8xl";
+  h1Weight: "font-semibold" | "font-bold" | "font-extrabold";
+  dateDescription: string;
+  dateDescriptionHeight:
+    | "text-md md:text-lg"
+    | "text-lg md:text-xl"
+    | "text-xl md:text-2xl"
+    | "text-2xl md:text-3xl"
+    | "text-3xl md:text-4xl";
+  dateDescriptionWeight: "font-normal" | "font-semibold" | "font-bold" | "font-extrabold";
   bannerDescription: string;
+  bannerDescriptionHeight:
+    | "text-md md:text-lg"
+    | "text-lg md:text-xl"
+    | "text-xl md:text-2xl"
+    | "text-2xl md:text-3xl"
+    | "text-3xl md:text-4xl";
+  bannerDescriptionWeight: "font-normal" | "font-semibold" | "font-bold" | "font-extrabold";
+  layoutTextBanner: "variantA" | "variantB" | "variantC" | "variantD" | "variantE" | "variantF";
   titleTextAbout: string;
   titleTextCarousel: string;
   titleTextTickets: string;
@@ -122,6 +145,7 @@ export interface IDiscoColors {
   bgNavbarColor: string;
   navbarForeground: string;
   h1BannerColor: string;
+  dateDescriptionColor: string;
   bannerGradientColor: string;
   bannerDescriptionColor: string;
   titleAboutColor: string;

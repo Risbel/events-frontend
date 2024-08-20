@@ -48,7 +48,7 @@ const Navbar = ({
         <LabelColor text="Text color" htmlFor="navbarForeground" />
         <ColorPicker
           reset={reset}
-          defaultValue="#a8d4fb"
+          defaultValue="#ffffff"
           defaultColor={values.navbarForeground}
           register={register}
           id={"navbarForeground"}
