@@ -21,7 +21,7 @@ jobs:
           script: |
             cd ${{ secrets.APP_PATH }}
             git fetch origin
-            git reset --hard origin/master
+            git reset --hard origin/main
             cd ..
             docker-compose up -d --build ${{ secrets.APP_NAME }}
             exit
