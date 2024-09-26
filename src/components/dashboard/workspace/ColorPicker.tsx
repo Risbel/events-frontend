@@ -13,7 +13,7 @@ const ColorPicker = ({
   defaultColor?: string;
   defaultValue?: string;
   id: string;
-  reset?: UseFormReset<AddDiscoSchema>;
+  reset?: UseFormReset<any>;
 }) => {
   const [color, setColor] = useState<any>(defaultColor);
   useEffect(() => {
@@ -23,7 +23,7 @@ const ColorPicker = ({
   const handleColorChange = (e: ChangeEvent<HTMLInputElement>) => {
     setColor(e.target.value);
     reset &&
-      reset((prev) => ({
+      reset((prev: any) => ({
         ...prev,
         [id]: e.target.value,
       }));

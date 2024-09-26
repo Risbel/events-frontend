@@ -151,8 +151,6 @@ export interface IDiscoColors {
   titleAboutColor: string;
   bgAboutColor: string;
   textAboutColor: string;
-  buttonColor: string;
-  buttonForeground: string;
   bgExperiencies: string;
   experienciesH1Color: string;
   bgTicketsSection: string;

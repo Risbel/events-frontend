@@ -66,8 +66,6 @@ export const addDiscoSchema = z.object({
   titleTextAbout: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")),
   bgAboutColor: z.string().min(1, { message: "Background color required" }),
   aboutTexts: z.array(aboutTextSchema), //new
-  buttonColor: z.string().min(1, { message: "Button color required" }),
-  buttonForeground: z.string().min(1, { message: "ButtonForeground color required" }),
   //experiencies
   titleTextCarousel: z.string().min(1, { message: "Title text required" }).optional().or(z.literal("")),
   bgExperiencies: z.string().min(1, { message: "Background Experiencies required" }),

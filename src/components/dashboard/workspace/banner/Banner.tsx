@@ -8,6 +8,9 @@ import JustifyPanel from "./JustifyPanel";
 import SettingsH1 from "./settingsH1";
 import SettingsDescription from "./settingsDescription";
 import SettingsDate from "./settingsDate";
+import { Loader2, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/shadcnUtils";
 
 const Banner = ({
   register,
@@ -22,11 +25,36 @@ const Banner = ({
   values: AddDiscoSchema;
   setValue: UseFormSetValue<AddDiscoSchema>;
 }) => {
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    if (isActive) {
+      setTimeout(() => {
+        return setIsActive(false);
+      }, 1000);
+    }
+  }, [isActive]);
+
   return (
-    <div className="flex flex-col gap-2 col-span-12 lg:col-span-8 p-4 md:p-6 bg-primary-foreground rounded-md shadow-md">
-      <p className="text-xl text-center font-bold text-primary md:mb-4">Banner</p>
+    <div className="relative overflow-hidden flex flex-col gap-2 col-span-12 lg:col-span-8 bg-primary-foreground rounded-xl shadow-md">
+      <button
+        type="button"
+        onClick={() => setIsActive((prev) => !prev)}
+        className="absolute bg-secondary p-2 rounded-full right-8 top-8 hover:scale-125 duration-300 transition-transform"
+      >
+        <Sparkles className="hover:cursor-pointer transition-all" />
+      </button>
+      <div
+        className={cn(
+          "flex justify-center items-center absolute z-[300] h-full w-full bg-black/10 backdrop-blur-[2px]",
+          !isActive && "hidden"
+        )}
+      >
+        <Loader2 className="animate-spin h-10 w-10" />
+      </div>
+      <p className="text-xl text-center font-bold text-primary md:mb-4 pt-6">Banner</p>
       <JustifyPanel setValue={setValue} values={values} />
-      <div className="flex flex-col md:flex-row gap-8 md:gap-4">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-4 p-4 md:p-6">
         <div className="flex flex-col gap-2 md:w-1/2">
           <div className="relative">
             <div className="relative">
@@ -94,7 +122,7 @@ const Banner = ({
           </div>
         </div>
       </div>
-      <div className="relative flex flex-col md:flex-row items-center gap-4 border-t pt-4 mt-4">
+      <div className="relative flex flex-col md:flex-row items-center gap-4 border-t pt-4 mt-4 md:gap-4 p-4 md:p-6">
         <div className="flex flex-col gap-2 w-full md:w-1/2">
           <div className="relative">
             <Label

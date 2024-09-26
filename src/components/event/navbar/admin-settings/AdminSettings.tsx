@@ -1,7 +1,7 @@
 import { DataDisco } from "@/services/getDisco";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { BarChartBig, Settings2, WalletCards } from "lucide-react";
+import { Settings2, WalletCards } from "lucide-react";
 
 import AddBannerImages from "./banner-images";
 import AddCarouselImages from "./carousel-images";

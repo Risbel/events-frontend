@@ -142,17 +142,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-<div className="relative hidden md:flex flex-col items-center justify-center text-gray-700">
-  <div style={{ background: "rgba(0, 0, 0, 0.5)" }} className="absolute h-full w-full rounded-3xl"></div>
-  <Image className="absolute" src={"/MyEvents-logo.svg"} alt="MyEvents logo" width={350} height={350} />
-
-  <Image
-    priority
-    className="w-full"
-    src={"/image-auth-hands-tickets.jpg"}
-    height={500}
-    width={500}
-    alt=" image auth hands tickets"
-  />
-</div>;

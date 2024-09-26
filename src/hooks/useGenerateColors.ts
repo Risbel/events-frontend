@@ -25,8 +25,6 @@ export const useGenerateColors = (
         bannerGradientColor: generatedColors[4],
         bgAboutColor: generatedColors[5],
         textAboutColor: generatedColors[6],
-        buttonColor: generatedColors[7],
-        buttonForeground: generatedColors[8],
         bgExperiencies: generatedColors[9],
         experienciesH1Color: generatedColors[10],
         bgTicketsSection: generatedColors[11],

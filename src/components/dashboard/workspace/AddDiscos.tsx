@@ -16,6 +16,7 @@ import Footer from "./footer";
 import { addDiscoSchema, AddDiscoSchema } from "./schemas/addDiscoSchema";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import DialogCopiloto from "./copiloto";
 
 const AddDiscos = () => {
   const { data } = useSession();
@@ -76,8 +77,6 @@ const AddDiscos = () => {
     data.titleTextAbout && formData.append("titleTextAbout", data.titleTextAbout);
     formData.append("titleAboutColor", data.titleAboutColor);
     formData.append("bgAboutColor", data.bgAboutColor);
-    formData.append("buttonColor", data.buttonColor);
-    formData.append("buttonForeground", data.buttonForeground);
     data.titleTextCarousel && formData.append("titleTextCarousel", data.titleTextCarousel);
     formData.append("bgExperiencies", data.bgExperiencies);
     formData.append("experienciesH1Color", data.experienciesH1Color);
@@ -108,7 +107,11 @@ const AddDiscos = () => {
 
   return (
     <>
-      <Preview values={values} />
+      <div className="flex gap-2 fixed z-[200] top-16 right-8">
+        <DialogCopiloto values={values} />
+        <Preview values={values} />
+      </div>
+
       <div className="pt-20 px-2 md:px-8 bg-secondary">
         <h1 className="text-md md:text-2xl text-primary font-bold mb-8 p-2 pl-4 bg-primary-foreground rounded-md">
           Let&apos;s create your virtual space:
@@ -148,8 +151,13 @@ const AddDiscos = () => {
 
           <div className="my-6 mb-12 text-center">
             <Button disabled={isLoading} type="submit" className="w-full">
-              {isLoading ? <Loader2 /> : "Create new event"}
-              {isError && <span className="text-red-600 text-sm">Error request 😔, please try leater 🫤...</span>}
+              {isLoading ? (
+                <Loader2 />
+              ) : isError ? (
+                <span className="text-red-600 text-sm">Error request 😔, please try leater 🫤...</span>
+              ) : (
+                "Create new event"
+              )}
             </Button>
           </div>
         </form>

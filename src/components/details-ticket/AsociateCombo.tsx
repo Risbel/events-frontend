@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { useCreateAsociationComboTicket } from "@/hooks/useCreateAsociationComboTicket";
 import { useGetCombosByDiscoId } from "@/hooks/useGetCombosByDiscoId";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { CheckSquareIcon, Loader, Loader2, PlusCircle, X } from "lucide-react";
+import { CheckSquareIcon, Loader2, PlusCircle, X } from "lucide-react";
 import Image from "next/image";
 
 const AsociateCombo = ({ discoId, discoTicketId }: { discoId: string; discoTicketId: any }) => {

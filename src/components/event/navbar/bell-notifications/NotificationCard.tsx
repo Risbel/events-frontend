@@ -1,9 +1,9 @@
 import { cn } from "@/lib/shadcnUtils";
 import { ISubscriptionNotifications } from "@/services/getNotificationsByUserEvent";
-import { formatDistanceToNow } from "date-fns";
 import { Dot } from "lucide-react";
 import Image from "next/image";
 import SettingsCard from "./SettingsCard";
+import { formatDistanceToNow } from "date-fns";
 
 const NotificationCard = ({ sub }: { sub: ISubscriptionNotifications }) => {
   return (
