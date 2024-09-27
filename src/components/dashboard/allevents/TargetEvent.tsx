@@ -36,7 +36,7 @@ const TargetEvent = ({ event }: { event: IMyEvents }) => {
         <div className="flex px-2 md:px-4 gap-2 justify-end">
           <DeleteEvent id={event.id} />
           <a
-            href={`https://event.myaipeople.com/event/${event?.slug}`}
+            href={`https://myevents.myaipeople.com/${event?.slug}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center bg-gray-200 hover:bg-gray-200/90 px-4 py-0.5 md:py-1 rounded-xl"

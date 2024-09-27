@@ -152,7 +152,7 @@ const AddDiscos = () => {
           <div className="my-6 mb-12 text-center">
             <Button disabled={isLoading} type="submit" className="w-full">
               {isLoading ? (
-                <Loader2 />
+                <Loader2 className="animate-spin" />
               ) : isError ? (
                 <span className="text-red-600 text-sm">Error request 😔, please try leater 🫤...</span>
               ) : (
