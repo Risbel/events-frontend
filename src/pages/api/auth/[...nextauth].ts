@@ -4,6 +4,14 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { decode } from "jsonwebtoken";
 
 export default NextAuth({
+  session: {
+    strategy: "jwt",
+  },
+  pages: {
+    signIn: "/auth/login",
+    error: "/auth/login",
+    signOut: "/auth/login",
+  },
   providers: [
     CredentialsProvider({
       name: "credentials",

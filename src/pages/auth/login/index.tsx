@@ -5,11 +5,10 @@ import { Separator } from "@/components/ui/separator";
 import useLogin from "@/hooks/useLogin";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowBigRight, EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -26,7 +25,6 @@ const Login = () => {
   const [isPassword, setIsPassword] = useState(false);
 
   const { mutate, isLoading, data, isSuccess } = useLogin();
-  const { status } = useSession();
 
   const {
     register,
@@ -39,12 +37,6 @@ const Login = () => {
   const onSubmit: SubmitHandler<ILoginSchema> = (data) => {
     mutate(data);
   };
-
-  useEffect(() => {
-    if (isSuccess && data?.ok && status === "authenticated") {
-      router.replace("/dashboard/allevents");
-    }
-  }, [isSuccess, data, router, status]);
 
   return (
     <AuthLayout>
@@ -84,18 +76,9 @@ const Login = () => {
           </div>
           {data?.status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
 
-          {isSuccess ? (
-            <Button
-              onClick={() => router.replace("/dashboard/allevents")}
-              className="flex gap-2 items-center justify-center bg-primary"
-            >
-              <span className="text-white">Get started</span> <ArrowBigRight className="stroke-white" />
-            </Button>
-          ) : (
-            <Button className="flex items-center gap-2" type="submit" disabled={isLoading}>
-              {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
-            </Button>
-          )}
+          <Button className="flex items-center gap-2" type="submit" disabled={isLoading}>
+            {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
+          </Button>
 
           <div className="flex justify-center items-center gap-2 w-full overflow-hidden text-black">
             <Separator className="w-full" />
