@@ -6,8 +6,8 @@ export default function Document() {
       <Head>
         {/* Character, robots, and OG image */}
         <meta charSet="UTF-8" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <link rel="icon" type="image/svg+xml" href="/MyEvents-logo.svg" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="author" content="MyEvents" />
         <meta name="description" content="Quickly and easily build virtual spaces to promote your events with us." />
         <meta name="keywords" content="MyEvents, Events, event generator, tickets, reservation" />

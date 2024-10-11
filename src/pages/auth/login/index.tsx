@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowBigRight, EyeIcon, EyeOffIcon, Loader2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useParams, useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -19,23 +20,33 @@ const loginSchema = z.object({
 });
 
 export type ILoginSchema = z.infer<typeof loginSchema>;
-
 const Login = () => {
   const router = useRouter();
   const [isPassword, setIsPassword] = useState(false);
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
 
-  const { mutate, isLoading, data, isSuccess } = useLogin();
+  const { mutate, isLoading } = useLogin();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<ILoginSchema>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit: SubmitHandler<ILoginSchema> = (data) => {
     mutate(data);
+  };
+
+  // Maneja el evento de entrada para eliminar el error
+  const handleInputChange = () => {
+    if (error) {
+      // Si hay un error, puedes hacer un setError o un setState para eliminar el mensaje de error
+      router.push("/auth/login"); // Redirige para quitar el parámetro de error, o simplemente limpia el estado del error.
+    }
   };
 
   return (
@@ -53,7 +64,14 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)} name="login form" className="flex flex-col gap-4">
           <div className="relative">
             <Label name={"Email"} htmlfor={"email"} />
-            <Input {...register("email")} autoComplete="none" id="email" type="email" placeholder="Email" />
+            <Input
+              {...register("email")}
+              autoComplete="none"
+              id="email"
+              type="email"
+              placeholder="Email"
+              onChange={handleInputChange} // Agregar onChange aquí
+            />
             {errors.email && <p className="text-start text-xs italic text-red-500">{errors.email.message}</p>}
           </div>
           <div className="relative z-20">
@@ -64,6 +82,7 @@ const Login = () => {
               autoComplete="none"
               type={isPassword ? "text" : "password"}
               placeholder="Password"
+              onChange={handleInputChange} // Agregar onChange aquí
             />
             <button
               type="button"
@@ -74,8 +93,9 @@ const Login = () => {
             </button>
             {errors.password && <p className="text-start text-xs italic text-red-500">{errors.password.message}</p>}
           </div>
-          {data?.status === 401 && <p className="text-center text-xs italic text-red-500">Invalid credentials</p>}
-
+          {error === "CredentialsSignin" && (
+            <p className="text-center text-xs italic text-red-500">Invalid credentials</p>
+          )}
           <Button className="flex items-center gap-2" type="submit" disabled={isLoading}>
             {isLoading ? <Loader2 className="animate-spin" /> : "Login"}
           </Button>

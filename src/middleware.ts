@@ -11,8 +11,6 @@ export async function middleware(req: NextRequest) {
 
   // If the user is not authenticated, redirect to the login page
   const loginUrl = new URL("/auth/login", req.url);
-  // Add the original URL as a query parameter for redirection after login
-  loginUrl.searchParams.set("redirect", req.nextUrl.pathname);
 
   return NextResponse.redirect(loginUrl);
 }

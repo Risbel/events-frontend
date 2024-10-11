@@ -3,6 +3,8 @@ import { IMyEvents } from "@/services/getMyEvents";
 import Image from "next/image";
 import React from "react";
 import DeleteEvent from "./DeleteEvent";
+import { Share2Icon } from "lucide-react";
+import Link from "next/link";
 
 const TargetEvent = ({ event }: { event: IMyEvents }) => {
   if (!event || !event?.logo) {
@@ -34,6 +36,10 @@ const TargetEvent = ({ event }: { event: IMyEvents }) => {
         </div>
 
         <div className="flex px-2 md:px-4 gap-2 justify-end">
+          <Link href={`/dashboard/share/${event.slug}`}>
+            <Share2Icon stroke="white" />
+          </Link>
+
           <DeleteEvent id={event.id} />
           <a
             href={`https://myevents.myaipeople.com/${event?.slug}`}
