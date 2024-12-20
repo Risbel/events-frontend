@@ -41,14 +41,6 @@ const Login = () => {
     mutate(data);
   };
 
-  // Maneja el evento de entrada para eliminar el error
-  const handleInputChange = () => {
-    if (error) {
-      // Si hay un error, puedes hacer un setError o un setState para eliminar el mensaje de error
-      router.push("/auth/login"); // Redirige para quitar el parámetro de error, o simplemente limpia el estado del error.
-    }
-  };
-
   return (
     <AuthLayout>
       <div className="flex flex-col gap-4">
@@ -57,20 +49,20 @@ const Login = () => {
           <p className="text-start font-light text-md leading-4">
             <span className="text-destructive/80 font-semibold">Login</span> to access or
             <Link href={"/auth/signup"}>
-              <span className="text-destructive/80 font-semibold hover:underline">Sign Up</span>
+              <span className="text-destructive/80 font-semibold hover:underline"> Sign Up</span>
             </Link>
           </p>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} name="login form" className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <div className="relative">
             <Label name={"Email"} htmlfor={"email"} />
             <Input
               {...register("email")}
               autoComplete="none"
+              name="email"
               id="email"
               type="email"
               placeholder="Email"
-              onChange={handleInputChange} // Agregar onChange aquí
             />
             {errors.email && <p className="text-start text-xs italic text-red-500">{errors.email.message}</p>}
           </div>
@@ -78,11 +70,11 @@ const Login = () => {
             <Label name={"Password"} htmlfor={"password"} />
             <Input
               {...register("password")}
+              name="password"
               id="password"
               autoComplete="none"
               type={isPassword ? "text" : "password"}
               placeholder="Password"
-              onChange={handleInputChange} // Agregar onChange aquí
             />
             <button
               type="button"
