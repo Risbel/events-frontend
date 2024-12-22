@@ -2,8 +2,10 @@ import axios from "axios";
 import { getSession, signOut } from "next-auth/react";
 import { refreshToken } from "./utils/refreshToken";
 
+console.log("Base URL:", process.env.NEXT_PUBLIC_URL_SERVER);
+
 const httpService = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL_SERVER,
+  baseURL: process.env.NEXT_PUBLIC_URL_SERVER,
   withCredentials: true,
 });
 
